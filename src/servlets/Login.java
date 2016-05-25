@@ -1,11 +1,15 @@
 package servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import database.DB;
+import helpers.Hasher;
 
 /**
  * Servlet implementation class Login
@@ -34,7 +38,17 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String user_login = request.getParameter("user_login");
+		String user_password = request.getParameter("user_password");
+		DB db = new DB();
+		Hasher h = new Hasher();
+		if(db.containsUser(user_login)){
+			if(db.passwordMatch(user_login, h.generateHash(user_password))){
+				//TODO redirect to homepage
+			}
+		} else {
+			
+		}
 		doGet(request, response);
 	}
 

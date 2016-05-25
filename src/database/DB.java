@@ -63,4 +63,10 @@ public class DB {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean passwordMatch(String user_login, String user_password){
+		boolean result = false;
+		
+		return result;
+	}
 }
