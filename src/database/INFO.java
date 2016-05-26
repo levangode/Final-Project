@@ -1,8 +1,8 @@
 package database;
 
 public class INFO {
-	public static final String MYSQL_USERNAME = "root";
-	public static final String MYSQL_PASSWORD = "12123321";
-	public static final String MYSQL_DATABASE_SERVER = "jdbc:mysql://localhost:3306";
-	public static final String MYSQL_DATABASE_NAME = "homework";
+	public static final String MYSQL_USERNAME = "sql8121040";
+	public static final String MYSQL_PASSWORD = "pQe1pZ6sIR";
+	public static final String MYSQL_DATABASE_SERVER = "jdbc:mysql://sql8.freemysqlhosting.net:3306";
+	public static final String MYSQL_DATABASE_NAME = "sql8121040";
 }
