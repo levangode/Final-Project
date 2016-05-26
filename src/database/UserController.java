@@ -1,31 +1,19 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DB {
+public class UserController {
 	private Connection connection;
-
-	public DB() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		String server = INFO.MYSQL_DATABASE_SERVER;
-		String userName = INFO.MYSQL_USERNAME;
-		String password = INFO.MYSQL_PASSWORD;
-		String dbName = INFO.MYSQL_DATABASE_NAME;
-		try {
-			connection = DriverManager.getConnection(server + "/" + dbName, userName, password);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	private DBconnector db;
+	public UserController(){
+		
 	}
 	public boolean containsUser(String user_login){
+		db = new DBconnector();
+		connection = db.getConnection();
 		String order = "select count(*) from Users " + "where user_login = " + "'" + user_login + "'";
 		PreparedStatement stm = null;
 		try {
@@ -42,12 +30,15 @@ public class DB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		db.closeConnection();
 		if (count == 0)
 			return false;
 		return true;
 	}
 	
 	public void addNewUser(String user_login, String user_password, String user_name){
+		db = new DBconnector();
+		connection = db.getConnection();
 		String order = ""
 				+ "insert into Users(user_login, user_password, user_name) values "
 				+ "	('"+user_login+"', '"+user_password+"', '"+user_name+"');";
@@ -62,11 +53,30 @@ public class DB {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		db.closeConnection();
 	}
 	
 	public boolean passwordMatch(String user_login, String user_password){
 		boolean result = false;
-		
+		db = new DBconnector();
+		connection = db.getConnection();
+		String order = ""
+				+ "select user_password from Users where user_login = '"+user_login+"'";
+		PreparedStatement stm = null;
+		try {
+			stm = connection.prepareStatement(order);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ResultSet myRes = null;
+		try {
+			myRes = stm.executeQuery();
+			myRes.next();
+			if(user_password.equals(myRes.getString(1)))
+				result = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 }

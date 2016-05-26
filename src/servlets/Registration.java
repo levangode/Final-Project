@@ -1,13 +1,14 @@
 package servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import database.DB;
+import database.UserController;
 import helpers.Hasher;
 
 /**
@@ -37,7 +38,7 @@ public class Registration extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String user_login = request.getParameter("user_login");
-		DB db = new DB();
+		UserController db = new UserController();
 		if(db.containsUser(user_login)){
 			request.setAttribute("user_login", user_login);
 			request.getRequestDispatcher("RegAgain.jsp").forward(request, response);
