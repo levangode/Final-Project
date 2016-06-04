@@ -33,13 +33,12 @@ create table Answers(
 	answer_text varchar(500),
     answer_description varchar(500),
     answer_correct bool not null,
-<<<<<<< HEAD
+	answer_type varchar(100) not null,
+
     
     foreign key (quiz_id) references Quizzes(quiz_id)
-=======
-    answer_type varchar(100) not null,
-    foreign key (quiz_id) references Quizes(quiz_id)
->>>>>>> origin/master
+
+
     
 );
 
