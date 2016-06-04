@@ -3,9 +3,9 @@
 body {
 	
 
-background: #16A085; /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #16A085 , #F4D03F); /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #16A085 , #F4D03F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+background: #16A085;
+background: -webkit-linear-gradient(to left, #16A085 , #F4D03F); 
+background: linear-gradient(to left, #16A085 , #F4D03F); 
         
 	text-align: center;
 }
@@ -13,4 +13,27 @@ background: linear-gradient(to left, #16A085 , #F4D03F); /* W3C, IE 10+/ Edge, F
 form {
 	margin:20px;
 	line-height: 2;
+}
+
+.myButton {
+	background-color:#44c767;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:1px solid #18ab29;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #2f6627;
+}
+.myButton:hover {
+	background-color:#5cbf2a;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
 }

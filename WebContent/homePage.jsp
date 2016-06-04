@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-
+<link rel="stylesheet" type="text/css" href="Buttons.css">
 <style>
 
 
@@ -24,7 +24,7 @@ background: linear-gradient(to left, #16A085 , #F4D03F); /* W3C, IE 10+/ Edge, F
 .headers ul {
 	text-align: center;
 	padding: auto;
-	margin: auto;
+	margin: 20px;
 	font-family: helvetica;
 }
 
@@ -32,9 +32,7 @@ background: linear-gradient(to left, #16A085 , #F4D03F); /* W3C, IE 10+/ Edge, F
 	text-decoration: none;
 	color: white;
 	font-size: 20px;
-	background: grey;
 	margin-top:30px;
-	border-right: 1px solid;
 }
 
 .headers li {
@@ -42,13 +40,12 @@ background: linear-gradient(to left, #16A085 , #F4D03F); /* W3C, IE 10+/ Edge, F
 }
 
 .headers a:hover {
-	background: #364444;
+	color: #364444;
 }
 
 div.box {
 	float: left;
 	width: 180px;
-	background: #D5FFE2;
 }
 
 .box ul {
@@ -88,7 +85,7 @@ div.box {
 
 	<div class="headers">
 		<ul>
-			<li><a href="https://www.google.com"> Create New Quiz </a></li>
+			<li><a href="CreateQuiz.jsp"> Create New Quiz </a></li>
 			<li><a href="https://www.google.com"> Top Quizzes </a></li>
 			<li><a href="https://www.google.com"> My Quizzes </a></li>
 			<li><a href="https://www.google.com"> New Quizzes </a></li>

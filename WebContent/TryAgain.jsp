@@ -4,6 +4,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
+<link rel="stylesheet" type="text/css" href="Buttons.css">
 <title>Incorrect Information</title>
 </head>
 <body>

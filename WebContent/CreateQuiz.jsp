@@ -8,9 +8,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Create Your Quiz</title>
-<link rel="stylesheet" type="text/css" href="BasicStyles.css">
+<link rel="stylesheet" type="text/css" href="Buttons.css">
 </head>
 <style>
+
+
 .slideDown{
 	animation-name: slideDown;
 	-webkit-animation-name: slideDown;	
@@ -65,6 +67,9 @@
 	}	
 }
 body {
+	background: #16A085;
+	background: -webkit-linear-gradient(to left, #16A085 , #F4D03F); 
+	background: linear-gradient(to left, #16A085 , #F4D03F); 
 	text-align: center;
 }
 
@@ -110,6 +115,7 @@ input[name=add]{
 		}
 	</script>
 	<input name="add" type="button" onclick="addInput()" value="Add Question" class="slideDown" />
-	<button type="button" onclick="location.href = 'homePage.jsp'">Register</button>
+	<br />
+	<button type="button" onclick="location.href = 'HomePage.jsp'">Save</button>
 </body>
 </html>
