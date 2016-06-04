@@ -10,6 +10,15 @@ public class Quiz {
 	private String difficulty;
 	private int times_taken;
 	
+	Quiz(	String quiz_name,
+	String quiz_description,
+	String quiz_author,
+	int likes,
+	String difficulty,
+	int times_taken){
+		
+	}
+	
 	public String getQuizName(){
 		return quiz_name;
 	}
