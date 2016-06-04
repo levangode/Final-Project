@@ -16,6 +16,12 @@ public class Quiz {
 	int likes,
 	String difficulty,
 	int times_taken){
+		this.quiz_name = quiz_name;
+		this.quiz_description= quiz_description;
+		this.quiz_author = quiz_author;
+		this.likes = likes;
+		this.difficulty = difficulty;
+		this.times_taken = times_taken;
 		
 	}
 	
