@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Create Your Quiz</title>
+<link rel="stylesheet" type="text/css" href="BasicStyles.css">
 </head>
 <style>
 .slideDown{
@@ -97,7 +98,6 @@ input[name=add]{
 		<br />
 		<textarea name="message" rows="3" cols="45" maxlength="1000">Enter quiz description here...</textarea>
 	</form>
-	<input name="add" type="button" onclick="addInput()" value="Add Question" class="slideDown"/>
 	<div id="Questions"></div>
 	<script>
 		var count = 1;
@@ -109,5 +109,7 @@ input[name=add]{
 			count += 1;
 		}
 	</script>
+	<input name="add" type="button" onclick="addInput()" value="Add Question" class="slideDown" />
+	<button type="button" onclick="location.href = 'homePage.jsp'">Register</button>
 </body>
 </html>
