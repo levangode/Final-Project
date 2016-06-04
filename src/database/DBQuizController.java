@@ -16,20 +16,7 @@ public class DBQuizController {
 	private Connection connection;
 
 	public DBQuizController() {
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		} catch (ClassNotFoundException e1) {
-			e1.printStackTrace();
-		}
-		String server = INFO.MYSQL_DATABASE_SERVER;
-		String userName = INFO.MYSQL_USERNAME;
-		String password = INFO.MYSQL_PASSWORD;
-		String dbName = INFO.MYSQL_DATABASE_NAME;
-		try {
-			connection = DriverManager.getConnection(server + "/" + dbName, userName, password);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		this.connection = (new DBconnector()).getConnection();
 	}
 
 	public ArrayList<String> getTopQuizesID(int num, boolean today) {
