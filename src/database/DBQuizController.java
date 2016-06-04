@@ -1,7 +1,6 @@
 package database;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import backend.Answer;
-import backend.Question;
 import backend.Quiz;
 
 public class DBQuizController {
@@ -107,6 +105,7 @@ public class DBQuizController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return null;
 
 	}
 
@@ -114,6 +113,26 @@ public class DBQuizController {
 		ArrayList<Answer> answers = new ArrayList<>();
 
 		return answers;
+	}
+	
+	
+	public ArrayList<String> getQuizCategories(){
+		ArrayList<String> result = new ArrayList<String>();
+		DBconnector db = new DBconnector();
+		Connection connection = db.getConnection();
+		String order = "select category_name from Categories";
+		ResultSet res = null;
+		try {
+			PreparedStatement stm = connection.prepareStatement(order);
+			res = stm.executeQuery();
+			while(res.next()){
+				result.add(res.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		db.closeConnection();
+		return result;
 	}
 
 }

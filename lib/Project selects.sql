@@ -8,6 +8,7 @@ create table Users (
 create table Quizzes (
 	quiz_id int not null auto_increment primary key,
     quiz_name varchar(50) not null,
+    category_id int not null,
     quiz_description varchar(1000),
     author_id int not null,
     quiz_likes int default 0,
@@ -15,6 +16,15 @@ create table Quizzes (
     quiz_difficulty varchar(50),
     times_taken int default 0
 );
+
+create table Categories(
+	quiz_category int not null auto_increment primary key,
+    category_name varchar(50) not null
+);
+insert into Categories(category_name) values 
+	('History'),
+    ('Biology'),
+    ('Math');
 
 create table Questions(
 	question_id int not null auto_increment primary key,
@@ -34,12 +44,7 @@ create table Answers(
     answer_description varchar(500),
     answer_correct bool not null,
 	answer_type varchar(100) not null,
-
-    
     foreign key (quiz_id) references Quizzes(quiz_id)
-
-
-    
 );
 
 
