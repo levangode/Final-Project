@@ -17,10 +17,23 @@ create table Quizzes (
     times_taken int default 0
 );
 
+create table QuestionTypes(
+	type_id int not null auto_increment primary key,
+    type_name varchar(50)
+);
+
+insert into QuestionTypes(type_name) values
+	('Question-Response'),
+    ('Fill in the Blank'),
+    ('Multiple Choice'),
+    ('Picture-Response Questions');
+    
+
 create table Categories(
 	quiz_category int not null auto_increment primary key,
     category_name varchar(50) not null
 );
+
 insert into Categories(category_name) values 
 	('History'),
     ('Biology'),
@@ -30,10 +43,11 @@ create table Questions(
 	question_id int not null auto_increment primary key,
     quiz_id int not null,
     question_text varchar(500),
-    question_type varchar(50) not null,
+    question_type_id int not null,
     question_description varchar(500),
     question_time_limit int default -1,
-  
+	
+    foreign key (question_type_id) references QuestionTypes(type_id),
 	foreign key (quiz_id) references Quizzes(quiz_id)
 );
 
