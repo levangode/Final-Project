@@ -1,6 +1,7 @@
 package backend;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class Quiz {
 	private String quiz_name;
@@ -15,7 +16,7 @@ public class Quiz {
 	String quiz_author,
 	int likes,
 	String difficulty,
-	int times_taken){
+	int times_taken, ArrayList<Question> questions){
 		this.quiz_name = quiz_name;
 		this.quiz_description= quiz_description;
 		this.quiz_author = quiz_author;

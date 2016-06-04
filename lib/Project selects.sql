@@ -19,8 +19,9 @@ create table Quizes (
 create table Questions(
 	question_id int not null auto_increment primary key,
     quiz_id int not null,
+    question_text varchar(500),
     question_type varchar(50) not null,
-    question_description varchar(500) not null,
+    question_description varchar(500),
     question_time_limit int default -1,
   
 	foreign key (quiz_id) references Quizes(quiz_id)
@@ -29,9 +30,10 @@ create table Questions(
 create table Answers(
 	answer_id int not null auto_increment primary key,
 	quiz_id int not null,
-    answer_description varchar(500) not null,
+	answer_text varchar(500),
+    answer_description varchar(500),
     answer_correct bool not null,
-    
+    answer_type varchar(100) not null,
     foreign key (quiz_id) references Quizes(quiz_id)
     
 );
