@@ -46,7 +46,7 @@ public class Registration extends HttpServlet {
 			Hasher h = new Hasher();
 			String user_password = h.generateHash(request.getParameter("user_password"));
 			db.addNewUser(user_login, user_password, "");
-			//TODO redirect to homepage
+			request.getRequestDispatcher("HomePage.jsp").forward(request,response);
 		}
 		doGet(request, response);
 	}

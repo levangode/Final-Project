@@ -5,7 +5,7 @@ create table Users (
     user_name varchar(50) not null
 );
 
-create table Quizes (
+create table Quizzes (
 	quiz_id int not null auto_increment primary key,
     quiz_name varchar(50) not null,
     quiz_description varchar(1000),
@@ -23,7 +23,7 @@ create table Questions(
     question_description varchar(500) not null,
     question_time_limit int default -1,
   
-	foreign key (quiz_id) references Quizes(quiz_id)
+	foreign key (quiz_id) references Quizzes(quiz_id)
 );
 
 create table Answers(
@@ -32,7 +32,7 @@ create table Answers(
     answer_description varchar(500) not null,
     answer_correct bool not null,
     
-    foreign key (quiz_id) references Quizes(quiz_id)
+    foreign key (quiz_id) references Quizzes(quiz_id)
     
 );
 

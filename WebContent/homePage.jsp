@@ -10,6 +10,10 @@
 <title>Insert title here</title>
 
 <style>
+
+body{
+	background-color: #ffcc66;
+}
 .headers ul {
 	text-align: center;
 	padding: auto;
@@ -21,8 +25,8 @@
 	text-decoration: none;
 	color: white;
 	font-size: 20px;
-	padding: 10px;
 	background: grey;
+	margin-top:30px;
 	border-right: 1px solid;
 }
 
@@ -53,22 +57,34 @@ div.box {
 .box a:hover {
 	background: #9EC4AA;
 }
+.headers{
+	padding: 10px;
+}
+
+
+
 </style>
-
-
-
 </head>
 <body>
 
-
-
+	<span id="homelogo" style="align:left">
+		WELCOMEEE
+	</span>
+	<div id="top" align="right" style="float:right">
+		<form action="Login" method="post">
+			User Name: <input type="text" name="user_login"> Password: <input
+				type="text" name="user_password"> <input type="submit"
+				value="Login">
+			<button type="button" onclick="location.href = 'Register.html'">Register</button>
+		</form>
+	</div>
 
 	<div class="headers">
 		<ul>
 			<li><a href="https://www.google.com"> Create New Quiz </a></li>
-			<li><a href="https://www.google.com"> Top Quizes </a></li>
-			<li><a href="https://www.google.com"> My Quizes </a></li>
-			<li><a href="https://www.google.com"> New Quizes </a></li>
+			<li><a href="https://www.google.com"> Top Quizzes </a></li>
+			<li><a href="https://www.google.com"> My Quizzes </a></li>
+			<li><a href="https://www.google.com"> New Quizzes </a></li>
 		</ul>
 	</div>
 
@@ -89,16 +105,6 @@ div.box {
 		<span style="margin: 30px; font-family: helvetica; font-size: 24px">
 			Hot Quizes</span>
 		<ul>
-			<%
-				//DBQuizController control = (DBQuizController) application.getAttribute("quizDBConnection");
-				//ArrayList<String> topQuizIDs = control.getTopQuizesID(10, true);
-				//ArrayList<String> topQuizNames = control.getTopQuizesNames(topQuizIDs);
-
-				//for (int i = 0; i < topQuizNames.size(); i++) {
-					//out.print(
-						//	"<li><a href= " + "quizPages/" + topQuizIDs.get(i) + "> " + topQuizNames.get(i) + "</a></li>");
-				//}
-			%>
 			<li><a href="https://www.google.com"> Quiz1</a></li>
 			<li><a href="https://www.google.com"> Quiz2</a></li>
 			<li><a href="https://www.google.com"> Quiz3</a></li>

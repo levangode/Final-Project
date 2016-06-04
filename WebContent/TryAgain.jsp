@@ -10,12 +10,11 @@
 	<h1>Please Try Again</h1>
 	<body>Either your user name or password is incorrect. 
 	Please try again.</body>
-	<br />
-	<br />
 	<form action="Login" method="post">
 		User Name: <input type="text" name="user_login">
 		<br />
 		Password: <input type="text" name="user_password">
+		<br />
 		<input type = "submit" value="Login">
 		<br />
 		<a href = "Register.html">Create New Account</a>
