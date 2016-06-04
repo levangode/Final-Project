@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import backend.quiz;
+import backend.Quiz;
 
 public class DBQuizController {
 	private Connection connection;
