@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import backend.Answer;
+import backend.Question;
 import backend.Quiz;
 
 public class DBQuizController {
@@ -84,6 +86,34 @@ public class DBQuizController {
 
 		}
 		return names;
+	}
+
+	public Quiz buildQuiz(int id) {
+		String command = "Select * from Questions where id =" + id;
+		try {
+			PreparedStatement stm = connection.prepareStatement(command);
+			ResultSet rs = stm.executeQuery();
+			while (rs.next()) {
+				String question_text = rs.getString(3);
+				int question_id = rs.getInt(1);
+				int quiz_id = rs.getInt(2);
+				String question_type = rs.getString(4);
+				String question_description = rs.getString(5);
+				int question_time_limit = rs.getInt(6);
+				ArrayList<Answer> answers = getAnswers(id);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public ArrayList<Answer> getAnswers(int id) {
+		ArrayList<Answer> answers = new ArrayList<>();
+
+		return answers;
 	}
 
 }
