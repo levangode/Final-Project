@@ -90,14 +90,14 @@ div.box {
 			Hot Quizes</span>
 		<ul>
 			<%
-				DBQuizController control = (DBQuizController) application.getAttribute("quizDBConnection");
-				ArrayList<String> topQuizIDs = control.getTopQuizesID(10, true);
-				ArrayList<String> topQuizNames = control.getTopQuizesNames(topQuizIDs);
+				//DBQuizController control = (DBQuizController) application.getAttribute("quizDBConnection");
+				//ArrayList<String> topQuizIDs = control.getTopQuizesID(10, true);
+				//ArrayList<String> topQuizNames = control.getTopQuizesNames(topQuizIDs);
 
-				for (int i = 0; i < topQuizNames.size(); i++) {
-					out.print(
-							"<li><a href= " + "quizPages/" + topQuizIDs.get(i) + "> " + topQuizNames.get(i) + "</a></li>");
-				}
+				//for (int i = 0; i < topQuizNames.size(); i++) {
+					//out.print(
+						//	"<li><a href= " + "quizPages/" + topQuizIDs.get(i) + "> " + topQuizNames.get(i) + "</a></li>");
+				//}
 			%>
 			<li><a href="https://www.google.com"> Quiz1</a></li>
 			<li><a href="https://www.google.com"> Quiz2</a></li>
