@@ -9,6 +9,7 @@ create table Quizzes (
 	quiz_id int not null auto_increment primary key,
     quiz_name varchar(50) not null,
     category_id int not null,
+    quiz_author varchar(50),
     quiz_description varchar(1000),
     author_id int not null,
     quiz_likes int default 0,
