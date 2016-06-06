@@ -16,10 +16,15 @@ public class Question {
 		this.question_id = question_id;
 		this.answers = answers;
 		this.quiz_id = quiz_id;
+		this.answers = answers;
 		this.question_text = question_text;
 		this.question_type = question_type;
 		this.question_description = question_description;
 		this.question_time_limit = question_time_limit;
+	}
+
+	public ArrayList<Answer> getAnswers() {
+		return answers;
 	}
 
 	public String getQuestionText() {
