@@ -30,7 +30,8 @@ public class Quiz {
 		this.times_taken = times_taken;
 
 	}
-	public ArrayList<Question> getQuestions(){
+
+	public ArrayList<Question> getQuestions() {
 		return questions;
 	}
 
