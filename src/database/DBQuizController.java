@@ -9,7 +9,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.sun.jmx.snmp.Timestamp;
 
 import backend.*;
 
@@ -199,6 +198,22 @@ public class DBQuizController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		return result;
+	}
+	public ArrayList<String> getQuestionTypes() {
+		ArrayList<String> result = new ArrayList<String>();
+		String order = "select type_name from QuestionTypes";
+		ResultSet res = null;
+		try {
+			PreparedStatement stm = connection.prepareStatement(order);
+			res = stm.executeQuery();
+			while (res.next()) {
+				result.add(res.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//TODO close
 		return result;
 	}
 

@@ -3,7 +3,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -12,19 +12,6 @@
 </head>
 <style>
 
-
-.slideDown{
-	animation-name: slideDown;
-	-webkit-animation-name: slideDown;	
-
-	animation-duration: 1s;	
-	-webkit-animation-duration: 1s;
-
-	animation-timing-function: ease;	
-	-webkit-animation-timing-function: ease;	
-
-	visibility: visible !important;						
-}
 @keyframes slideDown {
 	0% {
 		transform: translateY(-100%);
@@ -79,6 +66,9 @@ h2 {
 input[name=add]{
 	margin: 10px;
 }
+textarea{
+	resize:disabled;
+}
 
 </style>
 <body>
@@ -103,18 +93,20 @@ input[name=add]{
 		<br />
 		<textarea name="message" rows="3" cols="45" maxlength="1000">Enter quiz description here...</textarea>
 	</form>
-	<div id="Questions"></div>
-	<script>
-		var count = 1;
-		var fieldName = 0;
-		function addInput() {
-			var fieldName = "Question " + count;
-			var selectName = "category" + count;
-			document.getElementById("Questions").innerHTML += '<br/><input type="text" id="'+fieldName+'" value="'+fieldName+'"class="slideDown" /><br/>';
-			count += 1;
-		}
-	</script>
+	<div id="questions"></div>
+	
 	<input name="add" type="button" onclick="addInput()" value="Add Question" class="slideDown" />
+	<%
+		DBQuizController b = new DBQuizController();
+		ArrayList<String> types = b.getQuestionTypes();
+	%>
+	<select name="type">
+		<%
+			for (int i = 0; i < types.size(); i++) {
+				out.write("<option value=\"" + types.get(i) + "\">" + types.get(i) + "</option>");
+			}
+		%>
+	</select>
 	<br />
 	<button type="button" onclick="location.href = 'HomePage.jsp'">Save</button>
 </body>
