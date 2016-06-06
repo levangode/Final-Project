@@ -61,13 +61,22 @@ create table Answers(
     foreign key (quiz_id) references Quizzes(quiz_id)
 );
 
-create table friends(
-	from int not null,
-	to int not null,
+create table Friends(
+	`from` int not null,
+	`to` int not null,
 	
-	foreign key (from) references Users(user_id)
-	foreign key (to) references Users(user_id)
+	foreign key (`from`) references Users(user_id)
+	foreign key (`to`) references Users(user_id)
 );
+
+create table FriendshipRequests(
+	friendhip_request_id int not null auto_increment primary key,
+	`from` int not null,
+	`to` int not null,
+	
+	foreign key (`from`) references Users(user_id)
+	foreign key (`to`) references Users(user_id)
+)
 
 
 
