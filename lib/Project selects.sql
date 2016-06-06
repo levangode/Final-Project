@@ -61,6 +61,14 @@ create table Answers(
     foreign key (quiz_id) references Quizzes(quiz_id)
 );
 
+create table friends(
+	from int not null,
+	to int not null,
+	
+	foreign key (from) references Users(user_id)
+	foreign key (to) references Users(user_id)
+);
+
 
 
 insert into Users(user_login, user_password, user_name) values 
