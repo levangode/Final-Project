@@ -71,12 +71,19 @@ public class DBFriendController {
 			return false;
 		}
 		
-		String query = "insert into Friends(`from`, `to`) values (user1ID, user2ID);";
+		String query1 = "insert into Friends(`from`, `to`) values (" + user1ID + ", " + user2ID +" );";
+		String query2 = "insert into Friends(`from`, `to`) values (" + user2ID + ", " + user1ID +" );";
+		
 		java.sql.PreparedStatement stm;
 		
 		try{
-			stm = con.prepareStatement(query);
-			ResultSet rs = stm.executeQuery();
+			stm = con.prepareStatement(query1);
+			stm.executeQuery();
+
+			stm = con.prepareStatement(query2);
+			stm.executeQuery();
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -183,6 +190,70 @@ public class DBFriendController {
 		return addFriendshpByUserID(user1ID, user2ID);
 		//@SuppressWarnings
 		//return true;
+	}
+	
+	public boolean cancelFriendshipByID(int user1ID, int user2ID){
+		if(user1ID == user2ID){
+			return false;
+		}
+		
+		String query1 = "delete from Friends where `from` = " + user1ID + " and " + "`to` = " + user2ID + ";";
+		
+		String query2 = "delete from Friends where `from` = " + user2ID + " and " + "`to` = " + user1ID + ";";
+		
+		
+		java.sql.PreparedStatement stm;
+		
+		try{
+			stm = con.prepareStatement(query1);
+			stm.executeQuery();
+
+			stm = con.prepareStatement(query2);
+			stm.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} finally{
+			
+		}
+		
+		return true;
+
+	}
+	
+	public boolean cancelFriendshipRequestByID(int user1ID, int user2ID){
+		if(user1ID == user2ID){
+			return false;
+		}
+		
+		String query1 = "delete from FriendshipRequests where `from` = " + user1ID + " and " + "`to` = " + user2ID + ";";
+		
+		String query2 = "delete from FriendshipRequests where `from` = " + user2ID + " and " + "`to` = " + user1ID + ";";
+		
+		
+		java.sql.PreparedStatement stm;
+		
+		try{
+			stm = con.prepareStatement(query1);
+			stm.executeQuery();
+
+			stm = con.prepareStatement(query2);
+			stm.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} finally{
+			
+		}
+		
+		return true;
+
 	}
 
 	
