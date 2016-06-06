@@ -4,29 +4,35 @@ import java.net.URL;
 
 public class User {
 	private String name;
-	private int id;
+	private Integer id;
 	private String login;
-	private String password;
 	private String profile_image_url;
+
 	
+	User(String name, Integer id, String login, String profile_image_url ){
+		this.name = name;
+		this.id = id;
+		this.login = login;
+		this.profile_image_url = profile_image_url;
+	}
 	
-	private String getName(){
+	public String getName(){
 		return name;
 	}
 	
-	private int getId(){
+	public int getId(){
 		return id;
 	}
 	
-	private String getLogin(){
+	public String getLogin(){
 		return login;
 	}
 	
-	private String getPassword(){
-		return password;
-	}
+//	public String getPassword(){
+//		return password;
+//	}
 	
-	private String getImageURL(){
+	public String getImageURL(){
 		return profile_image_url;
 	}
 }
