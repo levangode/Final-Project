@@ -22,6 +22,7 @@ textarea{
 	resize:none;
 }
 </style>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js">
 </script>
 <script>
@@ -35,10 +36,10 @@ textarea{
 		count += 1;
 	}
 </script>
-</head>
+
 <body>
-	<h3>Question:</h3> 
-	<br /><textarea id="question" rows="3" cols="35" autofocus>Type your question here...</textarea>
+	<h3>Question '+count+':</h3>; 
+	<br /><textarea id="question" rows="3" cols="35" autofocus>Type your question here...</textarea>;
 	<div id="answers"></div>
 	<button type="button" onclick="myFunction()">Create Answer</button>
 </body>
