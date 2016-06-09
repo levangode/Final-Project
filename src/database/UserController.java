@@ -77,6 +77,7 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		db.closeConnection();
 		return result;
 	}
 }

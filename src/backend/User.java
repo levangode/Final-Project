@@ -1,6 +1,5 @@
 package backend;
 
-import java.net.URL;
 
 public class User {
 	private String name;

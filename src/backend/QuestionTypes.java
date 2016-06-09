@@ -2,12 +2,12 @@ package backend;
 
 public class QuestionTypes {
 	
-	public static final String QuestionResponse = "QuestionResponse";
-	public static final String FillInTheBlanks = "FillInTheBlanks";
-	public static final String MultipleChoice = "MultipleChoice";
-	public static final String PictureResponse = "PictureResponse";
-	public static final String MultiAnswer = "MultiAnswer";
-	public static final String MultipleChoiceMultipleAnswer = "MultipleChoiceMultipleAnswer";
+	public static final String QuestionResponse = "Question-Response";
+	public static final String FillInTheBlanks = "Fill in the Blank";
+	public static final String MultipleChoice = "Multiple Choice";
+	public static final String PictureResponse = "Picture-Response Question";
+	public static final String MultiAnswer = "Multi-Answer Question";
+	public static final String MultipleChoiceMultipleAnswer = "Multiple Choice with Multiple Answers";
 	public static final String Matching = "Matching";
 		
 
