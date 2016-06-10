@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import backend.Quiz;
+
 /**
  * Servlet implementation class CreateQuiz
  */
@@ -35,8 +37,17 @@ public class CreateQuiz extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//TODO create quiz object into session
-		request.getSession().setAttribute("questionNum", 1);
-		response.sendRedirect("Questions.jsp");
+		String quiz_name = request.getParameter("quiz_name");
+		String quiz_description = request.getParameter("quiz_description");
+		String quiz_category = request.getParameter("categories");
+		String quiz_difficulty = request.getParameter("difficulty");
+
+		System.out.println(quiz_name);
+		System.out.println(quiz_description);
+		System.out.println(quiz_category);
+		System.out.println(quiz_difficulty);
+		
+		response.sendRedirect("Questions.jsp?questionNum="+1);
 		
 		doGet(request, response);
 	}

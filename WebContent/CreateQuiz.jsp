@@ -46,12 +46,17 @@ textarea {
 				}
 			%>
 		</select>
+		<select name="difficulty"> <!-- TODO from base?------------------------------------------- -->
+			<option value="Easy">Easy</option>
+			<option value="Medium">Medium</option>
+			<option value="Hard">Hard</option>
+		</select>
 		<h2>Enter quiz name</h2>
 		<br /> <input type="text" name="quiz_name"
-			value="Enter quiz name here..."> <br />
+			placeholder="Enter quiz name here..."> <br />
 		<h2>Enter quiz description</h2>
 		<br />
-		<textarea name="quiz_description" rows="3" cols="45" maxlength="1000">Enter quiz description here...</textarea>
+		<textarea name="quiz_description" rows="3" cols="45" maxlength="1000" placeholder="Enter quiz description here..."></textarea>
 		<br /><input type="submit" value="Create">
 	</form>
 

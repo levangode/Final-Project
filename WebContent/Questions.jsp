@@ -39,8 +39,9 @@ textarea {
 	var count = 1;
 	function addImage() {
 		var fieldName = "image" + count;
+		var answerName = "answer"+count;
 		var tickName = "tick" + count;
-		$('<input type="text" name="'+fieldName+'" id="'+fieldName+'" placeholder="'+fieldName+'" style="display:none;"><br />')
+		$('<input type="text" name="'+answerName+'" id="'+fieldName+'" placeholder="'+fieldName+'" style="display:none;"><br />')
 				.appendTo('#answers').slideDown('fast');
 		$('<input type="checkbox" name="'+tickName+'" style="display:none;">Correct<br />')
 				.appendTo('#answers').slideDown('fast');
@@ -49,8 +50,9 @@ textarea {
 	}
 	function addAnswer(){
 		var fieldName = "answer" + count;
+		var answerName = "answer"+count;
 		var tickName = "tick" + count;
-		$('<textarea name="'+fieldName+'" id="'+fieldName+'" rows="3" cols="30" placeholder="'+fieldName+'" style="display:none;"></textarea><br />')
+		$('<textarea name="'+answerName+'" id="'+fieldName+'" rows="3" cols="30" placeholder="'+fieldName+'" style="display:none;"></textarea><br />')
 				.appendTo('#answers').slideDown('fast');
 		$('<input type="checkbox" name="'+tickName+'" style="display:none;">Correct<br />')
 				.appendTo('#answers').slideDown('fast');
@@ -58,20 +60,19 @@ textarea {
 		count += 1;
 	}
 	
+	
 	function clear(){
 		$("#question").html("");
 		count=1;
 	}
 	function addBlank(){
 		var fieldName = "blank" + count;
+		var answerName = "answer"+count;
 		$('#questionText').val($('#questionText').val()+ ' '+count+'. ____ '); 
-		$('<input type="text" name="'+fieldName+'" id="'+fieldName+'" placeholder="'+fieldName+'" style="display:none;"><br />')
+		$('<input type="text" name="'+answerName+'" id="'+fieldName+'" placeholder="'+fieldName+'" style="display:none;"><br />')
 		.appendTo('#answers').slideDown('fast');
 		$('#questionText').focus();
 		count += 1;
-	}
-	function submit(){
-		
 	}
 	
 	function addQuestion() {
@@ -104,8 +105,9 @@ textarea {
 </script>
 <body>
 	<form id="main" action="NextQuestion" method="post" onsubmit="">
+		<input type="hidden" name="questionNum" value=<% out.write(request.getParameter("questionNum")); %> >
 		<h2>
-			Question <%	out.write(request.getSession().getAttribute("questionNum").toString());%>:
+			Question <%	out.write(request.getParameter("questionNum"));%>:
 		</h2>
 		<%
 			DBQuizController b = new DBQuizController();
