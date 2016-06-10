@@ -35,7 +35,7 @@ public class NextQuestion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//TODO put question in the quiz;
 		request.getSession().setAttribute("questionNum", (int )request.getSession().getAttribute("questionNum") + 1);
-		request.getRequestDispatcher("Questions.jsp").forward(request, response);
+		response.sendRedirect("Questions.jsp");
 		doGet(request, response);
 	}
 

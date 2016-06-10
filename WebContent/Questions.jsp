@@ -99,6 +99,8 @@ textarea {
 			break;
 		}
 	}
+	
+	
 </script>
 <body>
 	<form id="main" action="NextQuestion" method="post" onsubmit="">

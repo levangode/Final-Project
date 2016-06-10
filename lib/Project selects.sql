@@ -65,7 +65,7 @@ create table Friends(
 	`from` int not null,
 	`to` int not null,
 	
-	foreign key (`from`) references Users(user_id)
+	foreign key (`from`) references Users(user_id),
 	foreign key (`to`) references Users(user_id)
 );
 
@@ -74,9 +74,9 @@ create table FriendshipRequests(
 	`from` int not null,
 	`to` int not null,
 	
-	foreign key (`from`) references Users(user_id)
+	foreign key (`from`) references Users(user_id),
 	foreign key (`to`) references Users(user_id)
-)
+);
 
 
 

@@ -36,7 +36,7 @@ public class CreateQuiz extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//TODO create quiz object into session
 		request.getSession().setAttribute("questionNum", 1);
-		request.getRequestDispatcher("Questions.jsp").forward(request, response);
+		response.sendRedirect("Questions.jsp");
 		
 		doGet(request, response);
 	}
