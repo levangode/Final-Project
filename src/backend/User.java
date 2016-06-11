@@ -16,6 +16,10 @@ public class User {
 		this.profile_image_url = profile_image_url;
 	}
 	
+	public User(String name, Integer id, String login){
+		this(name, id, login, DEFAULT_IMAGE);
+	}
+	
 	public String getName(){
 		return name;
 	}
