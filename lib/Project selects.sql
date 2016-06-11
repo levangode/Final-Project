@@ -1,8 +1,9 @@
 create table Users ( 
 	user_id int not null auto_increment primary key, 
-    user_login varchar(50) not null,
+    user_login varchar(50) not null unique,
 	user_password varchar(100) not null,
-    user_name varchar(50) not null
+    user_name varchar(50) not null,
+    user_profile_image varchar(1000)
 );
 
 create table Quizzes (
@@ -61,6 +62,8 @@ create table Answers(
     foreign key (quiz_id) references Quizzes(quiz_id)
 );
 
+-- Friend system
+
 create table Friends(
 	`from` int not null,
 	`to` int not null,
@@ -77,8 +80,24 @@ create table FriendshipRequests(
 	foreign key (`from`) references Users(user_id),
 	foreign key (`to`) references Users(user_id)
 );
+-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
+-- Messaging system
+create table Messages(
+	message_id int primary key auto_increment,
+	sender_id int not null,
+	recipient_id int not null,
+	message_text varchar(10000),
+	message_subject varchar(500),
+-- 	message_seen int(1) default 0, 
+	
+	foreign key (sender_id) references Users(user_id),
+	foreign key (recipient_id) references Users(user_id)
 
+)
+-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+SET SQL_SAFE_UPDATES=0; 
 
 insert into Users(user_login, user_password, user_name) values 
 	('faskunji1', 'afasljflasjf', 'levan goderdzishvili');
