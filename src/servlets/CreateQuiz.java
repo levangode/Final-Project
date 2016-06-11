@@ -41,12 +41,7 @@ public class CreateQuiz extends HttpServlet {
 		String quiz_description = request.getParameter("quiz_description");
 		String quiz_category = request.getParameter("categories");
 		String quiz_difficulty = request.getParameter("difficulty");
-
-		System.out.println(quiz_name);
-		System.out.println(quiz_description);
-		System.out.println(quiz_category);
-		System.out.println(quiz_difficulty);
-		
+		String quiz_author = (String)request.getSession().getAttribute("user_name");
 		response.sendRedirect("Questions.jsp?questionNum="+1);
 		
 		doGet(request, response);

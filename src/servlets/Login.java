@@ -44,8 +44,9 @@ public class Login extends HttpServlet {
 		Hasher h = new Hasher();
 		if(db.containsUser(user_login)){
 			if(db.passwordMatch(user_login, h.generateHash(user_password))){
-				request.getSession().setAttribute("User", null);;
-				request.getRequestDispatcher("homePage.jsp").forward(request,response);
+				request.getSession().setAttribute("user_name", user_login);
+				request.getSession().setAttribute("logged_in", true);
+				response.sendRedirect("HomePage.jsp");
 			} else {
 				request.getRequestDispatcher("TryAgain.jsp").forward(request, response);
 			}

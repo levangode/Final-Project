@@ -10,17 +10,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="Buttons.css">
 <style>
-
-
-body{
-	
-
-background: #16A085; /* fallback for old browsers */
-background: -webkit-linear-gradient(to left, #16A085 , #F4D03F); /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to left, #16A085 , #F4D03F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        
+body {
+	background: #16A085; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #16A085, #F4D03F);
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #16A085, #F4D03F);
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 	background-color: #ffcc66;
 }
+
 .headers ul {
 	text-align: center;
 	padding: auto;
@@ -32,7 +30,7 @@ background: linear-gradient(to left, #16A085 , #F4D03F); /* W3C, IE 10+/ Edge, F
 	text-decoration: none;
 	color: white;
 	font-size: 20px;
-	margin-top:30px;
+	margin-top: 30px;
 }
 
 .headers li {
@@ -61,25 +59,30 @@ div.box {
 .box a:hover {
 	background: #9EC4AA;
 }
-.headers{
+
+.headers {
 	padding: 10px;
 }
-
-
-
 </style>
 </head>
 <body>
 
-	<span id="homelogo" style="align:left">
-		WELCOMEEE
-	</span>
-	<div id="top" align="right" style="float:right">
+	<span id="homelogo" style="align: left"> WELCOMEEE </span>
+	<div id="top" align="right" style="float: right">
+
 		<form action="Login" method="post">
-			User Name: <input type="text" name="user_login"> Password: <input
-				type="text" name="user_password"> <input type="submit"
-				value="Login">
-			<button type="button" onclick="location.href = 'Register.html'">Register</button>
+			<%
+				if ((boolean)request.getSession().getAttribute("logged_in")) {
+					out.write("You are logged in as: ");
+					out.write((String)request.getSession().getAttribute("user_name")+"   ");
+					out.write("<a href=\"Logout.jsp\">Logout</a>");
+				} else {
+					out.write("User Name: <input type=\"text\" name=\"user_login\">");
+					out.write("Password: <input type=\"text\" name=\"user_password\">");
+					out.write("<input type=\"submit\" value=\"Login\">");
+					out.write("<button type=\"button\" onclick=\"location.href = 'Register.html'\">Register</button>");
+				}
+			%>
 		</form>
 	</div>
 

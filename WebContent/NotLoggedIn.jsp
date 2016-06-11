@@ -8,9 +8,7 @@
 <title>Incorrect Information</title>
 </head>
 <body>
-	<h1>Please Try Again</h1>
-	<p>Either your user name or password is incorrect. 
-	Please try again.</p>
+	<h3>You need to be logged in to create your own quiz</h3>
 	<form action="Login" method="post">
 		User Name: <input type="text" name="user_login">
 		<br />

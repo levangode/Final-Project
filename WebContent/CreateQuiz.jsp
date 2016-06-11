@@ -31,6 +31,11 @@ textarea {
 }
 </style>
 <body>
+	<% 
+	if(!(boolean)request.getSession().getAttribute("logged_in")){
+		response.sendRedirect("NotLoggedIn.jsp");			
+	}
+	%>
 	<h1>Create Quiz</h1>
 	<h2>Choose Quiz category</h2>
 	<%
