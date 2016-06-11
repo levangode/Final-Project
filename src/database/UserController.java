@@ -5,12 +5,45 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import backend.User;
+
 public class UserController {
 	private Connection connection;
 	private DBconnector db;
 	public UserController(){
 		
 	}
+	
+	public User getUserByID(int ID){
+		db = new DBconnector();
+		connection = db.getConnection();
+		String order = "select user_name, user_id, user_login, user_profile_image from Users " + "where user_id = "  + ID + ";";
+		PreparedStatement stm = null;
+		ResultSet myRes = null;
+		User thisUser = null;
+		
+		try {
+			stm = connection.prepareStatement(order);
+			myRes = stm.executeQuery();
+			db.closeConnection();
+			
+			String user_name = myRes.getString(1);
+			int user_id = myRes.getInt(2);
+			String user_login = myRes.getString(3);
+			String user_profile_image = myRes.getString(4);
+			if(user_profile_image == null){
+				user_profile_image = User.DEFAULT_IMAGE;
+			}
+			
+			thisUser = new User(user_name, user_id, user_login, user_profile_image);
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return thisUser;
+	}
+	
 	public boolean containsUser(String user_login){
 		db = new DBconnector();
 		connection = db.getConnection();
