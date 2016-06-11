@@ -42,6 +42,14 @@ public class CreateQuiz extends HttpServlet {
 		String quiz_category = request.getParameter("categories");
 		String quiz_difficulty = request.getParameter("difficulty");
 		String quiz_author = (String)request.getSession().getAttribute("user_name");
+		boolean random_questions = false;
+		boolean immediate_correction = false;
+		String show_on = "";
+		if(request.getParameter("Random Questions") != null)
+			random_questions = true;
+		if(request.getParameter("Immediate Correction") != null)
+			immediate_correction = true;
+		show_on = request.getParameter("Show on");
 		response.sendRedirect("Questions.jsp?questionNum="+1);
 		
 		doGet(request, response);

@@ -21,10 +21,18 @@ body {
 h2 {
 	margin: 10px;
 }
+h4{
+	margin: 0px;
+}
 
-input[name=add] {
+input[type=checkbox]{
 	margin: 10px;
 }
+input[type=radio]{
+	margin: 10px;
+}
+
+
 
 textarea {
 	resize: none;
@@ -62,7 +70,13 @@ textarea {
 		<h2>Enter quiz description</h2>
 		<br />
 		<textarea name="quiz_description" rows="3" cols="45" maxlength="1000" placeholder="Enter quiz description here..."></textarea>
-		<br /><input type="submit" value="Create" class="btn">
+		<br />
+		<input name="Random Questions" type="checkbox">Random Questions<br>
+		<input name="Immediate Correction" type="checkbox">Immediate Correction<br>
+		<h4>Show the quiz on: </h4>
+		<input type="radio" name="Show on" value="One Page" checked>One Page<br>
+ 		<input type="radio" name="Show on" value="Multiple Pages">Multiple Pages<br>
+		<input type="submit" value="Create" class="btn">
 	</form>
 
 </body>
