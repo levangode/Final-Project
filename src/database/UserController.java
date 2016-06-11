@@ -25,21 +25,23 @@ public class UserController {
 		try {
 			stm = connection.prepareStatement(order);
 			myRes = stm.executeQuery();
-			db.closeConnection();
 			
-			String user_name = myRes.getString(1);
-			int user_id = myRes.getInt(2);
-			String user_login = myRes.getString(3);
-			String user_profile_image = myRes.getString(4);
-			if(user_profile_image == null){
-				user_profile_image = User.DEFAULT_IMAGE;
+			if(myRes.next()){
+				String user_name = myRes.getString(1);
+				int user_id = myRes.getInt(2);
+				String user_login = myRes.getString(3);
+				String user_profile_image = myRes.getString(4);
+				if(user_profile_image == null){
+					user_profile_image = User.DEFAULT_IMAGE;
+				}
+				
+				thisUser = new User(user_name, user_id, user_login, user_profile_image);
 			}
-			
-			thisUser = new User(user_name, user_id, user_login, user_profile_image);
 						
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		db.closeConnection();
 		
 		return thisUser;
 	}

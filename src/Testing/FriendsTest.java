@@ -6,12 +6,12 @@ import database.DBFriendController;
 import database.UserController;
 
 public class FriendsTest {
-	public static void addFakeUsers(){
+	public void addFakeUsers(){
 		UserController DBU = new UserController();
 		DBU.addNewUser("gocha", "123", "gocha");
 	}
 	
-	public static void getFriendsList(String userLogin){
+	public void getFriendsList(String userLogin){
 
 		DBFriendController dbf = new DBFriendController();
 		
@@ -19,9 +19,5 @@ public class FriendsTest {
 		System.out.println(z.get(0));
 	}
 	
-	public static void main(String[] args){
-	//	addFakeUsers();
-		getFriendsList("asd");
-		System.out.println("asdasda");
-	}
+	
 }

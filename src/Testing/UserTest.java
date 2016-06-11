@@ -4,7 +4,7 @@ import backend.User;
 import database.UserController;
 
 public class UserTest {
-	private static void printAllUsers(){
+	private  void printAllUsers(){
 		UserController uc = new UserController();
 		
 		User tmp = uc.getUserByID(1);
@@ -17,7 +17,7 @@ public class UserTest {
 		
 	}
 	
-	public static void main(String[] args){
+	public  void zmain(String[] args){
 		printAllUsers();
 	}
 }

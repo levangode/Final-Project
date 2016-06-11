@@ -87,7 +87,7 @@ create table Messages(
 	message_id int primary key auto_increment,
 	sender_id int not null,
 	recipient_id int not null,
-	message_text varchar(10000),
+	message_text varchar(1000),
 	message_subject varchar(500),
 -- 	message_seen int(1) default 0, 
 	
