@@ -9,7 +9,7 @@ public class DBFriendController {
 	
 	private java.sql.Connection con;
 	
-	DBFriendController(){
+	public DBFriendController(){
 		con = new DBconnector().getConnection();
 	}
 	
