@@ -81,22 +81,22 @@ textarea {
 		switch (choice) {
 		case 'Question-Response':
 		case 'Multiple Choice':
-			$('<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus></textarea>').appendTo('#question').show('slow');
+			$('<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus></textarea>').appendTo('#question').slideDown('slow');
 			$('<div id="answers"></div>').appendTo('#question');
-			$('<button type="button" onclick="addAnswer()" style="display:none;">Create Answer</button><br> ').appendTo('#question').show('slow');
-			$('<input type="submit" value="Next Question" style="display:none;">').appendTo('#question').show('slow');
+			$('<button type="button" onclick="addAnswer()" style="display:none;">Create Answer</button><br> ').appendTo('#question').slideDown('slow');
+			$('<input type="submit" value="Next Question" style="display:none;">').appendTo('#question').slideDown('slow');
 			break;
 		case 'Fill in the Blank':
-			$('<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus></textarea>').appendTo('#question').show('slow');
+			$('<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus></textarea>').appendTo('#question').slideDown('slow');
 			$('<div id="answers"></div>').appendTo('#question');
-			$('<button type="button" onclick="addBlank()" style="display:none;">Blank</button><br> ').appendTo('#question').show('slow');
-			$('<input type="submit" value="Next Question" style="display:none;">').appendTo('#question').show('slow');
+			$('<button type="button" onclick="addBlank()" style="display:none;">Blank</button><br> ').appendTo('#question').slideDown('slow');
+			$('<input type="submit" value="Next Question" style="display:none;">').appendTo('#question').slideDown('slow');
 			break;
 		case 'Picture-Response Questions':
-			$('<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus></textarea>').appendTo('#question').show('slow');
+			$('<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus></textarea>').appendTo('#question').slideDown('slow');
 			$('<div id="answers"></div>').appendTo('#question');
-			$('<button type="button" onclick="addImage()" style="display:none;">Create Answer</button><br> ').appendTo('#question').show('slow');
-			$('<input type="submit" value="Next Question" style="display:none;">').appendTo('#question').show('slow');
+			$('<button type="button" onclick="addImage()" style="display:none;">Create Answer</button><br> ').appendTo('#question').slideDown('slow');
+			$('<input type="submit" value="Next Question" style="display:none;">').appendTo('#question').slideDown('slow');
 			break;
 		}
 	}

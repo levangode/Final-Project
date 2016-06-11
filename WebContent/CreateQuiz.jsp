@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Create Your Quiz</title>
-<link rel="stylesheet" type="text/css" href="Buttons.css">
+<link rel="stylesheet" type="text/css" href="Button.css">
 </head>
 <style>
 body {
@@ -57,7 +57,7 @@ textarea {
 		<h2>Enter quiz description</h2>
 		<br />
 		<textarea name="quiz_description" rows="3" cols="45" maxlength="1000" placeholder="Enter quiz description here..."></textarea>
-		<br /><input type="submit" value="Create">
+		<br /><input type="submit" value="Create" class="btn">
 	</form>
 
 </body>
