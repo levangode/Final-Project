@@ -4,19 +4,20 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Quiz {
-	private int quiz_id;
+	private long quiz_id;
 	private String quiz_name;
 	private String quiz_description;
 	private String quiz_author;
 	private int quiz_likes;
 	private Timestamp date_created_timestamp;
 	private int category_id;
+	private int author_id;
 	private String quiz_category;
 	private String quiz_difficulty;
 	private int times_taken;
 	private ArrayList<Question> questions;
 
-	public Quiz(int quiz_id, String quiz_name, int category_id, String quiz_description, String quiz_author,
+	public Quiz(long quiz_id, String quiz_name, int category_id, String quiz_description, String quiz_author,
 			Timestamp date_created_timestamp, int quiz_likes, String quiz_difficulty, int times_taken,
 			ArrayList<Question> questions) {
 		
@@ -24,14 +25,27 @@ public class Quiz {
 		
 
 	}
-	public Quiz(String quiz_name, String quiz_description, String quiz_category, String quiz_difficulty, int times_taken,
-			ArrayList<Question> questions){
+	public Quiz(String quiz_name, String quiz_description, String quiz_category,
+			String quiz_difficulty, int times_taken,int author_id){
 		
-		
+		setQuizName(quiz_name);
+		setQuizDescription(quiz_description);
+		setQuizCategory(quiz_category);
+		setQuizDifficulty(quiz_difficulty);
+		setTimesTaken(times_taken);
+		setAuthorid(author_id);
 		
 		
 	}
-	public int getQuizID() {
+	public int getAuthorid(){
+		return author_id;
+	}
+	
+	public void setAuthorid(int id){
+		this.author_id =id;
+	}
+	
+	public long getQuizID() {
 		return quiz_id;
 	}
 	public void setQuizID(int quiz_id) {

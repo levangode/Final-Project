@@ -9,16 +9,16 @@
 <%
 	DBQuizController cont = new DBQuizController();
 	int quiz_id = Integer.parseInt(request.getParameter("quiz_id"));
-	Quiz quiz = cont.buildQuiz(quiz_id);
+	Quiz quiz = cont.getQuiz(quiz_id);
 	ArrayList<Question> questions = quiz.getQuestions();
-	String quizName = quiz.getQuizname();
+	String quizName = quiz.getQuizName();
 %>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>
 	<%
-		quiz.getQuizname();
+		quiz.getQuizName();
 	%>
 </title>
 </head>

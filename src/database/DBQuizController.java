@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.mysql.jdbc.Statement;
+import com.sun.jmx.snmp.Timestamp;
 
 import backend.*;
 
@@ -86,7 +88,118 @@ public class DBQuizController {
 		return names;
 	}
 
-	public Quiz buildQuiz(int id) {
+	public void addQuiz(Quiz quiz) {
+		String command = "INSERT INTO Quizzes VALUES (";
+		long quiz_id = quiz.getQuizID();
+		String quiz_name = quiz.getQuizName();
+		int category_id = quiz.getCategoryID();
+		String quiz_description = quiz.getQuizDescription();
+		int author_id = quiz.getAuthorid();
+		int quiz_likes = quiz.getQuizLikes();
+		java.sql.Timestamp date_created = quiz.getDateCreatedTimestamp();
+		String quiz_difficulty = quiz.getQuizDifficulty();
+		int times_taken = quiz.getTimesTaken();
+
+		command += quiz_id + ", '" + quiz_name + "', " + category_id + ", " + "'" + quiz_description + "' ," + author_id
+				+ ", " + quiz_likes + ", " + date_created + "," + "'" + quiz_difficulty + "'," + times_taken + ");";
+
+		System.out.println(command);
+		PreparedStatement stm;
+
+		try {
+			stm = connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
+			stm.executeUpdate();
+			if (quiz_id == 0) {
+				ResultSet res = stm.getGeneratedKeys();
+				if(res.next())
+					quiz_id = res.getLong(1);
+			}
+			addQuestions(quiz, quiz_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void addAnswer(Answer answer, long question_id, long quiz_id) {
+		String command = "INSERCT INTO Answers VALUES (";
+
+		long answer_id = answer.getAnswerId();
+		String answer_text = answer.getAnswerText();
+		String answer_description = answer.getAnswerDescription();
+		boolean answer_correct = answer.getAnswerCorrect();
+		String answer_type = answer.getAnswerType();
+
+		command += answer_id + "," + quiz_id + ", '" + answer_text + "'," + "'" + answer_description + "',"
+				+ answer_correct + ", " + "'" + answer_type + "'," + question_id + ");";
+
+		PreparedStatement stm;
+
+		try {
+			stm = connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
+			stm.executeUpdate();
+
+			if (answer_id == 0) {
+				ResultSet res = stm.getGeneratedKeys();
+				if(res.next())
+					answer_id = res.getLong(1);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void addAnswers(Question question, long question_id, long quiz_id) {
+		ArrayList<Answer> answers = question.getAnswers();
+		for (int i = 0; i < answers.size(); i++) {
+			addAnswer(answers.get(i), question_id, quiz_id);
+		}
+	}
+
+	public void addQuestion(Question question, long quiz_id) {
+		String command = "Insert INTO Questions VALUES (";
+		long question_id = question.getQuestionid();
+		String question_text = question.getQuestiontext();
+		String question_type = question.getQuestiontype();
+		String question_description = question.getQuestiondescription();
+		long questions_time_limit = question.getQuestiontimelimit();
+		command += question_id + ", " + quiz_id + ", " + "'" + question_text + "', " + "'" + question_type + "', " + "'"
+				+ question_description + "', " + questions_time_limit + ");";
+
+		PreparedStatement stm;
+
+		try {
+			stm = connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
+			stm.executeUpdate();
+			if (question_id == 0) {
+				ResultSet res = stm.getGeneratedKeys();
+				if(res.next())
+					question_id = res.getLong(1);
+			}
+			addAnswers(question, question_id, quiz_id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	public void addQuestions(Quiz quiz, long quiz_id) {
+		if(quiz.getQuestions()==null){
+			System.out.println("WTF WTF WTF WTF");
+			return;
+		}
+		ArrayList<Question> questions = quiz.getQuestions();
+		for (int i = 0; i < questions.size(); i++) {
+			addQuestion(questions.get(i), quiz_id);
+		}
+	}
+
+	public Quiz getQuiz(int id) {
 		ArrayList<Question> questions = getQuestions(id);
 		String command = "Select * from Quizzes where quiz_id =" + id;
 		Quiz quiz = null;
@@ -166,14 +279,15 @@ public class DBQuizController {
 			ResultSet rs = stm.executeQuery();
 
 			while (rs.next()) {
-				int answer_id = rs.getInt(1);
-				int quiz_id = rs.getInt(2);
+				long answer_id = rs.getInt(1);
+				long quiz_id = rs.getInt(2);
 				String answer_text = rs.getString(3);
 				String answer_description = rs.getString(4);
 				boolean answer_correct = rs.getBoolean(5);
 				String answer_type = rs.getString(6);
+				long question_id = rs.getLong(7);
 				Answer newAnswer = new Answer(answer_id, quiz_id, answer_text, answer_description, answer_correct,
-						answer_type);
+						answer_type, question_id);
 				answers.add(newAnswer);
 			}
 
@@ -200,6 +314,7 @@ public class DBQuizController {
 		}
 		return result;
 	}
+
 	public ArrayList<String> getQuestionTypes() {
 		ArrayList<String> result = new ArrayList<String>();
 		String order = "select type_name from QuestionTypes";
@@ -213,7 +328,7 @@ public class DBQuizController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//TODO close
+		// TODO close
 		return result;
 	}
 

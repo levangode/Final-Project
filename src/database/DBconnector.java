@@ -18,21 +18,25 @@ public class DBconnector {
 		String password = INFO.MYSQL_PASSWORD;
 		String dbName = INFO.MYSQL_DATABASE_NAME;
 		try {
-			//connection = DriverManager.getConnection(server + "/" + dbName, userName, password);
-			connection = DriverManager.getConnection("jdbc:mysql://sql8.freemysqlhosting.net:3306" + "/" + "sql8123237", "sql8123237", "i6aiya2KBz");
+			// connection = DriverManager.getConnection(server + "/" + dbName,
+			// userName, password);
+			connection = DriverManager.getConnection("jdbc:mysql://sql8.freemysqlhosting.net:3306" + "/" + "sql8123237",
+					"sql8123237", "i6aiya2KBz");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	public Connection getConnection(){
+
+	public Connection getConnection() {
 		return connection;
 	}
-	public void closeConnection(){
+
+	public void closeConnection() {
 		try {
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 }
