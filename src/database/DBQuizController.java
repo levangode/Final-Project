@@ -123,7 +123,7 @@ public class DBQuizController {
 	}
 
 	public void addAnswer(Answer answer, long question_id, long quiz_id) {
-		String command = "INSERCT INTO Answers VALUES (";
+		String command = "INSERT INTO Answers VALUES (";
 
 		long answer_id = answer.getAnswerId();
 		String answer_text = answer.getAnswerText();
