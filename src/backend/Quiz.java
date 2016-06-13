@@ -31,58 +31,58 @@ public class Quiz {
 		
 		
 	}
-	public int getQuizid() {
+	public int getQuizID() {
 		return quiz_id;
 	}
-	public void setQuizid(int quiz_id) {
+	public void setQuizID(int quiz_id) {
 		this.quiz_id = quiz_id;
 	}
-	public String getQuizname() {
+	public String getQuizName() {
 		return quiz_name;
 	}
-	public void setQuizname(String quiz_name) {
+	public void setQuizName(String quiz_name) {
 		this.quiz_name = quiz_name;
 	}
-	public String getQuizdescription() {
+	public String getQuizDescription() {
 		return quiz_description;
 	}
-	public void setQuizdescription(String quiz_description) {
+	public void setQuizDescription(String quiz_description) {
 		this.quiz_description = quiz_description;
 	}
-	public int getQuizlikes() {
+	public int getQuizLikes() {
 		return quiz_likes;
 	}
-	public void setQuizlikes(int quiz_likes) {
+	public void setQuizLikes(int quiz_likes) {
 		this.quiz_likes = quiz_likes;
 	}
-	public Timestamp getDatecreatedtimestamp() {
+	public Timestamp getDateCreatedTimestamp() {
 		return date_created_timestamp;
 	}
-	public void setDatecreatedtimestamp(Timestamp date_created_timestamp) {
+	public void setDateCreatedTimestamp(Timestamp date_created_timestamp) {
 		this.date_created_timestamp = date_created_timestamp;
 	}
-	public int getCategoryid() {
+	public int getCategoryID() {
 		return category_id;
 	}
-	public void setCategoryid(int category_id) {
+	public void setCategoryID(int category_id) {
 		this.category_id = category_id;
 	}
-	public String getQuizcategory() {
+	public String getQuizCategory() {
 		return quiz_category;
 	}
-	public void setQuizcategory(String quiz_category) {
+	public void setQuizCategory(String quiz_category) {
 		this.quiz_category = quiz_category;
 	}
-	public int getTimestaken() {
+	public int getTimesTaken() {
 		return times_taken;
 	}
-	public void setTimestaken(int times_taken) {
+	public void setTimesTaken(int times_taken) {
 		this.times_taken = times_taken;
 	}
-	public String getQuizdifficulty() {
+	public String getQuizDifficulty() {
 		return quiz_difficulty;
 	}
-	public void setQuizdifficulty(String quiz_difficulty) {
+	public void setQuizDifficulty(String quiz_difficulty) {
 		this.quiz_difficulty = quiz_difficulty;
 	}
 	public ArrayList<Question> getQuestions() {
@@ -91,10 +91,10 @@ public class Quiz {
 	public void setQuestions(ArrayList<Question> questions) {
 		this.questions = questions;
 	}
-	public String getQuizauthor() {
+	public String getQuizAuthor() {
 		return quiz_author;
 	}
-	public void setQuizauthor(String quiz_author) {
+	public void setQuizAuthor(String quiz_author) {
 		this.quiz_author = quiz_author;
 	}
 	
