@@ -11,14 +11,14 @@
 	int quiz_id = Integer.parseInt(request.getParameter("quiz_id"));
 	Quiz quiz = cont.buildQuiz(quiz_id);
 	ArrayList<Question> questions = quiz.getQuestions();
-	String quizName = quiz.getQuizName();
+	String quizName = quiz.getQuizname();
 %>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>
 	<%
-		quiz.getQuizName();
+		quiz.getQuizname();
 	%>
 </title>
 </head>
@@ -27,7 +27,7 @@
 	<%
 		for (int i = 0; i < questions.size(); i++) {
 			Question question = questions.get(i);
-			String questionTxt = question.getQuestionText();
+			String questionTxt = question.getQuestiontext();
 			ArrayList<Answer> answers = question.getAnswers();
 			out.print("<h2>" + questionTxt + "</h2>");
 			for (int j = 0; j < answers.size(); j++) {
