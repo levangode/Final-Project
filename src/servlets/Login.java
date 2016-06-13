@@ -46,7 +46,7 @@ public class Login extends HttpServlet {
 			if(db.passwordMatch(user_login, h.generateHash(user_password))){
 				request.getSession().setAttribute("user_name", user_login);
 				request.getSession().setAttribute("logged_in", true);
-				response.sendRedirect("HomePage.jsp");
+				response.sendRedirect("homePage.jsp");
 			} else {
 				request.getRequestDispatcher("TryAgain.jsp").forward(request, response);
 			}
