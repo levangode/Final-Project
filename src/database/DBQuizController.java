@@ -133,7 +133,7 @@ public class DBQuizController {
 
 		command += answer_id + "," + quiz_id + ", '" + answer_text + "'," + "'" + answer_description + "',"
 				+ answer_correct + ", " + "'" + answer_type + "'," + question_id + ");";
-
+		System.out.println(command);
 		PreparedStatement stm;
 
 		try {
@@ -167,7 +167,7 @@ public class DBQuizController {
 		String question_type = question.getQuestiontype();
 		String question_description = question.getQuestiondescription();
 		long questions_time_limit = question.getQuestiontimelimit();
-		command += question_id + ", " + quiz_id + ", " + "'" + question_text + "', " + "'" + question_type + "', " + "'"
+		command += question_id + ", " + quiz_id + ", " + "'" + question_text + "', " + 1 + ", " + "'"
 				+ question_description + "', " + questions_time_limit + ");";
 
 		PreparedStatement stm;
