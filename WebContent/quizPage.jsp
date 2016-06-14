@@ -34,7 +34,7 @@
 				Answer answer = answers.get(j);
 				String command = "<div>" + "<input type='radio' " + "id = 'question-" + i + "-answer-" + j + "' "
 						+ "value = '" + j + "' />" + "<label for='question-" + i + "-answer-" + j + "' >"
-						+ answer.answerText() + "</div>";
+						+ answer.getAnswerType() + "</div>";
 
 				out.print(command);
 			}

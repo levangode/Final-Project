@@ -1,8 +1,9 @@
-<%@page import="database.*"%>
-<%@page import="backend.*"%>
+<!%@page import="database.*"%>
+<%@page import="backend.Quiz"%>
 <%@page import="database.DBQuizController"%>
 <%@page import="database.DBconnector"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="database.sampleQuiz;"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE>
@@ -23,32 +24,34 @@ body {
 h2 {
 	margin: 10px;
 }
-h4{
+
+h4 {
 	margin: 0px;
 }
 
-input[type=checkbox]{
-	margin: 10px;
-}
-input[type=radio]{
+input[type=checkbox] {
 	margin: 10px;
 }
 
-
+input[type=radio] {
+	margin: 10px;
+}
 
 textarea {
 	resize: none;
 }
 </style>
 <body>
-	<% 
-	if(!(boolean)request.getSession().getAttribute("logged_in")){
-		sampleQuiz squiz = new sampleQuiz();
-		Quiz quiz = squiz.getSampleQuiz();
-		DBQuizController dbc = new DBQuizController();
-		dbc.addQuiz(quiz);
-		response.sendRedirect("NotLoggedIn.jsp");			
-	}
+	<%
+		if (!(boolean) request.getSession().getAttribute("logged_in")) {
+			sampleQuiz 
+				squiz = 
+					new sampleQuiz();
+			Quiz quiz = squiz.getSampleQuiz();
+			DBQuizController dbc = new DBQuizController();
+			dbc.addQuiz(quiz);
+			response.sendRedirect("NotLoggedIn.jsp");
+		}
 	%>
 	<h1>Create Quiz</h1>
 	<h2>Choose Quiz category</h2>
@@ -64,8 +67,8 @@ textarea {
 					out.write("<option value=\"" + categories.get(i) + "\">" + categories.get(i) + "</option>");
 				}
 			%>
-		</select>
-		<select name="difficulty"> <!-- TODO from base?------------------------------------------- -->
+		</select> <select name="difficulty">
+			<!-- TODO from base?------------------------------------------- -->
 			<option value="Easy">Easy</option>
 			<option value="Medium">Medium</option>
 			<option value="Hard">Hard</option>
@@ -75,14 +78,16 @@ textarea {
 			placeholder="Enter quiz name here..."> <br />
 		<h2>Enter quiz description</h2>
 		<br />
-		<textarea name="quiz_description" rows="3" cols="45" maxlength="1000" placeholder="Enter quiz description here..."></textarea>
-		<br />
-		<input name="Random Questions" type="checkbox">Random Questions<br>
-		<input name="Immediate Correction" type="checkbox">Immediate Correction<br>
-		<h4>Show the quiz on: </h4>
-		<input type="radio" name="Show on" value="One Page" checked>One Page<br>
- 		<input type="radio" name="Show on" value="Multiple Pages">Multiple Pages<br>
-		<input type="submit" value="Create" class="btn">
+		<textarea name="quiz_description" rows="3" cols="45" maxlength="1000"
+			placeholder="Enter quiz description here..."></textarea>
+		<br /> <input name="Random Questions" type="checkbox">Random
+		Questions<br> <input name="Immediate Correction" type="checkbox">Immediate
+		Correction<br>
+		<h4>Show the quiz on:</h4>
+		<input type="radio" name="Show on" value="One Page" checked>One
+		Page<br> <input type="radio" name="Show on"
+			value="Multiple Pages">Multiple Pages<br> <input
+			type="submit" value="Create" class="btn">
 	</form>
 
 </body>

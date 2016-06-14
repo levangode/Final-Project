@@ -7,7 +7,9 @@ import com.mysql.jdbc.Connection;
 import backend.*;
 
 public class sampleQuiz {
-
+	public sampleQuiz(){
+		
+	}
 	
 	public ArrayList<Question> buildQuestions(){
 		Question a = new Question("Ra kaci xar?", QuestionTypes.MultipleChoice, "kacoba-test",
