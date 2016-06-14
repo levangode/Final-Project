@@ -59,8 +59,8 @@ create table Answers(
     answer_description varchar(500),
     answer_correct bool not null,
 	answer_type varchar(100) not null,
-	question_id long not null,
-    foreign key (quiz_id) references Quizzes(quiz_id)
+	question_id long not null
+    /*foreign key (quiz_id) references Quizzes(quiz_id)*/
 );
 
 -- Friend system

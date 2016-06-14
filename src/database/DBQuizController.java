@@ -123,7 +123,8 @@ public class DBQuizController {
 	}
 
 	public void addAnswer(Answer answer, long question_id, long quiz_id) {
-		String command = "INSERT INTO Answers VALUES (";
+		String command = "INSERT INTO Answers (answer_id,quiz_id,answer_text,"
+				+ " answer_description , answer_correct,answer_type ,question_id) values(?,?,?,?,?,?,?)";
 
 		long answer_id = answer.getAnswerId();
 		String answer_text = answer.getAnswerText();
@@ -131,13 +132,21 @@ public class DBQuizController {
 		boolean answer_correct = answer.getAnswerCorrect();
 		String answer_type = answer.getAnswerType();
 
-		command += answer_id + "," + quiz_id + ", '" + answer_text + "'," + "'" + answer_description + "',"
-				+ answer_correct + ", " + "'" + answer_type + "'," + question_id + ");";
-		System.out.println(command);
+		//command += answer_id + "," + quiz_id + ", '" + answer_text + "'," + "'" + answer_description + "',"
+			//	+ answer_correct + ", " + "'" + answer_type + "'," + question_id + ");";
+		//System.out.println(command);
 		PreparedStatement stm;
 
 		try {
 			stm = connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
+			stm.setLong(1, answer_id);
+			stm.setLong(2, quiz_id);
+			stm.setString(3, answer_text);
+			stm.setString(4, answer_description);
+			stm.setBoolean(5, answer_correct);
+			stm.setString(6, answer_type);
+			stm.setLong(7, question_id);
+			
 			stm.executeUpdate();
 
 			if (answer_id == 0) {
