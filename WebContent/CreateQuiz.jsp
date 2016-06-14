@@ -1,9 +1,5 @@
-<!%@page import="database.*"%>
-<%@page import="backend.Quiz"%>
 <%@page import="database.DBQuizController"%>
-<%@page import="database.DBconnector"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="database.sampleQuiz;"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE>
@@ -44,12 +40,6 @@ textarea {
 <body>
 	<%
 		if (!(boolean) request.getSession().getAttribute("logged_in")) {
-			sampleQuiz 
-				squiz = 
-					new sampleQuiz();
-			Quiz quiz = squiz.getSampleQuiz();
-			DBQuizController dbc = new DBQuizController();
-			dbc.addQuiz(quiz);
 			response.sendRedirect("NotLoggedIn.jsp");
 		}
 	%>
