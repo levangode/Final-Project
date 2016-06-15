@@ -6,6 +6,29 @@ create table Users (
     user_profile_image varchar(1000)
 );
 
+create table Quiz_edit(
+	user_id int not null,
+	quiz_id int not null,
+	quiz_edited tinyint default 0,
+	quiz_edit_date timestamp,
+	
+	foreign key (user_id) references Users(user_id),
+	foreign key (quiz_id) references Quizzes(quiz_id)	
+);
+
+create table Quiz_taken(
+	user_id int not null,
+	quiz_id int not null,
+	
+	time_finished timestamp,
+	time_taken timestamp,
+	
+	score int not null,
+	
+	foreign key (user_id) references Users(user_id),
+	foreign key (quiz_id) references Quizzes(quiz_id)
+);
+
 create table Quizzes (
 	quiz_id int auto_increment primary key,
     quiz_name varchar(50) not null,
@@ -15,7 +38,14 @@ create table Quizzes (
     quiz_likes int default 0,
     date_created timestamp not null,
     quiz_difficulty varchar(50),
-    times_taken int default 0
+    times_taken int default 0,
+    multiple_pages tinyint default 0,
+    immediate_correction tinyint default 0,
+    random_questions tinyint default 0,
+    
+    foreign key (author_id) references Users(user_id),
+    foreign key (category_id) references Categories(category_id),
+    
 );
 
 create table QuestionTypes(
@@ -31,7 +61,7 @@ insert into QuestionTypes(type_name) values
     
 
 create table Categories(
-	quiz_category int not null auto_increment primary key,
+	category_id int auto_increment primary key,
     category_name varchar(50) not null
 );
 
@@ -42,25 +72,26 @@ insert into Categories(category_name) values
 
 create table Questions(
 	question_id int auto_increment primary key,
-    quiz_id long not null,
+    quiz_id int not null,
     question_text varchar(500),
-    question_type varchar(50) not null,
+    question_type int not null,
     question_description varchar(500),
-    question_time_limit long default -1,
+    question_time_limit int default -1,
 	
  
 	foreign key (quiz_id) references Quizzes(quiz_id)
 );
 
 create table Answers(
-	answer_id long auto_increment primary key,
-	quiz_id long not null,
+	answer_id int auto_increment primary key,
+-- 	quiz_id long not null,
 	answer_text varchar(500),
     answer_description varchar(500),
     answer_correct bool not null,
-	answer_type varchar(100) not null,
-	question_id long not null
-    /*foreign key (quiz_id) references Quizzes(quiz_id)*/
+-- 	answer_type varchar(100) not null,
+	question_id long not null,
+    
+	foreign key (question_id) references Questions(question_id)
 );
 
 -- Friend system
@@ -90,6 +121,7 @@ create table Messages(
 	recipient_id int not null,
 	message_text varchar(1000),
 	message_subject varchar(500),
+	date_sent timestamp,
 -- 	message_seen int(1) default 0, 
 	
 	foreign key (sender_id) references Users(user_id),
@@ -98,9 +130,22 @@ create table Messages(
 )
 -- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
-SET SQL_SAFE_UPDATES=0; 
+
 
 insert into Users(user_login, user_password, user_name) values 
 	('faskunji1', 'afasljflasjf', 'levan goderdzishvili');
     
-select * from users
+select * from users;
+
+-- Caution remove scripts
+
+drop table Answers;
+drop table Friends;
+drop table FriendshipRequests;
+drop table Questions;
+drop table QuestionTypes;
+drop table Quizzes;
+drop table Categories;
+drop table Users;
+
+-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
