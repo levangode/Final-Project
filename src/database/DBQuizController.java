@@ -109,7 +109,7 @@ public class DBQuizController {
 		return id;
 	}
 
-	public int getAuthoId(String authorName) {
+	public int getAuthorId(String authorName) {
 		int id = 0;
 		String command = "Select user_id from Users where user_name = " + "'" + authorName + "';";
 		PreparedStatement stm;
@@ -131,30 +131,35 @@ public class DBQuizController {
 	}
 
 	public void addQuiz(Quiz quiz) {
-		String command = "INSERT INTO Quizzes (quiz_name,category_id,quiz_description,author_id,quiz_likes"
+		String command = "INSERT INTO Quizzes (quiz_id,quiz_name,category_id,quiz_description,author_id,quiz_likes,"
 				+ "date_created,quiz_difficulty,times_taken,multiple_pages,immediate_correction,random_questions) "
-				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
+				+ "values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement stm;
 
 		try {
 			stm = connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
-			stm.setString(1, quiz.getQuiz_name());
-			stm.setInt(2, getQuizCategoryId(quiz.getQuiz_category()));
-			stm.setString(3, quiz.getQuiz_description());
-			stm.setInt(4, getAuthoId(quiz.getQuiz_author()));
-			stm.setInt(5, quiz.getQuiz_likes());
-			stm.setTimestamp(6, quiz.getDate_created_timestamp());
-			stm.setString(7, quiz.getQuiz_difficulty());
-			stm.setInt(8, quiz.getTimes_taken());
-			stm.setBoolean(9, quiz.isDisplayMultiplePages());
-			stm.setBoolean(10, quiz.isImmediateCorrection());
-			stm.setBoolean(11, quiz.isRandomQuestions());
+			stm.setInt(1, 0);
+			stm.setString(2, quiz.getQuiz_name());
+			stm.setInt(3, getQuizCategoryId(quiz.getQuiz_category()));
+			stm.setString(4, quiz.getQuiz_description());
+			stm.setInt(5, getAuthorId(quiz.getQuiz_author()));
+			stm.setInt(6, quiz.getQuiz_likes());
+			stm.setTimestamp(7, quiz.getDate_created_timestamp());
+			stm.setString(8, quiz.getQuiz_difficulty());
+			stm.setInt(9, quiz.getTimes_taken());
+			stm.setBoolean(10, quiz.isDisplayMultiplePages());
+			stm.setBoolean(11, quiz.isImmediateCorrection());
+			stm.setBoolean(12, quiz.isRandomQuestions());
+
+			System.out.println("blaaas");
 			stm.executeUpdate();
+			System.out.println("FUCK");
 			ResultSet res = stm.getGeneratedKeys();
 			int quiz_id = 0;
 			if (res.next()) {
 				quiz_id = res.getInt(1);
+				System.out.println("Starting to add questions");
 				addQuestions(quiz, quiz_id);
 			} else {
 				System.out.println("Quiz id not generated!");
@@ -165,6 +170,7 @@ public class DBQuizController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("QUIZ ADDED SUCCESFULLY");
 
 	}
 
@@ -243,12 +249,14 @@ public class DBQuizController {
 			ResultSet res = stm.getGeneratedKeys();
 			int question_id = 0;
 			if (res.next()) {
+				System.out.println("starting to add answers");
 				question_id = res.getInt(1);
+				addAnswers(question.getAnswers(), question_id);
 			} else {
 				System.out.println("Question ID not generated!");
 				return;
 			}
-			addAnswers(question.getAnswers(), question_id);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
