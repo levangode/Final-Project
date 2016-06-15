@@ -8,10 +8,36 @@ create table Users (
     user_profile_image varchar(1000)
 );
 
+create table Categories(
+	category_id int auto_increment primary key,
+    category_name varchar(50) not null
+);
+
+create table Quizzes (
+	quiz_id int auto_increment primary key,
+    quiz_name varchar(50) not null,
+    category_id int not null,
+    quiz_description varchar(1000),
+    author_id int not null,
+    quiz_likes int default 0,
+    date_created timestamp not null,
+    quiz_difficulty varchar(50),
+    times_taken int default 0,
+    multiple_pages bool default false,
+    immediate_correction tinyint default 0,
+    random_questions tinyint default 0,
+    
+    foreign key (author_id) references Users(user_id),
+    foreign key (category_id) references Categories(category_id)
+    
+);
+
+
+
 create table Quiz_edit(
 	user_id int not null,
 	quiz_id int not null,
-	quiz_edited tinyint default 0,
+	quiz_edited tinyint(1) default null,
 	quiz_edit_date timestamp,
 	
 	foreign key (user_id) references Users(user_id),
@@ -31,6 +57,7 @@ create table Quiz_taken(
 	foreign key (quiz_id) references Quizzes(quiz_id)
 );
 
+<<<<<<< HEAD
 create table Quizzes (
 	quiz_id int auto_increment primary key,
     quiz_name varchar(50) not null,
@@ -50,6 +77,8 @@ create table Quizzes (
     
 );
 
+=======
+>>>>>>> origin/master
 create table QuestionTypes(
 	type_id int not null auto_increment primary key,
     type_name varchar(50)
@@ -62,10 +91,7 @@ insert into QuestionTypes(type_name) values
     ('Picture-Response Questions');
     
 
-create table Categories(
-	category_id int auto_increment primary key,
-    category_name varchar(50) not null
-);
+
 
 insert into Categories(category_name) values 
 	('History'),
@@ -86,11 +112,13 @@ create table Questions(
 
 create table Answers(
 	answer_id int auto_increment primary key,
--- 	quiz_id long not null,
 	answer_text varchar(500),
     answer_description varchar(500),
     answer_correct bool not null,
+<<<<<<< HEAD
 -- 	answer_type varchar(100) not null,
+=======
+>>>>>>> origin/master
 	question_id int not null,
     
 	foreign key (question_id) references Questions(question_id)
