@@ -1,3 +1,5 @@
+SET SQL_SAFE_UPDATES=0;
+
 create table Users ( 
 	user_id int not null auto_increment primary key, 
     user_login varchar(50) not null unique,
