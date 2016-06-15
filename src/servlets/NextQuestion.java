@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import backend.Question;
+import backend.QuestionFactory;
+import backend.Quiz;
+
 /**
  * Servlet implementation class NextQuestion
  */
@@ -38,6 +42,8 @@ public class NextQuestion extends HttpServlet {
 		//TODO put question in the quiz;
 		String question_text = request.getParameter("question");
 		String question_type = request.getParameter("type");
+		String question_description="";
+		long question_time_limit=Integer.parseInt(request.getParameter("timeLimit"))*60000;
 		
 		Enumeration<String> parameters = request.getParameterNames();
 		String param = "";
@@ -53,6 +59,11 @@ public class NextQuestion extends HttpServlet {
 				isCorrect = true;
 			}
 		}
+		
+		Question newQuestion = QuestionFactory.getQuestion(question_text, question_type, question_description, question_time_limit);
+		
+		Quiz currentQuiz = (Quiz)request.getSession().getAttribute("Quiz");
+		
 		response.sendRedirect("Questions.jsp?questionNum="+(Integer.parseInt(request.getParameter("questionNum"))+1));
 		doGet(request, response);
 	}
