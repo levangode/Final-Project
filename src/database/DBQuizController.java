@@ -111,7 +111,8 @@ public class DBQuizController {
 			stm.executeUpdate();
 			if (quiz_id == 0) {
 				ResultSet res = stm.getGeneratedKeys();
-				if(res.next())
+			
+				if (res.next())
 					quiz_id = res.getLong(1);
 			}
 			addQuestions(quiz, quiz_id);
@@ -122,39 +123,24 @@ public class DBQuizController {
 
 	}
 
-	public void addAnswer(Answer answer, long question_id, long quiz_id) {
-		String command = "INSERT INTO Answers (answer_id,quiz_id,answer_text,"
-				+ " answer_description , answer_correct,answer_type ,question_id) values(?,?,?,?,?,?,?)";
+	public void addAnswer(Answer answer, int question_id) {
+		String command = "INSERT INTO Answers (answer_id,answer_text,"
+				+ " answer_description , answer_correct,question_id) values(?,?,?,?,?)";
 
-		long answer_id = answer.getAnswerId();
 		String answer_text = answer.getAnswerText();
 		String answer_description = answer.getAnswerDescription();
 		boolean answer_correct = answer.getAnswerCorrect();
-		String answer_type = answer.getAnswerType();
 
-		//command += answer_id + "," + quiz_id + ", '" + answer_text + "'," + "'" + answer_description + "',"
-			//	+ answer_correct + ", " + "'" + answer_type + "'," + question_id + ");";
-		//System.out.println(command);
 		PreparedStatement stm;
 
 		try {
-			stm = connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
-			stm.setLong(1, answer_id);
-			stm.setLong(2, quiz_id);
-			stm.setString(3, answer_text);
-			stm.setString(4, answer_description);
-			stm.setBoolean(5, answer_correct);
-			stm.setString(6, answer_type);
-			stm.setLong(7, question_id);
-			
+			stm = connection.prepareStatement(command);
+			stm.setInt(1, 0);
+			stm.setString(1, answer_text);
+			stm.setString(3, answer_description);
+			stm.setBoolean(4, answer_correct);
+			stm.setInt(5, question_id);
 			stm.executeUpdate();
-
-			if (answer_id == 0) {
-				ResultSet res = stm.getGeneratedKeys();
-				if(res.next())
-					answer_id = res.getLong(1);
-			}
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -162,34 +148,62 @@ public class DBQuizController {
 
 	}
 
-	public void addAnswers(Question question, long question_id, long quiz_id) {
-		ArrayList<Answer> answers = question.getAnswers();
+	public void addAnswers(ArrayList<Answer> answers, int question_id) {
 		for (int i = 0; i < answers.size(); i++) {
-			addAnswer(answers.get(i), question_id, quiz_id);
+			addAnswer(answers.get(i), question_id);
 		}
 	}
 
-	public void addQuestion(Question question, long quiz_id) {
-		String command = "Insert INTO Questions VALUES (";
-		long question_id = question.getQuestionid();
+	public int getQuestionTypeId(String type) {
+		int res = 0;
+		String command = "select type_id from QuestionTypes where type_name =" + "'" + type + "';";
+
+		PreparedStatement stm;
+
+		try {
+			stm = connection.prepareStatement(command);
+			ResultSet result = stm.executeQuery();
+			if (result.next()) {
+				res = result.getInt(1);
+			} else {
+				System.out.println("Type not found!");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+
+	public void addQuestion(Question question, int quiz_id) {
+		String command = "Insert INTO Questions ( quiz_id,   question_text , question_type ,"
+				+ "question_description , question_time_limit) values (?,?,?,?,?,?)";
 		String question_text = question.getQuestiontext();
 		String question_type = question.getQuestiontype();
 		String question_description = question.getQuestiondescription();
-		long questions_time_limit = question.getQuestiontimelimit();
-		command += question_id + ", " + quiz_id + ", " + "'" + question_text + "', " + 1 + ", " + "'"
-				+ question_description + "', " + questions_time_limit + ");";
+		int questions_time_limit = (int) question.getQuestiontimelimit();
 
 		PreparedStatement stm;
 
 		try {
 			stm = connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
+			stm.setInt(1, 0);
+			stm.setInt(2, quiz_id);
+			stm.setString(3, question_text);
+			stm.setInt(4, getQuestionTypeId(question_type));
+			stm.setString(5, question_description);
+			stm.setInt(6, questions_time_limit);
 			stm.executeUpdate();
-			if (question_id == 0) {
-				ResultSet res = stm.getGeneratedKeys();
-				if(res.next())
-					question_id = res.getLong(1);
+			ResultSet res = stm.getGeneratedKeys();
+			int question_id = 0;
+			if (res.next()) {
+				question_id = res.getInt(1);
+			} else {
+				System.out.println("Question ID not generated!");
+				return;
 			}
-			addAnswers(question, question_id, quiz_id);
+			addAnswers(question.getAnswers(), question_id);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -197,8 +211,8 @@ public class DBQuizController {
 
 	}
 
-	public void addQuestions(Quiz quiz, long quiz_id) {
-		if(quiz.getQuestions()==null){
+	public void addQuestions(Quiz quiz, int quiz_id) {
+		if (quiz.getQuestions() == null) {
 			System.out.println("WTF WTF WTF WTF");
 			return;
 		}
@@ -254,21 +268,44 @@ public class DBQuizController {
 		return authorName;
 	}
 
+	public String getQuestionTypeStr(int id) {
+		String str = "";
+		String command = "select type_name from QuestionTypes where type_id =" + id + ";";
+
+		PreparedStatement stm;
+
+		try {
+			stm = connection.prepareStatement(command);
+			ResultSet result = stm.executeQuery();
+			if (result.next()) {
+				str = result.getString(1);
+			} else {
+				System.out.println("Type not found!");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return str;
+	}
+
 	public ArrayList<Question> getQuestions(int id) {
-		String command = "Select * from Questions where quiz_id =" + id;
+		String command = "Select question_id,question_type,question_description,question_text,"
+				+ "question_time_limit from Questions where quiz_id =" + id;
 		ArrayList<Question> questions = new ArrayList<>();
+
 		try {
 			PreparedStatement stm = connection.prepareStatement(command);
 			ResultSet rs = stm.executeQuery();
 			while (rs.next()) {
-				String question_text = rs.getString(3);
 				int question_id = rs.getInt(1);
-				int quiz_id = rs.getInt(2);
-				String question_type = rs.getString(4);
-				String question_description = rs.getString(5);
-				int question_time_limit = rs.getInt(6);
-				ArrayList<Answer> answers = getAnswers(id);
-				Question newQuestion = new Question(question_text, question_id, quiz_id, question_type,
+				int question_type = rs.getInt(2);
+				String question_description = rs.getString(3);
+				String question_text = rs.getString(4);
+				int question_time_limit = rs.getInt(5);
+				ArrayList<Answer> answers = getAnswers(question_id);
+				Question newQuestion = new Question(question_text, getQuestionTypeStr(question_type),
 						question_description, question_time_limit, answers);
 				questions.add(newQuestion);
 			}
@@ -282,21 +319,18 @@ public class DBQuizController {
 
 	public ArrayList<Answer> getAnswers(int id) {
 		ArrayList<Answer> answers = new ArrayList<>();
-		String command = "Select * from Answers where quiz_id =" + id;
+		String command = "Select answer_text,answer_description,answer_correct from Answers where question_id =" + id;
 		try {
 			PreparedStatement stm = connection.prepareStatement(command);
 			ResultSet rs = stm.executeQuery();
 
 			while (rs.next()) {
-				long answer_id = rs.getInt(1);
-				long quiz_id = rs.getInt(2);
-				String answer_text = rs.getString(3);
-				String answer_description = rs.getString(4);
-				boolean answer_correct = rs.getBoolean(5);
-				String answer_type = rs.getString(6);
-				long question_id = rs.getLong(7);
-				Answer newAnswer = new Answer(answer_id, quiz_id, answer_text, answer_description, answer_correct,
-						answer_type, question_id);
+
+				String answer_text = rs.getString(1);
+				String answer_description = rs.getString(2);
+				boolean answer_correct = rs.getBoolean(3);
+
+				Answer newAnswer = new Answer(answer_text, answer_description, answer_correct);
 				answers.add(newAnswer);
 			}
 

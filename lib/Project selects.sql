@@ -41,9 +41,9 @@ create table Quizzes (
     date_created timestamp not null,
     quiz_difficulty varchar(50),
     times_taken int default 0,
-    multiple_pages tinyint default 0,
-    immediate_correction tinyint default 0,
-    random_questions tinyint default 0,
+    multiple_pages boolean default 0,
+    immediate_correction boolean default 0,
+    random_questions boolean default 0,
     
     foreign key (author_id) references Users(user_id),
     foreign key (category_id) references Categories(category_id),
@@ -91,7 +91,7 @@ create table Answers(
     answer_description varchar(500),
     answer_correct bool not null,
 -- 	answer_type varchar(100) not null,
-	question_id long not null,
+	question_id int not null,
     
 	foreign key (question_id) references Questions(question_id)
 );
