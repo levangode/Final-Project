@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import backend.Answer;
+import backend.AnswerFactory;
 import backend.Question;
 import backend.QuestionFactory;
 import backend.Quiz;
@@ -39,31 +41,40 @@ public class NextQuestion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO put question in the quiz;
+		int questionNum=Integer.parseInt(request.getParameter("questionNum"));
 		String question_text = request.getParameter("question");
 		String question_type = request.getParameter("type");
-		String question_description="";
+		String question_description=request.getParameter("description");
 		long question_time_limit=Integer.parseInt(request.getParameter("timeLimit"))*60000;
+		Question newQuestion = QuestionFactory.getQuestion(question_text, question_type, question_description, question_time_limit);
 		
 		Enumeration<String> parameters = request.getParameterNames();
 		String param = "";
 		String answer = "";
+		String description = "";
 		boolean isCorrect = false;
 		while(parameters.hasMoreElements()){
 			answer="";
+			description="";
 			isCorrect=false;
-			param = parameters.nextElement();
 			if(param.contains("answer")){
 				answer = request.getParameter(param);
-			} else if(param.contains("tick")){
-				isCorrect = true;
+				description = request.getParameter(parameters.nextElement());
+				param=parameters.nextElement();
+				if(param.contains("tick")){
+					isCorrect = true;
+					if(parameters.hasMoreElements())
+						param=parameters.nextElement();
+				}
+				Answer newAns = AnswerFactory.getAnswer(answer, description, isCorrect);
+				newQuestion.addAnswer(newAns);
+			} else {
+				param = parameters.nextElement();
 			}
 		}
 		
-		Question newQuestion = QuestionFactory.getQuestion(question_text, question_type, question_description, question_time_limit);
-		
 		Quiz currentQuiz = (Quiz)request.getSession().getAttribute("Quiz");
-		
+		currentQuiz.addQuestion(newQuestion, questionNum);
 		response.sendRedirect("Questions.jsp?questionNum="+(Integer.parseInt(request.getParameter("questionNum"))+1));
 		doGet(request, response);
 	}

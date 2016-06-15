@@ -19,6 +19,15 @@ public class Question {
 		
 	}
 	
+	public String toString(){
+		String result=""+
+				"text: "+question_text+"\n"+
+				"description: "+question_description+"\n"+
+				"type: "+question_type+"\n"+
+				"limit: "+question_time_limit+"\n";
+		return result;
+	}
+	
 	public void addAnswer(Answer answer){
 		answers.add(answer);
 	}

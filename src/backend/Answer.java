@@ -10,6 +10,13 @@ public class Answer {
 		this.answer_description = answer_description;
 		this.answer_correct = answer_correct;
 	}
+	public String toString(){
+		String result=""+
+				"anwer: "+answer_text+"\n"+
+				"description: "+answer_description+"\n"+
+				"correct: "+answer_correct+"\n";
+		return result;
+	}
 
 
 
