@@ -23,9 +23,9 @@ create table Quizzes (
     date_created timestamp not null,
     quiz_difficulty varchar(50),
     times_taken int default 0,
-    multiple_pages bool default false,
-    immediate_correction tinyint default 0,
-    random_questions tinyint default 0,
+    multiple_pages boolean default false,
+    immediate_correction boolean default 0,
+    random_questions boolean default 0,
     
     foreign key (author_id) references Users(user_id),
     foreign key (category_id) references Categories(category_id)
