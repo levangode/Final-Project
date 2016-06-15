@@ -57,28 +57,8 @@ create table Quiz_taken(
 	foreign key (quiz_id) references Quizzes(quiz_id)
 );
 
-<<<<<<< HEAD
-create table Quizzes (
-	quiz_id int auto_increment primary key,
-    quiz_name varchar(50) not null,
-    category_id int not null,
-    quiz_description varchar(1000),
-    author_id int not null,
-    quiz_likes int default 0,
-    date_created timestamp not null,
-    quiz_difficulty varchar(50),
-    times_taken int default 0,
-    multiple_pages boolean default 0,
-    immediate_correction boolean default 0,
-    random_questions boolean default 0,
-    
-    foreign key (author_id) references Users(user_id),
-    foreign key (category_id) references Categories(category_id),
-    
-);
 
-=======
->>>>>>> origin/master
+
 create table QuestionTypes(
 	type_id int not null auto_increment primary key,
     type_name varchar(50)
@@ -115,10 +95,8 @@ create table Answers(
 	answer_text varchar(500),
     answer_description varchar(500),
     answer_correct bool not null,
-<<<<<<< HEAD
 -- 	answer_type varchar(100) not null,
-=======
->>>>>>> origin/master
+
 	question_id int not null,
     
 	foreign key (question_id) references Questions(question_id)

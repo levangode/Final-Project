@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.mysql.jdbc.Statement;
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 import com.sun.jmx.snmp.Timestamp;
 
 import backend.*;
@@ -88,34 +89,78 @@ public class DBQuizController {
 		return names;
 	}
 
+	public int getQuizCategoryId(String category) {
+		int id = 0;
+		String command = "Select category_id from Categories where category_name =" + "'" + category + "';";
+
+		PreparedStatement stm;
+
+		try {
+			stm = connection.prepareStatement(command);
+			ResultSet res = stm.executeQuery();
+			if (res.next()) {
+				id = res.getInt(1);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return id;
+	}
+
+	public int getAuthoId(String authorName) {
+		int id = 0;
+		String command = "Select user_id from Users where user_name = " + "'" + authorName + "';";
+		PreparedStatement stm;
+
+		try {
+			stm = connection.prepareStatement(command);
+			ResultSet res = stm.executeQuery();
+			if (res.next()) {
+				id = res.getInt(1);
+			} else {
+				System.out.println("User not found!");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return id;
+	}
+
 	public void addQuiz(Quiz quiz) {
-		String command = "INSERT INTO Quizzes VALUES (";
-		long quiz_id = quiz.getQuizID();
-		String quiz_name = quiz.getQuizName();
-		int category_id = quiz.getCategoryID();
-		String quiz_description = quiz.getQuizDescription();
-		int author_id = quiz.getAuthorid();
-		int quiz_likes = quiz.getQuizLikes();
-		java.sql.Timestamp date_created = quiz.getDateCreatedTimestamp();
-		String quiz_difficulty = quiz.getQuizDifficulty();
-		int times_taken = quiz.getTimesTaken();
+		String command = "INSERT INTO Quizzes (quiz_name,category_id,quiz_description,author_id,quiz_likes"
+				+ "date_created,quiz_difficulty,times_taken,multiple_pages,immediate_correction,random_questions) "
+				+ "values (?,?,?,?,?,?,?,?,?,?,?)";
 
-		command += quiz_id + ", '" + quiz_name + "', " + category_id + ", " + "'" + quiz_description + "' ," + author_id
-				+ ", " + quiz_likes + ", " + date_created + "," + "'" + quiz_difficulty + "'," + times_taken + ");";
-
-		System.out.println(command);
 		PreparedStatement stm;
 
 		try {
 			stm = connection.prepareStatement(command, Statement.RETURN_GENERATED_KEYS);
+			stm.setString(1, quiz.getQuiz_name());
+			stm.setInt(2, getQuizCategoryId(quiz.getQuiz_category()));
+			stm.setString(3, quiz.getQuiz_description());
+			stm.setInt(4, getAuthoId(quiz.getQuiz_author()));
+			stm.setInt(5, quiz.getQuiz_likes());
+			stm.setTimestamp(6, quiz.getDate_created_timestamp());
+			stm.setString(7, quiz.getQuiz_difficulty());
+			stm.setInt(8, quiz.getTimes_taken());
+			stm.setBoolean(9, quiz.isDisplayMultiplePages());
+			stm.setBoolean(10, quiz.isImmediateCorrection());
+			stm.setBoolean(11, quiz.isRandomQuestions());
 			stm.executeUpdate();
-			if (quiz_id == 0) {
-				ResultSet res = stm.getGeneratedKeys();
-			
-				if (res.next())
-					quiz_id = res.getLong(1);
+			ResultSet res = stm.getGeneratedKeys();
+			int quiz_id = 0;
+			if (res.next()) {
+				quiz_id = res.getInt(1);
+				addQuestions(quiz, quiz_id);
+			} else {
+				System.out.println("Quiz id not generated!");
+				return;
 			}
-			addQuestions(quiz, quiz_id);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -222,6 +267,27 @@ public class DBQuizController {
 		}
 	}
 
+	public String getQuizCategoryStr(int id) {
+		String str = "";
+		String command = "Select category_name from Categories where category_id =" + id;
+		PreparedStatement stm;
+
+		try {
+			stm = connection.prepareStatement(command);
+			ResultSet res = stm.executeQuery();
+			if (res.next()) {
+				str = res.getString(1);
+			} else {
+				System.out.println("Category not found!");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return str;
+	}
+
 	public Quiz getQuiz(int id) {
 		ArrayList<Question> questions = getQuestions(id);
 		String command = "Select * from Quizzes where quiz_id =" + id;
@@ -230,18 +296,21 @@ public class DBQuizController {
 		try {
 			stm = connection.prepareStatement(command);
 			ResultSet rs = stm.executeQuery();
-			int quiz_id = rs.getInt(1);
 			String quiz_name = rs.getString(2);
 			int category_id = rs.getInt(3);
 			String quiz_description = rs.getString(4);
 			int author_id = rs.getInt(5);
 			int quiz_likes = rs.getInt(6);
-			java.sql.Timestamp date_created_timestamp = rs.getTimestamp(7);
+			java.sql.Timestamp date_created = rs.getTimestamp(7);
 			String quiz_difficulty = rs.getString(8);
 			int times_taken = rs.getInt(9);
-			String quiz_author = getAuthor(author_id);
-			quiz = new Quiz(quiz_id, quiz_name, category_id, quiz_description, quiz_author, date_created_timestamp,
-					quiz_likes, quiz_difficulty, times_taken, questions);
+			boolean multiple_pages = rs.getBoolean(10);
+			boolean immediate_correction = rs.getBoolean(11);
+			boolean random_questions = rs.getBoolean(12);
+
+			quiz = new Quiz(quiz_name, quiz_description, getAuthorStr(author_id), quiz_likes, date_created,
+					getQuizCategoryStr(category_id), quiz_difficulty, times_taken, questions, multiple_pages,
+					immediate_correction, random_questions);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -251,7 +320,7 @@ public class DBQuizController {
 		return quiz;
 	}
 
-	public String getAuthor(int id) {
+	public String getAuthorStr(int id) {
 		String authorName = null;
 
 		String command = "Select user_name from Users where user_id =" + id;

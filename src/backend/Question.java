@@ -20,7 +20,7 @@ public class Question {
 	}
 	
 	public void addAnswer(Answer answer){
-		
+		answers.add(answer);
 	}
 
 	public String getQuestiontype() {

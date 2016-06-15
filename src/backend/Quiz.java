@@ -17,38 +17,39 @@ public class Quiz {
 	private boolean immediateCorrection;
 	private boolean randomQuestions;
 
-	public Quiz(String quiz_name, String quiz_description, String quiz_author, int quiz_likes, Timestamp date_created_timestamp,
-			String quiz_category, String quiz_difficulty, int times_taken, ArrayList<Question> questions,
-			boolean displayMultiplePages, boolean immediateCorrection, boolean randomQuestions) {
-		this.quiz_name=quiz_name;
-		this.quiz_description=quiz_description;
-		this.quiz_author=quiz_author;
-		this.quiz_likes=quiz_likes;
-		this.date_created_timestamp=date_created_timestamp;
-		this.quiz_category=quiz_category;
-		this.quiz_difficulty=quiz_difficulty;
-		this.times_taken=times_taken;
-		this.displayMultiplePages=displayMultiplePages;
-		this.immediateCorrection=immediateCorrection;
-		this.randomQuestions=randomQuestions;
-		
+	public Quiz(String quiz_name, String quiz_description, String quiz_author, int quiz_likes,
+			Timestamp date_created_timestamp, String quiz_category, String quiz_difficulty, int times_taken,
+			ArrayList<Question> questions, boolean displayMultiplePages, boolean immediateCorrection,
+			boolean randomQuestions) {
+		this.quiz_name = quiz_name;
+		this.quiz_description = quiz_description;
+		this.quiz_author = quiz_author;
+		this.quiz_likes = quiz_likes;
+		this.questions = questions;
+		this.date_created_timestamp = date_created_timestamp;
+		this.quiz_category = quiz_category;
+		this.quiz_difficulty = quiz_difficulty;
+		this.times_taken = times_taken;
+		this.displayMultiplePages = displayMultiplePages;
+		this.immediateCorrection = immediateCorrection;
+		this.randomQuestions = randomQuestions;
+
 	}
-	public void addQuestion(Question question, int questionNum){
-		questions.set(questionNum-1, question);
+
+	public void addQuestion(Question question, int questionNum) {
+		questions.set(questionNum - 1, question);
 	}
-	public String toString(){
-		String result = ""+
-				"name: "+quiz_name+"\n"+
-				"description: "+quiz_description+"\n"+
-				"author: "+quiz_author+"\n"+
-				"likes: "+quiz_likes+"\n"+
-				"date: "+date_created_timestamp+"\n"+
-				"category: "+quiz_category+"\n"+
-				"difficulty: "+quiz_difficulty+"\n"+
-				"times taken: "+times_taken+"\n"+
-				"display: "+displayMultiplePages+"\n"+
-				"immediate: "+immediateCorrection+"\n"+
-				"random: "+randomQuestions+"\n";
+
+	public void addQuestionWithoutNum(Question question) {
+		questions.add(question);
+	}
+
+	public String toString() {
+		String result = "" + "name: " + quiz_name + "\n" + "description: " + quiz_description + "\n" + "author: "
+				+ quiz_author + "\n" + "likes: " + quiz_likes + "\n" + "date: " + date_created_timestamp + "\n"
+				+ "category: " + quiz_category + "\n" + "difficulty: " + quiz_difficulty + "\n" + "times taken: "
+				+ times_taken + "\n" + "display: " + displayMultiplePages + "\n" + "immediate: " + immediateCorrection
+				+ "\n" + "random: " + randomQuestions + "\n";
 		return result;
 	}
 
@@ -147,5 +148,5 @@ public class Quiz {
 	public void setRandomQuestions(boolean randomQuestions) {
 		this.randomQuestions = randomQuestions;
 	}
-	
+
 }

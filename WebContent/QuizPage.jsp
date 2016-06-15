@@ -11,14 +11,14 @@
 	int quiz_id = Integer.parseInt(request.getParameter("quiz_id"));
 	Quiz quiz = cont.getQuiz(quiz_id);
 	ArrayList<Question> questions = quiz.getQuestions();
-	String quizName = quiz.getQuizName();
+	String quizName = quiz.getQuiz_name();
 %>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>
 	<%
-		quiz.getQuizName();
+		quiz.getQuiz_name();
 	%>
 </title>
 </head>
@@ -34,7 +34,7 @@
 				Answer answer = answers.get(j);
 				String command = "<div>" + "<input type='radio' " + "id = 'question-" + i + "-answer-" + j + "' "
 						+ "value = '" + j + "' />" + "<label for='question-" + i + "-answer-" + j + "' >"
-						+ answer.getAnswerType() + "</div>";
+						+ "</div>";
 
 				out.print(command);
 			}
