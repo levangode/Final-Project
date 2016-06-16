@@ -85,8 +85,8 @@ public class NextQuestion extends HttpServlet {
 		currentQuiz.addQuestion(newQuestion, questionNum);
 		if (request.getParameter("finalise") != null) {
 			Quiz quiz = (Quiz)request.getSession().getAttribute("Quiz");
-			DBQuizController ca = new DBQuizController();
-			ca.addQuiz(quiz);
+			//DBQuizController ca = new DBQuizController();
+			//ca.addQuiz(quiz);
 			response.sendRedirect("HomePage.jsp");
 		} else {
 			response.sendRedirect(
