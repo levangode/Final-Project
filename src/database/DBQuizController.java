@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.mysql.jdbc.Statement;
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-import com.sun.jmx.snmp.Timestamp;
 
 import backend.*;
 
@@ -111,7 +109,8 @@ public class DBQuizController {
 
 	public int getAuthorId(String authorName) {
 		int id = 0;
-		String command = "Select user_id from Users where user_name = " + "'" + authorName + "';";
+		String command = "select user_id from Users where user_login = " + "'" + authorName + "';";
+		System.out.println(command);
 		PreparedStatement stm;
 
 		try {
