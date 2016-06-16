@@ -111,14 +111,17 @@ public class DBQuizController {
 
 	public int getAuthorId(String authorName) {
 		int id = 0;
-		String command = "Select user_id from Users where user_name = " + "'" + authorName + "';";
+		String command = "Select user_id from Users where user_name = " + "'" + authorName + "'";
+		// command="Select * from Users";
 		PreparedStatement stm;
 
 		try {
 			stm = connection.prepareStatement(command);
 			ResultSet res = stm.executeQuery();
+			System.out.println("Trying to find the user: " + stm);
 			if (res.next()) {
 				id = res.getInt(1);
+				System.out.println("ID is :" + id);
 			} else {
 				System.out.println("User not found!");
 			}
@@ -143,7 +146,7 @@ public class DBQuizController {
 			stm.setString(2, quiz.getQuiz_name());
 			stm.setInt(3, getQuizCategoryId(quiz.getQuiz_category()));
 			stm.setString(4, quiz.getQuiz_description());
-			stm.setInt(5, getAuthorId(quiz.getQuiz_author()));
+			stm.setInt(5, getAuthorId(quiz.getQuiz_author()));// getauthorID ver poulobs verafers
 			stm.setInt(6, quiz.getQuiz_likes());
 			stm.setTimestamp(7, quiz.getDate_created_timestamp());
 			stm.setString(8, quiz.getQuiz_difficulty());
@@ -151,7 +154,7 @@ public class DBQuizController {
 			stm.setBoolean(10, quiz.isDisplayMultiplePages());
 			stm.setBoolean(11, quiz.isImmediateCorrection());
 			stm.setBoolean(12, quiz.isRandomQuestions());
-
+			System.out.println("PreparedStatement is: " + stm);
 			System.out.println("blaaas");
 			stm.executeUpdate();
 			System.out.println("FUCK");
@@ -228,8 +231,8 @@ public class DBQuizController {
 	}
 
 	public void addQuestion(Question question, int quiz_id) {
-		String command = "Insert INTO Questions ( quiz_id,   question_text , question_type ,"
-				+ "question_description , question_time_limit) values (?,?,?,?,?,?)";
+		String command = "Insert INTO Questions ( question_id,quiz_id,   question_text , question_type ,"
+				+ "question_description , question_time_limit) values(?,?,?,?,?,?)";
 		String question_text = question.getQuestiontext();
 		String question_type = question.getQuestiontype();
 		String question_description = question.getQuestiondescription();
@@ -245,7 +248,9 @@ public class DBQuizController {
 			stm.setInt(4, getQuestionTypeId(question_type));
 			stm.setString(5, question_description);
 			stm.setInt(6, questions_time_limit);
+			System.out.println("Question statemnt:" + stm);
 			stm.executeUpdate();
+
 			ResultSet res = stm.getGeneratedKeys();
 			int question_id = 0;
 			if (res.next()) {
