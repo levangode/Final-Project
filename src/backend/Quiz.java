@@ -37,7 +37,12 @@ public class Quiz {
 	}
 
 	public void addQuestion(Question question, int questionNum) {
-		questions.set(questionNum - 1, question);
+		if (questionNum >= questions.size()) {
+			questions.add(question);
+		} else {
+			questions.set(questionNum - 1, question);
+		}
+		System.out.println(questions.size());
 	}
 
 	public void addQuestionWithoutNum(Question question) {

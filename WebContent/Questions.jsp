@@ -92,7 +92,6 @@ textarea {
 			$('<br><input type="text" style="width:35px; display:none;" maxlength=3 name="timeLimit">Time Limit(minutes)<br>').appendTo('#question').slideDown('slow');
 			$('<div id="answers"></div>').appendTo('#question');
 			$('<button type="button" onclick="addAnswer()" style="display:none;">Create Answer</button><br> ').appendTo('#question').slideDown('slow');
-			$('<input type="submit" value="Next Question" style="display:none;">').appendTo('#question').slideDown('slow');
 			break;
 		case 'Fill in the Blank':
 			$('<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus></textarea>').appendTo('#question').slideDown('slow');
@@ -100,7 +99,6 @@ textarea {
 			$('<br><input type="text" style="width:35px; display:none;" maxlength=3 name="timeLimit">Time Limit(minutes)<br>').appendTo('#question').slideDown('slow');
 			$('<div id="answers"></div>').appendTo('#question');
 			$('<button type="button" onclick="addBlank()" style="display:none;">Blank</button><br> ').appendTo('#question').slideDown('slow');
-			$('<input type="submit" value="Next Question" style="display:none;">').appendTo('#question').slideDown('slow');
 			break;
 		case 'Picture-Response Questions':
 			$('<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus></textarea>').appendTo('#question').slideDown('slow');
@@ -108,9 +106,9 @@ textarea {
 			$('<br><input type="text" style="width:35px; display:none;" maxlength=3 name="timeLimit">Time Limit(minutes)<br>').appendTo('#question').slideDown('slow');
 			$('<div id="answers"></div>').appendTo('#question');
 			$('<button type="button" onclick="addImage()" style="display:none;">Create Answer</button><br> ').appendTo('#question').slideDown('slow');
-			$('<input type="submit" value="Next Question" style="display:none;">').appendTo('#question').slideDown('slow');
 			break;
 		}
+		$('<input type="submit" value="Next Question" style="display:none;">').appendTo('#question').slideDown('slow');
 	}
 	
 	
@@ -134,7 +132,7 @@ textarea {
 			%>
 		</select> <br />
 		<div id="question"></div>
+		<input type="submit" name="finalise" value="Finish Creating">
 	</form>
-	<button type="submit" onclick="NextQuestion">Finish Creating</button>
 </body>
 </html>
