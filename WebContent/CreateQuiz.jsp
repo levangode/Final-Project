@@ -40,8 +40,8 @@ textarea {
 </style>
 <body>
 	<%
-		/*DBQuizController ca = new DBQuizController();
-		ca.addQuiz(new sampleQuiz().getSampleQuiz());*/
+		DBQuizController ca = new DBQuizController();
+		ca.addQuiz(new sampleQuiz().getSampleQuiz());
 		if (!(boolean) request.getSession().getAttribute("logged_in")) {
 			response.sendRedirect("NotLoggedIn.jsp");
 		}
@@ -49,6 +49,7 @@ textarea {
 	<h1>Create Quiz</h1>
 	<h2>Choose Quiz category</h2>
 	<%
+
 		DBQuizController c = new DBQuizController();
 		ArrayList<String> categories = c.getQuizCategories();
 	%>

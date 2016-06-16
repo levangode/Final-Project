@@ -111,7 +111,7 @@ public class DBQuizController {
 
 	public int getAuthorId(String authorName) {
 		int id = 0;
-		String command = "Select user_id from Users where user_name = " + "'" + authorName + "'";
+		String command = "Select user_id from Users where user_login = " + "'" + authorName + "'";
 		// command="Select * from Users";
 		PreparedStatement stm;
 
@@ -146,7 +146,9 @@ public class DBQuizController {
 			stm.setString(2, quiz.getQuiz_name());
 			stm.setInt(3, getQuizCategoryId(quiz.getQuiz_category()));
 			stm.setString(4, quiz.getQuiz_description());
-			stm.setInt(5, getAuthorId(quiz.getQuiz_author()));// getauthorID ver poulobs verafers
+			stm.setInt(5, getAuthorId(quiz.getQuiz_author()));// getauthorID ver
+																// poulobs
+																// verafers
 			stm.setInt(6, quiz.getQuiz_likes());
 			stm.setTimestamp(7, quiz.getDate_created_timestamp());
 			stm.setString(8, quiz.getQuiz_difficulty());
