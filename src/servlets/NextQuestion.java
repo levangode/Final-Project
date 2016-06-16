@@ -14,6 +14,8 @@ import backend.AnswerFactory;
 import backend.Question;
 import backend.QuestionFactory;
 import backend.Quiz;
+import database.DBQuizController;
+import database.sampleQuiz;
 
 /**
  * Servlet implementation class NextQuestion
@@ -83,7 +85,8 @@ public class NextQuestion extends HttpServlet {
 		currentQuiz.addQuestion(newQuestion, questionNum);
 		if (request.getParameter("finalise") != null) {
 			Quiz quiz = (Quiz)request.getSession().getAttribute("Quiz");
-			//TODO chaamate quiz bazashii
+			//DBQuizController ca = new DBQuizController();
+			//ca.addQuiz(quiz);
 			response.sendRedirect("HomePage.jsp");
 		} else {
 			response.sendRedirect(
