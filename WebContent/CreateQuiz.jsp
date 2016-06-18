@@ -40,8 +40,8 @@ textarea {
 </style>
 <body>
 	<%
-		DBQuizController ca = new DBQuizController();
-		ca.addQuiz(new sampleQuiz().getSampleQuiz());
+		//DBQuizController ca = new DBQuizController();
+		//ca.addQuiz(new sampleQuiz().getSampleQuiz());
 		if (!(boolean) request.getSession().getAttribute("logged_in")) {
 			response.sendRedirect("NotLoggedIn.jsp");
 		}
@@ -62,18 +62,18 @@ textarea {
 				}
 			%>
 		</select> <select name="difficulty">
-			<!-- TODO from base?------------------------------------------- -->
+			<!-- //TODO from base?------------------------------------------- -->
 			<option value="Easy">Easy</option>
 			<option value="Medium">Medium</option>
 			<option value="Hard">Hard</option>
 		</select>
 		<h2>Enter quiz name</h2>
 		<br /> <input type="text" name="quiz_name"
-			placeholder="Enter quiz name here..."> <br />
+			placeholder="Enter quiz name here..." required> <br />
 		<h2>Enter quiz description</h2>
 		<br />
 		<textarea name="quiz_description" rows="3" cols="45" maxlength="1000"
-			placeholder="Enter quiz description here..."></textarea>
+			placeholder="Enter quiz description here..." required></textarea>
 		<br /> <input name="Random Questions" type="checkbox">Random
 		Questions<br> <input name="Immediate Correction" type="checkbox">Immediate
 		Correction<br>

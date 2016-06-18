@@ -9,13 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import answers.AnswerFactory;
 import backend.Answer;
-import backend.AnswerFactory;
 import backend.Question;
-import backend.QuestionFactory;
 import backend.Quiz;
 import database.DBQuizController;
-import database.sampleQuiz;
+import questions.QuestionFactory;
 
 /**
  * Servlet implementation class NextQuestion

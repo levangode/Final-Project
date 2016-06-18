@@ -109,13 +109,8 @@ public class DBQuizController {
 
 	public int getAuthorId(String authorName) {
 		int id = 0;
-<<<<<<< HEAD
 		String command = "Select user_id from Users where user_login = " + "'" + authorName + "'";
 		// command="Select * from Users";
-=======
-		String command = "select user_id from Users where user_login = " + "'" + authorName + "';";
-		System.out.println(command);
->>>>>>> origin/master
 		PreparedStatement stm;
 
 		try {
@@ -183,8 +178,8 @@ public class DBQuizController {
 	}
 
 	public void addAnswer(Answer answer, int question_id) {
-		String command = "INSERT INTO Answers (answer_id,answer_text,"
-				+ " answer_description , answer_correct,question_id) values(?,?,?,?,?)";
+		String command = "INSERT INTO Answers (answer_text,"
+				+ " answer_description , answer_correct,question_id) values(?,?,?,?)";
 
 		String answer_text = answer.getAnswerText();
 		String answer_description = answer.getAnswerDescription();
@@ -194,11 +189,10 @@ public class DBQuizController {
 
 		try {
 			stm = connection.prepareStatement(command);
-			stm.setInt(1, 0);
 			stm.setString(1, answer_text);
-			stm.setString(3, answer_description);
-			stm.setBoolean(4, answer_correct);
-			stm.setInt(5, question_id);
+			stm.setString(2, answer_description);
+			stm.setBoolean(3, answer_correct);
+			stm.setInt(4, question_id);
 			stm.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

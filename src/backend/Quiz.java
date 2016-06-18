@@ -3,6 +3,8 @@ package backend;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import questions.QuestionParent;
+
 public class Quiz {
 	private String quiz_name;
 	private String quiz_description;
@@ -12,14 +14,14 @@ public class Quiz {
 	private String quiz_category;
 	private String quiz_difficulty;
 	private int times_taken;
-	private ArrayList<Question> questions;
+	private ArrayList<QuestionParent> questions;
 	private boolean displayMultiplePages;
 	private boolean immediateCorrection;
 	private boolean randomQuestions;
 
 	public Quiz(String quiz_name, String quiz_description, String quiz_author, int quiz_likes,
 			Timestamp date_created_timestamp, String quiz_category, String quiz_difficulty, int times_taken,
-			ArrayList<Question> questions, boolean displayMultiplePages, boolean immediateCorrection,
+			ArrayList<QuestionParent> questions, boolean displayMultiplePages, boolean immediateCorrection,
 			boolean randomQuestions) {
 		this.quiz_name = quiz_name;
 		this.quiz_description = quiz_description;
@@ -36,7 +38,7 @@ public class Quiz {
 
 	}
 
-	public void addQuestion(Question question, int questionNum) {
+	public void addQuestion(QuestionParent question, int questionNum) {
 		if (questionNum >= questions.size()) {
 			questions.add(question);
 		} else {
@@ -45,7 +47,7 @@ public class Quiz {
 		System.out.println(questions.size());
 	}
 
-	public void addQuestionWithoutNum(Question question) {
+	public void addQuestionWithoutNum(QuestionParent question) {
 		questions.add(question);
 	}
 
@@ -122,11 +124,11 @@ public class Quiz {
 		this.times_taken = times_taken;
 	}
 
-	public ArrayList<Question> getQuestions() {
+	public ArrayList<QuestionParent> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(ArrayList<Question> questions) {
+	public void setQuestions(ArrayList<QuestionParent> questions) {
 		this.questions = questions;
 	}
 

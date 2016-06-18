@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import com.mysql.jdbc.Connection;
 
 import backend.*;
+import questions.QuestionTypes;
 
 public class sampleQuiz {
 	public sampleQuiz() {
