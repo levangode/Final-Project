@@ -15,6 +15,7 @@ import backend.Question;
 import backend.Quiz;
 import database.DBQuizController;
 import questions.QuestionFactory;
+import questions.QuestionParent;
 
 /**
  * Servlet implementation class NextQuestion
@@ -51,8 +52,20 @@ public class NextQuestion extends HttpServlet {
 		String question_type = request.getParameter("type");
 		String question_description = request.getParameter("description");
 		long question_time_limit = Integer.parseInt(request.getParameter("timeLimit")) * 60000;
-		Question newQuestion = QuestionFactory.getQuestion(question_text, question_type, question_description,
-				question_time_limit);
+		int question_score=Integer.parseInt(request.getParameter("Score"));
+		QuestionParent question;
+		switch (question_type) {
+		case "Fill in the Blank":
+			question=QuestionFactory.getBlankQuestion(question_text, question_type, question_description, question_time_limit, question_score);
+			break;
+		case "Question-Response":
+			question=QuestionFactory.getQuestionResponse(question_text, question_type, question_description, question_time_limit, question_score);
+			break;
+		case "Multiple Choice with Multiple Answers":
+			break;
+		default:
+			break;
+		}
 
 		Enumeration<String> parameters = request.getParameterNames();
 		String param = "";

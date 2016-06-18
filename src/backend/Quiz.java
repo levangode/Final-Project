@@ -3,6 +3,9 @@ package backend;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import questions.QuestionParent;
 
 public class Quiz {
@@ -36,6 +39,27 @@ public class Quiz {
 		this.immediateCorrection = immediateCorrection;
 		this.randomQuestions = randomQuestions;
 
+	}
+	public static Quiz retrieveQuiz(HttpServletRequest request, HttpServletResponse response){
+		String quiz_name = request.getParameter("quiz_name");
+		String quiz_description = request.getParameter("quiz_description");
+		String quiz_category = request.getParameter("categories");
+		String quiz_difficulty = request.getParameter("difficulty");
+		String quiz_author = (String)request.getSession().getAttribute("user_name");
+		boolean random_questions = false;
+		boolean immediate_correction = false;
+		boolean multiplePage = false;
+		String show_on = "";
+		if(request.getParameter("Random Questions") != null)
+			random_questions = true;
+		if(request.getParameter("Immediate Correction") != null)
+			immediate_correction = true;
+		show_on = request.getParameter("Show on");
+		if(show_on.equals("Multiple Pages")){
+			multiplePage = true;
+		}
+		Quiz newOne=QuizFactory.getQuiz(quiz_name, quiz_description, quiz_author, 0, quiz_category, quiz_difficulty, 0, multiplePage, immediate_correction, random_questions);
+		return newOne;
 	}
 
 	public void addQuestion(QuestionParent question, int questionNum) {

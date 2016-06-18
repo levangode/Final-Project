@@ -73,8 +73,8 @@ create table QuestionTypes(
 insert into QuestionTypes(type_name) values
 	('Question-Response'),
     ('Fill in the Blank'),
-    ('Multiple Choice'),
-    ('Picture-Response Questions');
+    ('Multiple Choice with Multiple Answers'),
+    ('Question with Multiple Answers'),
     
 
 

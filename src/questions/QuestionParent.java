@@ -2,6 +2,9 @@ package questions;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import answers.AnswerParent;
 
 public abstract class QuestionParent {
@@ -23,7 +26,7 @@ public abstract class QuestionParent {
 		this.answers = answers;
 
 	}
-
+	public abstract QuestionParent retrieveQuestion(HttpServletRequest request, HttpServletResponse response);
 	public String toString() {
 		String result = "" + "text: " + question_text + "\n" + "description: " + question_data + "\n" + "type: "
 				+ question_type + "\n" + "limit: " + question_time_limit + "\n" + "score: " + question_score + "\n";

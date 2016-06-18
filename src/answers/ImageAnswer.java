@@ -5,4 +5,5 @@ public class ImageAnswer implements AnswerParent{
 	public ImageAnswer(String answer_text){
 		this.answer_text=answer_text;
 	}
+	
 }
