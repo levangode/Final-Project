@@ -9,12 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import answers.AnswerFactory;
-import backend.Answer;
-import backend.Question;
+import answers.AnswerParent;
+import answers.AnswersHTMLRetriever;
 import backend.Quiz;
 import database.DBQuizController;
 import questions.QuestionFactory;
+import questions.QuestionHTMLRetriever;
 import questions.QuestionParent;
 
 /**
@@ -48,53 +48,26 @@ public class NextQuestion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int questionNum = Integer.parseInt(request.getParameter("questionNum"));
-		String question_text = request.getParameter("question");
 		String question_type = request.getParameter("type");
-		String question_description = request.getParameter("description");
-		long question_time_limit = Integer.parseInt(request.getParameter("timeLimit")) * 60000;
-		int question_score=Integer.parseInt(request.getParameter("Score"));
-		QuestionParent question;
-		switch (question_type) {
-		case "Fill in the Blank":
-			question=QuestionFactory.getBlankQuestion(question_text, question_type, question_description, question_time_limit, question_score);
-			break;
-		case "Question-Response":
-			question=QuestionFactory.getQuestionResponse(question_text, question_type, question_description, question_time_limit, question_score);
-			break;
-		case "Multiple Choice with Multiple Answers":
-			break;
-		default:
-			break;
-		}
-
+		QuestionHTMLRetriever qr=new QuestionHTMLRetriever();
+		AnswersHTMLRetriever ar=new AnswersHTMLRetriever();
+		QuestionParent question=qr.getQuestion(question_type, request);
+		
 		Enumeration<String> parameters = request.getParameterNames();
 		String param = "";
-		String answer = "";
-		String description = "";
-		boolean isCorrect = false;
 		while (parameters.hasMoreElements()) {
-			answer = "";
-			description = "";
-			isCorrect = false;
-			if (param.contains("answer")) {
-				answer = request.getParameter(param);
-				description = request.getParameter(parameters.nextElement());
-				if (parameters.hasMoreElements())
-					param = parameters.nextElement();
-				if (param.contains("tick")) {
-					isCorrect = true;
-					if (parameters.hasMoreElements())
-						param = parameters.nextElement();
-				}
-				Answer newAns = AnswerFactory.getAnswer(answer, description, isCorrect);
-				newQuestion.addAnswer(newAns);
-			} else {
-				param = parameters.nextElement();
+			param=parameters.nextElement();
+			if(param.contains("answer")){
+				AnswerParent answer=ar.getAnswer(question_type, request, param);
+				question.addAnswer(answer);
 			}
 		}
-
-		Quiz currentQuiz = (Quiz) request.getSession().getAttribute("Quiz");
-		currentQuiz.addQuestion(newQuestion, questionNum);
+		Quiz current = (Quiz)request.getSession().getAttribute("Quiz");
+		if(current == null){
+			//TODO redirect session has timed out----try catchit jobs albat
+		}
+		current.addQuestion(question, questionNum);
+		System.out.println(current);
 		if (request.getParameter("finalise") != null) {
 			Quiz quiz = (Quiz)request.getSession().getAttribute("Quiz");
 			//DBQuizController ca = new DBQuizController();

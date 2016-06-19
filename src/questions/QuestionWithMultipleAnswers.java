@@ -14,10 +14,10 @@ public class QuestionWithMultipleAnswers extends QuestionParent{
 		super(question_text, question_type, question_description, question_time_limit, question_score, answers);
 		this.order=order;
 	}
-	@Override
-	public QuestionParent retrieveQuestion(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public String toString(){
+		String result = super.toString()+"order: "+order+"\n";
+		return result;
 	}
 	
 }

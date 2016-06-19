@@ -7,4 +7,8 @@ public class MultipleAnswer implements AnswerParent {
 		this.answer_text=answer_text;
 		this.answer_num=answer_num;
 	}
+	
+	public String toString(){
+		return "answer: "+answer_text+"\n"+"num: "+answer_num+"\n";
+	}
 }

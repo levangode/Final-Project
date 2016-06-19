@@ -13,10 +13,11 @@ public class QuestionFactory {
 	}
 
 	public static MultipleChoiceQuestion getMultipleChoiceQuesion(String question_text, String question_type,
-			String question_description, long question_time_limit, int question_score, int answers_to_show) {
+			String question_description, long question_time_limit, int question_score, int answers_to_show,
+			int answers_to_be_correct) {
 		ArrayList<AnswerParent> answers = new ArrayList<AnswerParent>();
 		return new MultipleChoiceQuestion(question_text, question_type, question_description, question_time_limit,
-				question_score, answers_to_show, answers);
+				question_score, answers_to_show, answers_to_be_correct, answers);
 	}
 
 	public static QuestionWithMultipleAnswers getQuestionWithMultipleAnswers(String question_text, String question_type,
@@ -25,9 +26,11 @@ public class QuestionFactory {
 		return new QuestionWithMultipleAnswers(question_text, question_type, question_description, question_time_limit,
 				question_score, order, answers);
 	}
+
 	public static QuestionResponse getQuestionResponse(String question_text, String question_type,
 			String question_description, long question_time_limit, int question_score) {
 		ArrayList<AnswerParent> answers = new ArrayList<AnswerParent>();
-		return new QuestionResponse(question_text, question_type, question_description, question_time_limit, question_score, answers);
+		return new QuestionResponse(question_text, question_type, question_description, question_time_limit,
+				question_score, answers);
 	}
 }

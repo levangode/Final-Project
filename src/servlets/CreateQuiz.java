@@ -38,6 +38,7 @@ public class CreateQuiz extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Quiz newOne=Quiz.retrieveQuiz(request, response);
+		System.out.println(newOne);
 		request.getSession().setAttribute("Quiz", newOne);
 		response.sendRedirect("Questions.jsp?questionNum="+1);
 		doGet(request, response);

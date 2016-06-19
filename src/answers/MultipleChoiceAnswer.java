@@ -7,4 +7,8 @@ public class MultipleChoiceAnswer implements AnswerParent{
 		this.answer_text=answer_text;
 		this.answer_correct=answer_correct;
 	}
+	
+	public String toString(){
+		return "answer: "+answer_text+"\n"+"correct: "+answer_correct+"\n";
+	}
 }

@@ -2,11 +2,8 @@ package answers;
 
 
 public class AnswerFactory {
-	public static ResponseAnswer getResponseAnswer(String answer_text, boolean answer_correct){
+	public static ResponseAnswer getResponseAnswer(String answer_text){
 		return new ResponseAnswer(answer_text);
-	}
-	public static ImageAnswer getImageAnswer(String answer_text){
-		return new ImageAnswer(answer_text);
 	}
 	public static BlankAnswer getBlankAnswer(String answer_text, int blank_position){
 		return new BlankAnswer(answer_text, blank_position);

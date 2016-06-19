@@ -80,7 +80,14 @@ public class Quiz {
 				+ quiz_author + "\n" + "likes: " + quiz_likes + "\n" + "date: " + date_created_timestamp + "\n"
 				+ "category: " + quiz_category + "\n" + "difficulty: " + quiz_difficulty + "\n" + "times taken: "
 				+ times_taken + "\n" + "display: " + displayMultiplePages + "\n" + "immediate: " + immediateCorrection
-				+ "\n" + "random: " + randomQuestions + "\n";
+				+ "\n" + "random: " + randomQuestions + "\n ============================";
+		
+		for(int i=0; i<questions.size(); i++){
+			System.out.println(questions.get(i));
+			for(int j=0; j<questions.get(i).getAnswers().size(); j++){
+				System.out.println(questions.get(i).getAnswers().get(j));
+			}
+		}
 		return result;
 	}
 
