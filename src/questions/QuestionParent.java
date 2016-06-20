@@ -37,6 +37,10 @@ public abstract class QuestionParent {
 	public String getQuestiontype() {
 		return question_type;
 	}
+	
+	public int getQuestionscore(){
+		return question_score;
+	}
 
 	public void setQuestiontype(String question_type) {
 		this.question_type = question_type;
