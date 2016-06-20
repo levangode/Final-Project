@@ -41,7 +41,7 @@ public class BDQuestionWithMultipleAnswers {
 								rs.getString(2),
 								rs.getLong(3),
 								rs.getInt(4),
-								rs.getInt(5),// this is for numAnswers nut it is not in constructor
+								rs.getInt(5),// this is for numAnswers but it is not in constructor
 								rs.getBoolean(6),
 								null // TODO here should be arraylist of answers
 							);
