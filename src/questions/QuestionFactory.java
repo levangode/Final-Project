@@ -21,10 +21,10 @@ public class QuestionFactory {
 	}
 
 	public static QuestionWithMultipleAnswers getQuestionWithMultipleAnswers(String question_text, String question_type,
-			String question_description, long question_time_limit, int question_score, boolean order) {
+			String question_description, long question_time_limit, int question_score, int num_answers, boolean order) {
 		ArrayList<AnswerParent> answers = new ArrayList<AnswerParent>();
 		return new QuestionWithMultipleAnswers(question_text, question_type, question_description, question_time_limit,
-				question_score, order, answers);
+				question_score, num_answers, order, answers);
 	}
 
 	public static QuestionResponse getQuestionResponse(String question_text, String question_type,

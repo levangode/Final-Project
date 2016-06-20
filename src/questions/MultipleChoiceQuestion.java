@@ -19,6 +19,15 @@ public class MultipleChoiceQuestion extends QuestionParent {
 	public String toString(){
 		String result = super.toString()+"answers to show: "+answers_to_show+"\n"+"answers correct: "+answers_to_be_correct+"\n";
 		return result;
+		
+	}
+	
+	public int getNumanswersdisplay(){
+		return answers_to_show;
+	}
+	
+	public int getNumanswerscorrect(){
+		return answers_to_be_correct;
 	}
 
 }
