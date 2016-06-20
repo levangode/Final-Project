@@ -26,4 +26,8 @@ public class QuestionWithMultipleAnswers extends QuestionParent{
 		return numAnswers;
 	}
 	
+	public boolean getAnswersordered(){
+		return order;
+	}
+	
 }
