@@ -1,4 +1,4 @@
-package DBQuestionControllers;
+package DBAnswerControllers;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,15 +12,15 @@ import database.DBconnector;
 import questions.QuestionTypes;
 import questions.QuestionWithMultipleAnswers;
 
-public class BDQuestionWithMultipleAnswers {
+public class DBQuestionResponseAnswer {
 	private Connection connection;
 
 	
-	public BDQuestionWithMultipleAnswers() {
+	public DBQuestionResponseAnswer() {
 		this.connection = new DBconnector().getConnection();
 	}
-
-	public BDQuestionWithMultipleAnswers(Connection con) {
+	
+	public DBQuestionResponseAnswer(Connection con) {
 		this.connection = con;
 	}
 	

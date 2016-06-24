@@ -22,6 +22,10 @@ public class DBQuestionMultipleChoice {
 	public DBQuestionMultipleChoice() {
 		this.connection = new DBconnector().getConnection();
 	}
+
+	public DBQuestionMultipleChoice(Connection con) {
+		this.connection = con;
+	}
 	
 	public List<MultipleChoiceQuestion> retrieveQuestions(int quiz_id){
 		List<MultipleChoiceQuestion> questions = new ArrayList<MultipleChoiceQuestion>();
