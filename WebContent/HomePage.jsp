@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="database.DBQuizController"%>
+<%@page import="database.*"%>
 <!DOCTYPE >
 <html>
 <head>
@@ -72,9 +72,9 @@ div.box {
 
 		<form action="Login" method="post">
 			<%
-				if ((boolean)request.getSession().getAttribute("logged_in")) {
+				if ((boolean) request.getSession().getAttribute("logged_in")) {
 					out.write("You are logged in as: ");
-					out.write((String)request.getSession().getAttribute("user_name")+"   ");
+					out.write((String) request.getSession().getAttribute("user_name") + "   ");
 					out.write("<a href=\"Logout.jsp\">Logout</a>");
 				} else {
 					out.write("User Name: <input type=\"text\" name=\"user_login\">");

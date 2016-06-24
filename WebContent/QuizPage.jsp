@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="database.*"%>
+<%@page import="DBQuizControllers.*"%>
 <%@page import="backend.*"%>
+<%@page import="questions.*"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <%
-	DBQuizController cont = new DBQuizController();
-	int quiz_id = Integer.parseInt(request.getParameter("quiz_id"));
-	Quiz quiz = cont.getQuiz(quiz_id);
+	//DBQuizController cont = new DBQuizController();
+	//int quiz_id = Integer.parseInt(request.getParameter("quiz_id"));
+	Quiz quiz = (Quiz) session.getAttribute("Quiz");
 	//ArrayList<Question> questions = quiz.getQuestions();
 	//String quizName = quiz.getQuiz_name();
 %>
@@ -25,20 +27,15 @@
 <body>
 
 	<%
-		/*for (int i = 0; i < questions.size(); i++) {
-			Question question = questions.get(i);
-			String questionTxt = question.getQuestiontext();
-			ArrayList<Answer> answers = question.getAnswers();
-			out.print("<h2>" + questionTxt + "</h2>");
-			for (int j = 0; j < answers.size(); j++) {
-				Answer answer = answers.get(j);
-				String command = "<div>" + "<input type='radio' " + "id = 'question-" + i + "-answer-" + j + "' "
-						+ "value = '" + j + "' />" + "<label for='question-" + i + "-answer-" + j + "' >"
-						+ "</div>";
-
-				out.print(command);
-			}
-		}*/
+		out.print("<form action='' method='' id='quiz'>");
+		ArrayList<Question> questions = quiz.getQuestions();
+		for (int i = 0; i < questions.size(); i++) {
+			Question q = questions.get(i);
+			out.print((i + 1) + ")");
+			out.print(q.getQuestionHtml(i));
+		}
+		out.print("</form>");
+		out.print("<button type='submit' form='quiz' value='Submit'>Submit</button>");
 	%>
 
 

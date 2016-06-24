@@ -37,7 +37,7 @@ public class QuestionWithMultipleAnswers extends Question {
 		String html = "";
 		html += "<div id='question-" + id + "'>" + "<p>" + getQuestiontext() + "</p> ";
 		for (int i = 0; i < getNumanswers(); i++) {
-			html += "input type='text' name='q" + id + "' id='q" + id + "-" + i + "'><br/>";
+			html += "<input type='text' name='q" + id + "' id='q" + id + "-" + i + "'><br/>";
 		}
 		html += "</div>";
 		return html;

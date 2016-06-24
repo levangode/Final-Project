@@ -17,7 +17,6 @@ public class MultipleChoiceAnswer extends Answer {
 	public String getAnswerText() {
 		return answer_text;
 	}
-<<<<<<< HEAD
 
 	public String getHtml(int questionNum, int answerNum) {
 		String html = "";
@@ -25,14 +24,12 @@ public class MultipleChoiceAnswer extends Answer {
 		String name = "name='q" + questionNum + "' ";
 		String value = "value='" + answerNum + "' ";
 		String id = "id='q" + questionNum + answerNum + "' ";
-		html += "input " + type + name + value + id + "><label for=" + id + ">" + getAnswerText() + "</label><br/>";
+		html += "<input " + type + name + value + id + "><label for=" + id + ">" + getAnswerText() + "</label><br/>";
 		return html;
 	}
 
-=======
-	
-	public boolean getAnswercorrect(){
+	public boolean getAnswercorrect() {
 		return answer_correct;
 	}
->>>>>>> origin/master
+
 }
