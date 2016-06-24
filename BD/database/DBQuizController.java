@@ -11,7 +11,7 @@ import java.util.Date;
 
 import com.mysql.jdbc.Statement;
 
-import backend.*;
+import backend.Quiz;
 
 public class DBQuizController {
 	private Connection connection;
