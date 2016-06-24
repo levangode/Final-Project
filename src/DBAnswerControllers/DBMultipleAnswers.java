@@ -81,7 +81,7 @@ public class DBMultipleAnswers {
 	
 	}
 	
-	public void addAnswer(Collection<MultipleAnswer> answers, int question_id){
+	public void addAnswers(Collection<MultipleAnswer> answers, int question_id){
 		Iterator<MultipleAnswer> it = answers.iterator();
 		
 		while(it.hasNext()){
