@@ -2,9 +2,6 @@
     <wb-module deploy-name="Final Project">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/BD"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/Models"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/Servlets"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/Testing"/>
         <property name="context-root" value="Final_Project"/>
         <property name="java-output-path" value="/Final Project/build/classes"/>
