@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import questions.QuestionParent;
+import questions.Question;
 
 public class Quiz {
 	private String quiz_name;
@@ -17,14 +17,14 @@ public class Quiz {
 	private String quiz_category;
 	private String quiz_difficulty;
 	private int times_taken;
-	private ArrayList<QuestionParent> questions;
+	private ArrayList<Question> questions;
 	private boolean displayMultiplePages;
 	private boolean immediateCorrection;
 	private boolean randomQuestions;
 
 	public Quiz(String quiz_name, String quiz_description, String quiz_author, int quiz_likes,
 			Timestamp date_created_timestamp, String quiz_category, String quiz_difficulty, int times_taken,
-			ArrayList<QuestionParent> questions, boolean displayMultiplePages, boolean immediateCorrection,
+			ArrayList<Question> questions, boolean displayMultiplePages, boolean immediateCorrection,
 			boolean randomQuestions) {
 		this.quiz_name = quiz_name;
 		this.quiz_description = quiz_description;
@@ -62,7 +62,7 @@ public class Quiz {
 		return newOne;
 	}
 
-	public void addQuestion(QuestionParent question, int questionNum) {
+	public void addQuestion(Question question, int questionNum) {
 		if (questionNum >= questions.size()) {
 			questions.add(question);
 		} else {
@@ -71,7 +71,7 @@ public class Quiz {
 		System.out.println(questions.size());
 	}
 
-	public void addQuestionWithoutNum(QuestionParent question) {
+	public void addQuestionWithoutNum(Question question) {
 		questions.add(question);
 	}
 
@@ -155,11 +155,11 @@ public class Quiz {
 		this.times_taken = times_taken;
 	}
 
-	public ArrayList<QuestionParent> getQuestions() {
+	public ArrayList<Question> getQuestions() {
 		return questions;
 	}
 
-	public void setQuestions(ArrayList<QuestionParent> questions) {
+	public void setQuestions(ArrayList<Question> questions) {
 		this.questions = questions;
 	}
 

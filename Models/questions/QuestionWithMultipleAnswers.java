@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import answers.AnswerParent;
 
-public class QuestionWithMultipleAnswers extends QuestionParent{
+public class QuestionWithMultipleAnswers extends Question{
 	private boolean order;
 	private int numAnswers;
 	public QuestionWithMultipleAnswers(String question_text, String question_type, String question_description,

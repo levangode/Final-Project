@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import answers.AnswerParent;
 
-public class MultipleChoiceQuestion extends QuestionParent {
+public class MultipleChoiceQuestion extends Question {
 	private int answers_to_show;
 	private int answers_to_be_correct;
 

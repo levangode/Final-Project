@@ -15,7 +15,7 @@ import backend.Quiz;
 import database.DBQuizController;
 import questions.QuestionFactory;
 import questions.QuestionHTMLRetriever;
-import questions.QuestionParent;
+import questions.Question;
 
 /**
  * Servlet implementation class NextQuestion
@@ -51,7 +51,7 @@ public class NextQuestion extends HttpServlet {
 		String question_type = request.getParameter("type");
 		QuestionHTMLRetriever qr=new QuestionHTMLRetriever();
 		AnswersHTMLRetriever ar=new AnswersHTMLRetriever();
-		QuestionParent question=qr.getQuestion(question_type, request);
+		Question question=qr.getQuestion(question_type, request);
 		
 		Enumeration<String> parameters = request.getParameterNames();
 		String param = "";

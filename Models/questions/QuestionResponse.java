@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import answers.AnswerParent;
 
-public class QuestionResponse extends QuestionParent{
+public class QuestionResponse extends Question{
 
 	public QuestionResponse(String question_text, String question_type, String question_description,
 			long question_time_limit, int question_score, ArrayList<AnswerParent> answers) {

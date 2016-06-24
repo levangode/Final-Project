@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import answers.AnswerParent;
 
-public abstract class QuestionParent {
+public abstract class Question {
 
 	private String question_type;
 	private String question_data;
@@ -14,7 +14,7 @@ public abstract class QuestionParent {
 	private int question_score;
 	private ArrayList<AnswerParent> answers;
 
-	public QuestionParent(String question_text, String question_type, String question_description,
+	public Question(String question_text, String question_type, String question_description,
 			long question_time_limit, int question_score, ArrayList<AnswerParent> answers) {
 		this.question_type = question_type;
 		this.question_text = question_text;
