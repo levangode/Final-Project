@@ -1,6 +1,6 @@
 package answers;
 
-public class BlankAnswer implements AnswerParent{
+public class BlankAnswer implements Answer{
 	private String answer_text;
 	private int blank_position;
 	public BlankAnswer(String answer_text, int blank_position){

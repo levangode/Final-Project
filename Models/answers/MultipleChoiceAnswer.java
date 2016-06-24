@@ -1,6 +1,6 @@
 package answers;
 
-public class MultipleChoiceAnswer implements AnswerParent{
+public class MultipleChoiceAnswer implements Answer{
 	private String answer_text;
 	private boolean answer_correct;
 	public MultipleChoiceAnswer(String answer_text, boolean answer_correct){

@@ -3,7 +3,7 @@ package questions;
 import java.util.ArrayList;
 
 
-import answers.AnswerParent;
+import answers.Answer;
 
 public abstract class Question {
 
@@ -12,10 +12,10 @@ public abstract class Question {
 	private String question_text;
 	private long question_time_limit;
 	private int question_score;
-	private ArrayList<AnswerParent> answers;
+	private ArrayList<Answer> answers;
 
 	public Question(String question_text, String question_type, String question_description,
-			long question_time_limit, int question_score, ArrayList<AnswerParent> answers) {
+			long question_time_limit, int question_score, ArrayList<Answer> answers) {
 		this.question_type = question_type;
 		this.question_text = question_text;
 		this.question_data = question_description;
@@ -30,7 +30,7 @@ public abstract class Question {
 		return result;
 	}
 
-	public void addAnswer(AnswerParent answer) {
+	public void addAnswer(Answer answer) {
 		answers.add(answer);
 	}
 
@@ -70,11 +70,11 @@ public abstract class Question {
 		this.question_text = question_text;
 	}
 
-	public ArrayList<AnswerParent> getAnswers() {
+	public ArrayList<Answer> getAnswers() {
 		return answers;
 	}
 
-	public void setAnswers(ArrayList<AnswerParent> answers) {
+	public void setAnswers(ArrayList<Answer> answers) {
 		this.answers = answers;
 	}
 

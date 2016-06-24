@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import answers.AnswerParent;
+import answers.Answer;
 import answers.AnswersHTMLRetriever;
 import backend.Quiz;
 import database.DBQuizController;
@@ -58,7 +58,7 @@ public class NextQuestion extends HttpServlet {
 		while (parameters.hasMoreElements()) {
 			param=parameters.nextElement();
 			if(param.contains("answer")){
-				AnswerParent answer=ar.getAnswer(question_type, request, param);
+				Answer answer=ar.getAnswer(question_type, request, param);
 				question.addAnswer(answer);
 			}
 		}

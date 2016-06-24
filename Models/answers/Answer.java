@@ -1,6 +1,6 @@
 package answers;
 
-public interface AnswerParent {
+public interface Answer {
 	public String toString();
 	
 }

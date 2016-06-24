@@ -2,7 +2,7 @@ package questions;
 
 import java.util.ArrayList;
 
-import answers.AnswerParent;
+import answers.Answer;
 
 public class MultipleChoiceQuestion extends Question {
 	private int answers_to_show;
@@ -10,7 +10,7 @@ public class MultipleChoiceQuestion extends Question {
 
 	public MultipleChoiceQuestion(String question_text, String question_type, String question_description,
 			long question_time_limit, int question_score, int answers_to_show, int answers_to_be_correct,
-			ArrayList<AnswerParent> answers) {
+			ArrayList<Answer> answers) {
 		super(question_text, question_type, question_description, question_time_limit, question_score, answers);
 		this.answers_to_show = answers_to_show;
 		this.answers_to_be_correct = answers_to_be_correct;
