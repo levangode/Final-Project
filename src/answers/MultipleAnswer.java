@@ -1,6 +1,6 @@
 package answers;
 
-public class MultipleAnswer implements Answer {
+public class MultipleAnswer extends Answer {
 	private String answer_text;
 	private int answer_num;
 	public MultipleAnswer(String answer_text, int answer_num){

@@ -1,6 +1,7 @@
 package answers;
 
-public interface Answer {
-	public String toString();
-	
+public abstract class Answer {
+	public String getAnswerText() {
+		return null;
+	};
 }
