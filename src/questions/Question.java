@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import answers.Answer;
 
-public abstract class Question {
+public abstract class Question implements printableQuestion{
 
 	private String question_type;
 	private String question_data;
