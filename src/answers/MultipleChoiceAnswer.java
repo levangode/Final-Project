@@ -11,4 +11,8 @@ public class MultipleChoiceAnswer implements Answer{
 	public String toString(){
 		return "answer: "+answer_text+"\n"+"correct: "+answer_correct+"\n";
 	}
+	
+	public boolean getAnswercorrect(){
+		return answer_correct;
+	}
 }
