@@ -85,6 +85,7 @@ function addQuestion() {
 						+ '<br><textarea name="description" style="display:none;" placeholder="Enter additional description" rows="3" cols="35"></textarea>'
 						+ '<br><input type="text" required style="width:35px; display:none;" maxlength=3 name="timeLimit">Time Limit(minutes)'
 						+ '<br><select name="order"> <option value="Ordered">Ordered</option><option value="Unordered">Unordered</option></select>'
+						+ '<br><input type="text" required style="width:35px; display:none;" maxlength=3 name="numAnswers">Answers required'
 						+ '<br><input type="text" style="width:35px; display:none;" maxlength=3 name="score" value=0>Score'
 						+ '<div id="answers"></div>'
 						+ '<button type="button" onclick="addAnswer()" style="display:none;">Create Answer</button><br> ')
