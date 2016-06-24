@@ -6,8 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
+import answers.BlankAnswer;
 import answers.MultipleAnswer;
 import answers.ResponseAnswer;
 import database.DBconnector;
@@ -78,5 +81,13 @@ public class DBMultipleAnswers {
 	
 	}
 	
+	public void addAnswer(Collection<MultipleAnswer> answers, int question_id){
+		Iterator<MultipleAnswer> it = answers.iterator();
+		
+		while(it.hasNext()){
+			addAnswer(it.next(), question_id);
+		}
+		
+	}
 
 }
