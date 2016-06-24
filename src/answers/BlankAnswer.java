@@ -12,4 +12,8 @@ public class BlankAnswer implements Answer{
 		return "answer: "+answer_text+"\n"+"position: "+blank_position+"\n";
 	}
 	
+	public int getBlankpos(){
+		return blank_position;
+	}
+	
 }
