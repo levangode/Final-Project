@@ -18,7 +18,7 @@ public class QuestionWithMultipleAnswers extends Question{
 	}
 	
 	public String toString(){
-		String result = super.toString()+"order: "+order+"\n";
+		String result = super.toString()+"order: "+order+"\n"+"answers required: "+numAnswers+"\n";
 		return result;
 	}
 	

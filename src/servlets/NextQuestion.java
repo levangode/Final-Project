@@ -9,13 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBQuizControllers.DBQuizController;
 import answers.Answer;
 import answers.AnswersHTMLRetriever;
 import backend.Quiz;
-import database.DBQuizController;
-import questions.QuestionFactory;
-import questions.QuestionHTMLRetriever;
 import questions.Question;
+import questions.QuestionHTMLRetriever;
 
 /**
  * Servlet implementation class NextQuestion
@@ -70,8 +69,8 @@ public class NextQuestion extends HttpServlet {
 		System.out.println(current);
 		if (request.getParameter("finalise") != null) {
 			Quiz quiz = (Quiz)request.getSession().getAttribute("Quiz");
-			//DBQuizController ca = new DBQuizController();
-			//ca.addQuiz(quiz);
+			DBQuizController ca = new DBQuizController();
+			ca.addQuiz(quiz);
 			response.sendRedirect("HomePage.jsp");
 		} else {
 			response.sendRedirect(

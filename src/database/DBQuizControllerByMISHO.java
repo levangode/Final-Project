@@ -15,10 +15,10 @@ import answers.Answer;
 import backend.Quiz;
 import questions.Question;
 
-public class DBQuizController {
+public class DBQuizControllerByMISHO {
 	private Connection connection;
 
-	public DBQuizController() {
+	public DBQuizControllerByMISHO() {
 		this.connection = (new DBconnector()).getConnection();
 	}
 
@@ -408,37 +408,6 @@ public class DBQuizController {
 		return answers;
 	}
 
-	public ArrayList<String> getQuizCategories() {
-		ArrayList<String> result = new ArrayList<String>();
-		String order = "select category_name from Categories";
-		ResultSet res = null;
-		try {
-			PreparedStatement stm = connection.prepareStatement(order);
-			res = stm.executeQuery();
-			while (res.next()) {
-				result.add(res.getString(1));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	public ArrayList<String> getQuestionTypes() {
-		ArrayList<String> result = new ArrayList<String>();
-		String order = "select type_name from QuestionTypes";
-		ResultSet res = null;
-		try {
-			PreparedStatement stm = connection.prepareStatement(order);
-			res = stm.executeQuery();
-			while (res.next()) {
-				result.add(res.getString(1));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		// TODO close
-		return result;
-	}
+	
 
 }
