@@ -10,8 +10,8 @@
 	DBQuizController cont = new DBQuizController();
 	int quiz_id = Integer.parseInt(request.getParameter("quiz_id"));
 	Quiz quiz = cont.getQuiz(quiz_id);
-	ArrayList<Question> questions = quiz.getQuestions();
-	String quizName = quiz.getQuiz_name();
+	//ArrayList<Question> questions = quiz.getQuestions();
+	//String quizName = quiz.getQuiz_name();
 %>
 
 <head>
@@ -25,7 +25,7 @@
 <body>
 
 	<%
-		for (int i = 0; i < questions.size(); i++) {
+		/*for (int i = 0; i < questions.size(); i++) {
 			Question question = questions.get(i);
 			String questionTxt = question.getQuestiontext();
 			ArrayList<Answer> answers = question.getAnswers();
@@ -38,7 +38,7 @@
 
 				out.print(command);
 			}
-		}
+		}*/
 	%>
 
 

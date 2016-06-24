@@ -11,7 +11,9 @@ import java.util.Date;
 
 import com.mysql.jdbc.Statement;
 
+import answers.Answer;
 import backend.Quiz;
+import questions.Question;
 
 public class DBQuizController {
 	private Connection connection;
@@ -181,23 +183,6 @@ public class DBQuizController {
 		String command = "INSERT INTO Answers (answer_text,"
 				+ " answer_description , answer_correct,question_id) values(?,?,?,?)";
 
-		String answer_text = answer.getAnswerText();
-		String answer_description = answer.getAnswerDescription();
-		boolean answer_correct = answer.getAnswerCorrect();
-
-		PreparedStatement stm;
-
-		try {
-			stm = connection.prepareStatement(command);
-			stm.setString(1, answer_text);
-			stm.setString(2, answer_description);
-			stm.setBoolean(3, answer_correct);
-			stm.setInt(4, question_id);
-			stm.executeUpdate();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 	}
 
@@ -386,9 +371,9 @@ public class DBQuizController {
 				String question_text = rs.getString(4);
 				int question_time_limit = rs.getInt(5);
 				ArrayList<Answer> answers = getAnswers(question_id);
-				Question newQuestion = new Question(question_text, getQuestionTypeStr(question_type),
+				/*Question newQuestion = new Question(question_text, getQuestionTypeStr(question_type),
 						question_description, question_time_limit, answers);
-				questions.add(newQuestion);
+				questions.add(newQuestion);*/
 			}
 
 		} catch (SQLException e) {
@@ -411,8 +396,8 @@ public class DBQuizController {
 				String answer_description = rs.getString(2);
 				boolean answer_correct = rs.getBoolean(3);
 
-				Answer newAnswer = new Answer(answer_text, answer_description, answer_correct);
-				answers.add(newAnswer);
+				/*Answer newAnswer = new Answer(answer_text, answer_description, answer_correct);
+				answers.add(newAnswer);*/
 			}
 
 		} catch (SQLException e) {

@@ -17,10 +17,11 @@ public class QuestionHTMLRetriever {
 		long question_time_limit = Integer.parseInt(request.getParameter("timeLimit")) * 60000;
 		int question_score=Integer.parseInt(request.getParameter("score"));
 		boolean order=false;
+		int num_answers=Integer.parseInt(request.getParameter("numAnswers"));
 		if(request.getParameter("order").equals("Ordered")){
 			order=true;
 		}
-		Question newOne=QuestionFactory.getQuestionWithMultipleAnswers(question_text, question_type, question_description, question_time_limit, question_score, order);
+		Question newOne=QuestionFactory.getQuestionWithMultipleAnswers(question_text, question_type, question_description, question_time_limit, question_score, num_answers, order);
 		return newOne;
 	}
 	private Question getQuestionResponse(HttpServletRequest request, String question_type){
