@@ -11,4 +11,9 @@ public class MultipleAnswer implements Answer {
 	public String toString(){
 		return "answer: "+answer_text+"\n"+"num: "+answer_num+"\n";
 	}
+
+	
+	public int getAnswernum(){
+		return answer_num;
+	}
 }
