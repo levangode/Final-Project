@@ -1,4 +1,3 @@
-<%@page import="answers.ImageAnswer"%>
 <%@page import="database.DBQuizController"%>
 <%@page import="database.DBconnector"%>
 <%@page import="java.util.ArrayList"%>
