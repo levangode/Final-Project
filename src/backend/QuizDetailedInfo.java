@@ -24,5 +24,11 @@ public class QuizDetailedInfo extends QuizInfo{
 	public void setQuiz_description(String quiz_description) {
 		this.quiz_description = quiz_description;
 	}
+	public String showOnCard(){
+		String result = "";
+		
+		return result;
+	}
+	
 	
 }
