@@ -15,6 +15,9 @@ public class DBQuizController {
 	public DBQuizController() {
 		this.connection = new DBconnector().getConnection();
 	}
+	public DBQuizController(Connection connection){
+		this.connection = connection;
+	}
 
 	public ArrayList<String> getQuizCategories() {
 		ArrayList<String> result = new ArrayList<String>();

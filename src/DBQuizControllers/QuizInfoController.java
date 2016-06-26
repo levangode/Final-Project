@@ -19,6 +19,10 @@ public class QuizInfoController {
 		this.connection = new DBconnector().getConnection();
 	}
 
+	public QuizInfoController(Connection connection) {
+		this.connection = connection;
+	}
+
 	public ArrayList<QuizInfo> getPopularQuizzes() {
 		ArrayList<QuizInfo> result = new ArrayList<QuizInfo>();
 		String order = "" + "select quiz_id, quiz_name, user_login, date_created, times_taken from Quizzes "
@@ -64,10 +68,12 @@ public class QuizInfoController {
 		}
 		return result;
 	}
-	public ArrayList<QuizInfo> getMyQuizzes(String author){
+
+	public ArrayList<QuizInfo> getMyQuizzes(String user_login) {
 		ArrayList<QuizInfo> result = new ArrayList<QuizInfo>();
 		String order = "" + "SELECT quiz_id, quiz_name, user_login, date_created, times_taken " + "FROM Quizzes "
-				+ "JOIN Users ON author_id = user_id " + "ORDER BY date_created DESC " + "LIMIT " + LIMIT_RESULTS;
+				+ "JOIN Users ON author_id = user_id " + "AND user_login =  " + "'" + user_login + "' "
+				+ "ORDER BY date_created DESC " + "LIMIT " + LIMIT_RESULTS;
 		ResultSet res = null;
 		try {
 			PreparedStatement stm = connection.prepareStatement(order);
