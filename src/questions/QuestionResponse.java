@@ -31,9 +31,7 @@ public class QuestionResponse extends Question {
 		String name = "q" + questionIndex;
 		if (request.getParameter(name) != null) {
 			String res = request.getParameter(name);
-			ArrayList<Answer> answers = getAnswers();
-			for (int i = 0; i < answers.size(); i++) {
-				Answer ans = answers.get(i);
+			for (Answer ans : getAnswers()) {
 				if (ans.getAnswerText().equals(res)) {
 					return 1;
 				}
@@ -44,9 +42,10 @@ public class QuestionResponse extends Question {
 
 	public void addToDatabase(int quiz_id) throws Exception {
 		DBQuestionResponse db = new DBQuestionResponse(new DBconnector().getConnection());
-
+	
 		db.addQuestion(this, quiz_id);
-
+		
 	}
+	
 
 }
