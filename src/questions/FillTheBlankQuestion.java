@@ -25,11 +25,13 @@ public class FillTheBlankQuestion extends Question {
 	public String getQuestionHtml(int id) {
 		String html = "";
 		String questionTxt = getQuestiontext();
-		Pattern p = Pattern.compile("____");
+		// System.out.println("Question text is: " + questionTxt);
+		// System.out.println("ANswers size:" + getAnswers().size());
 		for (int i = 0; i < getAnswers().size(); i++) {
 			String inputStr = "<input type='text' name='q" + id + "-" + i + "' id='q" + id + "-" + i + "'>";
-			questionTxt = questionTxt.replaceFirst(p.pattern(), inputStr);
+			questionTxt = questionTxt.replaceFirst("____", inputStr);
 		}
+		html = questionTxt;
 		System.out.println("Generated HTML: " + html);
 		return html;
 	}
