@@ -57,8 +57,8 @@ public class DBQuestionResponseAnswer {
 	}
 	
 	public void addAnswer(ResponseAnswer ans, int question_id){
-		String query = "insert into answers_questionresponse(answer_text, question_id) values("
-				+ ans
+		String query = "insert into Answers_QuestionResponse(answer_text, question_id) values("
+				+ "'" + ans + "'"
 				+ ", "
 				+ question_id
 				+ ");";
@@ -66,7 +66,7 @@ public class DBQuestionResponseAnswer {
 		
 		try{
 			stm = connection.prepareStatement(query);
-			stm.executeQuery();
+			stm.executeUpdate();
 			
 		
 		

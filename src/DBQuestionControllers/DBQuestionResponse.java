@@ -68,30 +68,41 @@ public class DBQuestionResponse {
 		String query = 
 				"insert into Questions_QuestionResponse(quiz_id, question_text, question_data, question_time_limit, score) value ("
 				+ quiz_id + ", "
-				+ question.getQuestiontext() + ", "
-				+ question.getQuestiondescription() + ", "
+				+ "'" + question.getQuestiontext() + "'" + ", "
+				+ "'" + question.getQuestiondescription() + "'" + ", "
 				+ question.getQuestiontimelimit() + ", "
 				+ question.getQuestionscore()
 				+ ");";
 		
+//		System.out.println(query);
+		
 		PreparedStatement stm;
 		
 		try{
+			
 			stm = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-
-			stm.executeQuery();
+			
+//			System.out.println("11");
+			
+			stm.executeUpdate();
+			
+//			System.out.println("22");
 			
 			ResultSet rs = stm.getGeneratedKeys();
-			int question_id = rs.getInt("question_id");
+			int question_id = -1;
+			while(rs.next()){
+				question_id = rs.getInt(1);
+			}
 			
 			for(Answer cur: question.getAnswers()){
+//				System.out.println("processing answer " + cur + " id = " + question_id);
 				cur.addToDatabase(question_id);
 			}
 			
 			connection.close();
 			
 		} catch (SQLException e) {
-			System.out.println("Error occured durin database connection!");
+			System.out.println(e.getMessage());
 			
 			throw new Exception("Error durin insertion in DB");
 			//e.printStackTrace();
