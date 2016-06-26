@@ -2,9 +2,12 @@ package questions;
 
 import java.util.ArrayList;
 
+import DBQuestionControllers.DBQuestionMultipleChoice;
+import DBQuestionControllers.DBQuestionWithMultipleAnswers;
 import answers.Answer;
 import answers.MultipleAnswer;
 import answers.MultipleChoiceAnswer;
+import database.DBconnector;
 
 public class MultipleChoiceQuestion extends Question {
 	private int answers_to_show;
@@ -46,5 +49,14 @@ public class MultipleChoiceQuestion extends Question {
 		html += "</ul></div>";
 		return html;
 	}
+
+	@Override
+	public void addToDatabase(int quiz_id) throws Exception {
+		DBQuestionMultipleChoice db = new DBQuestionMultipleChoice(new DBconnector().getConnection());
+		
+		db.addQuestion(this, quiz_id);
+	}
+
+	
 
 }

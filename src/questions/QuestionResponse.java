@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBQuestionControllers.DBQuestionResponse;
 import answers.Answer;
+import database.DBconnector;
 
 public class QuestionResponse extends Question {
 
@@ -22,5 +24,14 @@ public class QuestionResponse extends Question {
 		html += "</div>";
 		return html;
 	}
+
+	@Override
+	public void addToDatabase(int quiz_id) throws Exception {
+		DBQuestionResponse db = new DBQuestionResponse(new DBconnector().getConnection());
+	
+		db.addQuestion(this, quiz_id);
+		
+	}
+	
 
 }

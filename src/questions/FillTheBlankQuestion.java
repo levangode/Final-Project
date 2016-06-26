@@ -2,7 +2,10 @@ package questions;
 
 import java.util.ArrayList;
 
+import DBQuestionControllers.DBQuestionFillInTheBlanks;
+import DBQuestionControllers.DBQuestionWithMultipleAnswers;
 import answers.Answer;
+import database.DBconnector;
 
 public class FillTheBlankQuestion extends Question {
 
@@ -31,4 +34,12 @@ public class FillTheBlankQuestion extends Question {
 	public void setNumAnswers(int numAnswers) {
 		this.numAnswers = numAnswers;
 	}
+
+	@Override
+	public void addToDatabase(int quiz_id) throws Exception {
+		DBQuestionFillInTheBlanks db = new DBQuestionFillInTheBlanks(new DBconnector().getConnection());
+		
+		db.addQuestion(this, quiz_id);
+	}
+
 }

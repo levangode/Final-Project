@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBQuestionControllers.DBQuestionMultipleChoice;
+import DBQuestionControllers.DBQuestionResponse;
+import DBQuestionControllers.DBQuestionWithMultipleAnswers;
 import answers.Answer;
+import database.DBconnector;
 
 public class QuestionWithMultipleAnswers extends Question {
 	private boolean order;
@@ -41,6 +45,14 @@ public class QuestionWithMultipleAnswers extends Question {
 		}
 		html += "</div>";
 		return html;
+	}
+
+
+	@Override
+	public void addToDatabase(int quiz_id) throws Exception {
+		DBQuestionWithMultipleAnswers db = new DBQuestionWithMultipleAnswers(new DBconnector().getConnection());
+		
+		db.addQuestion(this, quiz_id);
 	}
 
 }
