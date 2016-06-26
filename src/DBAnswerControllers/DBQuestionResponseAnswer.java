@@ -31,7 +31,7 @@ public class DBQuestionResponseAnswer {
 	public List<ResponseAnswer> retrieveAnswers(int answer_id){
 		List<ResponseAnswer> answers = new ArrayList<ResponseAnswer>();
 		
-		String query = "select answer_text from Answers_AuestionResponse where question_id = "
+		String query = "select answer_text from answers_questionresponse where question_id = "
 					+ answer_id + " ;";
 		
 		PreparedStatement stm;
@@ -57,8 +57,8 @@ public class DBQuestionResponseAnswer {
 	}
 	
 	public void addAnswer(ResponseAnswer ans, int question_id){
-		String query = "insert into Answers_QuestionResponse(answer_text, question_id) values("
-				+ "'" + ans + "'"
+		String query = "insert into answers_questionresponse(answer_text, question_id) values("
+				+ ans
 				+ ", "
 				+ question_id
 				+ ");";
@@ -66,7 +66,7 @@ public class DBQuestionResponseAnswer {
 		
 		try{
 			stm = connection.prepareStatement(query);
-			stm.executeUpdate();
+			stm.executeQuery();
 			
 		
 		

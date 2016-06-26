@@ -1,9 +1,5 @@
 package answers;
 
-
-import DBAnswerControllers.DBMultipleAnswers;
-import database.DBconnector;
-
 public class MultipleAnswer extends Answer {
 	private String answer_text;
 	private int answer_num;
@@ -15,17 +11,12 @@ public class MultipleAnswer extends Answer {
 	public String toString(){
 		return "answer: "+answer_text+"\n"+"num: "+answer_num+"\n";
 	}
-
+	@Override
+	public String getAnswerText(){
+		return answer_text;
+	}
 	
 	public int getAnswernum(){
 		return answer_num;
-	}
-
-	@Override
-	public void addToDatabase(int question_id) {
-		DBMultipleAnswers db = new DBMultipleAnswers(new DBconnector().getConnection());
-		
-		db.addAnswer(this, question_id);
-		
 	}
 }
