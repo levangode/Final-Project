@@ -69,7 +69,7 @@ textarea {
 			placeholder="Enter quiz name here..." required> <br />
 		<h2>Enter quiz description</h2>
 		<br />
-		<textarea name="quiz_description" rows="3" cols="45" maxlength="1000"
+		<textarea name="quiz_description" rows="3" cols="45" maxlength="150"
 			placeholder="Enter quiz description here..." required></textarea>
 		<br /> <input name="Random Questions" type="checkbox">Random
 		Questions<br> <input name="Immediate Correction" type="checkbox">Immediate

@@ -32,16 +32,14 @@ public class QuizDetailedInfo extends QuizInfo{
 		result=""
 			+"<div id=\"card\" class=\"box\" style=\"position:relative; text-align:center;\""
 			+"style=\"text-align: left; margin-left: auto; margin-right: auto;\">"
-			+"<p>"
-			+"Name: "+getQuiz_name()+"<br>"
-			+"Description: "+getQuiz_description()+"<br>"
-			+"Category: "+getQuiz_category()+"<br>"
-			+"Author: "+getQuiz_author()+"<br>"
+			+"<h3>Name: "+getQuiz_name()+"</h3>"
+			+"<p class=\"descr\">Description: "+getQuiz_description()+"</p>"
+			+"<p class=\"para\" style=\"left:0; top:0;\">Category: "+getQuiz_category()+"</p>"
+			+"<p class=\"para\" style=\"right:0; top:0;\">Author: "+getQuiz_author()+"</p>"
 			+"Date Created: "+getQuiz_date()+"<br>"
 			+"Times Taken: "+getTimes_taken()+"<br>"
-			+"Likes: "+getQuiz_likes()+"<br>"
+			+"<p class=\"para\" style=\"left:0; bottom:0;\">Likes: "+getQuiz_likes()+"</p>"
 			+"<a class=\"btn\" style=\"position: absolute; right:0; bottom:0; padding:5px;\" href=\"QuizInformation.jsp?id="+getQuiz_id()+"\">Check It Out</a>"
-			+"</p>"
 			+"</div>";
 		return result;
 	}

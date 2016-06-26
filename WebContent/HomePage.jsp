@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Home</title>
 <link rel="stylesheet" type="text/css" href="Button.css">
 <style>
 body {
@@ -85,18 +85,38 @@ h2{
 
 p {
 	font-size:18;
-	position: relative;
 	margin: 0;
-	height: 100%;
 }
+.descr{
+	font-size:16;
+	line-height: 1em;
+	height:2em;
+	text-overflow: ellipsis;
+    width: 100%;
+    overflow: hidden;
+}
+h3{
+	margin-bottom:1px;
+}
+
+.para{
+	font-size:14;
+	margin: 0;
+	padding:7px;
+	position:absolute;
+}
+
 .headers {
 	padding: 10px;
 }
+
+
 </style>
 </head>
 <body>
 	<div style="min-width: 900px;">
-		<div>
+		<!-- start top panel -->
+		<div id="top">
 			<span id="homelogo" style="align: left"> WELCOMEEE </span>
 			<div id="top" align="right" style="float: right">
 
@@ -171,7 +191,6 @@ p {
 						<%
 							QuizInfoController getter2 = new QuizInfoController();
 							ArrayList<QuizInfo> mine = getter2.getMyQuizzes((String) request.getSession().getAttribute("user_name"));
-							System.out.println((String) request.getSession().getAttribute("user_name"));
 							for (QuizInfo a : mine) {
 								out.print("<li><a href=\"QuizPage.jsp\">" + a.getQuiz_name() + "</a></li>");
 								//TODO shignidan ro dabechdos tavisi tavi
