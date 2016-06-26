@@ -65,7 +65,7 @@ textarea {
 			<option value="Hard">Hard</option>
 		</select>
 		<h2>Enter quiz name</h2>
-		<br /> <input type="text" name="quiz_name"
+		<br /> <input type="text" name="quiz_name" maxlength="25"
 			placeholder="Enter quiz name here..." required> <br />
 		<h2>Enter quiz description</h2>
 		<br />
