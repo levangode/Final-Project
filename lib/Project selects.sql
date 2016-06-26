@@ -32,13 +32,6 @@ create table Quizzes (
     
 );
 
-insert into Users(user_login, user_password, user_name, user_profile_image) values
-('aba', 'ulia', 'gio', 'asd');
-insert into Quizzes(quiz_name, category_id, quiz_description, author_id, quiz_likes, date_created, quiz_difficulty, times_taken,
-multiple_pages, immediate_correction, random_questions) values
-	('aba', 1, 'aga', 1, 0, current_timestamp(), 'hard', 0, true, false, false);
-
-
 
 create table Quiz_edit(
 	user_id int not null,
@@ -74,7 +67,7 @@ insert into QuestionTypes(type_name) values
 	('Question-Response'),
     ('Fill in the Blank'),
     ('Multiple Choice with Multiple Answers'),
-    ('Question with Multiple Answers'),
+    ('Question with Multiple Answers');
     
 
 
