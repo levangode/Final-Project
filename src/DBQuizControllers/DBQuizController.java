@@ -113,4 +113,33 @@ public class DBQuizController {
 		}
 		return id;
 	}
+	
+	public Quiz getQuiz(int id){
+		String query = "select quizzes.quiz_name, categories.category_name, quizzes.quiz_description, users.user_name, quizzes.quiz_likes, quizzes.date_created, quizzes.quiz_difficulty, quizzes.times_taken, quizzes.multiple_pages, quizzes.immediate_correction, quizzes.random_questions "
+				+ " from quizzes, users, categories where quiz_id = "
+				+ id
+				+ " and quizzes.author_id = users.user_id and quizzes.category_id = categories.category_id;";
+
+		Quiz tmpQuiz = null;
+		
+		PreparedStatement stm = null;
+		try {			
+			stm = connection.prepareStatement(query);
+			
+			ResultSet res = stm.executeQuery();
+			
+			while(res.next()){
+				tmpQuiz = new Quiz(res.getString(1), res.getString(3), res.getString(4), res.getInt(5), res.getTimestamp(6), res.getString(2), res.getString(7), res.getInt(8), 
+							null,
+							res.getBoolean(9), res.getBoolean(10), res.getBoolean(11));
+			}
+			
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return tmpQuiz;
+	}
 }
