@@ -73,13 +73,18 @@ li{
 
 #card {
     border-radius: 25px;
-    border: 2px solid #73AD21;
+    border: 2px solid #000000;
     padding: 10px; 
     width: calc(100% - 30px);
     height: 150px; 
     margin: 5px 3px;
 }
+h2{
+	margin:1px;
+}
+
 p {
+	font-size:18;
 	position: relative;
 	margin: 0;
 	height: 100%;
@@ -113,10 +118,7 @@ p {
 
 			<div class="headers">
 				<ul>
-					<li><a href="CreateQuiz.jsp"> Create New Quiz </a></li>
-					<li><a href="https://www.google.com"> Top Quizzes </a></li>
-					<li><a href="https://www.google.com"> My Quizzes </a></li>
-					<li><a href="https://www.google.com"> New Quizzes </a></li>
+					<li><a class="btn" href="CreateQuiz.jsp"> Create New Quiz </a></li>
 				</ul>
 			</div>
 		</div>
@@ -125,7 +127,7 @@ p {
 		<div>
 			<!-- Left Panel -->
 			<div class="box" style="text-align: center;">
-				<h4 margin: 1px;">Categories</h4>
+				<h2>Categories</h2>
 				<ul>
 					<%
 						DBQuizController q = new DBQuizController();
@@ -151,7 +153,7 @@ p {
 			<!-- Right Panel -->
 			<div class="box" style="float: right">
 				<div class="box" style="position: relative;">
-					<h4 style="text-align: center; margin: 1px;">Hot Quizzes</h4>
+					<h2 style="text-align: center; margin: 1px;">Hot Quizzes</h2>
 					<ul>
 						<%
 							QuizInfoController getter = new QuizInfoController();
@@ -164,7 +166,7 @@ p {
 				</div>
 
 				<div class=box style="position: relative;">
-					<h4 style="text-align: center; margin: 1px;">My Quizzes</h4>
+					<h2 style="text-align: center; margin: 1px;">My Quizzes</h2>
 					<ul>
 						<%
 							QuizInfoController getter2 = new QuizInfoController();
