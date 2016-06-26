@@ -88,10 +88,10 @@ public class DBQuestionMultipleChoice {
 		try{
 			stm = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-			stm.executeQuery();
+			stm.executeUpdate();
 			
 			ResultSet rs = stm.getGeneratedKeys();
-			int question_id = rs.getInt("question_id");
+			int question_id = rs.getInt(1);
 			
 			for(Answer cur: question.getAnswers()){
 				cur.addToDatabase(question_id);

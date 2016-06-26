@@ -65,7 +65,7 @@ public class DBMultipleChoiceAnswers {
 		
 		try{
 			stm = connection.prepareStatement(query);
-			stm.executeQuery();
+			stm.executeUpdate();
 					
 			connection.close();
 			
