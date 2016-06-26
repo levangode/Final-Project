@@ -19,26 +19,16 @@ public class FillTheBlankQuestion extends Question {
 		super(question_text, question_type, question_description, question_time_limit, question_score, answers);
 	}
 
-	private int numAnswers;
-
 	@Override
 	public String getQuestionHtml(int id) {
 		String html = "";
 		String questionTxt = getQuestiontext();
-		for (int i = 0; i < getNumAnswers(); i++) {
+		for (int i = 0; i < getAnswers().size(); i++) {
 			String inputStr = "<input type='text' name='q" + id + "-" + i + "' id='q" + id + "-" + i + "'>";
-			questionTxt.replaceFirst("____", inputStr);
+			questionTxt = questionTxt.replaceFirst("____", inputStr);
 		}
 		System.out.println("Generated HTML: " + html);
 		return html;
-	}
-
-	public int getNumAnswers() {
-		return numAnswers;
-	}
-
-	public void setNumAnswers(int numAnswers) {
-		this.numAnswers = numAnswers;
 	}
 
 	@Override

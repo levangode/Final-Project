@@ -31,7 +31,7 @@ body {
 </title>
 </head>
 <body>
-	<form action="GradeQuiz" method="get" id="quiz">
+	<form action="GradeQuiz" method="post" id="quiz">
 		<%
 			ArrayList<Question> questions = quiz.getQuestions();
 			for (int i = 0; i < questions.size(); i++) {
