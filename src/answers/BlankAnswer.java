@@ -1,5 +1,8 @@
 package answers;
 
+import DBAnswerControllers.DBBlankAnswer;
+import database.DBconnector;
+
 public class BlankAnswer extends Answer{
 	private String answer_text;
 	private int blank_position;
@@ -14,6 +17,13 @@ public class BlankAnswer extends Answer{
 	
 	public int getBlankpos(){
 		return blank_position;
+	}
+
+	@Override
+	public void addToDatabase(int question_id) {
+		DBBlankAnswer db = new DBBlankAnswer(new DBconnector().getConnection());
+		
+		db.addAnswer(this, question_id);
 	}
 	
 }
