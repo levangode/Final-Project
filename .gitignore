@@ -50,3 +50,5 @@ Temporary Items
 .classpath
 build/classes/servlets/Login.class
 src/questions/PrintableQuestion.java
+*.classpath
+.classpath
