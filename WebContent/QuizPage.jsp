@@ -17,6 +17,12 @@
 %>
 
 <head>
+<link rel="stylesheet" type="text/css" href="BasicStyles.css">
+<style>
+body{
+text-align:left
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>
 	<%
