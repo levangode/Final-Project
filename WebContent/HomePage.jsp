@@ -5,12 +5,12 @@
 <%@page import="database.*"%>
 <%@page import="backend.*"%>
 <%@page import="DBQuizControllers.*"%>
-<!DOCTYPE >
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="Buttons.css">
+<link rel="stylesheet" type="text/css" href="Button.css">
 <style>
 body {
 	background: #16A085; /* fallback for old browsers */
@@ -61,15 +61,34 @@ div.box {
 .box a:hover {
 	background: #9EC4AA;
 }
+ul{
+	width:100%; 
+	padding-left:0px;
+	text-align:center;
+}
+li{
+	list-style-type:none;
+}
+
 
 #card {
     border-radius: 25px;
-    border: 2px solid #73AD21;
-    padding: 20px; 
-    width: 200px;
+    border: 2px solid #000000;
+    padding: 10px; 
+    width: calc(100% - 30px);
     height: 150px; 
+    margin: 5px 3px;
+}
+h2{
+	margin:1px;
 }
 
+p {
+	font-size:18;
+	position: relative;
+	margin: 0;
+	height: 100%;
+}
 .headers {
 	padding: 10px;
 }
@@ -99,10 +118,7 @@ div.box {
 
 			<div class="headers">
 				<ul>
-					<li><a href="CreateQuiz.jsp"> Create New Quiz </a></li>
-					<li><a href="https://www.google.com"> Top Quizzes </a></li>
-					<li><a href="https://www.google.com"> My Quizzes </a></li>
-					<li><a href="https://www.google.com"> New Quizzes </a></li>
+					<li><a class="btn" href="CreateQuiz.jsp"> Create New Quiz </a></li>
 				</ul>
 			</div>
 		</div>
@@ -110,8 +126,8 @@ div.box {
 		<!-- Bottom Panel -->
 		<div>
 			<!-- Left Panel -->
-			<div class="box">
-				<h4 style="text-align: center; margin: 1px;">Categories</h4>
+			<div class="box" style="text-align: center;">
+				<h2>Categories</h2>
 				<ul>
 					<%
 						DBQuizController q = new DBQuizController();
@@ -123,22 +139,21 @@ div.box {
 				</ul>
 			</div>
 			<!-- End Left Panel -->
-			<div id="card" class="box" style="text-align:center; width:calc(100% - 404px);"
-				style="text-align: left; margin-left: auto; margin-right: auto;">
-				<p>
-				Name: Qvizi<br>
-				Description: Agweriloba<br>
-				Category: Kategoria<br>
-				Author: Avtori<br>
-				Date Created: Rodis gaketda bozi<br>
-				Times Taken: Ramdenjer ixmares<br>
-				
-				</p>
+			<!-- QuizList -->
+			<div class="box" style="text-align:center; width:calc(100% - 360px);">
+			<%
+			QuizInfoController all=new QuizInfoController();
+			ArrayList<QuizDetailedInfo> quizzes=all.getQuizzes();
+			for(QuizDetailedInfo b: quizzes){
+				out.print(b.showOnCard());
+			}
+			%>
 			</div>
+			<!-- End QuizList -->
 			<!-- Right Panel -->
 			<div class="box" style="float: right">
 				<div class="box" style="position: relative;">
-					<h4 style="text-align: center; margin: 1px;">Hot Quizzes</h4>
+					<h2 style="text-align: center; margin: 1px;">Hot Quizzes</h2>
 					<ul>
 						<%
 							QuizInfoController getter = new QuizInfoController();
@@ -151,7 +166,7 @@ div.box {
 				</div>
 
 				<div class=box style="position: relative;">
-					<h4 style="text-align: center; margin: 1px;">My Quizzes</h4>
+					<h2 style="text-align: center; margin: 1px;">My Quizzes</h2>
 					<ul>
 						<%
 							QuizInfoController getter2 = new QuizInfoController();

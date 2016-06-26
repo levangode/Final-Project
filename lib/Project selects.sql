@@ -73,6 +73,12 @@ insert into QuestionTypes(type_name) values
 
 
 insert into Categories(category_name) values 
+    ('Science'),
+    ('Chemistry'),
+    ('Physics'),
+    ('Foreign Languages'),
+    ('Computer Sciences'),
+    ('Other'),
 	('History'),
     ('Biology'),
     ('Math');
