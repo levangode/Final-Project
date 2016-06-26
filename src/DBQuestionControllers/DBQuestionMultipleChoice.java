@@ -87,7 +87,7 @@ public class DBQuestionMultipleChoice {
 			System.out.println(query);
 			stm = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-			stm.executeQuery();
+			stm.executeUpdate();
 			
 			ResultSet rs = stm.getGeneratedKeys();
 			int question_id = rs.getInt("question_id");
