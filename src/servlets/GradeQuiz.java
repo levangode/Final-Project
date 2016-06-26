@@ -49,8 +49,13 @@ public class GradeQuiz extends HttpServlet {
 			Question q = questions.get(i);
 			double curScore = q.gradeAnswer(request, i);
 			double questionScore = q.getQuestionscore();
+			System.out.println("score in this q=" + curScore);
+			System.out.println("Maxscore="+questionScore);
+			
 			double res = curScore / questionScore;
+			System.out.println("Res:" + res);
 			score += res;
+			System.out.println("curscore=" +score);
 		}
 		System.out.println("Your score: " + score);
 		response.getWriter().append("Served at: ").append(request.getContextPath());
