@@ -67,8 +67,8 @@ public class DBQuestionWithMultipleAnswers {
 		String query = 
 				"insert into Questions_MultipleAnswers(quiz_id, question_text, question_data, question_time_limit, score, num_answers, answers_ordered) value ("
 				+ quiz_id + ", "
-				+ question.getQuestiontext() + ", "
-				+ question.getQuestiondescription() + ", "
+				+ "'" + question.getQuestiontext() + "'" + ", "
+				+ "'" + question.getQuestiondescription() + "'" + ", "
 				+ question.getQuestiontimelimit() + ", "
 				+ question.getQuestionscore() + ", "
 				+ question.getNumanswers() + ", "
@@ -80,7 +80,7 @@ public class DBQuestionWithMultipleAnswers {
 		try{
 			stm = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-			stm.executeQuery();
+			stm.executeUpdate();
 			
 			ResultSet rs = stm.getGeneratedKeys();
 			int question_id = rs.getInt("question_id");

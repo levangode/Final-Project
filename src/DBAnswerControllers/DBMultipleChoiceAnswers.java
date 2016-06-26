@@ -54,8 +54,8 @@ public class DBMultipleChoiceAnswers {
 	}
 	
 	public void addAnswer(MultipleChoiceAnswer ans, int question_id){
-		String query = "insert into answers_questionresponse(answer_text, answer_correct, question_id) values("
-				+ ans
+		String query = "insert into Answers_MultipleChoice(answer_text, answer_correct, question_id) values("
+				+ "'" + ans.getAnswerText() + "'"
 				+ ", "
 				+ ans.getAnswercorrect()
 				+ ", "
@@ -64,6 +64,7 @@ public class DBMultipleChoiceAnswers {
 		PreparedStatement stm;
 		
 		try{
+			System.out.println(query);
 			stm = connection.prepareStatement(query);
 			stm.executeQuery();
 					

@@ -58,7 +58,7 @@ public class DBMultipleAnswers {
 	
 	public void addAnswer(MultipleAnswer ans, int question_id){
 		String query = "insert into answers_multipleanswers(answer_text, answer_num, question_id) values("
-				+ ans
+				+ "'" + ans.getAnswerText() + "'"
 				+ ", "
 				+ ans.getAnswernum()
 				+ ", "
@@ -68,7 +68,7 @@ public class DBMultipleAnswers {
 		
 		try{
 			stm = connection.prepareStatement(query);
-			stm.executeQuery();
+			stm.executeUpdate();
 			
 		
 		

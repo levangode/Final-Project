@@ -71,19 +71,20 @@ public class DBQuestionMultipleChoice {
 	
 	public void addQuestion(MultipleChoiceQuestion question, int quiz_id) throws Exception{
 		String query = 
-				"insert into Questions_QuestionResponse(quiz_id, question_text, question_data, question_time_limit, score, num_answers_display, num_answers_corrent) value ("
+				"insert into Questions_MultipleChoice(quiz_id, question_text, question_data, question_time_limit, score, num_answers_display, num_answers_correct) value ("
 				+ quiz_id + ", "
-				+ question.getQuestiontext() + ", "
-				+ question.getQuestiondescription() + ", "
+				+ "'" + question.getQuestiontext() + "'" + ", "
+				+ "'" + question.getQuestiondescription() + "'" + ", "
 				+ question.getQuestiontimelimit() + ", "
 				+ question.getQuestionscore() + ", "
 				+ question.getNumanswersdisplay() + ", "
-				+ question.getNumanswerscorrect() + ", "
+				+ question.getNumanswerscorrect()
 				+ ");";
 		
 		PreparedStatement stm;
 		
 		try{
+			System.out.println(query);
 			stm = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
 			stm.executeQuery();
