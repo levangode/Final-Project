@@ -7,4 +7,11 @@ public class INFO {
 	public static final String MYSQL_DATABASE_SERVER = "jdbc:mysql://sql7.freemysqlhosting.net:3306";
 	public static final String MYSQL_DATABASE_NAME = "sql7125243";
 
+	/*
+	 * public static final String MYSQL_USERNAME = "root"; public static final
+	 * String MYSQL_PASSWORD = "9999"; public static final String
+	 * MYSQL_DATABASE_SERVER = "jdbc:mysql://127.0.0.1:3306"; public static
+	 * final String MYSQL_DATABASE_NAME = "homework5";
+	 */
+
 }

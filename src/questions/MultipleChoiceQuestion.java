@@ -2,6 +2,8 @@ package questions;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import DBQuestionControllers.DBQuestionMultipleChoice;
 import DBQuestionControllers.DBQuestionWithMultipleAnswers;
 import answers.Answer;
@@ -51,12 +53,28 @@ public class MultipleChoiceQuestion extends Question {
 	}
 
 	@Override
-	public void addToDatabase(int quiz_id) throws Exception {
-		DBQuestionMultipleChoice db = new DBQuestionMultipleChoice(new DBconnector().getConnection());
-		
-		db.addQuestion(this, quiz_id);
+	public int gradeAnswer(HttpServletRequest request, int questionIndex) {
+		int counter = 0;
+		ArrayList<Answer> answers = getAnswers();
+		for (int i = 0; i < answers.size(); i++) {
+			MultipleChoiceAnswer ans = (MultipleChoiceAnswer) answers.get(i);
+			String name = "q" + questionIndex + "-" + i;
+			if (ans.getAnswercorrect()) {
+				if (request.getParameter(name) != null) {
+					counter++;
+				}
+			} else {
+				if (request.getParameter(name) != null)
+					return 0;
+			}
+		}
+		return counter;
 	}
 
-	
+	public void addToDatabase(int quiz_id) throws Exception {
+		DBQuestionMultipleChoice db = new DBQuestionMultipleChoice(new DBconnector().getConnection());
+
+		db.addQuestion(this, quiz_id);
+	}
 
 }

@@ -1,5 +1,5 @@
 package questions;
 
-public interface printableQuestion {
+public interface PrintableQuestion {
 	public String getQuestionHtml(int id);
 }

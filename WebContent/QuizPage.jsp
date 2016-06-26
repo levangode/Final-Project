@@ -19,8 +19,8 @@
 <head>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
 <style>
-body{
-text-align:left
+body {
+	text-align: left
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -31,20 +31,17 @@ text-align:left
 </title>
 </head>
 <body>
-
-	<%
-		out.print("<form action='' method='' id='quiz'>");
-		ArrayList<Question> questions = quiz.getQuestions();
-		for (int i = 0; i < questions.size(); i++) {
-			Question q = questions.get(i);
-			out.print((i + 1) + ")");
-			out.print(q.getQuestionHtml(i));
-		}
-		out.print("</form>");
-		out.print("<button type='submit' form='quiz' value='Submit'>Submit</button>");
-	%>
-
-
-
+	<form action="GradeQuiz" method="get" id="quiz">
+		<%
+			ArrayList<Question> questions = quiz.getQuestions();
+			for (int i = 0; i < questions.size(); i++) {
+				Question q = questions.get(i);
+				out.print((i + 1) + ")");
+				out.print(q.getQuestionHtml(i));
+			}
+		%>	
+	
+	<input type="submit" value="Submit">
+</form>
 </body>
 </html>

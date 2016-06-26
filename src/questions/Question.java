@@ -2,8 +2,11 @@ package questions;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 
 import answers.Answer;
+
+public abstract class Question implements PrintableQuestion {
 
 public abstract class Question implements printableQuestion, DatabaseAddable{
 
@@ -14,8 +17,8 @@ public abstract class Question implements printableQuestion, DatabaseAddable{
 	private int question_score;
 	private ArrayList<Answer> answers;
 
-	public Question(String question_text, String question_type, String question_description,
-			long question_time_limit, int question_score, ArrayList<Answer> answers) {
+	public Question(String question_text, String question_type, String question_description, long question_time_limit,
+			int question_score, ArrayList<Answer> answers) {
 		this.question_type = question_type;
 		this.question_text = question_text;
 		this.question_data = question_description;
@@ -23,7 +26,7 @@ public abstract class Question implements printableQuestion, DatabaseAddable{
 		this.question_score = question_score;
 		this.answers = answers;
 	}
-	
+
 	public String toString() {
 		String result = "" + "text: " + question_text + "\n" + "description: " + question_data + "\n" + "type: "
 				+ question_type + "\n" + "limit: " + question_time_limit + "\n" + "score: " + question_score + "\n";
@@ -37,10 +40,12 @@ public abstract class Question implements printableQuestion, DatabaseAddable{
 	public String getQuestiontype() {
 		return question_type;
 	}
-	
-	public int getQuestionscore(){
+
+	public int getQuestionscore() {
 		return question_score;
 	}
+
+	public abstract int gradeAnswer(HttpServletRequest request, int questionIndex);
 
 	public void setQuestiontype(String question_type) {
 		this.question_type = question_type;

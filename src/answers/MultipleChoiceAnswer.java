@@ -21,10 +21,11 @@ public class MultipleChoiceAnswer extends Answer {
 	public String getHtml(int questionNum, int answerNum) {
 		String html = "";
 		String type = "type='checkbox' ";
-		String name = "name='q" + questionNum + "' ";
-		String value = "value='" + answerNum + "' ";
+		String name = "name='q" + questionNum + "-" + answerNum + "' ";
+		String value = "value='" + getAnswerText() + "' ";
 		String id = "id='q" + questionNum + answerNum + "' ";
 		html += "<input " + type + name + value + id + "><label for=" + id + ">" + getAnswerText() + "</label><br/>";
+		System.out.println("Generated HTML:" + html);
 		return html;
 	}
 

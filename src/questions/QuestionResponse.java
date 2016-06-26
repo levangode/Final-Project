@@ -22,10 +22,24 @@ public class QuestionResponse extends Question {
 		html += "<div id='question-" + id + "'>" + "<p>" + getQuestiontext() + "</p> ";
 		html += "<input type='text' name='q" + id + "' id='q" + id + "'><br/>";
 		html += "</div>";
+		System.out.println("Generated HTML: " + html);
 		return html;
 	}
 
 	@Override
+	public int gradeAnswer(HttpServletRequest request, int questionIndex) {
+		String name = "q" + questionIndex;
+		if (request.getParameter(name) != null) {
+			String res = request.getParameter(name);
+			for (Answer ans : getAnswers()) {
+				if (ans.getAnswerText().equals(res)) {
+					return 1;
+				}
+			}
+		}
+		return 0;
+	}
+
 	public void addToDatabase(int quiz_id) throws Exception {
 		DBQuestionResponse db = new DBQuestionResponse(new DBconnector().getConnection());
 	

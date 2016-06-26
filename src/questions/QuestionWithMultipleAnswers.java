@@ -9,6 +9,9 @@ import DBQuestionControllers.DBQuestionMultipleChoice;
 import DBQuestionControllers.DBQuestionResponse;
 import DBQuestionControllers.DBQuestionWithMultipleAnswers;
 import answers.Answer;
+
+import answers.MultipleChoiceAnswer;
+
 import database.DBconnector;
 
 public class QuestionWithMultipleAnswers extends Question {
@@ -22,9 +25,8 @@ public class QuestionWithMultipleAnswers extends Question {
 		this.numAnswers = numAnswers;
 	}
 
-	
-	public String toString(){
-		String result = super.toString()+"order: "+order+"\n"+"answers required: "+numAnswers+"\n";
+	public String toString() {
+		String result = super.toString() + "order: " + order + "\n" + "answers required: " + numAnswers + "\n";
 		return result;
 	}
 
@@ -41,17 +43,35 @@ public class QuestionWithMultipleAnswers extends Question {
 		String html = "";
 		html += "<div id='question-" + id + "'>" + "<p>" + getQuestiontext() + "</p> ";
 		for (int i = 0; i < getNumanswers(); i++) {
-			html += "<input type='text' name='q" + id + "' id='q" + id + "-" + i + "'><br/>";
+			html += "<input type='text' name='q" + id + "-" + i + "' id='q" + id + "-" + i + "'><br/>";
 		}
 		html += "</div>";
+		System.out.println("Generated HTML: " + html);
 		return html;
 	}
 
+	@Override
+	public int gradeAnswer(HttpServletRequest request, int questionIndex) {
+		int counter = 0;
+		ArrayList<Answer> answers = getAnswers();
+		for (int i = 0; i < answers.size(); i++) {
+			MultipleChoiceAnswer ans = (MultipleChoiceAnswer) answers.get(i);
+			String name = "q" + questionIndex + "-" + i;
+			if (ans.getAnswercorrect()) {
+				if (request.getParameter(name) != null) {
+					counter++;
+				}
+			} else {
+				if (request.getParameter(name) != null)
+					return 0;
+			}
+		}
+		return counter;
 
 	@Override
 	public void addToDatabase(int quiz_id) throws Exception {
 		DBQuestionWithMultipleAnswers db = new DBQuestionWithMultipleAnswers(new DBconnector().getConnection());
-		
+
 		db.addQuestion(this, quiz_id);
 	}
 
