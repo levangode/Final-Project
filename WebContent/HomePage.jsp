@@ -62,86 +62,111 @@ div.box {
 	background: #9EC4AA;
 }
 
+#card {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    padding: 20px; 
+    width: 200px;
+    height: 150px; 
+}
+
 .headers {
 	padding: 10px;
 }
 </style>
 </head>
 <body>
+	<div style="min-width: 900px;">
+		<div>
+			<span id="homelogo" style="align: left"> WELCOMEEE </span>
+			<div id="top" align="right" style="float: right">
 
-	<span id="homelogo" style="align: left"> WELCOMEEE </span>
-	<div id="top" align="right" style="float: right">
+				<form action="Login" method="post">
+					<%
+						if ((boolean) request.getSession().getAttribute("logged_in")) {
+							out.write("You are logged in as: ");
+							out.write((String) request.getSession().getAttribute("user_name") + "   ");
+							out.write("<a href=\"Logout.jsp\">Logout</a>");
+						} else {
+							out.write("User Name: <input type=\"text\" name=\"user_login\">");
+							out.write("Password: <input type=\"text\" name=\"user_password\">");
+							out.write("<input type=\"submit\" value=\"Login\">");
+							out.write("<button type=\"button\" onclick=\"location.href = 'Register.html'\">Register</button>");
+						}
+					%>
+				</form>
+			</div>
 
-		<form action="Login" method="post">
-			<%
-				if ((boolean) request.getSession().getAttribute("logged_in")) {
-					out.write("You are logged in as: ");
-					out.write((String) request.getSession().getAttribute("user_name") + "   ");
-					out.write("<a href=\"Logout.jsp\">Logout</a>");
-				} else {
-					out.write("User Name: <input type=\"text\" name=\"user_login\">");
-					out.write("Password: <input type=\"text\" name=\"user_password\">");
-					out.write("<input type=\"submit\" value=\"Login\">");
-					out.write("<button type=\"button\" onclick=\"location.href = 'Register.html'\">Register</button>");
-				}
-			%>
-		</form>
-	</div>
-
-	<div class="headers">
-		<ul>
-			<li><a href="CreateQuiz.jsp"> Create New Quiz </a></li>
-			<li><a href="https://www.google.com"> Top Quizzes </a></li>
-			<li><a href="https://www.google.com"> My Quizzes </a></li>
-			<li><a href="https://www.google.com"> New Quizzes </a></li>
-		</ul>
-	</div>
-
-	<br>
-
-	<div class="box">
-		<span style="margin: 30px; font-family: helvetica; font-size: 24px">
-			Categories</span>
-		<ul>
-			<%
-				DBQuizController q = new DBQuizController();
-				ArrayList<String> quizCategories = q.getQuizCategories();
-				for (String a : quizCategories) {
-					out.print("<li><a href=\"QuizPage.jsp\">" + a + "</a></li>");
-				}
-			%>
-		</ul>
-	</div>
-
-	<div class="box" style="float: right">
-		<div class="box" style="position: relative;">
-			<h4 style="text-align: center; margin: 1px;">Hot Quizzes</h4>
-			<ul>
-				<%
-					QuizInfoController getter = new QuizInfoController();
-					ArrayList<QuizInfo> popular = getter.getPopularQuizzes();
-					for (QuizInfo a : popular) {
-						out.print("<li><a href=\"QuizPage.jsp\">" + a.getQuiz_name() + "</a></li>");
-					}
-				%>
-			</ul>
+			<div class="headers">
+				<ul>
+					<li><a href="CreateQuiz.jsp"> Create New Quiz </a></li>
+					<li><a href="https://www.google.com"> Top Quizzes </a></li>
+					<li><a href="https://www.google.com"> My Quizzes </a></li>
+					<li><a href="https://www.google.com"> New Quizzes </a></li>
+				</ul>
+			</div>
 		</div>
-		<div style="">
-			<h4 style="text-align: center; margin: 1px;">My Quizzes</h4>
-			<ul>
-				<%
-					QuizInfoController getter2 = new QuizInfoController();
-					ArrayList<QuizInfo> mine = getter2.getMyQuizzes((String) request.getSession().getAttribute("user_name"));
-					System.out.println((String) request.getSession().getAttribute("user_name"));
-					for (QuizInfo a : mine) {
-						out.print("<li><a href=\"QuizPage.jsp\">" + a.getQuiz_name() + "</a></li>");
-						//TODO shignidan ro dabechdos tavisi tavi
-					}
-				%>
-			</ul>
+		<!-- End Top Panel -->
+		<!-- Bottom Panel -->
+		<div>
+			<!-- Left Panel -->
+			<div class="box">
+				<h4 style="text-align: center; margin: 1px;">Categories</h4>
+				<ul>
+					<%
+						DBQuizController q = new DBQuizController();
+						ArrayList<String> quizCategories = q.getQuizCategories();
+						for (String a : quizCategories) {
+							out.print("<li><a href=\"QuizPage.jsp\">" + a + "</a></li>");
+						}
+					%>
+				</ul>
+			</div>
+			<!-- End Left Panel -->
+			<div id="card" class="box" style="text-align:center; width:calc(100% - 404px);"
+				style="text-align: left; margin-left: auto; margin-right: auto;">
+				<p>
+				Name: Qvizi<br>
+				Description: Agweriloba<br>
+				Category: Kategoria<br>
+				Author: Avtori<br>
+				Date Created: Rodis gaketda bozi<br>
+				Times Taken: Ramdenjer ixmares<br>
+				
+				</p>
+			</div>
+			<!-- Right Panel -->
+			<div class="box" style="float: right">
+				<div class="box" style="position: relative;">
+					<h4 style="text-align: center; margin: 1px;">Hot Quizzes</h4>
+					<ul>
+						<%
+							QuizInfoController getter = new QuizInfoController();
+							ArrayList<QuizInfo> popular = getter.getPopularQuizzes();
+							for (QuizInfo a : popular) {
+								out.print("<li><a href=\"QuizPage.jsp\">" + a.getQuiz_name() + "</a></li>");
+							}
+						%>
+					</ul>
+				</div>
+
+				<div class=box style="position: relative;">
+					<h4 style="text-align: center; margin: 1px;">My Quizzes</h4>
+					<ul>
+						<%
+							QuizInfoController getter2 = new QuizInfoController();
+							ArrayList<QuizInfo> mine = getter2.getMyQuizzes((String) request.getSession().getAttribute("user_name"));
+							System.out.println((String) request.getSession().getAttribute("user_name"));
+							for (QuizInfo a : mine) {
+								out.print("<li><a href=\"QuizPage.jsp\">" + a.getQuiz_name() + "</a></li>");
+								//TODO shignidan ro dabechdos tavisi tavi
+							}
+						%>
+					</ul>
+				</div>
+			</div>
+			<!-- End Right Panel -->
 		</div>
 	</div>
-
-
 </body>
 </html>

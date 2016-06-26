@@ -8,8 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import answers.Answer;
 import database.DBconnector;
 import questions.MultipleChoiceQuestion;
+import questions.Question;
 import questions.QuestionResponse;
 import questions.QuestionTypes;
 import questions.QuestionWithMultipleAnswers;
@@ -90,8 +92,11 @@ public class DBQuestionMultipleChoice {
 			stm.executeUpdate();
 			
 			ResultSet rs = stm.getGeneratedKeys();
-			int question_id = rs.getInt("question_id");
-			// TODO insert answers into its table.			
+			int question_id = rs.getInt(1);
+			
+			for(Answer cur: question.getAnswers()){
+				cur.addToDatabase(question_id);
+			}
 			
 			connection.close();
 			

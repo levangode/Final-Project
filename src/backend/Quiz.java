@@ -40,27 +40,25 @@ public class Quiz {
 		this.randomQuestions = randomQuestions;
 
 	}
-
-	public static Quiz retrieveQuiz(HttpServletRequest request, HttpServletResponse response) {
+	public static Quiz retrieveQuiz(HttpServletRequest request, HttpServletResponse response){
 		String quiz_name = request.getParameter("quiz_name");
 		String quiz_description = request.getParameter("quiz_description");
 		String quiz_category = request.getParameter("categories");
 		String quiz_difficulty = request.getParameter("difficulty");
-		String quiz_author = (String) request.getSession().getAttribute("user_name");
+		String quiz_author = (String)request.getSession().getAttribute("user_name");
 		boolean random_questions = false;
 		boolean immediate_correction = false;
 		boolean multiplePage = false;
 		String show_on = "";
-		if (request.getParameter("Random Questions") != null)
+		if(request.getParameter("Random Questions") != null)
 			random_questions = true;
-		if (request.getParameter("Immediate Correction") != null)
+		if(request.getParameter("Immediate Correction") != null)
 			immediate_correction = true;
 		show_on = request.getParameter("Show on");
-		if (show_on.equals("Multiple Pages")) {
+		if(show_on.equals("Multiple Pages")){
 			multiplePage = true;
 		}
-		Quiz newOne = QuizFactory.getQuiz(quiz_name, quiz_description, quiz_author, 0, quiz_category, quiz_difficulty,
-				0, multiplePage, immediate_correction, random_questions);
+		Quiz newOne=QuizFactory.getQuiz(quiz_name, quiz_description, quiz_author, 0, quiz_category, quiz_difficulty, 0, multiplePage, immediate_correction, random_questions);
 		return newOne;
 	}
 
@@ -83,13 +81,13 @@ public class Quiz {
 				+ "category: " + quiz_category + "\n" + "difficulty: " + quiz_difficulty + "\n" + "times taken: "
 				+ times_taken + "\n" + "display: " + displayMultiplePages + "\n" + "immediate: " + immediateCorrection
 				+ "\n" + "random: " + randomQuestions + "\n ============================";
-
-		for (int i = 0; i < questions.size(); i++) {
-			System.out.println(questions.get(i));
-			for (int j = 0; j < questions.get(i).getAnswers().size(); j++) {
-				System.out.println(questions.get(i).getAnswers().get(j));
-			}
-		}
+		
+//		for(int i=0; i<questions.size(); i++){
+//			System.out.println(questions.get(i));
+//			for(int j=0; j<questions.get(i).getAnswers().size(); j++){
+//				System.out.println(questions.get(i).getAnswers().get(j));
+//			}
+//		}
 		return result;
 	}
 

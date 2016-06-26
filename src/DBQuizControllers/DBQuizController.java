@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import backend.Quiz;
 import database.DBconnector;
+import questions.Question;
 
 public class DBQuizController {
 	private Connection connection;
@@ -107,8 +108,16 @@ public class DBQuizController {
 			while (myRes.next()) {
 				id = myRes.getInt(1);
 			}
+			
+			for(Question cur: quiz.getQuestions()){
+				cur.addToDatabase(id);
+			}
+			
 			connection.close();
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Error Adding Questions");
 			e.printStackTrace();
 		}
 		return id;
