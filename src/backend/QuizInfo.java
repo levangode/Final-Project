@@ -57,5 +57,8 @@ public class QuizInfo {
 	public void setQuiz_id(int quiz_id) {
 		this.quiz_id = quiz_id;
 	}
+	public String showOnCard(){
+		return "";
+	}
 	
 }

@@ -1,32 +1,28 @@
-@CHARSET "UTF-8";
-
 .btn {
-  background: #0c8544;
-  background-image: -webkit-linear-gradient(top, #0c8544, #2bb834);
-  background-image: -moz-linear-gradient(top, #0c8544, #2bb834);
-  background-image: -ms-linear-gradient(top, #0c8544, #2bb834);
-  background-image: -o-linear-gradient(top, #0c8544, #2bb834);
-  background-image: linear-gradient(to bottom, #0c8544, #2bb834);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  text-shadow: 2px 2px 2px #000000;
-  -webkit-box-shadow: 0px 1px 3px #000000;
-  -moz-box-shadow: 0px 1px 3px #000000;
-  box-shadow: 0px 1px 3px #000000;
+  background: #104206;
+  background-image: -webkit-linear-gradient(top, #104206, #5cbd24);
+  background-image: -moz-linear-gradient(top, #104206, #5cbd24);
+  background-image: -ms-linear-gradient(top, #104206, #5cbd24);
+  background-image: -o-linear-gradient(top, #104206, #5cbd24);
+  background-image: linear-gradient(to bottom, #104206, #5cbd24);
+  -webkit-border-radius: 60;
+  -moz-border-radius: 60;
+  border-radius: 60px;
+  text-shadow: 1px 1px 0px #666666;
   font-family: Arial;
   color: #ffffff;
   font-size: 20px;
-  padding: 10px;
+  padding: 10px 20px 10px 20px;
+  border: solid #0ef586 10px;
   text-decoration: none;
 }
 
 .btn:hover {
-  background: #1c6610;
-  background-image: -webkit-linear-gradient(top, #1c6610, #fafafa);
-  background-image: -moz-linear-gradient(top, #1c6610, #fafafa);
-  background-image: -ms-linear-gradient(top, #1c6610, #fafafa);
-  background-image: -o-linear-gradient(top, #1c6610, #fafafa);
-  background-image: linear-gradient(to bottom, #1c6610, #fafafa);
+  background: #000000;
+  background-image: -webkit-linear-gradient(top, #000000, #000000);
+  background-image: -moz-linear-gradient(top, #000000, #000000);
+  background-image: -ms-linear-gradient(top, #000000, #000000);
+  background-image: -o-linear-gradient(top, #000000, #000000);
+  background-image: linear-gradient(to bottom, #000000, #000000);
   text-decoration: none;
 }
