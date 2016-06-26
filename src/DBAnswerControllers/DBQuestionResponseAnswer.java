@@ -31,7 +31,7 @@ public class DBQuestionResponseAnswer {
 	public List<ResponseAnswer> retrieveAnswers(int answer_id){
 		List<ResponseAnswer> answers = new ArrayList<ResponseAnswer>();
 		
-		String query = "select answer_text from answers_questionresponse where question_id = "
+		String query = "select answer_text from Answers_AuestionResponse where question_id = "
 					+ answer_id + " ;";
 		
 		PreparedStatement stm;
