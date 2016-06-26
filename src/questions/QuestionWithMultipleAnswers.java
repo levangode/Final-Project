@@ -67,6 +67,7 @@ public class QuestionWithMultipleAnswers extends Question {
 			}
 		}
 		return counter;
+	}
 
 	@Override
 	public void addToDatabase(int quiz_id) throws Exception {

@@ -6,9 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import answers.Answer;
 
-public abstract class Question implements PrintableQuestion {
 
-public abstract class Question implements printableQuestion, DatabaseAddable{
+public abstract class Question implements PrintableQuestion, DatabaseAddable{
 
 	private String question_type;
 	private String question_data;
