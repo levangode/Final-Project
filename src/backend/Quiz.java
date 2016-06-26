@@ -82,12 +82,12 @@ public class Quiz {
 				+ times_taken + "\n" + "display: " + displayMultiplePages + "\n" + "immediate: " + immediateCorrection
 				+ "\n" + "random: " + randomQuestions + "\n ============================";
 		
-		for(int i=0; i<questions.size(); i++){
-			System.out.println(questions.get(i));
-			for(int j=0; j<questions.get(i).getAnswers().size(); j++){
-				System.out.println(questions.get(i).getAnswers().get(j));
-			}
-		}
+//		for(int i=0; i<questions.size(); i++){
+//			System.out.println(questions.get(i));
+//			for(int j=0; j<questions.get(i).getAnswers().size(); j++){
+//				System.out.println(questions.get(i).getAnswers().get(j));
+//			}
+//		}
 		return result;
 	}
 
