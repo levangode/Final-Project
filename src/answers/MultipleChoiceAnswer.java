@@ -1,8 +1,5 @@
 package answers;
 
-import DBAnswerControllers.DBMultipleChoiceAnswers;
-import database.DBconnector;
-
 public class MultipleChoiceAnswer extends Answer {
 	private String answer_text;
 	private boolean answer_correct;
@@ -34,13 +31,6 @@ public class MultipleChoiceAnswer extends Answer {
 
 	public boolean getAnswercorrect() {
 		return answer_correct;
-	}
-
-	@Override
-	public void addToDatabase(int question_id) {
-		DBMultipleChoiceAnswers db = new DBMultipleChoiceAnswers(new DBconnector().getConnection());
-		
-		db.addAnswer(this, question_id);
 	}
 
 }

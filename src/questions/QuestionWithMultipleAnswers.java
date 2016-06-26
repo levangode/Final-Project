@@ -9,7 +9,7 @@ import DBQuestionControllers.DBQuestionMultipleChoice;
 import DBQuestionControllers.DBQuestionResponse;
 import DBQuestionControllers.DBQuestionWithMultipleAnswers;
 import answers.Answer;
-
+import answers.MultipleAnswer;
 import answers.MultipleChoiceAnswer;
 
 import database.DBconnector;
@@ -54,19 +54,24 @@ public class QuestionWithMultipleAnswers extends Question {
 	public int gradeAnswer(HttpServletRequest request, int questionIndex) {
 		int counter = 0;
 		ArrayList<Answer> answers = getAnswers();
-		for (int i = 0; i < answers.size(); i++) {
-			MultipleChoiceAnswer ans = (MultipleChoiceAnswer) answers.get(i);
+		for (int i = 0; i < getNumanswers(); i++) {
 			String name = "q" + questionIndex + "-" + i;
-			if (ans.getAnswercorrect()) {
-				if (request.getParameter(name) != null) {
+			String res = request.getParameter(name);
+			if (getAnswersordered()) {
+				if (res.equals(answers.get(i).getAnswerText())) {
 					counter++;
 				}
 			} else {
-				if (request.getParameter(name) != null)
-					return 0;
+				for (int j = 0; j < answers.size(); j++) {
+					if (answers.get(j).getAnswerText().equals(res)) {
+						counter++;
+						answers.remove(j);
+					}
+				}
 			}
 		}
 		return counter;
+
 	}
 
 	@Override

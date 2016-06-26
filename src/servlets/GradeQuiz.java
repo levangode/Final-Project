@@ -40,24 +40,7 @@ public class GradeQuiz extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		System.out.println("Gadavedi doGetshi!");
-		Quiz quiz = (Quiz) session.getAttribute("Quiz");
-		double score = 0;
-		ArrayList<Question> questions = quiz.getQuestions();
-		for (int i = 0; i < questions.size(); i++) {
-			Question q = questions.get(i);
-			double curScore = q.gradeAnswer(request, i);
-			double questionScore = q.getQuestionscore();
-			System.out.println("score in this q=" + curScore);
-			System.out.println("Maxscore="+questionScore);
-			
-			double res = curScore / questionScore;
-			System.out.println("Res:" + res);
-			score += res;
-			System.out.println("curscore=" +score);
-		}
-		System.out.println("Your score: " + score);
+
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -67,7 +50,24 @@ public class GradeQuiz extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		System.out.println("Gadavedi doGetshi!");
+		Quiz quiz = (Quiz) session.getAttribute("Quiz");
+		int score = 0;
+		int maxScore = 0;
+		ArrayList<Question> questions = quiz.getQuestions();
+		for (int i = 0; i < questions.size(); i++) {
+			Question q = questions.get(i);
+			int curScore = q.gradeAnswer(request, i);
+			int questionScore = q.getQuestionscore();
+			maxScore += questionScore;
+			score += curScore;
+		}
+		System.out.println("Maxscore:" + maxScore);
+		System.out.println("CurScore:" + score);
+		request.getSession().setAttribute("userScore", score);
+		request.getSession().setAttribute("maxScore", maxScore);
+		response.sendRedirect("MyGrade.jsp");
 		doGet(request, response);
 	}
 
