@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import database.DBconnector;
+import questions.FillTheBlankQuestion;
 import questions.QuestionResponse;
 import questions.QuestionTypes;
 
@@ -62,7 +63,7 @@ public class DBQuestionFillInTheBlanks {
 		return questions;
 	}
 	
-	public void addQuestion(QuestionResponse question, int quiz_id) throws Exception{
+	public void addQuestion(FillTheBlankQuestion question, int quiz_id) throws Exception{
 		String query = 
 				"insert into Questions_QuestionResponse(quiz_id, question_text, question_data, question_time_limit, score) value ("
 				+ quiz_id + ", "
