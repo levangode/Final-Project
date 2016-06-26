@@ -64,10 +64,27 @@ public class QuizInfoController {
 		}
 		return result;
 	}
-	public ArrayList<QuizInfo> getMyQuizzes(String author){
+
+	private int getAuthorID(String authorName) {
+		int id = 0;
+		String command = "Select user_id from Users where user_login = " + "'" + authorName + "'";
+		PreparedStatement stm=null;
+		try {
+			stm = connection.prepareStatement(command);
+			ResultSet res = stm.executeQuery();
+			if (res.next()) {
+				id = res.getInt(1);
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+
+	public ArrayList<QuizInfo> getMyQuizzes(String author) {
 		ArrayList<QuizInfo> result = new ArrayList<QuizInfo>();
 		String order = "" + "SELECT quiz_id, quiz_name, user_login, date_created, times_taken " + "FROM Quizzes "
-				+ "JOIN Users ON author_id = user_id " + "ORDER BY date_created DESC " + "LIMIT " + LIMIT_RESULTS;
+				+ "JOIN Users ON author_id = user_id AND author_id = " +getAuthorID(author)+ " ORDER BY date_created DESC " + "LIMIT " + LIMIT_RESULTS;
 		ResultSet res = null;
 		try {
 			PreparedStatement stm = connection.prepareStatement(order);

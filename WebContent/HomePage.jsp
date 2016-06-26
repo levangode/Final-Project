@@ -3,6 +3,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="database.*"%>
+<%@page import="backend.*"%>
+<%@page import="DBQuizControllers.*"%>
 <!DOCTYPE >
 <html>
 <head>
@@ -101,22 +103,43 @@ div.box {
 		<span style="margin: 30px; font-family: helvetica; font-size: 24px">
 			Categories</span>
 		<ul>
-			<li><a href="https://www.google.com"> Funny </a></li>
-			<li><a href="https://www.google.com"> Science </a></li>
-			<li><a href="https://www.google.com"> Personality </a></li>
-			<li><a href="https://www.google.com"> Shit </a></li>
+			<%
+				DBQuizController q = new DBQuizController();
+				ArrayList<String> quizCategories = q.getQuizCategories();
+				for (String a : quizCategories) {
+					out.print("<li><a href=\"QuizPage.jsp\">" + a + "</a></li>");
+				}
+			%>
 		</ul>
 	</div>
 
 	<div class="box" style="float: right">
-		<span style="margin: 30px; font-family: helvetica; font-size: 24px">
-			Hot Quizes</span>
-		<ul>
-			<li><a href="https://www.google.com"> Quiz1</a></li>
-			<li><a href="https://www.google.com"> Quiz2</a></li>
-			<li><a href="https://www.google.com"> Quiz3</a></li>
-			<li><a href="https://www.google.com"> Quiz4</a></li>
-		</ul>
+		<div class="box" style="position: relative;">
+			<h4 style="text-align: center; margin: 1px;">Hot Quizzes</h4>
+			<ul>
+				<%
+					QuizInfoController getter = new QuizInfoController();
+					ArrayList<QuizInfo> popular = getter.getPopularQuizzes();
+					for (QuizInfo a : popular) {
+						out.print("<li><a href=\"QuizPage.jsp\">" + a.getQuiz_name() + "</a></li>");
+					}
+				%>
+			</ul>
+		</div>
+		<div style="">
+			<h4 style="text-align: center; margin: 1px;">My Quizzes</h4>
+			<ul>
+				<%
+					QuizInfoController getter2 = new QuizInfoController();
+					ArrayList<QuizInfo> mine = getter2.getMyQuizzes((String) request.getSession().getAttribute("user_name"));
+					System.out.println((String) request.getSession().getAttribute("user_name"));
+					for (QuizInfo a : mine) {
+						out.print("<li><a href=\"QuizPage.jsp\">" + a.getQuiz_name() + "</a></li>");
+						//TODO shignidan ro dabechdos tavisi tavi
+					}
+				%>
+			</ul>
+		</div>
 	</div>
 
 
