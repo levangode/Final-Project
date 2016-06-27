@@ -28,4 +28,9 @@ public class MultipleAnswer extends Answer {
 		db.addAnswer(this, question_id);
 		
 	}
+
+	@Override
+	public String getAnswerText() {
+		return answer_text;
+	}
 }
