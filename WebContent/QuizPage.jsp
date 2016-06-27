@@ -13,6 +13,7 @@
 	DBQuizController cont = new DBQuizController();
 	int id = Integer.parseInt(request.getParameter("id"));
 	Quiz quiz = cont.getQuiz(id);
+	request.getSession().setAttribute("Quiz", quiz);
 %>
 
 <head>
