@@ -8,9 +8,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import DBAnswerControllers.DBQuestionResponseAnswer;
+import DBAnswerControllers.DBResponseAnswer;
 import answers.Answer;
 import database.DBconnector;
+import questions.Question;
 import questions.QuestionResponse;
 import questions.QuestionTypes;
 
@@ -71,9 +72,9 @@ public class DBQuestionResponse {
 	private ArrayList<Answer> getAnswers(int id){
 		ArrayList<Answer> res;
 		
-		DBQuestionResponseAnswer db = new DBQuestionResponseAnswer();
+		DBResponseAnswer db = new DBResponseAnswer();
 		
-		res = db.retrieveAnswers(id);
+		res = new ArrayList<Answer>( db.retrieveAnswers(id) );
 		
 		return res;
 	}

@@ -1,6 +1,6 @@
 package answers;
 
-import DBAnswerControllers.DBQuestionResponseAnswer;
+import DBAnswerControllers.DBResponseAnswer;
 import database.DBconnector;
 
 public class ResponseAnswer extends Answer {
@@ -16,7 +16,7 @@ public class ResponseAnswer extends Answer {
 
 	@Override
 	public void addToDatabase(int question_id) {
-		DBQuestionResponseAnswer db = new DBQuestionResponseAnswer(new DBconnector().getConnection());
+		DBResponseAnswer db = new DBResponseAnswer(new DBconnector().getConnection());
 
 		db.addAnswer(this, question_id);
 	}

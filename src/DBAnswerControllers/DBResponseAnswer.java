@@ -16,15 +16,15 @@ import database.DBconnector;
 import questions.QuestionTypes;
 import questions.QuestionWithMultipleAnswers;
 
-public class DBQuestionResponseAnswer {
+public class DBResponseAnswer {
 	private Connection connection;
 
 	
-	public DBQuestionResponseAnswer() {
+	public DBResponseAnswer() {
 		this.connection = new DBconnector().getConnection();
 	}
 	
-	public DBQuestionResponseAnswer(Connection con) {
+	public DBResponseAnswer(Connection con) {
 		this.connection = con;
 	}
 	

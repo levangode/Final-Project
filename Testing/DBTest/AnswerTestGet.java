@@ -7,7 +7,7 @@ import org.junit.Test;
 import DBAnswerControllers.DBBlankAnswer;
 import DBAnswerControllers.DBMultipleAnswers;
 import DBAnswerControllers.DBMultipleChoiceAnswers;
-import DBAnswerControllers.DBQuestionResponseAnswer;
+import DBAnswerControllers.DBResponseAnswer;
 import answers.Answer;
 import answers.BlankAnswer;
 import answers.MultipleAnswer;
@@ -18,7 +18,7 @@ import answers.ResponseAnswer;
 public class AnswerTestGet {
 //	@Test
 	public void Test_ResponseAnswer_get(){
-		DBQuestionResponseAnswer z = new DBQuestionResponseAnswer();
+		DBResponseAnswer z = new DBResponseAnswer();
 		
 		List<ResponseAnswer> answers = z.retrieveAnswers(14);
 		
