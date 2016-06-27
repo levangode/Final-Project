@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import DBAnswerControllers.DBMultipleChoiceAnswers;
+import DBAnswerControllers.DBResponseAnswer;
 import answers.Answer;
 import database.DBconnector;
 import questions.MultipleChoiceQuestion;
@@ -32,11 +34,13 @@ public class DBQuestionMultipleChoice {
 	public List<MultipleChoiceQuestion> retrieveQuestions(int quiz_id){
 		List<MultipleChoiceQuestion> questions = new ArrayList<MultipleChoiceQuestion>();
 		
-		String query = " select question_text, question_data, question_time_limit, score, num_answers_display, num_answers_corrent from Questions_MultipleChoice where quiz_id = "
+		String query = " select question_text, question_data, question_time_limit, score, num_answers_display, num_answers_correct, question_id from Questions_MultipleChoice where quiz_id = "
 				+ quiz_id
 				+ "; ";
 		
 		PreparedStatement stm;
+		
+		System.out.println(query);
 		
 		try{
 			stm = connection.prepareStatement(query);
@@ -45,6 +49,7 @@ public class DBQuestionMultipleChoice {
 			while(rs.next()){
 				MultipleChoiceQuestion newQuestion;
 				
+				ArrayList<Answer> answers = getAnswers(rs.getInt(7));
 				
 				newQuestion = new MultipleChoiceQuestion(
 								rs.getString(1),
@@ -54,7 +59,7 @@ public class DBQuestionMultipleChoice {
 								rs.getInt(4),
 								rs.getInt(5),
 								rs.getInt(6),
-								null
+								answers
 								//TODO add answers controller
 							);
 				
@@ -69,6 +74,16 @@ public class DBQuestionMultipleChoice {
 		}
 		
 		return questions;
+	}
+	
+	private ArrayList<Answer> getAnswers(int id){
+		ArrayList<Answer> res;
+		
+		DBMultipleChoiceAnswers db = new DBMultipleChoiceAnswers();
+		
+		res = new ArrayList<Answer>( db.retrieveAnswers(id) );
+		
+		return res;
 	}
 	
 	public void addQuestion(MultipleChoiceQuestion question, int quiz_id) throws Exception{
