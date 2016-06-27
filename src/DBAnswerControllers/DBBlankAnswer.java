@@ -24,13 +24,15 @@ public class DBBlankAnswer {
 		this.connection = con;
 	}
 	
-	public List<BlankAnswer> retrieveAnswers(int answer_id){
+	public List<BlankAnswer> retrieveAnswers(int question_id){
 		List<BlankAnswer> answers = new ArrayList<BlankAnswer>();
 		
 		String query = "select answer_text, blank_pos from Answers_FillInTheBlanks where question_id = "
-					+ answer_id + " ;";
+					+ question_id + " ;";
 		
 		PreparedStatement stm;
+		
+		System.out.println(query);
 		
 		try{
 			stm = connection.prepareStatement(query);
