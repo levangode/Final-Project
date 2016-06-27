@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import answers.Answer;
+import answers.BlankAnswer;
 import answers.MultipleAnswer;
 import answers.MultipleChoiceAnswer;
 import answers.ResponseAnswer;
 import database.DBconnector;
+import questions.FillTheBlankQuestion;
 import questions.MultipleChoiceQuestion;
 import questions.Question;
+import questions.QuestionFactory;
 import questions.QuestionResponse;
 import questions.QuestionTypes;
 import questions.QuestionWithMultipleAnswers;
@@ -71,15 +74,19 @@ public class QuestionTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void Test_MultipleAnswers_add(){
 		ArrayList<Answer> answers = new ArrayList<Answer>();
 		
 		for(int i=1; i<5; i++){
-			answers.add(new MultipleAnswer("it's: " + i, i));
+			answers.add(new MultipleAnswer("its: " + i, i));
 		}
 		
-		answers.add(new MultipleAnswer("it's: " + 5, 5));
+		answers.add(new MultipleAnswer("its: " + "5", 5));
+		
+		for(Answer ans: answers){
+			System.out.println(ans.getAnswerText());
+		}
 		
 		System.out.println(answers.size());
 		
@@ -93,8 +100,31 @@ public class QuestionTest {
 		}
 	}
 	
+	@Test
+	public void Test_fillInTheBlanks_add(){
+		ArrayList<Answer> answers = new ArrayList<Answer>();
+		
+		answers.add(new BlankAnswer("cow", 1));
+		answers.add(new BlankAnswer("sheep", 2));
+		answers.add(new BlankAnswer("ox", 3));
+		answers.add(new BlankAnswer("squrrel", 4));
+		answers.add(new BlankAnswer("unicorn", 5));
+		
+		Question z = new FillTheBlankQuestion("the prettiest animal is ? others are ? ? ? ?", QuestionTypes.FillInTheBlanks, "", 1, 5, answers);
+		
+		try{
+			z.addToDatabase(27);
+		} catch (SQLException e){
+			System.out.println("sqlError!!");
+			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("Fill in the blanks error");
+			e.printStackTrace();
+		}
+	}
+	
 	//@Test
-	public void lowLevelQueryTest(){
+	public void lowLevelQueryTest(){	
 		Connection connection = new DBconnector().getConnection();
 		
 		try{
