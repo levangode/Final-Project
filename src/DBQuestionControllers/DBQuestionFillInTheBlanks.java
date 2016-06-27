@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DBAnswerControllers.DBBlankAnswer;
+import DBAnswerControllers.DBMultipleChoiceAnswers;
 import answers.Answer;
 import database.DBconnector;
 import questions.FillTheBlankQuestion;
@@ -27,12 +28,12 @@ public class DBQuestionFillInTheBlanks {
 		this.connection = DBconnection;
 	}
 	
-	public List<QuestionResponse> retrieveQuestions(int quiz_id){
-		List<QuestionResponse> questions = new ArrayList<QuestionResponse>();
+	public List<FillTheBlankQuestion> retrieveQuestions(int quiz_id){
+		List<FillTheBlankQuestion> questions = new ArrayList<FillTheBlankQuestion>();
 		
-		String query = " select question_text, question_data, question_time_limit, score from Questions_QuestionResponse where quiz_id = "
+		String query = " select question_text, question_data, question_time_limit, score, question_id from Questions_FillInTheBlanks where quiz_id = "
 				+ quiz_id
-				+ "; ";
+				+ ";";
 		
 		PreparedStatement stm;
 		
@@ -41,16 +42,18 @@ public class DBQuestionFillInTheBlanks {
 			ResultSet rs = stm.executeQuery();
 			
 			while(rs.next()){
-				QuestionResponse newQuestion;
+				FillTheBlankQuestion newQuestion;
+				
+				ArrayList<Answer> answers = getAnswers(rs.getInt(5));
 				
 				// TODO add code for answers
-				newQuestion = new QuestionResponse(
+				newQuestion = new FillTheBlankQuestion(
 								rs.getString(1), 
 								QuestionTypes.QuestionResponse,
 								rs.getString(2),
 								rs.getInt(3),
 								rs.getInt(4),
-								null
+								answers
 							);
 				
 				questions.add(newQuestion);
@@ -64,6 +67,16 @@ public class DBQuestionFillInTheBlanks {
 		}
 		
 		return questions;
+	}
+	
+	private ArrayList<Answer> getAnswers(int id){
+		ArrayList<Answer> res;
+		
+		DBBlankAnswer db = new DBBlankAnswer();
+		
+		res = new ArrayList<Answer>( db.retrieveAnswers(id) );
+		
+		return res;
 	}
 	
 	public void addQuestion(FillTheBlankQuestion question, int quiz_id) throws Exception{

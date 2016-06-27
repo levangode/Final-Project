@@ -5,10 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
+import DBAnswerControllers.DBMultipleAnswers;
+import DBQuestionControllers.DBQuestionFillInTheBlanks;
+import DBQuestionControllers.DBQuestionMultipleChoice;
+import DBQuestionControllers.DBQuestionResponse;
+import DBQuestionControllers.DBQuestionWithMultipleAnswers;
 import backend.Quiz;
 import database.DBconnector;
+import questions.FillTheBlankQuestion;
+import questions.MultipleChoiceQuestion;
 import questions.Question;
+import questions.QuestionResponse;
+import questions.QuestionWithMultipleAnswers;
 
 public class DBQuizController {
 	private Connection connection;
@@ -124,7 +134,7 @@ public class DBQuizController {
 	}
 	
 	public Quiz getQuiz(int id){
-		String query = "select Quizzes.quiz_name, Categories.category_name, Quizzes.quiz_description, Users.user_name, Quizzes.quiz_likes, Quizzes.date_created, Quizzes.quiz_difficulty, Quizzes.times_taken, Quizzes.multiple_pages, Quizzes.immediate_correction, Quizzes.random_questions "
+		String query = "select Quizzes.quiz_name, Categories.category_name, Quizzes.quiz_description, Users.user_name, Quizzes.quiz_likes, Quizzes.date_created, Quizzes.quiz_difficulty, Quizzes.times_taken, Quizzes.multiple_pages, Quizzes.immediate_correction, Quizzes.random_questions, Quizzes.quiz_id "
 				+ " from Quizzes, Users, Categories where quiz_id = "
 				+ id
 				+ " and Quizzes.author_id = Users.user_id and Quizzes.category_id = Categories.category_id;";
@@ -139,9 +149,12 @@ public class DBQuizController {
 			
 			ResultSet res = stm.executeQuery();
 			
+			
 			while(res.next()){
+				ArrayList<Question> questions = getQuestions(res.getInt(12));
+				
 				tmpQuiz = new Quiz(res.getString(1), res.getString(3), res.getString(4), res.getInt(5), res.getTimestamp(6), res.getString(2), res.getString(7), res.getInt(8), 
-							null,
+							questions,
 							res.getBoolean(9), res.getBoolean(10), res.getBoolean(11));
 			}
 			
@@ -152,5 +165,31 @@ public class DBQuizController {
 		
 		
 		return tmpQuiz;
+	}
+
+	private ArrayList<Question> getQuestions(int id) {
+		ArrayList<Question> questions = new ArrayList<Question>();
+		
+		//Response questions
+		DBQuestionResponse db1 = new DBQuestionResponse();
+		List<QuestionResponse> responseQuestions =  db1.retrieveQuestions(id);
+		questions.addAll(responseQuestions);
+
+		//Multiple choice questions
+		DBQuestionMultipleChoice db2 = new DBQuestionMultipleChoice();
+		List<MultipleChoiceQuestion> multipleChoiceQuestions =  db2.retrieveQuestions(id);
+		questions.addAll(multipleChoiceQuestions);
+
+		//Fill in the blanks questions
+		DBQuestionFillInTheBlanks db3 = new DBQuestionFillInTheBlanks();
+		List<FillTheBlankQuestion> fillTheBlanksQuestions =  db3.retrieveQuestions(id);
+		questions.addAll(fillTheBlanksQuestions);
+
+		//Multiple answers questions
+		DBQuestionWithMultipleAnswers db4 = new DBQuestionWithMultipleAnswers();
+		List<QuestionWithMultipleAnswers> multipleAnswersQuestions =  db4.retrieveQuestions(id);
+		questions.addAll(multipleAnswersQuestions);
+		
+		return questions;
 	}
 }

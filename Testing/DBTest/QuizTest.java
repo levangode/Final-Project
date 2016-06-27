@@ -21,7 +21,7 @@ public class QuizTest {
 	public void QuizTest2(){
 		DBQuizController db = new DBQuizController();
 		
-		Quiz z = db.getQuiz(9);
+		Quiz z = db.getQuiz(27);
 		
 		System.out.println(z);
 		//System.out.println(z.getQuiz_name());
