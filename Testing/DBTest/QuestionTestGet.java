@@ -6,10 +6,12 @@ import org.junit.Test;
 
 import DBQuestionControllers.DBQuestionMultipleChoice;
 import DBQuestionControllers.DBQuestionResponse;
+import DBQuestionControllers.DBQuestionWithMultipleAnswers;
 import answers.Answer;
 import questions.MultipleChoiceQuestion;
 import questions.Question;
 import questions.QuestionResponse;
+import questions.QuestionWithMultipleAnswers;
 
 public class QuestionTestGet {
 //	@Test
@@ -29,11 +31,28 @@ public class QuestionTestGet {
 		
 	}
 	
-	@Test
+//	@Test
 	public void Test_MultipleChoice_Get(){
 		DBQuestionMultipleChoice z = new DBQuestionMultipleChoice();
 		
 		List<MultipleChoiceQuestion> questions = z.retrieveQuestions(27);
+		
+		System.out.println(questions.isEmpty());
+		
+		for(Question q: questions){
+			System.out.println(q);
+			for(Answer a: q.getAnswers()){
+				System.out.println(a);
+			}
+		}
+		
+	}
+	
+	@Test
+	public void Test_MultipleAnswers_Get(){
+		DBQuestionWithMultipleAnswers z = new DBQuestionWithMultipleAnswers();
+		
+		List<QuestionWithMultipleAnswers> questions = z.retrieveQuestions(27);
 		
 		System.out.println(questions.isEmpty());
 		
