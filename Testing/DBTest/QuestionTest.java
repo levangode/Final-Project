@@ -9,20 +9,24 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 import answers.Answer;
+import answers.MultipleAnswer;
+import answers.MultipleChoiceAnswer;
 import answers.ResponseAnswer;
 import database.DBconnector;
+import questions.MultipleChoiceQuestion;
 import questions.Question;
 import questions.QuestionResponse;
 import questions.QuestionTypes;
+import questions.QuestionWithMultipleAnswers;
 
 public class QuestionTest {
 	
-	@Test
-	public void Test1(){
+//	@Test
+	public void Test_QuestionResponse_add(){
 		ArrayList<Answer> answers = new ArrayList<Answer>();
 		
 		for(int i=0; i<5; i++){
-			answers.add(new ResponseAnswer("" + i));
+			answers.add(new ResponseAnswer("zanswer " + i));
 		}
 		
 		System.out.println(answers.size());
@@ -35,6 +39,51 @@ public class QuestionTest {
 					1,
 					answers
 				);
+		
+		try {
+			z.addToDatabase(27);
+		} catch (Exception e) {
+			System.out.println("Bozeboooo");
+			e.printStackTrace();
+		}
+	}
+	
+	
+//	@Test
+	public void Test_multpleChoice_add(){
+		ArrayList<Answer> answers = new ArrayList<Answer>();
+		
+		for(int i=0; i<5; i++){
+			answers.add(new MultipleChoiceAnswer("ans " + i, false));
+		}
+		
+		answers.add(new MultipleChoiceAnswer("ans " + 99, true));
+		
+		System.out.println(answers.size());
+		
+		Question z = new MultipleChoiceQuestion("how much is 5 + 5?", QuestionTypes.MultipleChoiceMultipleAnswer, "", 1, 1, 5, 1, answers);
+		
+		try {
+			z.addToDatabase(27);
+		} catch (Exception e) {
+			System.out.println("Bozeboooo");
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void Test_MultipleAnswers_add(){
+		ArrayList<Answer> answers = new ArrayList<Answer>();
+		
+		for(int i=1; i<5; i++){
+			answers.add(new MultipleAnswer("it's: " + i, i));
+		}
+		
+		answers.add(new MultipleAnswer("it's: " + 5, 5));
+		
+		System.out.println(answers.size());
+		
+		Question z = new QuestionWithMultipleAnswers("how much is 5 + 0?", QuestionTypes.MultiAnswer, "", 1, 1, 5, false, answers);
 		
 		try {
 			z.addToDatabase(27);

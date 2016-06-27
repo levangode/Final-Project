@@ -86,14 +86,17 @@ public class DBQuestionMultipleChoice {
 		PreparedStatement stm;
 		
 		try{
-			System.out.println(query);
+//			System.out.println(query);
 			stm = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
 			stm.executeUpdate();
 			
 			ResultSet rs = stm.getGeneratedKeys();
-			int question_id = rs.getInt(1);
-			
+			int question_id = -1;
+			while(rs.next()){
+				question_id = rs.getInt(1);
+			}
+	
 			for(Answer cur: question.getAnswers()){
 				cur.addToDatabase(question_id);
 			}
