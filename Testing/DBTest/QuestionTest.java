@@ -2,14 +2,13 @@ package DBTest;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
 
 import answers.Answer;
-import answers.AnswersHTMLRetriever;
 import answers.ResponseAnswer;
 import database.DBconnector;
 import questions.Question;
@@ -17,6 +16,7 @@ import questions.QuestionResponse;
 import questions.QuestionTypes;
 
 public class QuestionTest {
+	
 	@Test
 	public void Test1(){
 		ArrayList<Answer> answers = new ArrayList<Answer>();
@@ -28,9 +28,9 @@ public class QuestionTest {
 		System.out.println(answers.size());
 		
 		Question z = new QuestionResponse(
-					"waht is your name?",
+					"zzz waht is your name?",
 					QuestionTypes.QuestionResponse,
-					"Best Question ever",
+					"zzz Best Question ever",
 					1, 
 					1,
 					answers
@@ -45,7 +45,31 @@ public class QuestionTest {
 	}
 	
 	//@Test
-	public void Test2(){
+	public void lowLevelQueryTest(){
+		Connection connection = new DBconnector().getConnection();
+		
+		try{
+			String query = "select * from Questions_QuestionResponse where 1;";
+			
+			PreparedStatement stm = connection.prepareStatement(query);//, Statement.RETURN_GENERATED_KEYS);
+			
+			System.out.println("11");
+			
+			ResultSet rs = stm.executeQuery();
+			
+			System.out.println("22");
+			
+			connection.close();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+	
+	//@Test
+	public void lowLevelUpdateTest(){
 		Connection connection = new DBconnector().getConnection();
 		
 		try{
