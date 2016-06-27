@@ -22,7 +22,7 @@ import questions.QuestionResponse;
 import questions.QuestionTypes;
 import questions.QuestionWithMultipleAnswers;
 
-public class QuestionTest {
+public class QuestionTestAdd {
 	
 //	@Test
 	public void Test_QuestionResponse_add(){
@@ -100,7 +100,7 @@ public class QuestionTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void Test_fillInTheBlanks_add(){
 		ArrayList<Answer> answers = new ArrayList<Answer>();
 		

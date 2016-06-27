@@ -15,7 +15,7 @@ import answers.MultipleChoiceAnswer;
 //import answers.Answer;
 import answers.ResponseAnswer;
 
-public class AnswerTest {
+public class AnswerTestGet {
 //	@Test
 	public void Test_ResponseAnswer_get(){
 		DBQuestionResponseAnswer z = new DBQuestionResponseAnswer();
