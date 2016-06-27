@@ -1,8 +1,8 @@
-package backend;
+package quizInfoes;
 
 import java.sql.Timestamp;
 
-public class QuizDetailedInfo extends QuizInfo{
+public class QuizDetailedInfo extends QuizInfo implements DrawableInfo{
 	private String quiz_category;
 	private String quiz_description;
 	private int quiz_likes;
@@ -39,7 +39,7 @@ public class QuizDetailedInfo extends QuizInfo{
 			+"Date Created: "+getQuiz_date()+"<br>"
 			+"Times Taken: "+getTimes_taken()+"<br>"
 			+"<p class=\"para\" style=\"left:0; bottom:0;\">Likes: "+getQuiz_likes()+"</p>"
-			+"<a class=\"btn\" style=\"position: absolute; right:0; bottom:0; padding:5px;\" href=\"QuizInformation.jsp?id="+getQuiz_id()+"\">Check It Out</a>"
+			+"<a class=\"btn\" style=\"position: absolute; right:0; bottom:0; padding:5px;\" href=\"QuizSummaryPage.jsp?id="+getQuiz_id()+"\">Check It Out</a>"
 			+"</div>";
 		return result;
 	}

@@ -1,9 +1,9 @@
-package backend;
+package quizInfoes;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class QuizInfo {
+public class QuizInfo implements DrawableInfo{
 	private String quiz_name;
 	private int times_taken;
 	private String quiz_author;
@@ -57,8 +57,11 @@ public class QuizInfo {
 	public void setQuiz_id(int quiz_id) {
 		this.quiz_id = quiz_id;
 	}
-	public String showOnCard(){
-		return "";
+
+	@Override
+	public String showOnCard() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
