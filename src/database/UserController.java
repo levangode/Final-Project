@@ -10,43 +10,78 @@ import backend.User;
 public class UserController {
 	private Connection connection;
 	private DBconnector db;
-	public UserController(){
-		
+
+	public UserController() {
+
 	}
-	
-	public User getUserByID(int ID){
+
+	public User getUserByID(int ID) {
 		db = new DBconnector();
 		connection = db.getConnection();
-		String order = "select user_name, user_id, user_login, user_profile_image from Users " + "where user_id = "  + ID + ";";
+		String order = "select user_name, user_id, user_login, user_profile_image from Users " + "where user_id = " + ID
+				+ ";";
 		PreparedStatement stm = null;
 		ResultSet myRes = null;
 		User thisUser = null;
-		
+
 		try {
 			stm = connection.prepareStatement(order);
 			myRes = stm.executeQuery();
-			
-			if(myRes.next()){
+
+			if (myRes.next()) {
 				String user_name = myRes.getString(1);
 				int user_id = myRes.getInt(2);
 				String user_login = myRes.getString(3);
 				String user_profile_image = myRes.getString(4);
-				if(user_profile_image == null){
+				if (user_profile_image == null) {
 					user_profile_image = User.DEFAULT_IMAGE;
 				}
-				
+
 				thisUser = new User(user_name, user_id, user_login, user_profile_image);
 			}
-						
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		db.closeConnection();
-		
+
 		return thisUser;
 	}
-	
-	public boolean containsUser(String user_login){
+
+	public User getUserByLogin(String login) {
+		db = new DBconnector();
+		connection = db.getConnection();
+		String order = "select user_name, user_id, user_login, user_profile_image from Users " + "where user_login = "
+				+ login + ";";
+		PreparedStatement stm = null;
+		ResultSet myRes = null;
+		User thisUser = null;
+
+		try {
+			stm = connection.prepareStatement(order);
+			myRes = stm.executeQuery();
+
+			if (myRes.next()) {
+				String user_name = myRes.getString(1);
+				int user_id = myRes.getInt(2);
+				String user_login = myRes.getString(3);
+				String user_profile_image = myRes.getString(4);
+				if (user_profile_image == null) {
+					user_profile_image = User.DEFAULT_IMAGE;
+				}
+
+				thisUser = new User(user_name, user_id, user_login, user_profile_image);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		db.closeConnection();
+
+		return thisUser;
+	}
+
+	public boolean containsUser(String user_login) {
 		db = new DBconnector();
 		connection = db.getConnection();
 		String order = "select count(*) from Users " + "where user_login = " + "'" + user_login + "'";
@@ -70,13 +105,12 @@ public class UserController {
 			return false;
 		return true;
 	}
-	
-	public void addNewUser(String user_login, String user_password, String user_name){
+
+	public void addNewUser(String user_login, String user_password, String user_name) {
 		db = new DBconnector();
 		connection = db.getConnection();
-		String order = ""
-				+ "insert into Users(user_login, user_password, user_name) values "
-				+ "	('"+user_login+"', '"+user_password+"', '"+user_name+"');";
+		String order = "" + "insert into Users(user_login, user_password, user_name) values " + "	('" + user_login
+				+ "', '" + user_password + "', '" + user_name + "');";
 		PreparedStatement stm = null;
 		try {
 			stm = connection.prepareStatement(order);
@@ -90,13 +124,12 @@ public class UserController {
 		}
 		db.closeConnection();
 	}
-	
-	public boolean passwordMatch(String user_login, String user_password){
+
+	public boolean passwordMatch(String user_login, String user_password) {
 		boolean result = false;
 		db = new DBconnector();
 		connection = db.getConnection();
-		String order = ""
-				+ "select user_password from Users where user_login = '"+user_login+"'";
+		String order = "" + "select user_password from Users where user_login = '" + user_login + "'";
 		PreparedStatement stm = null;
 		try {
 			stm = connection.prepareStatement(order);
@@ -107,7 +140,7 @@ public class UserController {
 		try {
 			myRes = stm.executeQuery();
 			myRes.next();
-			if(user_password.equals(myRes.getString(1)))
+			if (user_password.equals(myRes.getString(1)))
 				result = true;
 		} catch (SQLException e) {
 			e.printStackTrace();

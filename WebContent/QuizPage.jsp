@@ -10,11 +10,9 @@
 <html>
 
 <%
-	//DBQuizController cont = new DBQuizController();
-	//int quiz_id = Integer.parseInt(request.getParameter("quiz_id"));
-	Quiz quiz = (Quiz) session.getAttribute("Quiz");
-	//ArrayList<Question> questions = quiz.getQuestions();
-	//String quizName = quiz.getQuiz_name();
+	DBQuizController cont = new DBQuizController();
+	int id = Integer.parseInt(request.getParameter("id"));
+	Quiz quiz = cont.getQuiz(id);
 %>
 
 <head>
@@ -40,9 +38,9 @@ body {
 				out.print((i + 1) + ")");
 				out.print(q.getQuestionHtml(i));
 			}
-		%>	
-	
-	<input type="submit" value="Submit">
-</form>
+		%>
+
+		<input type="submit" value="Submit">
+	</form>
 </body>
 </html>

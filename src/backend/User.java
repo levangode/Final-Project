@@ -28,6 +28,12 @@ public class User {
 		return id;
 	}
 	
+	public int getCreatedQuizCount(){
+		int counter =0; 
+		
+		return counter;
+	}
+	
 	public String getLogin(){
 		return login;
 	}
