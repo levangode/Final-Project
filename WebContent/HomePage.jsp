@@ -6,6 +6,7 @@
 <%@page import="backend.*"%>
 <%@page import="DBQuizControllers.*"%>
 <%@page import="DBQuizControllers.QuizInfoController"%>
+<%@page import="quizInfoes.*"%>
 <!DOCTYPE>
 <html>
 <head>
@@ -157,7 +158,7 @@ h3 {
 						DBQuizController q = new DBQuizController();
 						ArrayList<String> quizCategories = q.getQuizCategories();
 						for (String a : quizCategories) {
-							out.print("<li><a href=\"QuizPage.jsp\">" + a + "</a></li>");
+							out.print("<li><a href=\"QuizSummaryPage.jsp\">" + a + "</a></li>");
 						}
 					%>
 				</ul>
@@ -184,7 +185,7 @@ h3 {
 							QuizInfoController getter = new QuizInfoController();
 							ArrayList<QuizInfo> popular = getter.getPopularQuizzes();
 							for (QuizInfo a : popular) {
-								out.print("<li><a href=\"QuizPage.jsp\">" + a.getQuiz_name() + "</a></li>");
+								out.print("<li><a href=\"QuizSummaryPage.jsp\">" + a.getQuiz_name() + "</a></li>");
 							}
 						%>
 					</ul>
@@ -197,7 +198,7 @@ h3 {
 							QuizInfoController getter2 = new QuizInfoController();
 							ArrayList<QuizInfo> mine = getter2.getMyQuizzes((String) request.getSession().getAttribute("user_name"));
 							for (QuizInfo a : mine) {
-								out.print("<li><a href=\"QuizPage.jsp\">" + a.getQuiz_name() + "</a></li>");
+								out.print("<li><a href=\"QuizSummaryPage.jsp\">" + a.getQuiz_name() + "</a></li>");
 								//TODO shignidan ro dabechdos tavisi tavi
 							}
 						%>

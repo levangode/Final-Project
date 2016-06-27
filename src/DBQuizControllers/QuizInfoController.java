@@ -7,10 +7,11 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-import backend.QuizDetailedInfo;
-import backend.QuizInfo;
-import backend.QuizInfoFactory;
 import database.DBconnector;
+import quizInfoes.QuizDetailedInfo;
+import quizInfoes.QuizFullSummary;
+import quizInfoes.QuizInfo;
+import quizInfoes.QuizInfoFactory;
 
 public class QuizInfoController {
 	private static final int LIMIT_RESULTS_FOR_BLOCKS = 10;
@@ -111,6 +112,35 @@ public class QuizInfoController {
 			e.printStackTrace();
 		}
 		return id;
+	}
+	public QuizFullSummary getQuizSummary(int quiz_id){
+		String order = ""
+				+ "SELECT quiz_name, quiz_description, category_name, user_login, quiz_difficulty, date_created, immediate_correction, quiz_likes, times_taken "
+				+ "FROM Quizzes q "
+				+ "JOIN Users u ON u.user_id = q.author_id "
+				+ "JOIN Categories c ON c.category_id = q.category_id "
+				+ "WHERE quiz_id = "+quiz_id;
+		PreparedStatement stm = null;
+		try {
+			stm = connection.prepareStatement(order);
+			ResultSet res = stm.executeQuery();
+			while(res.next()){
+				String quiz_name=res.getString("quiz_name");
+				String quiz_description=res.getString("quiz_description");
+				String quiz_category=res.getString("category_name");
+				String user_login=res.getString("user_login");
+				String quiz_difficulty=res.getString("quiz_difficulty");
+				Timestamp date_created=res.getTimestamp("date_created");
+				Boolean immediate_correction=res.getBoolean("immediate_correction");
+				int quiz_likes=res.getInt("quiz_likes");
+				int times_taken=res.getInt("times_taken");
+				//TODO kide rac unda
+				QuizFullSummary summary = QuizInfoFactory.getFullSummary(quiz_name, times_taken, user_login, date_created, quiz_id, quiz_category, quiz_description, quiz_likes, quiz_difficulty, immediate_correction);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public ArrayList<QuizInfo> getMyQuizzes(String author) {
