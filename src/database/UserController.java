@@ -51,8 +51,8 @@ public class UserController {
 	public User getUserByLogin(String login) {
 		db = new DBconnector();
 		connection = db.getConnection();
-		String order = "select user_name, user_id, user_login, user_profile_image from Users " + "where user_login = "
-				+ login + ";";
+		String order = "select user_name, user_id, user_login, user_profile_image from Users " + "where user_login = '"
+				+ login + "';";
 		PreparedStatement stm = null;
 		ResultSet myRes = null;
 		User thisUser = null;
