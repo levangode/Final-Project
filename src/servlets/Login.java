@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import backend.User;
 import database.UserController;
 import helpers.Hasher;
 
@@ -17,35 +18,41 @@ import helpers.Hasher;
 @WebServlet("/Login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Login() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public Login() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String user_login = request.getParameter("user_login");
 		String user_password = request.getParameter("user_password");
 		UserController db = new UserController();
 		Hasher h = new Hasher();
-		if(db.containsUser(user_login)){
-			if(db.passwordMatch(user_login, h.generateHash(user_password))){
+		if (db.containsUser(user_login)) {
+			if (db.passwordMatch(user_login, h.generateHash(user_password))) {
 				request.getSession().setAttribute("user_name", user_login);
+				User user = db.getUserByLogin(user_login);
 				request.getSession().setAttribute("logged_in", true);
+				request.getSession().setAttribute("User", user);
 				response.sendRedirect("HomePage.jsp");
 			} else {
 				request.getRequestDispatcher("TryAgain.jsp").forward(request, response);

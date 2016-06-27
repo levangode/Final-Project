@@ -62,56 +62,58 @@ div.box {
 .box a:hover {
 	background: #9EC4AA;
 }
-ul{
-	width:100%; 
-	padding-left:0px;
-	text-align:center;
-}
-li{
-	list-style-type:none;
+
+ul {
+	width: 100%;
+	padding-left: 0px;
+	text-align: center;
 }
 
+li {
+	list-style-type: none;
+}
 
 #card {
-    border-radius: 25px;
-    border: 2px solid #000000;
-    padding: 10px; 
-    width: calc(100% - 30px);
-    height: 150px; 
-    margin: 5px 3px;
+	border-radius: 25px;
+	border: 2px solid #000000;
+	padding: 10px;
+	width: calc(100% - 30px);
+	height: 150px;
+	margin: 5px 3px;
 }
-h2{
-	margin:1px;
+
+h2 {
+	margin: 1px;
 }
 
 p {
-	font-size:18;
+	font-size: 18;
 	margin: 0;
-}
-.descr{
-	font-size:16;
-	line-height: 1em;
-	height:2em;
-	text-overflow: ellipsis;
-    width: 100%;
-    overflow: hidden;
-}
-h3{
-	margin-bottom:1px;
 }
 
-.para{
-	font-size:14;
+.descr {
+	font-size: 16;
+	line-height: 1em;
+	height: 2em;
+	text-overflow: ellipsis;
+	width: 100%;
+	overflow: hidden;
+}
+
+h3 {
+	margin-bottom: 1px;
+}
+
+.para {
+	font-size: 14;
 	margin: 0;
-	padding:7px;
-	position:absolute;
+	padding: 7px;
+	position: absolute;
 }
 
 .headers {
 	padding: 10px;
 }
-
-
 </style>
 </head>
 <body>
@@ -139,7 +141,8 @@ h3{
 
 			<div class="headers">
 				<ul>
-					<li><a class="btn" href="CreateQuiz.jsp"> Create New Quiz </a></li>
+					<li><a class="btn" href="CreateQuiz.jsp"> Create New Quiz
+					</a></li>
 				</ul>
 			</div>
 		</div>
@@ -161,14 +164,15 @@ h3{
 			</div>
 			<!-- End Left Panel -->
 			<!-- QuizList -->
-			<div class="box" style="text-align:center; width:calc(100% - 360px);">
-			<%
-			QuizInfoController all=new QuizInfoController();
-			ArrayList<QuizDetailedInfo> quizzes=all.getQuizzes();
-			for(QuizDetailedInfo b: quizzes){
-				out.print(b.showOnCard());
-			}
-			%>
+			<div class="box"
+				style="text-align: center; width: calc(100% - 360px);">
+				<%
+					QuizInfoController all = new QuizInfoController();
+					ArrayList<QuizDetailedInfo> quizzes = all.getQuizzes();
+					for (QuizDetailedInfo b : quizzes) {
+						out.print(b.showOnCard());
+					}
+				%>
 			</div>
 			<!-- End QuizList -->
 			<!-- Right Panel -->
