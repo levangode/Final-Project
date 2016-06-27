@@ -1,9 +1,13 @@
 package Testing;
 
+import org.junit.Test;
+
 import backend.User;
 import database.UserController;
 
 public class UserTest {
+	
+	@Test
 	private  void printAllUsers(){
 		UserController uc = new UserController();
 		
@@ -17,7 +21,8 @@ public class UserTest {
 		
 	}
 	
-	public  void zmain(String[] args){
-		printAllUsers();
+	@Test
+	public  void zmain(){
+		//printAllUsers();
 	}
 }

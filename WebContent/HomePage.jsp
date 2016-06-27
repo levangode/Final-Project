@@ -5,6 +5,7 @@
 <%@page import="database.*"%>
 <%@page import="backend.*"%>
 <%@page import="DBQuizControllers.*"%>
+<%@page import="DBQuizControllers.QuizInfoController"%>
 <!DOCTYPE>
 <html>
 <head>
