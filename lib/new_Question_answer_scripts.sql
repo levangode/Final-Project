@@ -130,6 +130,8 @@ create table Questions_MultipleAnswers(
 --  question_description varchar(500) default null,
     question_time_limit int default -1,
     
+    answers_ordered tinyint default 0,
+    
     num_answers int not null,
     
     score int,
