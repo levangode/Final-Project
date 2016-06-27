@@ -4,15 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import answers.BlankAnswer;
 import answers.MultipleAnswer;
-import answers.ResponseAnswer;
 import database.DBconnector;
 
 public class DBMultipleAnswers {
@@ -57,7 +55,7 @@ public class DBMultipleAnswers {
 	}
 	
 	public void addAnswer(MultipleAnswer ans, int question_id){
-		String query = "insert into answers_multipleanswers(answer_text, answer_num, question_id) values("
+		String query = "insert into Answers_MultipleAnswers(answer_text, answer_num, question_id) values("
 				+ "'" + ans.getAnswerText() + "'"
 				+ ", "
 				+ ans.getAnswernum()
@@ -66,11 +64,12 @@ public class DBMultipleAnswers {
 				+ ");";
 		PreparedStatement stm;
 		
+		System.out.println(query);
+				
 		try{
 			stm = connection.prepareStatement(query);
 			stm.executeUpdate();
 			
-		
 		
 			connection.close();
 			
