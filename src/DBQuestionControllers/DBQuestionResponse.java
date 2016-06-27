@@ -32,7 +32,7 @@ public class DBQuestionResponse {
 		
 		String query = " select question_text, question_data, question_time_limit, score, question_id from Questions_QuestionResponse where quiz_id = "
 				+ quiz_id
-				+ "; ";
+				+ ";";
 		
 		PreparedStatement stm;
 		
