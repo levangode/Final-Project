@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import DBAnswerControllers.DBQuestionResponseAnswer;
 import answers.Answer;
 import database.DBconnector;
 import questions.QuestionResponse;
@@ -28,11 +29,13 @@ public class DBQuestionResponse {
 	public List<QuestionResponse> retrieveQuestions(int quiz_id){
 		List<QuestionResponse> questions = new ArrayList<QuestionResponse>();
 		
-		String query = " select question_text, question_data, question_time_limit, score from Questions_QuestionResponse where quiz_id = "
+		String query = " select question_text, question_data, question_time_limit, score, question_id from Questions_QuestionResponse where quiz_id = "
 				+ quiz_id
 				+ "; ";
 		
 		PreparedStatement stm;
+		
+		System.out.println(query);
 		
 		try{
 			stm = connection.prepareStatement(query);
@@ -41,14 +44,15 @@ public class DBQuestionResponse {
 			while(rs.next()){
 				QuestionResponse newQuestion;
 				
-				// TODO add code for answers
+				ArrayList<Answer> answers = getAnswers(rs.getInt(5));
+				
 				newQuestion = new QuestionResponse(
 								rs.getString(1), 
 								QuestionTypes.QuestionResponse,
 								rs.getString(2),
 								rs.getInt(3),
 								rs.getInt(4),
-								null
+								answers
 							);
 				
 				questions.add(newQuestion);
@@ -62,6 +66,16 @@ public class DBQuestionResponse {
 		}
 		
 		return questions;
+	}
+	
+	private ArrayList<Answer> getAnswers(int id){
+		ArrayList<Answer> res;
+		
+		DBQuestionResponseAnswer db = new DBQuestionResponseAnswer();
+		
+		res = db.retrieveAnswers(id);
+		
+		return res;
 	}
 	
 	public void addQuestion(QuestionResponse question, int quiz_id) throws Exception{
