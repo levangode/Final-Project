@@ -28,11 +28,11 @@ public class DBQuestionResponseAnswer {
 		this.connection = con;
 	}
 	
-	public List<ResponseAnswer> retrieveAnswers(int answer_id){
+	public List<ResponseAnswer> retrieveAnswers(int question_id){
 		List<ResponseAnswer> answers = new ArrayList<ResponseAnswer>();
 		
-		String query = "select answer_text from Answers_AuestionResponse where question_id = "
-					+ answer_id + " ;";
+		String query = "select answer_text from Answers_QuestionResponse where question_id = "
+					+ question_id + " ;";
 		
 		PreparedStatement stm;
 		
