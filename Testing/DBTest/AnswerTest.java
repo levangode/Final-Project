@@ -5,10 +5,12 @@ import java.util.List;
 import org.junit.Test;
 
 import DBAnswerControllers.DBBlankAnswer;
+import DBAnswerControllers.DBMultipleAnswers;
 import DBAnswerControllers.DBMultipleChoiceAnswers;
 import DBAnswerControllers.DBQuestionResponseAnswer;
 import answers.Answer;
 import answers.BlankAnswer;
+import answers.MultipleAnswer;
 import answers.MultipleChoiceAnswer;
 //import answers.Answer;
 import answers.ResponseAnswer;
@@ -37,11 +39,24 @@ public class AnswerTest {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void Test_MultipleChoiceAnswer_get(){
 		DBMultipleChoiceAnswers z = new DBMultipleChoiceAnswers();
 		
 		List<MultipleChoiceAnswer> answers = z.retrieveAnswers(10);
+		
+		System.out.println(answers.isEmpty());
+		for(Answer tmpAns: answers){
+			System.out.println(tmpAns);
+		}
+		
+	}
+
+	@Test
+	public void Test_MultipleAnswer_get(){
+		DBMultipleAnswers z = new DBMultipleAnswers();
+		
+		List<MultipleAnswer> answers = z.retrieveAnswers(5);
 		
 		System.out.println(answers.isEmpty());
 		for(Answer tmpAns: answers){
