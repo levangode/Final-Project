@@ -25,14 +25,16 @@ public class DBMultipleAnswers {
 		this.connection = con;
 	}
 	
-	public List<MultipleAnswer> retrieveAnswers(int answer_id){
+	public List<MultipleAnswer> retrieveAnswers(int question_id){
 		List<MultipleAnswer> answers = new ArrayList<MultipleAnswer>();
 		
-		String query = "select answer_text, answer_num from answers_multipleanswers where question_id = "
-				+ answer_id
-				+ "order by answer_num ASC;";
+		String query = "select answer_text, answer_num from Answers_MultipleAnswers where question_id = "
+				+ question_id
+				+ " order by answer_num ASC;";
 					
 		PreparedStatement stm;
+		
+		System.out.println(query);
 		
 		try{
 			stm = connection.prepareStatement(query);
