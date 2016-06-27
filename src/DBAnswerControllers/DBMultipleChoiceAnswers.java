@@ -28,10 +28,12 @@ public class DBMultipleChoiceAnswers {
 	public List<MultipleChoiceAnswer> retrieveAnswers(int answer_id){
 		List<MultipleChoiceAnswer> answers = new ArrayList<MultipleChoiceAnswer>();
 		
-		String query = "select answer_text, answer_correct from answers_questionresponse where question_id = "
+		String query = "select answer_text, answer_correct from Answers_MultipleChoice where question_id = "
 					+ answer_id + " ;";
 		
 		PreparedStatement stm;
+		
+		System.out.println(query);
 		
 		try{
 			stm = connection.prepareStatement(query);
