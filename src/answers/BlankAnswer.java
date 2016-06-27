@@ -20,6 +20,7 @@ public class BlankAnswer extends Answer {
 		return blank_position;
 	}
 
+	@Override
 	public String getAnswerText() {
 		return answer_text;
 	}
