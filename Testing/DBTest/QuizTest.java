@@ -1,4 +1,4 @@
-package Testing;
+package DBTest;
 
 import org.junit.Test;
 
