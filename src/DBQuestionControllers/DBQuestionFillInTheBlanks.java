@@ -68,23 +68,29 @@ public class DBQuestionFillInTheBlanks {
 	
 	public void addQuestion(FillTheBlankQuestion question, int quiz_id) throws Exception{
 		String query = 
-				"insert into Questions_QuestionResponse(quiz_id, question_text, question_data, question_time_limit, score) value ("
+				"insert into Questions_FillInTheBlanks(quiz_id, question_text, question_data, question_time_limit, score) value ("
 				+ quiz_id + ", "
-				+ question.getQuestiontext() + ", "
-				+ question.getQuestiondescription() + ", "
+				+ "'" + question.getQuestiontext() + "'" + ", "
+				+ "'" + question.getQuestiondescription() + "'" + ", "
 				+ question.getQuestiontimelimit() + ", "
 				+ question.getQuestionscore()
 				+ ");";
 		
 		PreparedStatement stm;
 		
+		System.out.println(query);
+		
 		try{
 			stm = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-			stm.executeQuery();
+			stm.executeUpdate();
 			
 			ResultSet rs = stm.getGeneratedKeys();
-			int question_id = rs.getInt("question_id");
+			int question_id = -1;
+			
+			while(rs.next()){
+				question_id = rs.getInt(1);
+			}
 			
 			question.getAnswers();
 			

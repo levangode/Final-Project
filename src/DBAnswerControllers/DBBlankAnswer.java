@@ -54,7 +54,7 @@ public class DBBlankAnswer {
 	
 	public void addAnswer(BlankAnswer ans, int question_id){
 		String query = "insert into Answers_FillInTheBlanks(answer_text, blank_pos, question_id) values("
-				+ ans
+				+ "'" + ans.getAnswerText() + "'"
 				+ ", "
 				+ ans.getBlankpos()
 				+ ", "
@@ -62,9 +62,11 @@ public class DBBlankAnswer {
 				+ ");";
 		PreparedStatement stm;
 		
+		System.out.println(query);
+		
 		try{
 			stm = connection.prepareStatement(query);
-			stm.executeQuery();
+			stm.executeUpdate();
 					
 			connection.close();
 			
