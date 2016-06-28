@@ -17,6 +17,7 @@ import javax.websocket.Session;
 
 import answers.Answer;
 import backend.Quiz;
+import questions.MultipleChoiceQuestion;
 import questions.Question;
 
 /**
@@ -56,9 +57,11 @@ public class GradeQuiz extends HttpServlet {
 		int maxScore = 0;
 		ArrayList<Question> questions = quiz.getQuestions();
 		for (int i = 0; i < questions.size(); i++) {
-			Question q = questions.get(i);
+			MultipleChoiceQuestion q = (MultipleChoiceQuestion) questions.get(i);
 			int curScore = q.gradeAnswer(request, i);
+			int toBeCorrect = q.getNumanswerscorrect();
 			int questionScore = q.getQuestionscore();
+			curScore = (curScore / toBeCorrect) * questionScore;
 			maxScore += questionScore;
 			score += curScore;
 		}
