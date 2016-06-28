@@ -1,3 +1,6 @@
+<%@page import="DBQuizControllers.QuizInfoController"%>
+<%@page import="quizInfoes.*"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE>
@@ -10,30 +13,38 @@
 	float: left;
 	font-family: sans-serif;
 	margin: 0px 15px;
-	overflow:hidden;
+	overflow: hidden;
 }
 </style>
 </head>
 <body>
-	<div style="position: relative; margin:auto; min-width:1000; text-align: center;">
-		<div id="top" style="position:relative; overflow: hidden;">
+	<div
+		style="position: relative; margin: auto; min-width: 1000; text-align: center;">
+		<div id="top" style="position: relative; overflow: hidden;">
 			<div style="width: 22%;" class="column">
-				<h4>Quiz Info:</h4>
-				<p>Name: </p>
-				<p>Description:</p>
-				<p>Quiz Category:</p>
-				<p>
-					Author: <a href="UserPage.jsp">saxeli</a>
-				</p>
-				<p>Quiz Difficulty</p>
-				<p>Create Date:</p>
-				<p>Immediate Correction:</p>
-				<p>Quiz Likes:</p>
-				<p>Times Taken:</p>
+				<h4>Quiz Info</h4>
+				<%
+					QuizInfoController qq = new QuizInfoController();
+					int quiz_id=Integer.parseInt(request.getParameter("id"));
+					QuizFullSummary summary = qq.getQuizSummary(quiz_id);
+					summary.showOnCard(out);
+					
+				%>
+				
 			</div>
 			<div style="width: 22%;" class="column">
-				<h4>Users' past performance of this quiz</h4>
-
+				<h4>User's past performance of this quiz</h4>
+				<%
+					QuizInfoController activity = new QuizInfoController();
+					String user_login = (String) request.getSession().getAttribute("user_name");
+					ArrayList<UserActivity> act = activity.getUserActivity(user_login, quiz_id);
+					if(act.isEmpty()){
+						out.print("You Have Never Taken This Quiz Before");
+					}
+					for(UserActivity next: act){
+						next.showOnCard(out);
+					}
+				%>
 			</div>
 			<div style="width: 22%;" class="column">
 				<h4>Highest Performers of all time</h4>
@@ -42,7 +53,7 @@
 				<h4>Top Performers of the day</h4>
 			</div>
 		</div>
-		<div id="mid" style="position:relative; overflow: hidden;">
+		<div id="mid" style="position: relative; overflow: hidden;">
 			<h4>Statistics</h4>
 		</div>
 		<div id="bottom" style="overflow: hidden; margin: 20px;">

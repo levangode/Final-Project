@@ -1,5 +1,8 @@
 package quizInfoes;
 
+
+import javax.servlet.jsp.JspWriter;
+
 public interface DrawableInfo {
-	public String showOnCard();
+	public void showOnCard(JspWriter out);
 }

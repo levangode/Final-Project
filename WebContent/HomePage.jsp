@@ -171,7 +171,7 @@ h3 {
 					QuizInfoController all = new QuizInfoController();
 					ArrayList<QuizDetailedInfo> quizzes = all.getQuizzes();
 					for (QuizDetailedInfo b : quizzes) {
-						out.print(b.showOnCard());
+						b.showOnCard(out);
 					}
 				%>
 			</div>

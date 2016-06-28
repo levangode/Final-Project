@@ -3,6 +3,10 @@ package quizInfoes;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import javax.servlet.jsp.JspWriter;
+
+import org.apache.jasper.el.JspPropertyNotWritableException;
+
 public class QuizInfo implements DrawableInfo{
 	private String quiz_name;
 	private int times_taken;
@@ -59,9 +63,8 @@ public class QuizInfo implements DrawableInfo{
 	}
 
 	@Override
-	public String showOnCard() {
+	public void showOnCard(JspWriter out) {
 		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

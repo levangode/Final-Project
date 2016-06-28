@@ -16,12 +16,13 @@ public class QuizInfoFactory {
 	}
 
 	public static QuizFullSummary getFullSummary(String quiz_name, int times_taken, String quiz_author,
-			Timestamp quiz_date, int quiz_id, String quiz_category, String quiz_description, int quiz_likes, String quiz_difficulty, boolean immediate_correction) {
-		ArrayList<QuizInfo> usersPastPerformance = new ArrayList<QuizInfo>();
-		ArrayList<String> highestPerformers = new ArrayList<String>();
-		ArrayList<String> performersOfTheDay = new ArrayList<String>();
-		ArrayList<String> statistics = new ArrayList<String>();
+			Timestamp quiz_date, int quiz_id, String quiz_category, String quiz_description, int quiz_likes,
+			String quiz_difficulty, boolean immediate_correction) {
 		return new QuizFullSummary(quiz_name, times_taken, quiz_author, quiz_date, quiz_id, quiz_category,
 				quiz_description, quiz_likes, quiz_difficulty, immediate_correction);
+	}
+
+	public static UserActivity getUserActivity(Timestamp time_finished, Timestamp time_taken, int score, String user) {
+		return new UserActivity(time_finished, time_taken, score, user);
 	}
 }
