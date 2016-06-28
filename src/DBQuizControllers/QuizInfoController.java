@@ -8,17 +8,17 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import database.DBconnector;
+import quizInfoes.Constants;
 import quizInfoes.HighScore;
 import quizInfoes.QuizDetailedInfo;
 import quizInfoes.QuizFullSummary;
 import quizInfoes.QuizInfo;
 import quizInfoes.QuizInfoFactory;
+import quizInfoes.Statistics;
 import quizInfoes.UserActivity;
 
 public class QuizInfoController {
-	private static final int LIMIT_RESULTS_FOR_BLOCKS = 10;
-	private static final int LIMIT_RESULTS_FOR_FEED = 100;
-	private static final int LIMIT_OF_SCORES = 15;
+
 	private Connection connection;
 
 	public QuizInfoController() {
@@ -31,7 +31,7 @@ public class QuizInfoController {
 				+ "SELECT quiz_id, quiz_name, quiz_description, category_name, user_login, date_created, times_taken, quiz_likes "
 				+ "FROM Quizzes q " + "JOIN Users ON author_id = user_id "
 				+ "JOIN Categories c ON c.category_id = q.category_id " + "ORDER BY date_created DESC " + "LIMIT "
-				+ LIMIT_RESULTS_FOR_FEED;
+				+ Constants.LIMIT_RESULTS_FOR_FEED;
 		ResultSet res = null;
 		try {
 			PreparedStatement stm = connection.prepareStatement(order);
@@ -58,7 +58,7 @@ public class QuizInfoController {
 	public ArrayList<QuizInfo> getPopularQuizzes() {
 		ArrayList<QuizInfo> result = new ArrayList<QuizInfo>();
 		String order = "" + "select quiz_id, quiz_name, user_login, date_created, times_taken from Quizzes "
-				+ "join Users on author_id=user_id " + "order by times_taken limit " + LIMIT_RESULTS_FOR_BLOCKS;
+				+ "join Users on author_id=user_id " + "order by times_taken limit " + Constants.LIMIT_RESULTS_FOR_BLOCKS;
 		ResultSet res = null;
 		try {
 			PreparedStatement stm = connection.prepareStatement(order);
@@ -82,7 +82,7 @@ public class QuizInfoController {
 		ArrayList<QuizInfo> result = new ArrayList<QuizInfo>();
 		String order = "" + "SELECT quiz_id, quiz_name, user_login, date_created, times_taken " + "FROM Quizzes "
 				+ "JOIN Users ON author_id = user_id " + "ORDER BY date_created DESC " + "LIMIT "
-				+ LIMIT_RESULTS_FOR_BLOCKS;
+				+ Constants.LIMIT_RESULTS_FOR_BLOCKS;
 		ResultSet res = null;
 		try {
 			PreparedStatement stm = connection.prepareStatement(order);
@@ -140,10 +140,20 @@ public class QuizInfoController {
 		return act;
 	}
 
-	public ArrayList<HighScore> getHighScores(int quiz_id) {
+	public ArrayList<HighScore> getHighScores(int quiz_id, int pastHours) {
 		ArrayList<HighScore> act = new ArrayList<HighScore>();
-		String order = "Select user_login, score from Quiz_taken q join Users u on u.user_id=q.user_id where quiz_id = "
-				+ quiz_id + " order by score limit " + LIMIT_OF_SCORES;
+		String timeLimit = "";
+		if(pastHours > -1){
+			timeLimit = "AND CURRENT_TIMESTAMP() - INTERVAL '"+pastHours+"'"+" HOUR < time_finished ";
+		}
+		String order = ""
+				+ "SELECT user_login, score "
+				+ "FROM Quiz_taken q "
+				+ "JOIN Users u ON u.user_id = q.user_id "
+				+ "WHERE quiz_id = "+quiz_id+" "
+				+ timeLimit
+				+ "ORDER BY score "
+				+ "LIMIT "+Constants.LIMIT_OF_SCORES;
 		PreparedStatement stm = null;
 		try {
 			stm = connection.prepareStatement(order);
@@ -189,12 +199,32 @@ public class QuizInfoController {
 		}
 		return summary;
 	}
-
+	public Statistics getStatistics(){
+		Statistics statist = null;
+		String order = ""
+				+ "SELECT COUNT( * ) AS count, AVG( score ) AS average "
+				+ "FROM Quiz_taken";
+		ResultSet res=null;
+		try {
+			PreparedStatement stm = connection.prepareStatement(order);
+			res = stm.executeQuery();
+			while (res.next()) {
+				int count = res.getInt("count");
+				int avgScore = res.getInt("average");
+				statist=QuizInfoFactory.getStatistics(count, avgScore);
+			}
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return statist;
+		
+	}
 	public ArrayList<QuizInfo> getMyQuizzes(String author) {
 		ArrayList<QuizInfo> result = new ArrayList<QuizInfo>();
 		String order = "" + "SELECT quiz_id, quiz_name, user_login, date_created, times_taken " + "FROM Quizzes "
 				+ "JOIN Users ON author_id = user_id AND author_id = " + getAuthorID(author)
-				+ " ORDER BY date_created DESC " + "LIMIT " + LIMIT_RESULTS_FOR_BLOCKS;
+				+ " ORDER BY date_created DESC " + "LIMIT " + Constants.LIMIT_RESULTS_FOR_BLOCKS;
 		ResultSet res = null;
 		try {
 			PreparedStatement stm = connection.prepareStatement(order);
