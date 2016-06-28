@@ -19,6 +19,7 @@ create table Quizzes (
     category_id int not null,
     quiz_description varchar(1000),
     author_id int not null,
+    quiz_score int default 0,
     quiz_likes int default 0,
     date_created timestamp not null,
     quiz_difficulty varchar(50),
@@ -135,30 +136,12 @@ create table Messages(
 	message_text varchar(1000),
 	message_subject varchar(500),
 	date_sent timestamp,
--- 	message_seen int(1) default 0, 
+ 	message_seen tinyint(1) default 0, 
 	
 	foreign key (sender_id) references Users(user_id),
 	foreign key (recipient_id) references Users(user_id)
 
 )
 -- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-
-
-insert into Users(user_login, user_password, user_name) values 
-	('faskunji1', 'afasljflasjf', 'levan goderdzishvili');
-    
-select * from users;
-
--- Caution remove scripts
-
-drop table Answers;
-drop table Friends;
-drop table FriendshipRequests;
-drop table Questions;
-drop table QuestionTypes;
-drop table Quizzes;
-drop table Categories;
-drop table Users;
 
 -- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
