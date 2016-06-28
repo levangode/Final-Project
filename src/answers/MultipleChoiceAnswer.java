@@ -20,6 +20,10 @@ public class MultipleChoiceAnswer extends Answer {
 	public String getAnswerText() {
 		return answer_text;
 	}
+	
+	public boolean isCorrect(){
+		return this.getAnswercorrect();
+	}
 
 	public String getHtml(int questionNum, int answerNum) {
 		String html = "";
