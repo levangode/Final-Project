@@ -1,6 +1,6 @@
 <%@page import="DBQuizControllers.QuizInfoController"%>
 <%@page import="quizInfoes.*"%>
-<%@page import="java.util.*"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE>
@@ -49,7 +49,7 @@
 				<h4>Highest Performers of all time</h4>
 				<%
 					QuizInfoController scores = new QuizInfoController();
-					ArrayList<HighScore> scor = scores.getHighScores(quiz_id);
+					ArrayList<HighScore> scor = scores.getHighScores(quiz_id, Constants.NO_HOURS_LIMIT);
 					if (scor.isEmpty()) {
 						out.print("Quiz hasn't been taken yet, be the first!");
 					}
@@ -60,10 +60,25 @@
 			</div>
 			<div style="width: 22%;" class="column">
 				<h4>Top Performers of the day</h4>
+				<%
+					QuizInfoController todayScores = new QuizInfoController();
+					ArrayList<HighScore> todayScor = todayScores.getHighScores(quiz_id, Constants.PAST_HOURS);
+					if (todayScor.isEmpty()) {
+						out.print("Quiz hasn't been taken yet, be the first!");
+					}
+					for (HighScore next : todayScor) {
+						next.showOnCard(out);
+					}
+				%>
 			</div>
 		</div>
 		<div id="mid" style="position: relative; overflow: hidden;">
 			<h4>Statistics</h4>
+			<%
+				QuizInfoController stat = new QuizInfoController();
+				Statistics statist = stat.getStatistics();
+				statist.showOnCard(out);
+			%>
 		</div>
 		<div id="bottom" style="overflow: hidden; margin: 20px;">
 			<form action="QuizPage.jsp">

@@ -28,4 +28,7 @@ public class QuizInfoFactory {
 	public static HighScore getHighScore(int score, String user) {
 		return new HighScore(score, user);
 	}
+	public static Statistics getStatistics(int count, int avgScore){
+		return new Statistics(count, avgScore);
+	}
 }
