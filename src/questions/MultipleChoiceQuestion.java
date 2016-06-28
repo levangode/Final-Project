@@ -1,6 +1,8 @@
 package questions;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -28,6 +30,40 @@ public class MultipleChoiceQuestion extends Question {
 				+ answers_to_be_correct + "\n";
 		return result;
 
+	}
+	
+	public ArrayList<Answer> getFormattedAnswers(){
+		ArrayList<Answer> res = new ArrayList<Answer>();
+		
+		List<Answer> tmp = this.getAnswers();
+		Collections.shuffle(tmp);
+		
+		int total = answers_to_show;
+		int correct = answers_to_be_correct;
+		
+		for(Answer ans: tmp){
+			if(((MultipleChoiceAnswer)ans).isCorrect()){
+				if(correct>0){
+					correct--;
+					total--;
+					res.add(ans);
+				}
+			} else
+			if(!((MultipleChoiceAnswer)ans).isCorrect()){
+				if(total>0){
+					total--;
+					res.add(ans);
+				}
+			}
+			else
+			if(correct == 0 && total == 0){
+				break;
+			} else{
+				System.out.println("something went wrong int getFormattedAnswers Methd!!!!!!!!!!!!!!");
+			}
+		}
+		
+		return res;
 	}
 
 	public int getNumanswersdisplay() {
