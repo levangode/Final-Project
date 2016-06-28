@@ -161,6 +161,7 @@ h3 {
 					<%
 						DBQuizController q = new DBQuizController();
 						ArrayList<String> quizCategories = q.getQuizCategories();
+						out.print("<li><a href=\"HomePage.jsp\">"+"All"+"</a></li>");
 						for (String a : quizCategories) {
 							out.print("<li><a href=\"HomePage.jsp?category="+a+"\">" + a + "</a></li>");
 						}

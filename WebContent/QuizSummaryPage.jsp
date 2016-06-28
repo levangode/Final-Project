@@ -86,6 +86,10 @@
 					value=<%out.print(request.getParameter("id"));%>> <input
 					type="submit" value="Take Quiz">
 			</form>
+			<form action="SubmitLike" method="post">
+				<input type="hidden" name="like_id" value=<%out.print(request.getParameter("id")); %>>
+				<input type="submit" value="Like Quiz">
+			</form>
 		</div>
 	</div>
 
