@@ -67,10 +67,10 @@ public class QuizInfoController {
 		return result;
 	}
 
-	public ArrayList<QuizInfo> getPopularQuizzes() {
+	public ArrayList<QuizInfo> getPopularQuizzes(String orderBy) {
 		ArrayList<QuizInfo> result = new ArrayList<QuizInfo>();
 		String order = "" + "select quiz_id, quiz_name, user_login, date_created, times_taken from Quizzes "
-				+ "join Users on author_id=user_id " + "order by times_taken limit " + Constants.LIMIT_RESULTS_FOR_BLOCKS;
+				+ "join Users on author_id=user_id " + "order by "+orderBy+" DESC limit " + Constants.LIMIT_RESULTS_FOR_BLOCKS;
 		ResultSet res = null;
 		try {
 			PreparedStatement stm = connection.prepareStatement(order);

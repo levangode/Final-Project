@@ -184,12 +184,24 @@ h3 {
 			<!-- Right Panel -->
 			<div class="box" style="float: right">
 				<div class="box" style="position: relative;">
-					<h2 style="text-align: center; margin: 1px;">Hot Quizzes</h2>
+					<h2 style="text-align: center; margin: 1px;">Popular Quizzes</h2>
 					<ul>
 						<%
 							QuizInfoController getter = new QuizInfoController();
-							ArrayList<QuizInfo> popular = getter.getPopularQuizzes();
+							ArrayList<QuizInfo> popular = getter.getPopularQuizzes("times_taken");
 							for (QuizInfo a : popular) {
+								out.print("<li><a href=\"QuizSummaryPage.jsp?id="+a.getQuiz_id()+"\">" + a.getQuiz_name() + "</a></li>");
+							}
+						%>
+					</ul>
+				</div>
+				<div class="box" style="position: relative;">
+					<h2 style="text-align: center; margin: 1px;">Most Liked</h2>
+					<ul>
+						<%
+							QuizInfoController liked = new QuizInfoController();
+							ArrayList<QuizInfo> likes = liked.getPopularQuizzes("quiz_likes");
+							for (QuizInfo a : likes) {
 								out.print("<li><a href=\"QuizSummaryPage.jsp?id="+a.getQuiz_id()+"\">" + a.getQuiz_name() + "</a></li>");
 							}
 						%>

@@ -1,3 +1,4 @@
+<%@page import="DBQuizControllers.DBQuizController"%>
 <%@page import="DBQuizControllers.QuizInfoController"%>
 <%@page import="quizInfoes.*"%>
 <%@page import="java.util.ArrayList"%>
@@ -86,10 +87,19 @@
 					value=<%out.print(request.getParameter("id"));%>> <input
 					type="submit" value="Take Quiz">
 			</form>
-			<form action="SubmitLike" method="post">
-				<input type="hidden" name="like_id" value=<%out.print(request.getParameter("id")); %>>
-				<input type="submit" value="Like Quiz">
-			</form>
+			<%
+				DBQuizController another =  new DBQuizController();
+				String button = "";
+				if(another.canLike(user_login, quiz_id)){
+					button = "<input type=\"submit\" value=\"Like Quiz\">";
+				} else {
+					button = "<input type=\"submit\" value=\"Liked\" disabled>";
+				}
+				out.write("<form action=\"SubmitLike\" method=\"post\">");
+				out.write("<input type=\"hidden\" name=\"like_id\" value="+request.getParameter("id")+">");
+				out.write(button);
+				out.write("</form>");
+			%>
 		</div>
 	</div>
 

@@ -96,6 +96,14 @@ create table Questions(
 	foreign key (quiz_id) references Quizzes(quiz_id)
 );
 
+create table Likes(
+	user_id int not null,
+	quiz_id int not null,
+	
+	foreign key (user_id) references Users(user_id),
+	foreign key (quiz_id) references Quizzes(quiz_id)
+);
+
 create table Answers(
 	answer_id int auto_increment primary key,
 	answer_text varchar(500),

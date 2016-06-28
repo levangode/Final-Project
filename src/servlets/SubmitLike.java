@@ -38,7 +38,7 @@ public class SubmitLike extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		DBQuizController qc = new DBQuizController();
 		int quiz_id=Integer.parseInt(request.getParameter("like_id"));
-		qc.incrementLikes(quiz_id);
+		qc.addLike((String)request.getSession().getAttribute("user_name"), quiz_id);
 		response.sendRedirect("QuizSummaryPage.jsp?id="+quiz_id);
 		doGet(request, response);
 	}
