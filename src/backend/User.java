@@ -1,5 +1,7 @@
 package backend;
 
+import database.UserController;
+
 public class User {
 	private String name;
 	private String login;
@@ -14,7 +16,7 @@ public class User {
 	}
 
 	public User(String name, Integer id, String login) {
-		this(name,  login, DEFAULT_IMAGE);
+		this(name, login, DEFAULT_IMAGE);
 	}
 
 	public String getName() {
@@ -25,6 +27,11 @@ public class User {
 		int counter = 0;
 
 		return counter;
+	}
+
+	public void editImageUrl(String url) {
+		UserController cont = new UserController();
+		cont.editImgUrl(this.login, url);
 	}
 
 	public String getLogin() {

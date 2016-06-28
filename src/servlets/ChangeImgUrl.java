@@ -1,28 +1,26 @@
 package servlets;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import backend.User;
+import DBQuizControllers.DBQuizController;
 import database.UserController;
-import helpers.Hasher;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class ChangeImgUrl
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/ChangeImgUrl")
+public class ChangeImgUrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public Login() {
+	public ChangeImgUrl() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -43,21 +41,13 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String user_login = request.getParameter("user_login");
-		String user_password = request.getParameter("user_password");
-		UserController db = new UserController();
-		Hasher h = new Hasher();
-		if (db.containsUser(user_login)) {
-			if (db.passwordMatch(user_login, h.generateHash(user_password))) {
-				request.getSession().setAttribute("user_name", user_login);
-				request.getSession().setAttribute("logged_in", true);
-				response.sendRedirect("HomePage.jsp");
-			} else {
-				request.getRequestDispatcher("TryAgain.jsp").forward(request, response);
-			}
-		} else {
-			request.getRequestDispatcher("TryAgain.jsp").forward(request, response);
-		}
+		String newUrl = (String) request.getParameter("imgUrl");
+		String login = (String) request.getSession().getAttribute("user_name");
+		UserController contr = new UserController();
+		DBQuizController db = new DBQuizController();
+		int id = db.getAuthorId(login);
+		contr.editImgUrl(login, newUrl);
+		response.sendRedirect("UserPage.jsp?id=" + id);
 		doGet(request, response);
 	}
 

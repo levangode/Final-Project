@@ -129,6 +129,10 @@ h3 {
 						if ((boolean) request.getSession().getAttribute("logged_in")) {
 							out.write("You are logged in as: ");
 							out.write((String) request.getSession().getAttribute("user_name") + "   ");
+							String login = (String) request.getSession().getAttribute("user_name");
+							DBQuizController quizCont = new DBQuizController();
+							int yourID = quizCont.getAuthorId(login);
+							out.write("<a href='UserPage.jsp?id=" + yourID + "'>Your Page</a>");
 							out.write("<a href=\"Logout.jsp\">Logout</a>");
 						} else {
 							out.write("User Name: <input type=\"text\" name=\"user_login\">");

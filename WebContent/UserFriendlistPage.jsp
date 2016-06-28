@@ -41,7 +41,10 @@ div.left {
 		for (int i = 0; i < friendIds.size(); i++) {
 			User friend = userController.getUserByID(friendIds.get(i));
 			int friendsId = friendIds.get(i);
-			
+			String url = friend.getImageURL();
+			String name = friend.getName();
+			out.print("<li> <img border='0' alt='FriendImage' src='" + url + "' width='100' height='100'>"
+					+ "<h3><a href='UserPage.jsp?id=" + friendsId + "'>" + name + "</a></h3>	</li>");
 		}
 	%>
 

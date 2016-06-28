@@ -81,6 +81,24 @@ public class UserController {
 		return thisUser;
 	}
 
+	public void editImgUrl(String login, String newUrl) {
+		db = new DBconnector();
+		connection = db.getConnection();
+		String order = "Update Users Set user_profile_image = '" + newUrl + "' where user_login ='" + login + "'";
+		PreparedStatement stm = null;
+
+		try {
+			stm = connection.prepareStatement(order);
+			System.out.println(stm);
+			stm.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		db.closeConnection();
+
+	}
+
 	public boolean containsUser(String user_login) {
 		db = new DBconnector();
 		connection = db.getConnection();
