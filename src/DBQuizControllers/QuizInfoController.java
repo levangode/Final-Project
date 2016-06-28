@@ -105,7 +105,6 @@ public class QuizInfoController {
 	private int getAuthorID(String authorName) {
 		int id = 0;
 		String command = "Select user_id from Users where user_login = " + "'" + authorName + "'";
-		System.out.println(command);
 		PreparedStatement stm = null;
 		try {
 			stm = connection.prepareStatement(command);
@@ -125,7 +124,6 @@ public class QuizInfoController {
 		String order = "Select time_finished, time_taken, score from Quiz_taken where user_id = " + user_id
 				+ " AND quiz_id = " + quiz_id;
 		PreparedStatement stm = null;
-		System.out.println(order);
 		try {
 			stm = connection.prepareStatement(order);
 			ResultSet res = stm.executeQuery();
@@ -147,7 +145,6 @@ public class QuizInfoController {
 		String order = "Select user_login, score from Quiz_taken q join Users u on u.user_id=q.user_id where quiz_id = "
 				+ quiz_id + " order by score limit " + LIMIT_OF_SCORES;
 		PreparedStatement stm = null;
-		System.out.println(order);
 		try {
 			stm = connection.prepareStatement(order);
 			ResultSet res = stm.executeQuery();
