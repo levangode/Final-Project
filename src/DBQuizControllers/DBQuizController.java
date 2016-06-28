@@ -77,7 +77,7 @@ public class DBQuizController {
 		return result;
 	}
 
-	private int getAuthorId(String author) {
+	public int getAuthorId(String author) {
 		int result = 0;
 		String order = "select user_id from Users where user_login = '" + author + "'";
 		PreparedStatement stm = null;
@@ -118,11 +118,11 @@ public class DBQuizController {
 			while (myRes.next()) {
 				id = myRes.getInt(1);
 			}
-			
-			for(Question cur: quiz.getQuestions()){
+
+			for (Question cur : quiz.getQuestions()) {
 				cur.addToDatabase(id);
 			}
-			
+
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -132,64 +132,93 @@ public class DBQuizController {
 		}
 		return id;
 	}
-	
-	public Quiz getQuiz(int id){
+
+	public Quiz getQuiz(int id) {
 		String query = "select Quizzes.quiz_name, Categories.category_name, Quizzes.quiz_description, Users.user_name, Quizzes.quiz_likes, Quizzes.date_created, Quizzes.quiz_difficulty, Quizzes.times_taken, Quizzes.multiple_pages, Quizzes.immediate_correction, Quizzes.random_questions, Quizzes.quiz_id "
-				+ " from Quizzes, Users, Categories where quiz_id = "
-				+ id
+				+ " from Quizzes, Users, Categories where quiz_id = " + id
 				+ " and Quizzes.author_id = Users.user_id and Quizzes.category_id = Categories.category_id;";
 
 		Quiz tmpQuiz = null;
-		
+
 		PreparedStatement stm = null;
-		
+
 		System.out.println(query);
-		try {			
+		try {
 			stm = connection.prepareStatement(query);
-			
+
 			ResultSet res = stm.executeQuery();
-			
-			
-			while(res.next()){
+
+			while (res.next()) {
 				ArrayList<Question> questions = getQuestions(res.getInt(12));
-				
-				tmpQuiz = new Quiz(res.getString(1), res.getString(3), res.getString(4), res.getInt(5), res.getTimestamp(6), res.getString(2), res.getString(7), res.getInt(8), 
-							questions,
-							res.getBoolean(9), res.getBoolean(10), res.getBoolean(11));
+
+				tmpQuiz = new Quiz(res.getString(1), res.getString(3), res.getString(4), res.getInt(5),
+						res.getTimestamp(6), res.getString(2), res.getString(7), res.getInt(8), questions,
+						res.getBoolean(9), res.getBoolean(10), res.getBoolean(11));
 			}
-			
+
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return tmpQuiz;
+	}
+
+	public ArrayList<Quiz> getMyQuizes(String author) {
+		String query = "select Quizzes.quiz_name, Categories.category_name, Quizzes.quiz_description, Users.user_name, Quizzes.quiz_likes, Quizzes.date_created, Quizzes.quiz_difficulty, Quizzes.times_taken, Quizzes.multiple_pages, Quizzes.immediate_correction, Quizzes.random_questions, Quizzes.quiz_id "
+				+ " from Quizzes, Users, Categories where author_id = " + getAuthorId(author)
+				+ " and Quizzes.author_id = Users.user_id and Quizzes.category_id = Categories.category_id;";
+
+		ArrayList<Quiz> quizes = new ArrayList<>();
+		PreparedStatement stm = null;
+
+		System.out.println(query);
+		try {
+			stm = connection.prepareStatement(query);
+
+			ResultSet res = stm.executeQuery();
+
+			while (res.next()) {
+				Quiz tmpQuiz = null;
+				ArrayList<Question> questions = getQuestions(res.getInt(12));
+
+				tmpQuiz = new Quiz(res.getString(1), res.getString(3), res.getString(4), res.getInt(5),
+						res.getTimestamp(6), res.getString(2), res.getString(7), res.getInt(8), questions,
+						res.getBoolean(9), res.getBoolean(10), res.getBoolean(11));
+				quizes.add(tmpQuiz);
+			}
+
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return quizes;
 	}
 
 	private ArrayList<Question> getQuestions(int id) {
 		ArrayList<Question> questions = new ArrayList<Question>();
-		
-		//Response questions
+
+		// Response questions
 		DBQuestionResponse db1 = new DBQuestionResponse();
-		List<QuestionResponse> responseQuestions =  db1.retrieveQuestions(id);
+		List<QuestionResponse> responseQuestions = db1.retrieveQuestions(id);
 		questions.addAll(responseQuestions);
 
-		//Multiple choice questions
+		// Multiple choice questions
 		DBQuestionMultipleChoice db2 = new DBQuestionMultipleChoice();
-		List<MultipleChoiceQuestion> multipleChoiceQuestions =  db2.retrieveQuestions(id);
+		List<MultipleChoiceQuestion> multipleChoiceQuestions = db2.retrieveQuestions(id);
 		questions.addAll(multipleChoiceQuestions);
 
-		//Fill in the blanks questions
+		// Fill in the blanks questions
 		DBQuestionFillInTheBlanks db3 = new DBQuestionFillInTheBlanks();
-		List<FillTheBlankQuestion> fillTheBlanksQuestions =  db3.retrieveQuestions(id);
+		List<FillTheBlankQuestion> fillTheBlanksQuestions = db3.retrieveQuestions(id);
 		questions.addAll(fillTheBlanksQuestions);
 
-		//Multiple answers questions
+		// Multiple answers questions
 		DBQuestionWithMultipleAnswers db4 = new DBQuestionWithMultipleAnswers();
-		List<QuestionWithMultipleAnswers> multipleAnswersQuestions =  db4.retrieveQuestions(id);
+		List<QuestionWithMultipleAnswers> multipleAnswersQuestions = db4.retrieveQuestions(id);
 		questions.addAll(multipleAnswersQuestions);
-		
+
 		return questions;
 	}
 }
