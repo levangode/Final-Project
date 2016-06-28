@@ -158,7 +158,7 @@ h3 {
 						DBQuizController q = new DBQuizController();
 						ArrayList<String> quizCategories = q.getQuizCategories();
 						for (String a : quizCategories) {
-							out.print("<li><a href=\"QuizSummaryPage.jsp\">" + a + "</a></li>");
+							out.print("<li><a href=\"HomePage.jsp?category="+a+"\">" + a + "</a></li>");
 						}
 					%>
 				</ul>
@@ -169,7 +169,7 @@ h3 {
 				style="text-align: center; width: calc(100% - 360px);">
 				<%
 					QuizInfoController all = new QuizInfoController();
-					ArrayList<QuizDetailedInfo> quizzes = all.getQuizzes();
+					ArrayList<QuizDetailedInfo> quizzes = all.getQuizzes(request.getParameter("category"));
 					for (QuizDetailedInfo b : quizzes) {
 						b.showOnCard(out);
 					}
@@ -185,7 +185,7 @@ h3 {
 							QuizInfoController getter = new QuizInfoController();
 							ArrayList<QuizInfo> popular = getter.getPopularQuizzes();
 							for (QuizInfo a : popular) {
-								out.print("<li><a href=\"QuizSummaryPage.jsp\">" + a.getQuiz_name() + "</a></li>");
+								out.print("<li><a href=\"QuizSummaryPage.jsp?id="+a.getQuiz_id()+"\">" + a.getQuiz_name() + "</a></li>");
 							}
 						%>
 					</ul>
@@ -198,7 +198,7 @@ h3 {
 							QuizInfoController getter2 = new QuizInfoController();
 							ArrayList<QuizInfo> mine = getter2.getMyQuizzes((String) request.getSession().getAttribute("user_name"));
 							for (QuizInfo a : mine) {
-								out.print("<li><a href=\"QuizSummaryPage.jsp\">" + a.getQuiz_name() + "</a></li>");
+								out.print("<li><a href=\"QuizSummaryPage.jsp?id="+a.getQuiz_id()+"\">" + a.getQuiz_name() + "</a></li>");
 								//TODO shignidan ro dabechdos tavisi tavi
 							}
 						%>

@@ -33,12 +33,16 @@ public class QuizInfoController {
 		this.connection = new DBconnector().getConnection();
 	}
 
-	public ArrayList<QuizDetailedInfo> getQuizzes() {
+	public ArrayList<QuizDetailedInfo> getQuizzes(String category) {
 		ArrayList<QuizDetailedInfo> result = new ArrayList<QuizDetailedInfo>();
+		String addition = "";
+		if(category != null){
+			addition = "AND c.category_name = '"+category+"'";
+		}
 		String order = ""
 				+ "SELECT quiz_id, quiz_name, quiz_description, category_name, user_login, date_created, times_taken, quiz_likes "
 				+ "FROM Quizzes q " + "JOIN Users ON author_id = user_id "
-				+ "JOIN Categories c ON c.category_id = q.category_id " + "ORDER BY date_created DESC " + "LIMIT "
+				+ "JOIN Categories c ON c.category_id = q.category_id " +addition+ "ORDER BY date_created DESC " + "LIMIT "
 				+ Constants.LIMIT_RESULTS_FOR_FEED;
 		ResultSet res = null;
 		try {
