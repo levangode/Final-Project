@@ -16,7 +16,7 @@ public class DBFriendController {
 	public List<Integer> getFriendsIDList(int ID){
 		List<Integer> friends = new ArrayList<Integer>();
 		
-		String query = "select `to` from Firends where `from` = " + ID + ";";
+		String query = "select `to` from Friends where `from` = " + ID + ";";
 		
 		java.sql.PreparedStatement stm;
 		

@@ -25,7 +25,9 @@ div.left {
 
 
 <%
-	User user = (User) request.getSession().getAttribute("User");
+	int mid = Integer.parseInt(request.getParameter("id"));
+	UserController db = new UserController();
+	User user = db.getUserByID(mid);
 	DBFriendController friendDB = new DBFriendController();
 	DBQuizController quizDB = new DBQuizController();
 	int id = quizDB.getAuthorId(user.getLogin());
@@ -52,7 +54,8 @@ div.left {
 		<a class="btn" href="HomePage.jsp"> Return To Homepage </a>
 	</div>
 	<div class="center">
-		<a class="btn" href="UserPage.jsp"> Return To User Page </a>
+		<a class="btn" href="UserPage.jsp?id=<%out.print(id);%>"> Return
+			To User Page </a>
 	</div>
 
 </body>

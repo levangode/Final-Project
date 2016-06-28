@@ -63,15 +63,17 @@ div.right {
 			<a class="btn" href="HomePage.jsp"> Return To Homepage </a>
 		</p>
 	</div>
+	
 	<div class='right'>
-		<a class="btn" href="UserFriendlistPage.jsp"> My Friends </a>
+	
+		<a class="btn" href="UserFriendlistPage.jsp?id=<%out.print(id);%>"
+			> My Friends </a>
 	</div>
 	<div class='right'>
-		<a class="btn" href="UserQuizes.jsp"> My Quizes </a>
+		<a class="btn" href="UserQuizes.jsp?id=<%out.print(id);%>"> My
+			Quizes </a>
 	</div>
-	<div class='right'>
-		<a class="btn" href="UserFriendlistPage.jsp"> Recent Quizes </a>
-	</div>
+
 
 
 </body>
