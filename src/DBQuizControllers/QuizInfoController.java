@@ -7,12 +7,15 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import backend.Quiz;
 import database.DBconnector;
+import questions.Question;
 import quizInfoes.HighScore;
 import quizInfoes.QuizDetailedInfo;
 import quizInfoes.QuizFullSummary;
 import quizInfoes.QuizInfo;
 import quizInfoes.QuizInfoFactory;
+import quizInfoes.ShortInfo;
 import quizInfoes.UserActivity;
 
 public class QuizInfoController {
@@ -213,4 +216,34 @@ public class QuizInfoController {
 		}
 		return result;
 	}
+
+	public ArrayList<ShortInfo> getMyQuizesShortInfo(String author) {
+		String query = "select Quizzes.quiz_id,Quizzes.quiz_name, Quizzes.quiz_description, Quizzes.quiz_likes, Quizzes.date_created "
+				+ " from Quizzes where author_id = " + getAuthorID(author);
+
+		ArrayList<ShortInfo> quizes = new ArrayList<>();
+		PreparedStatement stm = null;
+
+		System.out.println(query);
+		try {
+			stm = connection.prepareStatement(query);
+
+			ResultSet res = stm.executeQuery();
+
+			while (res.next()) {
+				ShortInfo tmpQuiz = null;
+				tmpQuiz = new ShortInfo(res.getInt(1), res.getString(2), res.getTimestamp(5), res.getString(3),
+						res.getInt(4));
+
+				quizes.add(tmpQuiz);
+			}
+
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return quizes;
+	}
+
 }
