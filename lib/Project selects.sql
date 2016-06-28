@@ -48,7 +48,7 @@ create table Quiz_taken(
 	quiz_id int not null,
 	
 	time_finished timestamp,
-	time_taken timestamp,
+	time_taken int,
 	
 	score int not null,
 	
