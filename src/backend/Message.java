@@ -38,13 +38,7 @@ public class Message {
 		return recipient.getName();
 	}
 	
-	public Integer getSenderID(){
-		return sender.getId();
-	}
-
-	public Integer getRecipientID(){
-		return recipient.getId();
-	}
+	
 
 
 }

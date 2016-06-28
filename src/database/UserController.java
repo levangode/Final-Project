@@ -37,7 +37,7 @@ public class UserController {
 					user_profile_image = User.DEFAULT_IMAGE;
 				}
 
-				thisUser = new User(user_name, user_id, user_login, user_profile_image);
+				thisUser = new User(user_name, user_login, user_profile_image);
 			}
 
 		} catch (SQLException e) {
@@ -70,7 +70,7 @@ public class UserController {
 					user_profile_image = User.DEFAULT_IMAGE;
 				}
 
-				thisUser = new User(user_name, user_id, user_login, user_profile_image);
+				thisUser = new User(user_name, user_login, user_profile_image);
 			}
 
 		} catch (SQLException e) {

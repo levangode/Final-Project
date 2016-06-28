@@ -30,7 +30,7 @@ div.left {
 	DBQuizController quizDB = new DBQuizController();
 	int id = quizDB.getAuthorId(user.getLogin());
 	UserController userController = new UserController();
-	List<Integer> friendIds =friendDB.getFriendsIDList(id);
+	List<Integer> friendIds = friendDB.getFriendsIDList(id);
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Your Friends</title>
@@ -38,8 +38,9 @@ div.left {
 <body>
 
 	<%
-		for(int i =0; i < friendIds.size();i++){
+		for (int i = 0; i < friendIds.size(); i++) {
 			User friend = userController.getUserByID(friendIds.get(i));
+			int friendsId = friendIds.get(i);
 			
 		}
 	%>

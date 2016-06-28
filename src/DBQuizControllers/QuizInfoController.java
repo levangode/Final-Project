@@ -9,21 +9,20 @@ import java.util.ArrayList;
 
 import backend.Quiz;
 import database.DBconnector;
-<<<<<<< HEAD
+
 import questions.Question;
-=======
+
 import quizInfoes.Constants;
->>>>>>> origin/master
+
 import quizInfoes.HighScore;
 import quizInfoes.QuizDetailedInfo;
 import quizInfoes.QuizFullSummary;
 import quizInfoes.QuizInfo;
 import quizInfoes.QuizInfoFactory;
-<<<<<<< HEAD
+
 import quizInfoes.ShortInfo;
-=======
+
 import quizInfoes.Statistics;
->>>>>>> origin/master
 import quizInfoes.UserActivity;
 
 public class QuizInfoController {
