@@ -1,7 +1,6 @@
 package quizInfoes;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 
 public class QuizInfoFactory {
 	public static QuizInfo getQuizInfo(String quiz_name, int times_taken, String quiz_author, Timestamp quiz_date,
@@ -24,5 +23,9 @@ public class QuizInfoFactory {
 
 	public static UserActivity getUserActivity(Timestamp time_finished, Timestamp time_taken, int score, String user) {
 		return new UserActivity(time_finished, time_taken, score, user);
+	}
+
+	public static HighScore getHighScore(int score, String user) {
+		return new HighScore(score, user);
 	}
 }
