@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import DBAnswerControllers.DBMultipleAnswers;
@@ -219,6 +220,8 @@ public class DBQuizController {
 		List<QuestionWithMultipleAnswers> multipleAnswersQuestions = db4.retrieveQuestions(id);
 		questions.addAll(multipleAnswersQuestions);
 
+		Collections.sort(questions);
+		
 		return questions;
 	}
 }

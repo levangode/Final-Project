@@ -34,7 +34,7 @@ public class DBQuestionMultipleChoice {
 	public List<MultipleChoiceQuestion> retrieveQuestions(int quiz_id){
 		List<MultipleChoiceQuestion> questions = new ArrayList<MultipleChoiceQuestion>();
 		
-		String query = " select question_text, question_data, question_time_limit, score, num_answers_display, num_answers_correct, question_id from Questions_MultipleChoice where quiz_id = "
+		String query = " select question_text, question_data, question_time_limit, score, num_answers_display, num_answers_correct, question_id, question_number from Questions_MultipleChoice where quiz_id = "
 				+ quiz_id
 				+ "; ";
 		
@@ -60,7 +60,7 @@ public class DBQuestionMultipleChoice {
 								rs.getInt(5),
 								rs.getInt(6),
 								answers,
-								0
+								rs.getInt(8)
 							);
 				
 				questions.add(newQuestion);
@@ -88,14 +88,15 @@ public class DBQuestionMultipleChoice {
 	
 	public void addQuestion(MultipleChoiceQuestion question, int quiz_id) throws Exception{
 		String query = 
-				"insert into Questions_MultipleChoice(quiz_id, question_text, question_data, question_time_limit, score, num_answers_display, num_answers_correct) value ("
+				"insert into Questions_MultipleChoice(quiz_id, question_text, question_data, question_time_limit, score, num_answers_display, num_answers_correct, question_number) value ("
 				+ quiz_id + ", "
 				+ "'" + question.getQuestiontext() + "'" + ", "
 				+ "'" + question.getQuestiondescription() + "'" + ", "
 				+ question.getQuestiontimelimit() + ", "
 				+ question.getQuestionscore() + ", "
 				+ question.getNumanswersdisplay() + ", "
-				+ question.getNumanswerscorrect()
+				+ question.getNumanswerscorrect() + ", "
+				+ question.getQuestionnumber()
 				+ ");";
 		
 		PreparedStatement stm;

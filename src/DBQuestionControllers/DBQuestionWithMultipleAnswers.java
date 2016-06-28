@@ -30,7 +30,7 @@ public class DBQuestionWithMultipleAnswers {
 	public List<QuestionWithMultipleAnswers> retrieveQuestions(int quiz_id){
 		List<QuestionWithMultipleAnswers> questions = new ArrayList<QuestionWithMultipleAnswers>();
 		
-		String query = "select question_text, question_data, question_time_limit, num_answers, score, answers_ordered, question_id from Questions_MultipleAnswers where quiz_id = "
+		String query = "select question_text, question_data, question_time_limit, num_answers, score, answers_ordered, question_id, question_number from Questions_MultipleAnswers where quiz_id = "
 					+ quiz_id + " ;";
 		
 		PreparedStatement stm;
@@ -53,7 +53,7 @@ public class DBQuestionWithMultipleAnswers {
 								rs.getInt(5),// this is for numAnswers but it is not in constructor
 								rs.getBoolean(6),
 								answers,
-								0
+								rs.getInt(8)
 							);
 				
 				questions.add(newQuestion);
@@ -81,14 +81,15 @@ public class DBQuestionWithMultipleAnswers {
 	
 	public void addQuestion(QuestionWithMultipleAnswers question, int quiz_id) throws Exception{
 		String query = 
-				"insert into Questions_MultipleAnswers(quiz_id, question_text, question_data, question_time_limit, score, num_answers, answers_ordered) value ("
+				"insert into Questions_MultipleAnswers(quiz_id, question_text, question_data, question_time_limit, score, num_answers, answers_ordered, question_number) value ("
 				+ quiz_id + ", "
 				+ "'" + question.getQuestiontext() + "'" + ", "
 				+ "'" + question.getQuestiondescription() + "'" + ", "
 				+ question.getQuestiontimelimit() + ", "
 				+ question.getQuestionscore() + ", "
 				+ question.getNumanswers() + ", "
-				+ question.getAnswersordered()
+				+ question.getAnswersordered() + ", "
+				+ question.getQuestionnumber()
 				+ ");";
 		
 		PreparedStatement stm;

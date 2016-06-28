@@ -30,7 +30,7 @@ public class DBQuestionResponse {
 	public List<QuestionResponse> retrieveQuestions(int quiz_id){
 		List<QuestionResponse> questions = new ArrayList<QuestionResponse>();
 		
-		String query = "select question_text, question_data, question_time_limit, score, question_id from Questions_QuestionResponse where quiz_id = "
+		String query = "select question_text, question_data, question_time_limit, score, question_id, question_number from Questions_QuestionResponse where quiz_id = "
 				+ quiz_id
 				+ ";";
 		
@@ -54,7 +54,7 @@ public class DBQuestionResponse {
 								rs.getInt(3),
 								rs.getInt(4),
 								answers,
-								0
+								rs.getInt(6)
 							);
 				
 				questions.add(newQuestion);
@@ -82,12 +82,13 @@ public class DBQuestionResponse {
 	
 	public void addQuestion(QuestionResponse question, int quiz_id) throws Exception{
 		String query = 
-				"insert into Questions_QuestionResponse(quiz_id, question_text, question_data, question_time_limit, score) value ("
+				"insert into Questions_QuestionResponse(quiz_id, question_text, question_data, question_time_limit, score, question_number) value ("
 				+ quiz_id + ", "
 				+ "'" + question.getQuestiontext() + "'" + ", "
 				+ "'" + question.getQuestiondescription() + "'" + ", "
 				+ question.getQuestiontimelimit() + ", "
-				+ question.getQuestionscore()
+				+ question.getQuestionscore()+ ", "
+				+ question.getQuestionnumber()
 				+ ");";
 		
 //		System.out.println(query);
