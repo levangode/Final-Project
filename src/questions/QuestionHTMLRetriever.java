@@ -8,7 +8,8 @@ public class QuestionHTMLRetriever {
 		String question_description=request.getParameter("description");
 		long question_time_limit = Integer.parseInt(request.getParameter("timeLimit")) * 60000;
 		int question_score=Integer.parseInt(request.getParameter("score"));
-		Question newOne=QuestionFactory.getBlankQuestion(question_text, question_type, question_description, question_time_limit, question_score);
+		// TODO change last argument to proper number
+		Question newOne=QuestionFactory.getBlankQuestion(question_text, question_type, question_description, question_time_limit, question_score,0);
 		return newOne;
 	}
 	private Question getMultiAnswerQuestion(HttpServletRequest request, String question_type){
@@ -21,7 +22,8 @@ public class QuestionHTMLRetriever {
 		if(request.getParameter("order").equals("Ordered")){
 			order=true;
 		}
-		Question newOne=QuestionFactory.getQuestionWithMultipleAnswers(question_text, question_type, question_description, question_time_limit, question_score, num_answers, order);
+		// TODO change last argument
+		Question newOne=QuestionFactory.getQuestionWithMultipleAnswers(question_text, question_type, question_description, question_time_limit, question_score, num_answers, order, 0);
 		return newOne;
 	}
 	private Question getQuestionResponse(HttpServletRequest request, String question_type){
@@ -29,7 +31,8 @@ public class QuestionHTMLRetriever {
 		String question_description=request.getParameter("description");
 		long question_time_limit = Integer.parseInt(request.getParameter("timeLimit")) * 60000;
 		int question_score=Integer.parseInt(request.getParameter("score"));
-		Question newOne=QuestionFactory.getQuestionResponse(question_text, question_type, question_description, question_time_limit, question_score);
+		// TODO change here too
+		Question newOne=QuestionFactory.getQuestionResponse(question_text, question_type, question_description, question_time_limit, question_score, 0);
 		return newOne;
 	}
 	private Question getMultiChoiceMultiAnswer(HttpServletRequest request, String question_type){
@@ -39,7 +42,8 @@ public class QuestionHTMLRetriever {
 		int question_score=Integer.parseInt(request.getParameter("score"));
 		int answers_to_show=Integer.parseInt(request.getParameter("questionsToShow"));
 		int answers_to_be_correct=Integer.parseInt(request.getParameter("correctNeeded"));
-		Question newOne=QuestionFactory.getMultipleChoiceQuesion(question_text, question_type, question_description, question_time_limit, question_score, answers_to_show, answers_to_be_correct);
+		// TODO change last argument
+		Question newOne=QuestionFactory.getMultipleChoiceQuesion(question_text, question_type, question_description, question_time_limit, question_score, answers_to_show, answers_to_be_correct, 0);
 		return newOne;
 	}
 	public Question getQuestion(String type, HttpServletRequest request){
