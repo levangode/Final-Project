@@ -46,14 +46,14 @@ public class DBQuestionFillInTheBlanks {
 				
 				ArrayList<Answer> answers = getAnswers(rs.getInt(5));
 				
-				// TODO add code for answers
 				newQuestion = new FillTheBlankQuestion(
 								rs.getString(1), 
 								QuestionTypes.QuestionResponse,
 								rs.getString(2),
 								rs.getInt(3),
 								rs.getInt(4),
-								answers
+								answers,
+								0
 							);
 				
 				questions.add(newQuestion);

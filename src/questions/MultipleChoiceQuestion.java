@@ -19,8 +19,8 @@ public class MultipleChoiceQuestion extends Question {
 
 	public MultipleChoiceQuestion(String question_text, String question_type, String question_description,
 			long question_time_limit, int question_score, int answers_to_show, int answers_to_be_correct,
-			ArrayList<Answer> answers) {
-		super(question_text, question_type, question_description, question_time_limit, question_score, answers);
+			ArrayList<Answer> answers, int question_number) {
+		super(question_text, question_type, question_description, question_time_limit, question_score, answers, question_number);
 		this.answers_to_show = answers_to_show;
 		this.answers_to_be_correct = answers_to_be_correct;
 	}

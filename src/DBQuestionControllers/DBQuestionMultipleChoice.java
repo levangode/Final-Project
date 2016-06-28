@@ -59,8 +59,8 @@ public class DBQuestionMultipleChoice {
 								rs.getInt(4),
 								rs.getInt(5),
 								rs.getInt(6),
-								answers
-								//TODO add answers controller
+								answers,
+								0
 							);
 				
 				questions.add(newQuestion);

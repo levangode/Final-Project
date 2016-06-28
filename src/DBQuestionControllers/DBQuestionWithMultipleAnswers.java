@@ -52,7 +52,8 @@ public class DBQuestionWithMultipleAnswers {
 								rs.getInt(4),
 								rs.getInt(5),// this is for numAnswers but it is not in constructor
 								rs.getBoolean(6),
-								answers
+								answers,
+								0
 							);
 				
 				questions.add(newQuestion);

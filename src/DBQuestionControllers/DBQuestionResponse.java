@@ -53,7 +53,8 @@ public class DBQuestionResponse {
 								rs.getString(2),
 								rs.getInt(3),
 								rs.getInt(4),
-								answers
+								answers,
+								0
 							);
 				
 				questions.add(newQuestion);
