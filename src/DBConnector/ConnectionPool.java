@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
  
-import DBConnector.Configuration;
+//import DBConnector.Configuration;
 import java.sql.Connection;;
 
 public class ConnectionPool {
@@ -24,48 +24,44 @@ public class ConnectionPool {
 	}
 	 
 	private synchronized boolean checkIfConnectionPoolIsFull(){
-	final int MAX_POOL_SIZE = Configuration.getInstance().DB_MAX_CONNECTIONS;
+		
+		if(availableConnections.size() < PoolINFO.MAX_CONNECTIONS){
+			return false;
+		}
 	 
-	  if(availableConnections.size() < MAX_POOL_SIZE)
-	  {
-	   return false;
-	  }
+		return true;
+	}
 	 
-	  return true;
-	 }
-	 
-	 //Creating a connection
-	 private Connection createNewConnectionForPool()
-	 {
-	  Configuration config = Configuration.getInstance();
-	  try {
-	   Class.forName(config.DB_DRIVER);
-	   Connection connection = (Connection) DriverManager.getConnection(
-	     config.DB_URL, config.DB_USER_NAME, config.DB_PASSWORD);
-	   return connection;
-	  } catch (ClassNotFoundException e) {
-	   e.printStackTrace();
-	  } catch (SQLException e) {
-	   e.printStackTrace();
-	  }
-	  return null;
-	   
-	 }
-	 
-	 public synchronized Connection getConnectionFromPool()
-	 {
-	  Connection connection = null;
-	  if(availableConnections.size() > 0)
-	  {
-	   connection = (Connection) availableConnections.get(0);
-	   availableConnections.remove(0);
-	  }
-	  return connection;
-	 }
-	 
-	 public synchronized void returnConnectionToPool(Connection connection)
-	 {
-	  availableConnections.add(connection);
-	 }
+	//Creating a connection
+	private Connection createNewConnectionForPool(){
+		//Configuration config = Configuration.getInstance();
+		try {
+			Class.forName(DBINFO.DRIVER_NAME);
+			Connection connection = (Connection) DriverManager.getConnection(
+					DBINFO.MYSQL_DATABASE_SERVER + "/" + DBINFO.MYSQL_DATABASE_NAME,
+					DBINFO.MYSQL_USERNAME,
+					DBINFO.MYSQL_PASSWORD);
+			return connection;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+		 
+	public synchronized Connection getConnectionFromPool(){
+		Connection connection = null;
+		if(availableConnections.size() > 0){
+			connection = (Connection) availableConnections.get(0);
+			availableConnections.remove(0);
+		}
+		return connection;
+	}
+		 
+	public synchronized void returnConnectionToPool(Connection connection){
+		availableConnections.add(connection);
+	}
 	
 }
