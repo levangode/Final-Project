@@ -40,7 +40,7 @@ body {
 				out.print(q.getQuestionHtml(i));
 			}
 		%>
-
+		<input type="hidden" name="id" value=<% out.write(request.getParameter("id")); %>>
 		<input type="submit" value="Submit">
 	</form>
 </body>

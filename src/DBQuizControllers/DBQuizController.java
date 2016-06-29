@@ -224,7 +224,25 @@ public class DBQuizController {
 		
 		return questions;
 	}
-
+	public void incrementTimesTaken(int quiz_id){
+		String order1 = "select times_taken from Quizzes where quiz_id = " + quiz_id + " FOR UPDATE;";
+		String order2 = "update Quizzes set times_taken = times_taken + 1 where quiz_id = " + quiz_id + ";";
+		String order3 = "commit;";
+		PreparedStatement stm1 = null;
+		PreparedStatement stm2 = null;
+		PreparedStatement stm3 = null;
+		try {
+			stm1 = connection.prepareStatement(order1);
+			stm2 = connection.prepareStatement(order2);
+			stm3 = connection.prepareStatement(order3);
+			stm1.executeQuery();
+			stm2.executeUpdate();
+			stm3.executeQuery();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	private void incrementLikes(int quiz_id) {
 		String order1 = "select quiz_likes from Quizzes where quiz_id = " + quiz_id + " FOR UPDATE;";
 		String order2 = "update Quizzes set quiz_likes = quiz_likes + 1 where quiz_id = " + quiz_id + ";";

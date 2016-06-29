@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import DBQuizControllers.DBQuizController;
+import DBQuizControllers.QuizInfoController;
 import answers.Answer;
 import backend.Quiz;
 import questions.MultipleChoiceQuestion;
@@ -69,6 +71,8 @@ public class GradeQuiz extends HttpServlet {
 		System.out.println("CurScore:" + score);
 		request.getSession().setAttribute("userScore", score);
 		request.getSession().setAttribute("maxScore", maxScore);
+		DBQuizController contr = new DBQuizController();
+		contr.incrementTimesTaken(Integer.parseInt(request.getParameter("id")));
 		response.sendRedirect("MyGrade.jsp");
 		doGet(request, response);
 	}

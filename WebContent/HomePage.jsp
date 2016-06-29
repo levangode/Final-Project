@@ -111,6 +111,10 @@ h3 {
 	padding: 7px;
 	position: absolute;
 }
+li {
+	margin:2px 0px;
+}
+
 
 .headers {
 	padding: 10px;
