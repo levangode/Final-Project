@@ -40,7 +40,8 @@ public class QuestionTestAdd {
 					"zzz Best Question ever",
 					1, 
 					1,
-					answers
+					answers,
+					5
 				);
 		
 		try {
@@ -64,7 +65,7 @@ public class QuestionTestAdd {
 		
 		System.out.println(answers.size());
 		
-		Question z = new MultipleChoiceQuestion("how much is 5 + 5?", QuestionTypes.MultipleChoiceMultipleAnswer, "", 1, 1, 5, 1, answers);
+		Question z = new MultipleChoiceQuestion("how much is 5 + 5?", QuestionTypes.MultipleChoiceMultipleAnswer, "", 1, 1, 5, 1, answers, 7);
 		
 		try {
 			z.addToDatabase(27);
@@ -90,7 +91,7 @@ public class QuestionTestAdd {
 		
 		System.out.println(answers.size());
 		
-		Question z = new QuestionWithMultipleAnswers("how much is 5 + 0?", QuestionTypes.MultiAnswer, "", 1, 1, 5, false, answers);
+		Question z = new QuestionWithMultipleAnswers("how much is 5 + 0?", QuestionTypes.MultiAnswer, "", 1, 1, 5, false, answers, 7);
 		
 		try {
 			z.addToDatabase(27);
@@ -110,7 +111,7 @@ public class QuestionTestAdd {
 		answers.add(new BlankAnswer("squrrel", 4));
 		answers.add(new BlankAnswer("unicorn", 5));
 		
-		Question z = new FillTheBlankQuestion("the prettiest animal is ? others are ? ? ? ?", QuestionTypes.FillInTheBlanks, "", 1, 5, answers);
+		Question z = new FillTheBlankQuestion("the prettiest animal is ? others are ? ? ? ?", QuestionTypes.FillInTheBlanks, "", 1, 5, answers, 8);
 		
 		try{
 			z.addToDatabase(27);
