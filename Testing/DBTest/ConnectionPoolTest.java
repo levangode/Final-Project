@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
+
 import DBConnector.Connector;
 import answers.BlankAnswer;
 import answers.ResponseAnswer;
@@ -54,6 +56,8 @@ public class ConnectionPoolTest {
 		
 		System.out.println(answers);
 		
+		System.out.println("Test 1 end");
+		
 	}
 	
 	@Test
@@ -85,6 +89,10 @@ public class ConnectionPoolTest {
 				answers.add(newAnswer);
 			}
 			
+			System.out.println(con.getClass());
+			
+			con.close();
+			
 			Connector.returnConnection(con);
 			
 		} catch (SQLException e) {
@@ -93,6 +101,8 @@ public class ConnectionPoolTest {
 		}
 		
 		System.out.println(answers);
+		
+		System.out.println("Test2 end");
 		
 	}
 	

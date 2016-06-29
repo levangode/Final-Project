@@ -16,4 +16,11 @@ public class Connector {
 	public static void returnConnection(Connection connection) {
 		pool.returnConnectionToPool(connection);
 	}
+	
+	public static void terminateAllConnections() throws SQLException{
+		for(Connection con: pool.availableConnections){
+			con.close();
+		}
+	}
+
 }

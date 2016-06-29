@@ -1,15 +1,28 @@
 package DBConnector;
 
 import java.sql.DriverManager;
+import java.sql.NClob;
+import java.sql.PreparedStatement;
+import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
+import java.sql.SQLWarning;
+import java.sql.SQLXML;
+import java.sql.Savepoint;
+import java.sql.Statement;
+import java.sql.Struct;
 import java.util.ArrayList;
 import java.util.List;
- 
+import java.util.Properties;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+import com.mysql.jdbc.JDBC4Connection;
+
 //import DBConnector.Configuration;
-import java.sql.Connection;;
+import java.sql.Connection;
 
 public class ConnectionPool {
- 
+	Queue<Connection> Connections = new ConcurrentLinkedQueue<>();
 	List<Connection> availableConnections = new ArrayList<Connection>();
  
 	public ConnectionPool() {
@@ -18,8 +31,10 @@ public class ConnectionPool {
 	 
 	 
 	private void initializeConnectionPool(){
+		int counter = 0;
 		while(!checkIfConnectionPoolIsFull()){
-		  availableConnections.add(createNewConnectionForPool());
+			System.out.println(counter++);
+			availableConnections.add(createNewConnectionForPool());
 		}
 	}
 	 
@@ -32,9 +47,8 @@ public class ConnectionPool {
 		return true;
 	}
 	 
-	//Creating a connection
+	//Creating a single connection
 	private Connection createNewConnectionForPool(){
-		//Configuration config = Configuration.getInstance();
 		try {
 			Class.forName(DBINFO.DRIVER_NAME);
 			Connection connection = (Connection) DriverManager.getConnection(
