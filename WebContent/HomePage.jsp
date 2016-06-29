@@ -168,6 +168,7 @@ h3 {
 					%>
 				</ul>
 			</div>
+			
 			<!-- End Left Panel -->
 			<!-- QuizList -->
 			<div class="box"

@@ -99,6 +99,23 @@ public class UserController {
 
 	}
 
+	public void editUserName(String login, String newUserName) {
+		db = new DBconnector();
+		connection = db.getConnection();
+		String order = "Update Users Set user_name = '" + newUserName + "' where user_login ='" + login + "'";
+		PreparedStatement stm = null;
+
+		try {
+			stm = connection.prepareStatement(order);
+			System.out.println(stm);
+			stm.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		db.closeConnection();
+	}
+
 	public boolean containsUser(String user_login) {
 		db = new DBconnector();
 		connection = db.getConnection();

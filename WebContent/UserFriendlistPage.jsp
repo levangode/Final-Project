@@ -38,25 +38,30 @@ div.left {
 <title>Your Friends</title>
 </head>
 <body>
+	<ul>
+		<%
+			for (int i = 0; i < friendIds.size(); i++) {
+				User friend = userController.getUserByID(friendIds.get(i));
+				int friendsId = friendIds.get(i);
+				String url = friend.getImageURL();
+				String login = friend.getLogin();
+				String name = friend.getName();
+				out.print("<li> <img border='0' alt='FriendImage' src='" + url + "' width='100' height='100'>"
+						+ "<h3><a href='UserPage.jsp?id=" + friendsId + "'>" + login + "</a></h3>");
+				if (name != null) {
+					out.print("<p>" + name + "</p>");
+				}
+				out.print("</li>");
+			}
+		%>
 
-	<%
-		for (int i = 0; i < friendIds.size(); i++) {
-			User friend = userController.getUserByID(friendIds.get(i));
-			int friendsId = friendIds.get(i);
-			String url = friend.getImageURL();
-			String name = friend.getName();
-			out.print("<li> <img border='0' alt='FriendImage' src='" + url + "' width='100' height='100'>"
-					+ "<h3><a href='UserPage.jsp?id=" + friendsId + "'>" + name + "</a></h3>	</li>");
-		}
-	%>
-
-	<div class="center">
-		<a class="btn" href="HomePage.jsp"> Return To Homepage </a>
-	</div>
-	<div class="center">
-		<a class="btn" href="UserPage.jsp?id=<%out.print(id);%>"> Return
-			To User Page </a>
-	</div>
-
+		<div class="center">
+			<a class="btn" href="HomePage.jsp"> Return To Homepage </a>
+		</div>
+		<div class="center">
+			<a class="btn" href="UserPage.jsp?id=<%out.print(id);%>"> Return
+				To User Page </a>
+		</div>
+	</ul>
 </body>
 </html>
