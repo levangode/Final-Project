@@ -12,6 +12,8 @@
 <link rel="stylesheet" type="text/css" href="Button.css">
 <link rel="stylesheet" type="text/css" href="MyButtonStyles.css">
 
+
+
 <style>
 div.left {
 	float: left;
@@ -25,6 +27,8 @@ div.right {
 </style>
 
 
+
+</script>
 <%
 	int id = Integer.parseInt(request.getParameter("id"));
 	UserController db = new UserController();
@@ -63,7 +67,7 @@ div.right {
 				out.print(
 						"<form action='ChangeUserName' method='post'>Chane Your Name: <input type='text' name='userName'>"
 								+ "<input type='submit' value='Submit'></form>");
-			} else if (!dbf.isFriend(myId, id)) {
+			} else if (!dbf.isFriend(myId, id) && !dbf.isRequestSent(myId, id)) {
 				request.getSession().setAttribute("friendId", id);
 				out.print("<form action='SendFriendshipRequest' method='post'>"
 						+ "<input type='submit' value='Send Friend Request' class='btn'></form>");
@@ -87,9 +91,10 @@ div.right {
 				String fname = friend.getName();
 				out.print("<li> <img border='0' alt='FriendImage' src='" + furl + "' width='100' height='100'>"
 						+ "<h3><a href='UserPage.jsp?id=" + friendsId + "'>" + flogin + "</a></h3>"
-						+ "<a href='FriendshipConfirmed.jsp?id=' style='text-decoration=none'" + friendsId
-						+ "' class='button tick'></a> " + "<a href='FriendshipConfirmed.jsp?id='" + friendsId
-						+ "' class='button cross'></a>");
+						+ "<form action='AcceptFriendRequest' method='post'>"
+						+ "<input type='submit' value='Accept' class='button tick'><input type='hidden' name='fid' value='"+friendsId+"'></form> ");
+						out.print("<form action='RejectFriendshipRequest' method='post'>"
+								+ "<input type='submit' value='Reject' class='button tick' style='float:right' ><input type='hidden' name='fid' value='"+friendsId+"'></form>");
 				if (fname != null) {
 					out.print("<p>" + fname + "</p>");
 				}
@@ -105,10 +110,10 @@ div.right {
 	<div class='right'>
 
 		<a class="btn" href="UserFriendlistPage.jsp?id=<%out.print(id);%>">
-			My Friends </a>
+			Friends </a>
 	</div>
 	<div class='right'>
-		<a class="btn" href="UserQuizes.jsp?id=<%out.print(id);%>"> My
+		<a class="btn" href="UserQuizes.jsp?id=<%out.print(id);%>">
 			Quizes </a>
 	</div>
 

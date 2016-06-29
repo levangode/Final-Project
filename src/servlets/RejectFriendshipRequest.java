@@ -11,16 +11,16 @@ import DBQuizControllers.DBQuizController;
 import database.DBFriendController;
 
 /**
- * Servlet implementation class AcceptFriendRequest
+ * Servlet implementation class RejectFriendshipRequest
  */
-@WebServlet("/AcceptFriendRequest")
-public class AcceptFriendRequest extends HttpServlet {
+@WebServlet("/RejectFriendshipRequest")
+public class RejectFriendshipRequest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AcceptFriendRequest() {
+	public RejectFriendshipRequest() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -41,13 +41,11 @@ public class AcceptFriendRequest extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		int friendId = Integer.parseInt(request.getParameter("fid"));
 		DBFriendController dbf = new DBFriendController();
 		String login = (String) request.getSession().getAttribute("user_name");
 		DBQuizController db = new DBQuizController();
 		int id = db.getAuthorId(login);
-		dbf.addFriendshpByUserID(id, friendId);
 		dbf.cancelFriendshipRequestByID(id, friendId);
 		response.sendRedirect("UserPage.jsp?id=" + id);
 		doGet(request, response);

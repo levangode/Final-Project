@@ -238,18 +238,46 @@ public class DBFriendController {
 		return true;
 	}
 
+	public boolean isRequestSent(int user1, int user2) {
+		if (user1 == user2) {
+			return false;
+		}
+
+		String query1 = "SELECT * FROM FriendshipRequests WHERE `from` =" + user1 + " and " + "`to` = " + user2 + ";";
+
+		java.sql.PreparedStatement stm;
+		System.out.println("isFriendsdadas?");
+		try {
+			stm = con.prepareStatement(query1);
+			ResultSet res1 = stm.executeQuery();
+
+			;
+
+			if (res1.next()) {
+				return true;
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} finally {
+
+		}
+
+		return false;
+	}
+
 	public boolean isFriend(int user1ID, int user2ID) {
 		if (user1ID == user2ID) {
 			return false;
 		}
 
-		String query1 = "SELECT COUNT(*) AS total FROM Friends WHERE 'from' =" + user1ID + " and " + "`to` = " + user2ID
-				+ ";";
-		String query2 = "SELECT COUNT(*) AS total FROM Friends WHERE 'from' =" + user2ID + " and " + "`to` = " + user1ID
-				+ ";";
+		String query1 = "SELECT * FROM Friends WHERE `from` =" + user1ID + " and " + "`to` = " + user2ID + ";";
+		String query2 = "SELECT * FROM Friends WHERE `from` =" + user2ID + " and " + "`to` = " + user1ID + ";";
 
 		java.sql.PreparedStatement stm;
-
+		System.out.println("isFriendsdadas?");
 		try {
 			stm = con.prepareStatement(query1);
 			ResultSet res1 = stm.executeQuery();
@@ -257,8 +285,8 @@ public class DBFriendController {
 			stm = con.prepareStatement(query2);
 			ResultSet res2 = stm.executeQuery();
 
-			if (res1.next() && res1.getInt(1) > 0) {
-				if (res2.next() && res2.getInt(1) > 0) {
+			if (res1.next()) {
+				if (res2.next()) {
 					return true;
 				}
 
@@ -291,10 +319,10 @@ public class DBFriendController {
 
 		try {
 			stm = con.prepareStatement(query1);
-			stm.executeQuery();
+			stm.executeUpdate();
 
 			stm = con.prepareStatement(query2);
-			stm.executeQuery();
+			stm.executeUpdate();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
