@@ -102,7 +102,7 @@ public class DBQuestionMultipleChoice {
 		PreparedStatement stm;
 		
 		try{
-//			System.out.println(query);
+			System.out.println(query);
 			stm = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
 			stm.executeUpdate();

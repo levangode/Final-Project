@@ -176,4 +176,88 @@ public class DBMessage {
 		
 		return getMessagesSent(recipient_id);
 	}
+	
+	public Message getMessageByID(int message_id){
+		
+		Message message = null;
+		
+		String query = "select sender_id, recipient_id, message_text, message_subject from Messages where "
+				+ "message_id = " + message_id
+				+ ";";
+		
+		connection = new DBconnector().getConnection();
+		
+		PreparedStatement stm;
+		
+		System.out.println(query);
+		
+		try {
+			stm = connection.prepareStatement(query);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while (rs.next()){
+				int sender_id1 = rs.getInt(1);
+				int recipient_id1 = rs.getInt(2);
+				String message_text = rs.getString(3);
+				String message_subject = rs.getString(4);
+				
+				User sender = new UserController().getUserByID(sender_id1);
+				User recipient = new UserController().getUserByID(recipient_id1);
+				
+				Message m = new Message(message_text, message_subject, sender, recipient);
+				
+				message = m;
+			}
+			
+			connection.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	
+	public MessageInfo getMessageInfoByID(int message_id){
+		
+		MessageInfo message = null;
+		
+		String query = "select sender_id, recipient_id, message_text, message_subject, message_id from Messages where "
+				+ "message_id = " + message_id
+				+ ";";
+		
+		connection = new DBconnector().getConnection();
+		
+		PreparedStatement stm;
+		
+		System.out.println(query);
+		
+		try {
+			stm = connection.prepareStatement(query);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while (rs.next()){
+				int sender_id = rs.getInt(1);
+				int recipient_id = rs.getInt(2);
+				
+				String message_text = rs.getString(3);
+				String message_subject = rs.getString(4);
+				
+				int tmp_message_id = rs.getInt(5);
+				
+				MessageInfo m = new MessageInfo(sender_id, recipient_id, message_text, message_subject, tmp_message_id);
+				
+				message = m;
+			}
+			
+			connection.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
 }
