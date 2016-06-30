@@ -183,4 +183,35 @@ public class UserController {
 		db.closeConnection();
 		return result;
 	}
+	
+	public int getUserIDByLogin(String login){
+		
+		int user_id = -1;
+		
+		connection = new DBconnector().getConnection();
+		
+		String query = "select user_id from Users where user_login = "
+				+ "'" + login + "'"
+				+";";
+		
+		PreparedStatement stm = null;
+		
+//		System.out.println(query);
+		
+		try {
+			stm = connection.prepareStatement(query);
+			ResultSet rs = stm.executeQuery(query);
+			
+			while(rs.next()){
+				user_id = rs.getInt(1);
+			}
+			
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return user_id;
+	}
+
 }

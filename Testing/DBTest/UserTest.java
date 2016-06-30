@@ -7,8 +7,8 @@ import database.UserController;
 
 public class UserTest {
 
-	@Test
-	private void printAllUsers() {
+//	@Test
+	public void printAllUsers() {
 		UserController uc = new UserController();
 
 		User tmp = uc.getUserByID(1);
@@ -18,9 +18,14 @@ public class UserTest {
 		System.out.println(tmp.getImageURL());
 
 	}
-
+	
 	@Test
-	public void zmain() {
-		// printAllUsers();
+	public void getUserIDByLoginTest(){
+		UserController c = new UserController();
+		
+		System.out.println( c.getUserIDByLogin("mike") );
+				
 	}
+
+	
 }
