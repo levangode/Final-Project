@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import backend.Quiz;
 import database.DBconnector;
@@ -129,6 +130,26 @@ public class QuizInfoController {
 		}
 		return id;
 	}
+	
+	public List<QuizInfo> getQuizListByName(String name){
+		
+		connection = new DBconnector().getConnection();
+		
+		String query = "";
+		
+		try {
+			PreparedStatement stm = connection.prepareStatement(query);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 	public ArrayList<UserActivity> getUserActivity(String user_login, int quiz_id) {
 		ArrayList<UserActivity> act = new ArrayList<UserActivity>();

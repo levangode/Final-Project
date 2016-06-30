@@ -2,6 +2,6 @@ package DBConnector;
 
 public class PoolINFO{
 	
-	public static final int MAX_CONNECTIONS = 10;
+	public static final int MAX_CONNECTIONS = 1;
 	
 }

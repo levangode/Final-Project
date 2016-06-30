@@ -20,6 +20,7 @@ import questions.MultipleChoiceQuestion;
 import questions.Question;
 import questions.QuestionResponse;
 import questions.QuestionWithMultipleAnswers;
+import quizInfoes.QuizInfo;
 
 public class DBQuizController {
 	private Connection connection;
@@ -77,6 +78,13 @@ public class DBQuizController {
 		}
 		return result;
 	}
+	
+	public List<QuizInfo> getQuizListByName(String name){
+		
+		
+		
+		return null;
+	}
 
 	public int getAuthorId(String author) {
 		int result = 0;
@@ -98,7 +106,7 @@ public class DBQuizController {
 		int id = -1;
 		String order = "insert into Quizzes(quiz_name, category_id, quiz_description, author_id,"
 				+ "quiz_likes, date_created, quiz_difficulty, times_taken, multiple_pages, immediate_correction,"
-				+ "random_questions) Values (?,?,?,?,?,?,?,?,?,?,?)";
+				+ "random_questions, quiz_score) Values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement stm = null;
 		try {
@@ -114,6 +122,8 @@ public class DBQuizController {
 			stm.setBoolean(9, quiz.isDisplayMultiplePages());
 			stm.setBoolean(10, quiz.isImmediateCorrection());
 			stm.setBoolean(11, quiz.isRandomQuestions());
+			int max_score = getMaxScore(quiz);
+			stm.setInt(12, max_score);
 			stm.executeUpdate();
 			ResultSet myRes = stm.getGeneratedKeys();
 			while (myRes.next()) {
@@ -132,6 +142,14 @@ public class DBQuizController {
 			e.printStackTrace();
 		}
 		return id;
+	}
+
+	private int getMaxScore(Quiz quiz) {
+		int counter = 0;
+		for(Question q: quiz.getQuestions()){
+			counter+=q.getQuestionscore();
+		}
+		return counter;
 	}
 
 	public Quiz getQuiz(int id) {
