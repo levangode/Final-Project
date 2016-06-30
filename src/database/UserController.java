@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import backend.User;
 
@@ -79,6 +80,16 @@ public class UserController {
 		db.closeConnection();
 
 		return thisUser;
+	}
+	
+	public List<User> getUserList(String fragment){
+		
+		connection = new DBconnector().getConnection();
+		
+		String query = "select user_name, user_id, user_login, user_profile_image from Users " + "where user_login = '"
+				+ fragment + "';";
+		
+		return null;
 	}
 
 	public void editImgUrl(String login, String newUrl) {
