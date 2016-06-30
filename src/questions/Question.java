@@ -44,11 +44,11 @@ public abstract class Question implements PrintableQuestion, DatabaseAddable, Co
 		return question_type;
 	}
 
-	public int getQuestionscore() {
+	public double getQuestionscore() {
 		return question_score;
 	}
 
-	public abstract int gradeAnswer(HttpServletRequest request, int questionIndex);
+	public abstract double gradeAnswer(HttpServletRequest request, int questionIndex);
 
 	public void setQuestiontype(String question_type) {
 		this.question_type = question_type;

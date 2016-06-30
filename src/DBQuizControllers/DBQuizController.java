@@ -79,12 +79,6 @@ public class DBQuizController {
 		return result;
 	}
 	
-	public List<QuizInfo> getQuizListByName(String name){
-		
-		
-		
-		return null;
-	}
 
 	public int getAuthorId(String author) {
 		int result = 0;

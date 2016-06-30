@@ -18,7 +18,8 @@ public class FillTheBlankQuestion extends Question {
 
 	public FillTheBlankQuestion(String question_text, String question_type, String question_description,
 			long question_time_limit, int question_score, ArrayList<Answer> answers, int question_number) {
-		super(question_text, question_type, question_description, question_time_limit, question_score, answers, question_number);
+		super(question_text, question_type, question_description, question_time_limit, question_score, answers,
+				question_number);
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class FillTheBlankQuestion extends Question {
 	}
 
 	@Override
-	public int gradeAnswer(HttpServletRequest request, int questionIndex) {
+	public double gradeAnswer(HttpServletRequest request, int questionIndex) {
 		int counter = 0;
 		ArrayList<Answer> answers = getAnswers();
 		for (int i = 0; i < answers.size(); i++) {
@@ -48,7 +49,7 @@ public class FillTheBlankQuestion extends Question {
 					counter++;
 			}
 		}
-		return counter;
+		return counter / answers.size() * getQuestionscore();
 	}
 
 	public void addToDatabase(int quiz_id) throws Exception {

@@ -103,7 +103,8 @@ div.right {
 			}
 
 			out.print("</ul> </div>");
-
+			out.print("<form action='SearchUser' method='post'>Search User<input"
+					+ " type='text' name='user_name'> <input type='submit' value='Search'></form>");
 		}
 	%>
 

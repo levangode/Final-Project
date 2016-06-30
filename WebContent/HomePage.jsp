@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="database.*"%>
 <%@page import="backend.*"%>
 <%@page import="DBQuizControllers.*"%>
@@ -152,7 +153,19 @@ li {
 				style="text-align: center; width: calc(100% - 360px);">
 				<%
 					QuizInfoController all = new QuizInfoController();
-					ArrayList<QuizDetailedInfo> quizzes = all.getQuizzes(request.getParameter("category"));
+					String param = request.getParameter("category");
+					List<QuizDetailedInfo> quizzes = new ArrayList<>();
+					if (param == null) {
+						param = request.getParameter("quiz_name");
+						if (param != null) {
+							quizzes = all.getQuizListByName(param);
+						} else {
+							quizzes = all.getQuizzes(param);
+						}
+					} else {
+						quizzes = all.getQuizzes(param);
+					}
+
 					for (QuizDetailedInfo b : quizzes) {
 						b.showOnCard(out);
 					}

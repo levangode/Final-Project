@@ -131,23 +131,39 @@ public class QuizInfoController {
 		return id;
 	}
 	
-	public List<QuizInfo> getQuizListByName(String name){
+	public List<QuizDetailedInfo> getQuizListByName(String nameFragment){
+		
+		List<QuizDetailedInfo> result = new ArrayList<QuizDetailedInfo>();
 		
 		connection = new DBconnector().getConnection();
 		
-		String query = "";
+		String query = "select quiz_id, quiz_name, quiz_description, category_name, user_login, date_created, times_taken, quiz_likes from Quizzes, Users, Categories "
+				+ "where quiz_name like '%" + nameFragment + "%' and Quizzes.category_id = Categories.category_id and author_id = user_id;";
 		
 		try {
 			PreparedStatement stm = connection.prepareStatement(query);
 			
 			ResultSet rs = stm.executeQuery();
 			
+			while(rs.next()){
+				int quiz_id = rs.getInt("quiz_id");
+				String quiz_name = rs.getString("quiz_name");
+				String quiz_author = rs.getString("user_login");
+				Timestamp quiz_date = rs.getTimestamp("date_created");
+				int times_taken = rs.getInt("times_taken");
+				String quiz_description = rs.getString("quiz_description");
+				String quiz_category = rs.getString("category_name");
+				int quiz_likes = rs.getInt("quiz_likes");
+				result.add(QuizInfoFactory.getDetailedInfo(quiz_name, times_taken, quiz_author, quiz_date, quiz_id,
+						quiz_category, quiz_description, quiz_likes));
+			}
+			
 			connection.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
-		return null;
+		return result;
 	}
 
 
