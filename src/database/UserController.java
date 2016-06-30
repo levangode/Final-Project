@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import backend.User;
@@ -84,12 +85,33 @@ public class UserController {
 	
 	public List<User> getUserList(String fragment){
 		
+		List<User> users = new ArrayList<User>();
+		
 		connection = new DBconnector().getConnection();
 		
-		String query = "select user_name, user_id, user_login, user_profile_image from Users " + "where user_login = '"
-				+ fragment + "';";
+		String query = "select user_name, user_id, user_login, user_profile_image from Users " + 
+				"where user_login like '%" + fragment + "%' or user_name like '%" + fragment + "%';";
 		
-		return null;
+		PreparedStatement stm;
+		
+		System.out.println(query);
+		
+		try {
+			stm = connection.prepareStatement(query);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()){
+				User tmp = new User(rs.getString(1), rs.getString(3), rs.getString(4));
+				users.add(tmp);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return users;
 	}
 
 	public void editImgUrl(String login, String newUrl) {
