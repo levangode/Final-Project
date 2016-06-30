@@ -27,7 +27,7 @@ public class QuestionResponse extends Question {
 	}
 
 	@Override
-	public int gradeAnswer(HttpServletRequest request, int questionIndex) {
+	public double gradeAnswer(HttpServletRequest request, int questionIndex) {
 		String name = "q" + questionIndex;
 		if (request.getParameter(name) != null) {
 			String res = request.getParameter(name);

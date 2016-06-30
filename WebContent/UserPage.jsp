@@ -92,9 +92,11 @@ div.right {
 				out.print("<li> <img border='0' alt='FriendImage' src='" + furl + "' width='100' height='100'>"
 						+ "<h3><a href='UserPage.jsp?id=" + friendsId + "'>" + flogin + "</a></h3>"
 						+ "<form action='AcceptFriendRequest' method='post'>"
-						+ "<input type='submit' value='Accept' class='button tick'><input type='hidden' name='fid' value='"+friendsId+"'></form> ");
-						out.print("<form action='RejectFriendshipRequest' method='post'>"
-								+ "<input type='submit' value='Reject' class='button tick' style='float:right' ><input type='hidden' name='fid' value='"+friendsId+"'></form>");
+						+ "<input type='submit' value='Accept' class='button tick'><input type='hidden' name='fid' value='"
+						+ friendsId + "'></form> ");
+				out.print("<form action='RejectFriendshipRequest' method='post'>"
+						+ "<input type='submit' value='Reject' class='button tick' style='float:right' ><input type='hidden' name='fid' value='"
+						+ friendsId + "'></form>");
 				if (fname != null) {
 					out.print("<p>" + fname + "</p>");
 				}
@@ -102,7 +104,8 @@ div.right {
 			}
 
 			out.print("</ul> </div>");
-
+			out.print("<form action='SearchUser' method='post'>Search User<input"
+					+ " type='text' name='user_name'> <input type='submit' value='Search'></form>");
 		}
 	%>
 
@@ -113,8 +116,8 @@ div.right {
 			Friends </a>
 	</div>
 	<div class='right'>
-		<a class="btn" href="UserQuizes.jsp?id=<%out.print(id);%>">
-			Quizes </a>
+		<a class="btn" href="UserQuizes.jsp?id=<%out.print(id);%>"> Quizes
+		</a>
 	</div>
 
 

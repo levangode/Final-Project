@@ -55,15 +55,15 @@ public class GradeQuiz extends HttpServlet {
 		HttpSession session = request.getSession();
 		System.out.println("Gadavedi doGetshi!");
 		Quiz quiz = (Quiz) session.getAttribute("Quiz");
-		int score = 0;
-		int maxScore = 0;
+		double score = 0;
+		double maxScore = 0;
 		ArrayList<Question> questions = quiz.getQuestions();
 		for (int i = 0; i < questions.size(); i++) {
-			MultipleChoiceQuestion q = (MultipleChoiceQuestion) questions.get(i);
-			int curScore = q.gradeAnswer(request, i);
-			int toBeCorrect = q.getNumanswerscorrect();
-			int questionScore = q.getQuestionscore();
-			curScore = (curScore / toBeCorrect) * questionScore;
+			Question q = questions.get(i);
+			double curScore = q.gradeAnswer(request, i);
+
+			double questionScore = q.getQuestionscore();
+
 			maxScore += questionScore;
 			score += curScore;
 		}

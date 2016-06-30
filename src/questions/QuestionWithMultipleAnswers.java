@@ -53,7 +53,7 @@ public class QuestionWithMultipleAnswers extends Question {
 	}
 
 	@Override
-	public int gradeAnswer(HttpServletRequest request, int questionIndex) {
+	public double gradeAnswer(HttpServletRequest request, int questionIndex) {
 		int counter = 0;
 		ArrayList<Answer> answers = getAnswers();
 		for (int i = 0; i < getNumanswers(); i++) {
@@ -72,7 +72,7 @@ public class QuestionWithMultipleAnswers extends Question {
 				}
 			}
 		}
-		return counter;
+		return (counter / getNumanswers()) * getQuestionscore();
 	}
 
 	@Override

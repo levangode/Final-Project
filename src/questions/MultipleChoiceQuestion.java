@@ -20,7 +20,8 @@ public class MultipleChoiceQuestion extends Question {
 	public MultipleChoiceQuestion(String question_text, String question_type, String question_description,
 			long question_time_limit, int question_score, int answers_to_show, int answers_to_be_correct,
 			ArrayList<Answer> answers, int question_number) {
-		super(question_text, question_type, question_description, question_time_limit, question_score, answers, question_number);
+		super(question_text, question_type, question_description, question_time_limit, question_score, answers,
+				question_number);
 		this.answers_to_show = answers_to_show;
 		this.answers_to_be_correct = answers_to_be_correct;
 	}
@@ -31,38 +32,35 @@ public class MultipleChoiceQuestion extends Question {
 		return result;
 
 	}
-	
-	public ArrayList<Answer> getFormattedAnswers(){
+
+	public ArrayList<Answer> getFormattedAnswers() {
 		ArrayList<Answer> res = new ArrayList<Answer>();
-		
+
 		List<Answer> tmp = this.getAnswers();
 		Collections.shuffle(tmp);
-		
+
 		int total = answers_to_show;
 		int correct = answers_to_be_correct;
-		
-		for(Answer ans: tmp){
-			if(((MultipleChoiceAnswer)ans).isCorrect()){
-				if(correct>0){
+
+		for (Answer ans : tmp) {
+			if (((MultipleChoiceAnswer) ans).isCorrect()) {
+				if (correct > 0) {
 					correct--;
 					total--;
 					res.add(ans);
 				}
-			} else
-			if(!((MultipleChoiceAnswer)ans).isCorrect()){
-				if(total>0){
+			} else if (!((MultipleChoiceAnswer) ans).isCorrect()) {
+				if (total > 0) {
 					total--;
 					res.add(ans);
 				}
-			}
-			else
-			if(correct == 0 && total == 0){
+			} else if (correct == 0 && total == 0) {
 				break;
-			} else{
+			} else {
 				System.out.println("something went wrong int getFormattedAnswers Methd!!!!!!!!!!!!!!");
 			}
 		}
-		
+
 		return res;
 	}
 
@@ -89,7 +87,7 @@ public class MultipleChoiceQuestion extends Question {
 	}
 
 	@Override
-	public int gradeAnswer(HttpServletRequest request, int questionIndex) {
+	public double gradeAnswer(HttpServletRequest request, int questionIndex) {
 		int counter = 0;
 		ArrayList<Answer> answers = getAnswers();
 		for (int i = 0; i < answers.size(); i++) {
@@ -99,12 +97,9 @@ public class MultipleChoiceQuestion extends Question {
 				if (request.getParameter(name) != null) {
 					counter++;
 				}
-			} else {
-				if (request.getParameter(name) != null)
-					return 0;
 			}
 		}
-		return counter;
+		return (counter / getNumanswerscorrect()) * getQuestionscore();
 	}
 
 	public void addToDatabase(int quiz_id) throws Exception {

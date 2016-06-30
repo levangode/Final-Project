@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="database.*"%>
 <%@page import="backend.*"%>
 <%@page import="DBQuizControllers.*"%>
@@ -111,10 +112,10 @@ h3 {
 	padding: 7px;
 	position: absolute;
 }
-li {
-	margin:2px 0px;
-}
 
+li {
+	margin: 2px 0px;
+}
 
 .headers {
 	padding: 10px;
@@ -147,7 +148,14 @@ li {
 					%>
 				</form>
 			</div>
+			<div>
 
+				<form action="SearchQuiz" method="post">
+					Search Quiz<input type="text" name="quiz_name"> <input
+						type="submit" value="Search">
+				</form>
+
+			</div>
 			<div class="headers">
 				<ul>
 					<li><a class="btn" href="CreateQuiz.jsp"> Create New Quiz
@@ -165,21 +173,33 @@ li {
 					<%
 						DBQuizController q = new DBQuizController();
 						ArrayList<String> quizCategories = q.getQuizCategories();
-						out.print("<li><a href=\"HomePage.jsp\">"+"All"+"</a></li>");
+						out.print("<li><a href=\"HomePage.jsp\">" + "All" + "</a></li>");
 						for (String a : quizCategories) {
-							out.print("<li><a href=\"HomePage.jsp?category="+a+"\">" + a + "</a></li>");
+							out.print("<li><a href=\"HomePage.jsp?category=" + a + "\">" + a + "</a></li>");
 						}
 					%>
 				</ul>
 			</div>
-			
+
 			<!-- End Left Panel -->
 			<!-- QuizList -->
 			<div class="box"
 				style="text-align: center; width: calc(100% - 360px);">
 				<%
 					QuizInfoController all = new QuizInfoController();
-					ArrayList<QuizDetailedInfo> quizzes = all.getQuizzes(request.getParameter("category"));
+					String param = request.getParameter("category");
+					List<QuizDetailedInfo> quizzes = new ArrayList<>();
+					if (param == null) {
+						param = request.getParameter("quiz_name");
+						if (param != null) {
+							quizzes = all.getQuizListByName(param);
+						} else {
+							quizzes = all.getQuizzes(param);
+						}
+					} else {
+						quizzes = all.getQuizzes(param);
+					}
+
 					for (QuizDetailedInfo b : quizzes) {
 						b.showOnCard(out);
 					}
@@ -195,7 +215,8 @@ li {
 							QuizInfoController getter = new QuizInfoController();
 							ArrayList<QuizInfo> popular = getter.getPopularQuizzes("times_taken");
 							for (QuizInfo a : popular) {
-								out.print("<li><a href=\"QuizSummaryPage.jsp?id="+a.getQuiz_id()+"\">" + a.getQuiz_name() + "</a></li>");
+								out.print("<li><a href=\"QuizSummaryPage.jsp?id=" + a.getQuiz_id() + "\">" + a.getQuiz_name()
+										+ "</a></li>");
 							}
 						%>
 					</ul>
@@ -207,7 +228,8 @@ li {
 							QuizInfoController liked = new QuizInfoController();
 							ArrayList<QuizInfo> likes = liked.getPopularQuizzes("quiz_likes");
 							for (QuizInfo a : likes) {
-								out.print("<li><a href=\"QuizSummaryPage.jsp?id="+a.getQuiz_id()+"\">" + a.getQuiz_name() + "</a></li>");
+								out.print("<li><a href=\"QuizSummaryPage.jsp?id=" + a.getQuiz_id() + "\">" + a.getQuiz_name()
+										+ "</a></li>");
 							}
 						%>
 					</ul>
@@ -220,7 +242,8 @@ li {
 							QuizInfoController getter2 = new QuizInfoController();
 							ArrayList<QuizInfo> mine = getter2.getMyQuizzes((String) request.getSession().getAttribute("user_name"));
 							for (QuizInfo a : mine) {
-								out.print("<li><a href=\"QuizSummaryPage.jsp?id="+a.getQuiz_id()+"\">" + a.getQuiz_name() + "</a></li>");
+								out.print("<li><a href=\"QuizSummaryPage.jsp?id=" + a.getQuiz_id() + "\">" + a.getQuiz_name()
+										+ "</a></li>");
 								//TODO shignidan ro dabechdos tavisi tavi
 							}
 						%>
