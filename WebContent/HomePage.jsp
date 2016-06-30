@@ -111,10 +111,10 @@ h3 {
 	padding: 7px;
 	position: absolute;
 }
-li {
-	margin:2px 0px;
-}
 
+li {
+	margin: 2px 0px;
+}
 
 .headers {
 	padding: 10px;
@@ -122,38 +122,11 @@ li {
 </style>
 </head>
 <body>
-	<div style="min-width: 900px;">
+	<div style="min-width: 1024px; position: relative;">
 		<!-- start top panel -->
-		<div id="top">
-			<span id="homelogo" style="align: left"> WELCOMEEE </span>
-			<div id="top" align="right" style="float: right">
-
-				<form action="Login" method="post">
-					<%
-						if ((boolean) request.getSession().getAttribute("logged_in")) {
-							out.write("You are logged in as: ");
-							out.write((String) request.getSession().getAttribute("user_name") + "   ");
-							String login = (String) request.getSession().getAttribute("user_name");
-							DBQuizController quizCont = new DBQuizController();
-							int yourID = quizCont.getAuthorId(login);
-							out.write("<a href='UserPage.jsp?id=" + yourID + "'>Your Page</a>");
-							out.write("<a href=\"Logout.jsp\">Logout</a>");
-						} else {
-							out.write("User Name: <input type=\"text\" name=\"user_login\">");
-							out.write("Password: <input type=\"text\" name=\"user_password\">");
-							out.write("<input type=\"submit\" value=\"Login\">");
-							out.write("<button type=\"button\" onclick=\"location.href = 'Register.html'\">Register</button>");
-						}
-					%>
-				</form>
-			</div>
-
-			<div class="headers">
-				<ul>
-					<li><a class="btn" href="CreateQuiz.jsp"> Create New Quiz
-					</a></li>
-				</ul>
-			</div>
+		<jsp:include page="Header.jsp" />
+		<div style="text-align:center; height:50px;">
+			<a class="btn" href="CreateQuiz.jsp"> Create New Quiz </a>
 		</div>
 		<!-- End Top Panel -->
 		<!-- Bottom Panel -->
@@ -165,14 +138,14 @@ li {
 					<%
 						DBQuizController q = new DBQuizController();
 						ArrayList<String> quizCategories = q.getQuizCategories();
-						out.print("<li><a href=\"HomePage.jsp\">"+"All"+"</a></li>");
+						out.print("<li><a href=\"HomePage.jsp\">" + "All" + "</a></li>");
 						for (String a : quizCategories) {
-							out.print("<li><a href=\"HomePage.jsp?category="+a+"\">" + a + "</a></li>");
+							out.print("<li><a href=\"HomePage.jsp?category=" + a + "\">" + a + "</a></li>");
 						}
 					%>
 				</ul>
 			</div>
-			
+
 			<!-- End Left Panel -->
 			<!-- QuizList -->
 			<div class="box"
@@ -195,7 +168,8 @@ li {
 							QuizInfoController getter = new QuizInfoController();
 							ArrayList<QuizInfo> popular = getter.getPopularQuizzes("times_taken");
 							for (QuizInfo a : popular) {
-								out.print("<li><a href=\"QuizSummaryPage.jsp?id="+a.getQuiz_id()+"\">" + a.getQuiz_name() + "</a></li>");
+								out.print("<li><a href=\"QuizSummaryPage.jsp?id=" + a.getQuiz_id() + "\">" + a.getQuiz_name()
+										+ "</a></li>");
 							}
 						%>
 					</ul>
@@ -207,7 +181,8 @@ li {
 							QuizInfoController liked = new QuizInfoController();
 							ArrayList<QuizInfo> likes = liked.getPopularQuizzes("quiz_likes");
 							for (QuizInfo a : likes) {
-								out.print("<li><a href=\"QuizSummaryPage.jsp?id="+a.getQuiz_id()+"\">" + a.getQuiz_name() + "</a></li>");
+								out.print("<li><a href=\"QuizSummaryPage.jsp?id=" + a.getQuiz_id() + "\">" + a.getQuiz_name()
+										+ "</a></li>");
 							}
 						%>
 					</ul>
@@ -220,7 +195,8 @@ li {
 							QuizInfoController getter2 = new QuizInfoController();
 							ArrayList<QuizInfo> mine = getter2.getMyQuizzes((String) request.getSession().getAttribute("user_name"));
 							for (QuizInfo a : mine) {
-								out.print("<li><a href=\"QuizSummaryPage.jsp?id="+a.getQuiz_id()+"\">" + a.getQuiz_name() + "</a></li>");
+								out.print("<li><a href=\"QuizSummaryPage.jsp?id=" + a.getQuiz_id() + "\">" + a.getQuiz_name()
+										+ "</a></li>");
 								//TODO shignidan ro dabechdos tavisi tavi
 							}
 						%>

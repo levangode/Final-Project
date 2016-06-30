@@ -105,8 +105,8 @@ public class DBQuizController {
 	public int addQuiz(Quiz quiz) {
 		int id = -1;
 		String order = "insert into Quizzes(quiz_name, category_id, quiz_description, author_id,"
-				+ "quiz_likes, date_created, quiz_difficulty, times_taken, multiple_pages, immediate_correction,"
-				+ "random_questions, quiz_score) Values (?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "quiz_likes, quiz_difficulty, times_taken, multiple_pages, immediate_correction,"
+				+ "random_questions, quiz_score) Values (?,?,?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement stm = null;
 		try {
@@ -116,14 +116,13 @@ public class DBQuizController {
 			stm.setString(3, quiz.getQuiz_description());
 			stm.setInt(4, getAuthorId(quiz.getQuiz_author()));
 			stm.setInt(5, quiz.getQuiz_likes());
-			stm.setTimestamp(6, quiz.getDate_created_timestamp());
-			stm.setString(7, quiz.getQuiz_difficulty());
-			stm.setInt(8, quiz.getTimes_taken());
-			stm.setBoolean(9, quiz.isDisplayMultiplePages());
-			stm.setBoolean(10, quiz.isImmediateCorrection());
-			stm.setBoolean(11, quiz.isRandomQuestions());
+			stm.setString(6, quiz.getQuiz_difficulty());
+			stm.setInt(7, quiz.getTimes_taken());
+			stm.setBoolean(8, quiz.isDisplayMultiplePages());
+			stm.setBoolean(9, quiz.isImmediateCorrection());
+			stm.setBoolean(10, quiz.isRandomQuestions());
 			int max_score = getMaxScore(quiz);
-			stm.setInt(12, max_score);
+			stm.setInt(11, max_score);
 			stm.executeUpdate();
 			ResultSet myRes = stm.getGeneratedKeys();
 			while (myRes.next()) {

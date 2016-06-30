@@ -5,7 +5,7 @@
 <%@page import="database.*"%>
 <%@page import="DBQuizControllers.*"%>
 <%@page import="java.util.ArrayList"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
@@ -28,21 +28,20 @@ div.right {
 
 
 
-</script>
-<%
-	int id = Integer.parseInt(request.getParameter("id"));
-	UserController db = new UserController();
-	User user = db.getUserByID(id);
-%>
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>
 	<%
+		int id = Integer.parseInt(request.getParameter("id"));
+		UserController db = new UserController();
+		User user = db.getUserByID(id);
 		out.print(user.getName());
 	%>
 </title>
 </head>
 <body>
+	<div style="min-width: 1024px; position: relative;">
+	<jsp:include page="Header.jsp" />
 	<div class='left'>
 		<h1>
 			<%
@@ -92,9 +91,11 @@ div.right {
 				out.print("<li> <img border='0' alt='FriendImage' src='" + furl + "' width='100' height='100'>"
 						+ "<h3><a href='UserPage.jsp?id=" + friendsId + "'>" + flogin + "</a></h3>"
 						+ "<form action='AcceptFriendRequest' method='post'>"
-						+ "<input type='submit' value='Accept' class='button tick'><input type='hidden' name='fid' value='"+friendsId+"'></form> ");
-						out.print("<form action='RejectFriendshipRequest' method='post'>"
-								+ "<input type='submit' value='Reject' class='button tick' style='float:right' ><input type='hidden' name='fid' value='"+friendsId+"'></form>");
+						+ "<input type='submit' value='Accept' class='button tick'><input type='hidden' name='fid' value='"
+						+ friendsId + "'></form> ");
+				out.print("<form action='RejectFriendshipRequest' method='post'>"
+						+ "<input type='submit' value='Reject' class='button tick' style='float:right' ><input type='hidden' name='fid' value='"
+						+ friendsId + "'></form>");
 				if (fname != null) {
 					out.print("<p>" + fname + "</p>");
 				}
@@ -113,11 +114,11 @@ div.right {
 			Friends </a>
 	</div>
 	<div class='right'>
-		<a class="btn" href="UserQuizes.jsp?id=<%out.print(id);%>">
-			Quizes </a>
+		<a class="btn" href="UserQuizes.jsp?id=<%out.print(id);%>"> Quizes
+		</a>
 	</div>
 
-
+	</div>
 
 </body>
 </html>
