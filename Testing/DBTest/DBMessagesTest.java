@@ -14,11 +14,17 @@ public class DBMessagesTest {
 		
 		DBMessage dbm = new DBMessage();
 		
-		User sender = new User("gocha", 0, "mike");
+		User sender = new User("goscha", 0, "mike");
 		
-		User recipient = new User("gogi", 0, )
+		User recipient = new User("", 0, "z" );
 		
-		Message m = new Message()
+		Message m = new Message("traki", "adasdasdfsdfsd", sender, recipient);
+		
+		dbm.sendMessage(m);
+		
+		//System.out.println(m);
 		
 	}
+	
+	
 }

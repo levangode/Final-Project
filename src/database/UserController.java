@@ -63,7 +63,7 @@ public class UserController {
 
 			if (myRes.next()) {
 				String user_name = myRes.getString(1);
-				int user_id = myRes.getInt(2);
+				//int user_id = myRes.getInt(2);
 				String user_login = myRes.getString(3);
 				String user_profile_image = myRes.getString(4);
 				if (user_profile_image == null) {

@@ -29,7 +29,7 @@ public class DBMessage {
 		int sender_id = getSenderID(m);
 		int recipient_id = getRecipientID(m);
 		
-		String query = "insert into Messages(sender_id, recipient_id, message_text, message_subject) valie("
+		String query = "insert into Messages(sender_id, recipient_id, message_text, message_subject) value("
 				+ sender_id + ", "
 				+ recipient_id + ", "
 				+ "'" + m.getText() + "', "
@@ -37,6 +37,8 @@ public class DBMessage {
 				+");";
 		
 		PreparedStatement stm;
+		
+		System.out.println(query);
 		
 		try{
 			stm = connection.prepareStatement(query);
@@ -70,5 +72,32 @@ public class DBMessage {
 		int senderID = u.getUserIDByLogin(sender_login);
 		
 		return senderID;
+	}
+	
+	public List<Message> getMessages(int semder_id){
+		List<Message> messages = new ArrayList<Message>(); 
+		
+		String query = "select sender_id, recipient_id, message_text, message_subject from Messages where 1;";
+		
+		connection = new DBconnector().getConnection();
+		
+		PreparedStatement stm;
+		
+		System.out.println(query);
+		
+		try {
+			stm = connection.prepareStatement(query);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while (rs.next()){
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return messages;
 	}
 }

@@ -7,7 +7,7 @@ public class Message {
 	private User sender;
 	private User recipient;
 	
-	Message(String text, String subject, User sender, User recipient){
+	public Message(String text, String subject, User sender, User recipient){
 		this.text = text;
 		this.subject = subject;
 		this.sender = sender;
@@ -38,7 +38,12 @@ public class Message {
 		return recipient.getName();
 	}
 	
-	
+	@Override
+	public String toString(){
+		return "from: " + sender.getName() + " to: " + recipient + "\n"
+				+ getText() + "\n"
+				+ getSubject();
+	}
 
 
 }
