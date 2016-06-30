@@ -40,7 +40,7 @@ public class Message {
 	
 	@Override
 	public String toString(){
-		return "from: " + sender.getName() + " to: " + recipient + "\n"
+		return "from: " + sender.getName() + " to: " + recipient.getName() + "\n"
 				+ getText() + "\n"
 				+ getSubject();
 	}
