@@ -14,10 +14,10 @@ public class QuizInfoFactory {
 				quiz_description, quiz_likes);
 	}
 
-	public static QuizFullSummary getFullSummary(String quiz_name, int times_taken, String quiz_author,
+	public static QuizFullSummary getFullSummary(String quiz_name, int times_taken, String quiz_author, int quiz_score,
 			Timestamp quiz_date, int quiz_id, String quiz_category, String quiz_description, int quiz_likes,
 			String quiz_difficulty, boolean immediate_correction) {
-		return new QuizFullSummary(quiz_name, times_taken, quiz_author, quiz_date, quiz_id, quiz_category,
+		return new QuizFullSummary(quiz_name, times_taken, quiz_author, quiz_score, quiz_date, quiz_id, quiz_category,
 				quiz_description, quiz_likes, quiz_difficulty, immediate_correction);
 	}
 

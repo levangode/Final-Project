@@ -71,7 +71,6 @@ public class NextQuestion extends HttpServlet {
 			Quiz quiz = (Quiz)request.getSession().getAttribute("Quiz");
 			DBQuizController ca = new DBQuizController();
 			ca.addQuiz(quiz);
-			System.out.println("chaagdo");
 			response.sendRedirect("HomePage.jsp");
 		} else {
 			response.sendRedirect(

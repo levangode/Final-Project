@@ -8,13 +8,15 @@ import javax.servlet.jsp.JspWriter;
 public class QuizFullSummary extends QuizDetailedInfo implements DrawableInfo {
 	private String quiz_difficulty;
 	private Boolean immediate_correction;
+	private int quiz_score;
 
-	public QuizFullSummary(String quiz_name, int times_taken, String quiz_author, Timestamp quiz_date, int quiz_id,
+	public QuizFullSummary(String quiz_name, int times_taken, String quiz_author, int quiz_score, Timestamp quiz_date, int quiz_id,
 			String quiz_category, String quiz_description, int quiz_likes, String quiz_difficulty,
 			boolean immediate_correction) {
 		super(quiz_name, times_taken, quiz_author, quiz_date, quiz_id, quiz_category, quiz_description, quiz_likes);
 		this.setQuiz_difficulty(quiz_difficulty);
 		this.setImmediate_correction(immediate_correction);
+		this.setQuiz_score(quiz_score);
 	}
 	@Override
 	public void showOnCard(JspWriter out) {
@@ -36,6 +38,7 @@ public class QuizFullSummary extends QuizDetailedInfo implements DrawableInfo {
 			out.write("<p>Immediate Correction: " + onOff + "</p>");
 			out.write("<p>Quiz Likes: " + getQuiz_likes() + "</p>");
 			out.write("<p>Times Taken: " + getTimes_taken() + "</p>");
+			out.write("<p>Maximum Score in This Quiz: " + getQuiz_score() + "</p>");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -55,6 +58,12 @@ public class QuizFullSummary extends QuizDetailedInfo implements DrawableInfo {
 
 	public void setImmediate_correction(Boolean immediate_correction) {
 		this.immediate_correction = immediate_correction;
+	}
+	public int getQuiz_score() {
+		return quiz_score;
+	}
+	public void setQuiz_score(int quiz_score) {
+		this.quiz_score = quiz_score;
 	}
 
 }
