@@ -131,7 +131,7 @@ public class QuizInfoController {
 		return id;
 	}
 	
-	public List<QuizInfo> getQuizListByName(String name){
+	public List<QuizDetailedInfo> getQuizListByName(String name){
 		
 		connection = new DBconnector().getConnection();
 		
@@ -141,6 +141,10 @@ public class QuizInfoController {
 			PreparedStatement stm = connection.prepareStatement(query);
 			
 			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()){
+				
+			}
 			
 			connection.close();
 		} catch (SQLException e) {
