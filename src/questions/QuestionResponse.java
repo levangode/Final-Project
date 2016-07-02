@@ -13,7 +13,8 @@ public class QuestionResponse extends Question {
 
 	public QuestionResponse(String question_text, String question_type, String question_description,
 			long question_time_limit, int question_score, ArrayList<Answer> answers, int question_number) {
-		super(question_text, question_type, question_description, question_time_limit, question_score, answers, question_number);
+		super(question_text, question_type, question_description, question_time_limit, question_score, answers,
+				question_number);
 	}
 
 	@Override
@@ -35,7 +36,7 @@ public class QuestionResponse extends Question {
 			for (int i = 0; i < answers.size(); i++) {
 				Answer ans = answers.get(i);
 				if (ans.getAnswerText().equals(res)) {
-					return 1;
+					return getQuestionscore();
 				}
 			}
 		}
