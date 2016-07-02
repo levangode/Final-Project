@@ -53,3 +53,5 @@ src/questions/PrintableQuestion.java
 *.classpath
 .classpath
 .classpath
+*.class
+build/classes/database/INFO.class
