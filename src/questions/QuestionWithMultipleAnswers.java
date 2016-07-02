@@ -19,9 +19,9 @@ public class QuestionWithMultipleAnswers extends Question {
 	private int numAnswers;
 
 	public QuestionWithMultipleAnswers(String question_text, String question_type, String question_description,
-			long question_time_limit, int question_score, int numAnswers, boolean order, ArrayList<Answer> answers,
+			 int question_score, int numAnswers, boolean order, ArrayList<Answer> answers,
 			int question_number) {
-		super(question_text, question_type, question_description, question_time_limit, question_score, answers,
+		super(question_text, question_type, question_description, question_score, answers,
 				question_number);
 		this.order = order;
 		this.numAnswers = numAnswers;

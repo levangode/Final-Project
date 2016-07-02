@@ -33,32 +33,41 @@ textarea {
 	resize: none;
 }
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="ScriptsForQuestionCreating.js" type="text/javascript"></script>
 <body>
-	<form id="main" action="NextQuestion" method="post" onsubmit="">
-		<input type="hidden" name="questionNum"
-			value=<%out.write(request.getParameter("questionNum"));%>>
-		<h2>
-			Question
-			<%
-			out.write(request.getParameter("questionNum"));
-		%>:
-		</h2>
+	<div id="main">
+		<jsp:include page="Header.jsp" />
 		<%
-			DBQuizController b = new DBQuizController();
-			ArrayList<String> types = b.getQuestionTypes();
+			if (!(boolean) request.getSession().getAttribute("logged_in")) {
+				response.sendRedirect("NotLoggedIn.jsp");
+			}
 		%>
-		<select id="type" name="type" onchange="addQuestion()">
-			<option disabled selected>--- select an option ---</option>
+		<form id="main" action="NextQuestion" method="post" onsubmit="">
+			<input type="hidden" name="questionNum"
+				value=<%out.write(request.getParameter("questionNum"));%>>
+			<h2>
+				Question
+				<%
+				out.write(request.getParameter("questionNum"));
+			%>:
+			</h2>
 			<%
-				for (int i = 0; i < types.size(); i++) {
-					out.write("<option value=\"" + types.get(i) + "\">" + types.get(i) + "</option>");
-				}
+				DBQuizController b = new DBQuizController();
+				ArrayList<String> types = b.getQuestionTypes();
 			%>
-		</select> <br />
-		<div id="question"></div>
-		<input type="submit" name="finalise" value="Finish Creating">
-	</form>
+			<select id="type" name="type" onchange="addQuestion()">
+				<option disabled selected>--- select an option ---</option>
+				<%
+					for (int i = 0; i < types.size(); i++) {
+						out.write("<option value=\"" + types.get(i) + "\">" + types.get(i) + "</option>");
+					}
+				%>
+			</select> <br />
+			<div id="question"></div>
+			<input type="submit" name="finalise" value="Finish Creating">
+		</form>
+	</div>
 </body>
 </html>
