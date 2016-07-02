@@ -48,11 +48,14 @@ public class Quiz {
 		String quiz_category = request.getParameter("categories");
 		String quiz_difficulty = request.getParameter("difficulty");
 		String quiz_author = (String) request.getSession().getAttribute("user_name");
-		int time_limit;
-		if (request.getParameter("time_limit").equals("")) {
-			time_limit = -1;
-		} else {
-			time_limit = Integer.parseInt(request.getParameter("time_limit"));
+		int time_limit=-1;
+		if (!request.getParameter("time_limit").equals("")) {
+			try {
+				time_limit = Integer.parseInt(request.getParameter("time_limit"));
+			} catch (Exception e) {
+				time_limit=-1;
+				System.out.println("ParseInt Error");
+			}
 		}
 		boolean random_questions = false;
 		boolean immediate_correction = false;

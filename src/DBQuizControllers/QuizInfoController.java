@@ -8,10 +8,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import backend.Quiz;
 import database.DBconnector;
 
-import questions.Question;
 
 import quizInfoes.Constants;
 
