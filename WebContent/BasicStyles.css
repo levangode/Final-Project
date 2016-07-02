@@ -1,44 +1,72 @@
-@CHARSET "UTF-8";
-
 body {
-	background: #16A085;
-	background: -webkit-linear-gradient(to left, #16A085, #F4D03F);
-	background: linear-gradient(to left, #16A085, #F4D03F);
-	text-align: center;
+	background-color: #F3FAB6;
+	color:black;
 }
 
-form {
-	margin: 20px;
-	line-height: 2;
-}
-/*.style classes added from web */
-.style1 {
-	font-style: italic;
-	color: #B6B6B6;
-	font-size: 24px;
-	margin-top: 20px;
-	text-align: center;
-	text-shadow: 0 1px 1px #fff;
+.para {
+	font-size: 14;
+	margin: 0;
+	padding: 7px;
+	position: absolute;
 }
 
-.style2 {
-	color: #7a7c7f;
-	font-size: 29px;
-	font-family: "Libre Baskerville", serif;
-	line-height: 45px;
-	text-align: center;
-	text-shadow: 0 1px 1px #fff;
-	padding-top: 20px;
+.descr {
+	font-size: 16;
+	line-height: 1em;
+	height: 2em;
+	text-overflow: ellipsis;
+	width: 100%;
+	overflow: hidden;
+}
+div.box {
+	float: left;
+	width: 180px;
 }
 
-.style3 {
-	color: #d54d7b;
-	font-family: "Great Vibes", cursive;
-	font-size: 165px;
-	line-height: 160px;
-	font-weight: normal;
-	margin-bottom: 0px;
-	margin-top: 40px;
+.box a {
+	text-decoration: none;
+	color: black;
+	font-size: 20px;
+}
+
+.box a:hover {
+	background: #CBE32D;
+}
+
+.bloki{
+		background-color:#005A31;
+	border-style:solid;
+	border-width:0px;
+	border-radius:25px;
+}
+h2 {
+	margin: 2px;
+	padding:2px;
+}
+.box{
+	margin:12px;
+}
+ul {
+	width: 100%;
+	padding-left: 0px;
 	text-align: center;
-	text-shadow: 0 1px 1px #fff;
+}
+li {
+	margin: 2px 0px;
+	list-style-type: none;
+}
+
+p {
+	font-size: 18;
+	margin: 0;
+}
+
+#card {
+	background-color: #CBE32D;
+	border-radius: 25px;
+	border: 2px solid #000000;
+	padding: 0px;
+	width: calc(100% - 4px);
+	height: 150px;
+	margin: 5px 3px;
 }
