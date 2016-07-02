@@ -146,7 +146,7 @@ public class DBQuizController {
 	}
 
 	public Quiz getQuiz(int id) {
-		String query = "select Quizzes.quiz_name, Categories.category_name, Quizzes.quiz_description, Users.user_name, Quizzes.quiz_likes, Quizzes.date_created, Quizzes.quiz_difficulty, Quizzes.times_taken, Quizzes.multiple_pages, Quizzes.immediate_correction, Quizzes.random_questions, Quizzes.quiz_id "
+		String query = "select Quizzes.quiz_name, Categories.category_name, Quizzes.quiz_description, Users.user_name, Quizzes.quiz_likes, Quizzes.date_created, Quizzes.quiz_difficulty, Quizzes.times_taken, Quizzes.multiple_pages, Quizzes.immediate_correction, Quizzes.random_questions, Quizzes.quiz_id, Quizzes.time_limit "
 				+ " from Quizzes, Users, Categories where quiz_id = " + id
 				+ " and Quizzes.author_id = Users.user_id and Quizzes.category_id = Categories.category_id;";
 
@@ -165,7 +165,7 @@ public class DBQuizController {
 
 				tmpQuiz = new Quiz(res.getString(1), res.getString(3), res.getString(4), res.getInt(5),
 						res.getTimestamp(6), res.getString(2), res.getString(7), res.getInt(8), questions,
-						res.getBoolean(9), res.getBoolean(10), res.getBoolean(11));
+						res.getBoolean(9), res.getBoolean(10), res.getBoolean(11), res.getInt(12));
 			}
 
 			connection.close();
@@ -177,7 +177,7 @@ public class DBQuizController {
 	}
 
 	public ArrayList<Quiz> getMyQuizes(String author) {
-		String query = "select Quizzes.quiz_name, Categories.category_name, Quizzes.quiz_description, Users.user_name, Quizzes.quiz_likes, Quizzes.date_created, Quizzes.quiz_difficulty, Quizzes.times_taken, Quizzes.multiple_pages, Quizzes.immediate_correction, Quizzes.random_questions, Quizzes.quiz_id "
+		String query = "select Quizzes.quiz_name, Categories.category_name, Quizzes.quiz_description, Users.user_name, Quizzes.quiz_likes, Quizzes.date_created, Quizzes.quiz_difficulty, Quizzes.times_taken, Quizzes.multiple_pages, Quizzes.immediate_correction, Quizzes.random_questions, Quizzes.quiz_id, Quizzes.time_limit "
 				+ " from Quizzes, Users, Categories where author_id = " + getAuthorId(author)
 				+ " and Quizzes.author_id = Users.user_id and Quizzes.category_id = Categories.category_id;";
 
@@ -196,7 +196,7 @@ public class DBQuizController {
 
 				tmpQuiz = new Quiz(res.getString(1), res.getString(3), res.getString(4), res.getInt(5),
 						res.getTimestamp(6), res.getString(2), res.getString(7), res.getInt(8), questions,
-						res.getBoolean(9), res.getBoolean(10), res.getBoolean(11));
+						res.getBoolean(9), res.getBoolean(10), res.getBoolean(11), res.getInt(12));
 				quizes.add(tmpQuiz);
 			}
 

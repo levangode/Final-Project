@@ -8,8 +8,7 @@ create table Questions(
     question_text varchar(500),
     question_type int not null,
     question_description varchar(500),
-    question_time_limit int default -1,
-	
+    
  
 	foreign key (quiz_id) references Quizzes(quiz_id)
 );
@@ -34,7 +33,6 @@ create table Questions_QuestionResponse(
     quiz_id int not null,
     question_text varchar(500),
     question_data varchar(500),
-    question_time_limit int default -1,
     
     question_number int not null,
     
@@ -59,7 +57,6 @@ create table Questions_MultipleChoice(
     quiz_id int not null,
     question_text varchar(500),
     question_data varchar(500),
-    question_time_limit int default -1,
     
     num_answers_display int default 4,
     num_answers_correct int default 1,
@@ -88,7 +85,6 @@ create table Questions_FillInTheBlanks(
     quiz_id int not null,
     question_text varchar(500),
     question_data varchar(500),
-    question_time_limit int default -1,
     
     question_number int not null,
     
@@ -114,7 +110,6 @@ create table Questions_MultipleAnswers(
     quiz_id int not null,
     question_text varchar(500),
     question_data varchar(500),
-    question_time_limit int default -1,
     
     answers_ordered tinyint default 0,
     
