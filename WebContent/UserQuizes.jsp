@@ -72,6 +72,9 @@ div.left {
 
 
 	<div class="center">
+		<a class="btn" href="HomePage.jsp"> Return To Homepage </a>
+	</div>
+	<div class="center">
 		<a class="btn" href="UserPage.jsp?id=<%out.print(id);%>"> Return
 			To User Page </a>
 	</div>

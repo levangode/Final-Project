@@ -13,6 +13,7 @@ public class QuestionResponse extends Question {
 
 	public QuestionResponse(String question_text, String question_type, String question_description,
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 			long question_time_limit, int question_score, ArrayList<Answer> answers, int question_number) {
 		super(question_text, question_type, question_description, question_time_limit, question_score, answers,
@@ -25,6 +26,10 @@ public class QuestionResponse extends Question {
 			long question_time_limit, int question_score, ArrayList<Answer> answers, int question_number) {
 		super(question_text, question_type, question_description, question_time_limit, question_score, answers,
 				question_number);
+>>>>>>> parent of 9517f87... Merge remote-tracking branch 'origin/master'
+=======
+			 int question_score, ArrayList<Answer> answers, int question_number) {
+		super(question_text, question_type, question_description, question_score, answers, question_number);
 >>>>>>> parent of 9517f87... Merge remote-tracking branch 'origin/master'
 	}
 
@@ -47,7 +52,7 @@ public class QuestionResponse extends Question {
 			for (int i = 0; i < answers.size(); i++) {
 				Answer ans = answers.get(i);
 				if (ans.getAnswerText().equals(res)) {
-					return getQuestionscore();
+					return 1;
 				}
 			}
 		}
