@@ -5,8 +5,14 @@
 <%@page import="database.*"%>
 <%@page import="DBQuizControllers.*"%>
 <%@page import="java.util.List"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
+	<%
+		if (!(boolean) request.getSession().getAttribute("logged_in")) {
+			response.sendRedirect("NotLoggedIn.jsp");
+			return;
+		}
+	%>
 <head>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
 <link rel="stylesheet" type="text/css" href="Button.css">
@@ -38,6 +44,7 @@ div.left {
 <title>Your Friends</title>
 </head>
 <body>
+	<div id="main">
 	<ul>
 		<%
 			for (int i = 0; i < friendIds.size(); i++) {
@@ -63,5 +70,6 @@ div.left {
 				To User Page </a>
 		</div>
 	</ul>
+	</div>
 </body>
 </html>
