@@ -26,7 +26,7 @@ public class Quiz {
 	public Quiz(String quiz_name, String quiz_description, String quiz_author, int quiz_likes,
 			Timestamp date_created_timestamp, String quiz_category, String quiz_difficulty, int times_taken,
 			ArrayList<Question> questions, boolean displayMultiplePages, boolean immediateCorrection,
-			boolean randomQuestions) {
+			boolean randomQuestions, int time_limit) {
 		this.quiz_name = quiz_name;
 		this.quiz_description = quiz_description;
 		this.quiz_author = quiz_author;
@@ -39,7 +39,7 @@ public class Quiz {
 		this.displayMultiplePages = displayMultiplePages;
 		this.immediateCorrection = immediateCorrection;
 		this.randomQuestions = randomQuestions;
-
+		this.time_limit=time_limit;
 	}
 	public static Quiz retrieveQuiz(HttpServletRequest request, HttpServletResponse response){
 		String quiz_name = request.getParameter("quiz_name");
@@ -65,7 +65,7 @@ public class Quiz {
 		if(show_on.equals("Multiple Pages")){
 			multiplePage = true;
 		}
-		Quiz newOne=QuizFactory.getQuiz(quiz_name, quiz_description, quiz_author, 0, quiz_category, quiz_difficulty, 0, multiplePage, immediate_correction, random_questions);
+		Quiz newOne=QuizFactory.getQuiz(quiz_name, quiz_description, quiz_author, 0, quiz_category, quiz_difficulty, 0, multiplePage, immediate_correction, random_questions, time_limit);
 		return newOne;
 	}
 
@@ -87,7 +87,7 @@ public class Quiz {
 				+ quiz_author + "\n" + "likes: " + quiz_likes + "\n" + "date: " + date_created_timestamp + "\n"
 				+ "category: " + quiz_category + "\n" + "difficulty: " + quiz_difficulty + "\n" + "times taken: "
 				+ times_taken + "\n" + "display: " + displayMultiplePages + "\n" + "immediate: " + immediateCorrection
-				+ "\n" + "random: " + randomQuestions + "\n ============================";
+				+ "\n" + "random: " + randomQuestions + "\n" + "time limit: "+ time_limit+"\n"+" ============================";
 		
 		for(int i=0; i<questions.size(); i++){
 			System.out.println(questions.get(i));
