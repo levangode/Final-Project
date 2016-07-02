@@ -45,7 +45,7 @@ public class QuestionTestAdd {
 				);
 		
 		try {
-			z.addToDatabase(27);
+			z.addToDatabase(1);
 		} catch (Exception e) {
 			System.out.println("Bozeboooo");
 			e.printStackTrace();
@@ -68,7 +68,7 @@ public class QuestionTestAdd {
 		Question z = new MultipleChoiceQuestion("how much is 5 + 5?", QuestionTypes.MultipleChoiceMultipleAnswer, "", 1, 1, 5, 1, answers, 7);
 		
 		try {
-			z.addToDatabase(27);
+			z.addToDatabase(1);
 		} catch (Exception e) {
 			System.out.println("Bozeboooo");
 			e.printStackTrace();
@@ -114,7 +114,7 @@ public class QuestionTestAdd {
 		Question z = new FillTheBlankQuestion("the prettiest animal is ? others are ? ? ? ?", QuestionTypes.FillInTheBlanks, "", 1, 5, answers, 8);
 		
 		try{
-			z.addToDatabase(27);
+			z.addToDatabase(1);
 		} catch (SQLException e){
 			System.out.println("sqlError!!");
 			e.printStackTrace();
