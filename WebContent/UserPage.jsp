@@ -7,6 +7,12 @@
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE>
 <html>
+	<%
+		if (!(boolean) request.getSession().getAttribute("logged_in")) {
+			response.sendRedirect("NotLoggedIn.jsp");
+			return;
+		}
+	%>
 <head>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
 <link rel="stylesheet" type="text/css" href="Button.css">
