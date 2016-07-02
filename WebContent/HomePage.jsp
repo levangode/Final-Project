@@ -126,11 +126,17 @@ li {
 	<div style="min-width: 1024px; position: relative;">
 		<!-- start top panel -->
 		<jsp:include page="Header.jsp" />
-		<div style="text-align:center; height:50px;">
+		<div style="text-align: center; height: 50px;">
 			<a class="btn" href="CreateQuiz.jsp"> Create New Quiz </a>
 		</div>
 		<!-- End Top Panel -->
 		<!-- Bottom Panel -->
+		<div style="float: left">
+			<form action='SearchUser' method='post'>
+				Search Quiz<input type='text' name='user_name'> <input
+					type='submit' value='Search'>
+			</form>
+		</div>
 		<div>
 			<!-- Left Panel -->
 			<div class="box" style="text-align: center;">
