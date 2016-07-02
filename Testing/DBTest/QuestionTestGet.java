@@ -51,7 +51,7 @@ public class QuestionTestGet {
 		
 	}
 	
-//	@Test
+	@Test
 	public void Test_MultipleAnswers_Get(){
 		DBQuestionWithMultipleAnswers z = new DBQuestionWithMultipleAnswers();
 		
@@ -69,7 +69,7 @@ public class QuestionTestGet {
 		
 	}
 	
-	@Test
+//	@Test
 	public void Test_FillInTheBlanks_Get(){
 		DBQuestionFillInTheBlanks z = new DBQuestionFillInTheBlanks();
 		

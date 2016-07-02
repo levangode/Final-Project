@@ -45,7 +45,7 @@ public class DBQuestionMultipleChoice {
 			while(rs.next()){
 				MultipleChoiceQuestion newQuestion;
 				
-				ArrayList<Answer> answers = getAnswers(rs.getInt(7));
+				ArrayList<Answer> answers = getAnswers(rs.getInt("question_id"));
 				
 				newQuestion = new MultipleChoiceQuestion(
 								rs.getString("question_text"),
