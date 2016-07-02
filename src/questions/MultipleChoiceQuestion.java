@@ -18,10 +18,9 @@ public class MultipleChoiceQuestion extends Question {
 	private int answers_to_be_correct;
 
 	public MultipleChoiceQuestion(String question_text, String question_type, String question_description,
-			 int question_score, int answers_to_show, int answers_to_be_correct,
-			ArrayList<Answer> answers, int question_number) {
-		super(question_text, question_type, question_description, question_score, answers,
-				question_number);
+			int question_score, int answers_to_show, int answers_to_be_correct, ArrayList<Answer> answers,
+			int question_number) {
+		super(question_text, question_type, question_description, question_score, answers, question_number);
 		this.answers_to_show = answers_to_show;
 		this.answers_to_be_correct = answers_to_be_correct;
 	}
@@ -88,7 +87,7 @@ public class MultipleChoiceQuestion extends Question {
 
 	@Override
 	public double gradeAnswer(HttpServletRequest request, int questionIndex) {
-		int counter = 0;
+		double counter = 0;
 		ArrayList<Answer> answers = getAnswers();
 		for (int i = 0; i < answers.size(); i++) {
 			MultipleChoiceAnswer ans = (MultipleChoiceAnswer) answers.get(i);
@@ -97,9 +96,11 @@ public class MultipleChoiceQuestion extends Question {
 				if (request.getParameter(name) != null) {
 					counter++;
 				}
+			} else if (request.getParameter(name) != null) {
+				return 0;
 			}
 		}
-		return (counter / getNumanswerscorrect()) * getQuestionscore();
+		return (counter / (double) getNumanswerscorrect()) * getQuestionscore();
 	}
 
 	public void addToDatabase(int quiz_id) throws Exception {

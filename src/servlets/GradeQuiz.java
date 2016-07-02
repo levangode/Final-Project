@@ -55,6 +55,10 @@ public class GradeQuiz extends HttpServlet {
 		HttpSession session = request.getSession();
 		System.out.println("Gadavedi doGetshi!");
 		Quiz quiz = (Quiz) session.getAttribute("Quiz");
+		if (quiz == null) {
+			response.sendRedirect("HomePage.jsp");
+			return;
+		}
 		double score = 0;
 		double maxScore = 0;
 		ArrayList<Question> questions = quiz.getQuestions();
@@ -73,6 +77,7 @@ public class GradeQuiz extends HttpServlet {
 		request.getSession().setAttribute("maxScore", maxScore);
 		DBQuizController contr = new DBQuizController();
 		contr.incrementTimesTaken(Integer.parseInt(request.getParameter("id")));
+		session.removeAttribute("Quiz");
 		response.sendRedirect("MyGrade.jsp");
 		doGet(request, response);
 	}
