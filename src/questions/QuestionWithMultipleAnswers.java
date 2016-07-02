@@ -52,17 +52,21 @@ public class QuestionWithMultipleAnswers extends Question {
 
 	@Override
 	public double gradeAnswer(HttpServletRequest request, int questionIndex) {
-		int counter = 0;
+		double counter = 0;
 		ArrayList<Answer> answers = getAnswers();
 		for (int i = 0; i < getNumanswers(); i++) {
 			String name = "q" + questionIndex + "-" + i;
 			String res = request.getParameter(name);
+			System.out.println("answers size is :" + answers.size());
+			System.out.println("answer is =" + answers.get(i).getAnswerText());
+			System.out.println("res =" + res);
 			if (getAnswersordered()) {
 				if (res.equals(answers.get(i).getAnswerText())) {
 					counter++;
 				}
 			} else {
 				for (int j = 0; j < answers.size(); j++) {
+					System.out.println("in unordered answer is =" + answers.get(i).getAnswerText());
 					if (answers.get(j).getAnswerText().equals(res)) {
 						counter++;
 						answers.remove(j);
@@ -70,7 +74,7 @@ public class QuestionWithMultipleAnswers extends Question {
 				}
 			}
 		}
-		return (counter / getNumanswers()) * getQuestionscore();
+		return (counter / (double)getNumanswers()) * getQuestionscore();
 	}
 
 	@Override

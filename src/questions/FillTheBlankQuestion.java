@@ -44,15 +44,11 @@ public class FillTheBlankQuestion extends Question {
 			String name = "q" + questionIndex + "-" + i;
 			if (request.getParameter(name) != null) {
 				String res = request.getParameter(name);
-				System.out.println("res: " + res);
-				System.out.println("answrs is: " + answers.get(i).getAnswerText());
 				if (res.equals(answers.get(i).getAnswerText()))
 					counter++;
 			}
 		}
-		System.out.println("counter is: " + counter);
-		System.out.println("answer size is: " + answers.size());
-		System.out.println("questionsScore is: " + getQuestionscore());
+		
 		return (counter /(double) answers.size()) * getQuestionscore();
 	}
 
