@@ -4,6 +4,12 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE>
 <html>
+<%
+	if (!(boolean) request.getSession().getAttribute("logged_in")) {
+		response.sendRedirect("NotLoggedIn.jsp");
+		return;
+	}
+%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Create Your Quiz</title>
@@ -40,11 +46,6 @@ textarea {
 <body>
 	<div id="main">
 		<jsp:include page="Header.jsp" />
-		<%
-			if (!(boolean) request.getSession().getAttribute("logged_in")) {
-				response.sendRedirect("NotLoggedIn.jsp");
-			}
-		%>
 		<h1>Create Quiz</h1>
 		<h2>Choose Quiz category</h2>
 		<%

@@ -5,6 +5,12 @@
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE >
 <html>
+		<%
+			if (!(boolean) request.getSession().getAttribute("logged_in")) {
+				response.sendRedirect("NotLoggedIn.jsp");
+				return;
+			}
+		%>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
@@ -39,11 +45,6 @@ textarea {
 <body>
 	<div id="main">
 		<jsp:include page="Header.jsp" />
-		<%
-			if (!(boolean) request.getSession().getAttribute("logged_in")) {
-				response.sendRedirect("NotLoggedIn.jsp");
-			}
-		%>
 		<form id="main" action="NextQuestion" method="post" onsubmit="">
 			<input type="hidden" name="questionNum"
 				value=<%out.write(request.getParameter("questionNum"));%>>
