@@ -131,12 +131,7 @@ li {
 		</div>
 		<!-- End Top Panel -->
 		<!-- Bottom Panel -->
-		<div style="float: left">
-			<form action='SearchUser' method='post'>
-				Search Quiz<input type='text' name='user_name'> <input
-					type='submit' value='Search'>
-			</form>
-		</div>
+
 		<div>
 			<!-- Left Panel -->
 			<div class="box" style="text-align: center;">
@@ -179,7 +174,14 @@ li {
 			</div>
 			<!-- End QuizList -->
 			<!-- Right Panel -->
+
 			<div class="box" style="float: right">
+				<div style="text-align:center;">
+					<form action='SearchQuiz' method='post'>
+						Search Quiz<input type='text' name='quiz_name'> <input
+							type='submit' value='Search'>
+					</form>
+				</div>
 				<div class="box" style="position: relative;">
 					<h2 style="text-align: center; margin: 1px;">Popular Quizzes</h2>
 					<ul>

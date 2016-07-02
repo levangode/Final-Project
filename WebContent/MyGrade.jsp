@@ -12,8 +12,8 @@
 <body>
 
 	<%
-		int score = (int) request.getSession().getAttribute("userScore");
-		int maxScore = (int) request.getSession().getAttribute("maxScore");
+		double score = (double) request.getSession().getAttribute("userScore");
+		double maxScore = (double) request.getSession().getAttribute("maxScore");
 		out.print(score + "/" + maxScore);
 	%>
 
