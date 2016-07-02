@@ -83,7 +83,7 @@ public class DBQuestionMultipleChoice {
 	
 	public void addQuestion(MultipleChoiceQuestion question, int quiz_id) throws Exception{
 		String query = 
-				"insert into Questions_MultipleChoice(quiz_id, question_text, question_data, question_time_limit, score, num_answers_display, num_answers_correct, question_number) value ("
+				"insert into Questions_MultipleChoice(quiz_id, question_text, question_data, score, num_answers_display, num_answers_correct, question_number) value ("
 				+ quiz_id + ", "
 				+ "'" + question.getQuestiontext() + "'" + ", "
 				+ "'" + question.getQuestiondescription() + "'" + ", "

@@ -77,7 +77,7 @@ public class DBQuestionFillInTheBlanks {
 	
 	public void addQuestion(FillTheBlankQuestion question, int quiz_id) throws Exception{
 		String query = 
-				"insert into Questions_FillInTheBlanks(quiz_id, question_text, question_data, question_time_limit, score, question_number) value ("
+				"insert into Questions_FillInTheBlanks(quiz_id, question_text, question_data, score, question_number) value ("
 				+ quiz_id + ", "
 				+ "'" + question.getQuestiontext() + "'" + ", "
 				+ "'" + question.getQuestiondescription() + "'" + ", "

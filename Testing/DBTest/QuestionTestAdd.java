@@ -100,7 +100,7 @@ public class QuestionTestAdd {
 		}
 	}
 	
-//	@Test
+	@Test
 	public void Test_fillInTheBlanks_add(){
 		ArrayList<Answer> answers = new ArrayList<Answer>();
 		
