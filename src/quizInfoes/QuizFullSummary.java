@@ -9,14 +9,16 @@ public class QuizFullSummary extends QuizDetailedInfo implements DrawableInfo {
 	private String quiz_difficulty;
 	private Boolean immediate_correction;
 	private int quiz_score;
+	private int time_limit;
 
 	public QuizFullSummary(String quiz_name, int times_taken, String quiz_author, int quiz_score, Timestamp quiz_date, int quiz_id,
 			String quiz_category, String quiz_description, int quiz_likes, String quiz_difficulty,
-			boolean immediate_correction) {
+			boolean immediate_correction, int time_limit) {
 		super(quiz_name, times_taken, quiz_author, quiz_date, quiz_id, quiz_category, quiz_description, quiz_likes);
 		this.setQuiz_difficulty(quiz_difficulty);
 		this.setImmediate_correction(immediate_correction);
 		this.setQuiz_score(quiz_score);
+		this.time_limit=time_limit;
 	}
 	@Override
 	public void showOnCard(JspWriter out) {
@@ -39,6 +41,7 @@ public class QuizFullSummary extends QuizDetailedInfo implements DrawableInfo {
 			out.write("<p>Quiz Likes: " + getQuiz_likes() + "</p>");
 			out.write("<p>Times Taken: " + getTimes_taken() + "</p>");
 			out.write("<p>Maximum Score in This Quiz: " + getQuiz_score() + "</p>");
+			out.write("<p>Time Limit: "+time_limit + " minutes</p>");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

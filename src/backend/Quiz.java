@@ -13,7 +13,7 @@ public class Quiz {
 	private String quiz_description;
 	private String quiz_author;
 	private int quiz_likes;
-	private int time_limit; //(minutes)
+	private int time_limit; // (minutes)
 	private Timestamp date_created_timestamp;
 	private String quiz_category;
 	private String quiz_difficulty;
@@ -39,17 +39,18 @@ public class Quiz {
 		this.displayMultiplePages = displayMultiplePages;
 		this.immediateCorrection = immediateCorrection;
 		this.randomQuestions = randomQuestions;
-		this.time_limit=time_limit;
+		this.setTime_limit(time_limit);
 	}
-	public static Quiz retrieveQuiz(HttpServletRequest request, HttpServletResponse response){
+
+	public static Quiz retrieveQuiz(HttpServletRequest request, HttpServletResponse response) {
 		String quiz_name = request.getParameter("quiz_name");
 		String quiz_description = request.getParameter("quiz_description");
 		String quiz_category = request.getParameter("categories");
 		String quiz_difficulty = request.getParameter("difficulty");
-		String quiz_author = (String)request.getSession().getAttribute("user_name");
+		String quiz_author = (String) request.getSession().getAttribute("user_name");
 		int time_limit;
-		if(request.getParameter("time_limit").equals("")){
-			time_limit=-1;
+		if (request.getParameter("time_limit").equals("")) {
+			time_limit = -1;
 		} else {
 			time_limit = Integer.parseInt(request.getParameter("time_limit"));
 		}
@@ -57,15 +58,16 @@ public class Quiz {
 		boolean immediate_correction = false;
 		boolean multiplePage = false;
 		String show_on = "";
-		if(request.getParameter("Random Questions") != null)
+		if (request.getParameter("Random Questions") != null)
 			random_questions = true;
-		if(request.getParameter("Immediate Correction") != null)
+		if (request.getParameter("Immediate Correction") != null)
 			immediate_correction = true;
 		show_on = request.getParameter("Show on");
-		if(show_on.equals("Multiple Pages")){
+		if (show_on.equals("Multiple Pages")) {
 			multiplePage = true;
 		}
-		Quiz newOne=QuizFactory.getQuiz(quiz_name, quiz_description, quiz_author, 0, quiz_category, quiz_difficulty, 0, multiplePage, immediate_correction, random_questions, time_limit);
+		Quiz newOne = QuizFactory.getQuiz(quiz_name, quiz_description, quiz_author, 0, quiz_category, quiz_difficulty,
+				0, multiplePage, immediate_correction, random_questions, time_limit);
 		return newOne;
 	}
 
@@ -87,11 +89,12 @@ public class Quiz {
 				+ quiz_author + "\n" + "likes: " + quiz_likes + "\n" + "date: " + date_created_timestamp + "\n"
 				+ "category: " + quiz_category + "\n" + "difficulty: " + quiz_difficulty + "\n" + "times taken: "
 				+ times_taken + "\n" + "display: " + displayMultiplePages + "\n" + "immediate: " + immediateCorrection
-				+ "\n" + "random: " + randomQuestions + "\n" + "time limit: "+ time_limit+"\n"+" ============================";
-		
-		for(int i=0; i<questions.size(); i++){
+				+ "\n" + "random: " + randomQuestions + "\n" + "time limit: " + time_limit + "\n"
+				+ " ============================";
+
+		for (int i = 0; i < questions.size(); i++) {
 			System.out.println(questions.get(i));
-			for(int j=0; j<questions.get(i).getAnswers().size(); j++){
+			for (int j = 0; j < questions.get(i).getAnswers().size(); j++) {
 				System.out.println(questions.get(i).getAnswers().get(j));
 			}
 		}
@@ -192,6 +195,14 @@ public class Quiz {
 
 	public void setRandomQuestions(boolean randomQuestions) {
 		this.randomQuestions = randomQuestions;
+	}
+
+	public int getTime_limit() {
+		return time_limit;
+	}
+
+	public void setTime_limit(int time_limit) {
+		this.time_limit = time_limit;
 	}
 
 }

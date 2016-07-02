@@ -16,9 +16,9 @@ public class QuizInfoFactory {
 
 	public static QuizFullSummary getFullSummary(String quiz_name, int times_taken, String quiz_author, int quiz_score,
 			Timestamp quiz_date, int quiz_id, String quiz_category, String quiz_description, int quiz_likes,
-			String quiz_difficulty, boolean immediate_correction) {
+			String quiz_difficulty, boolean immediate_correction, int time_limit) {
 		return new QuizFullSummary(quiz_name, times_taken, quiz_author, quiz_score, quiz_date, quiz_id, quiz_category,
-				quiz_description, quiz_likes, quiz_difficulty, immediate_correction);
+				quiz_description, quiz_likes, quiz_difficulty, immediate_correction, time_limit);
 	}
 
 	public static UserActivity getUserActivity(Timestamp time_finished, Timestamp time_taken, int score, String user) {

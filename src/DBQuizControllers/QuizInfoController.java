@@ -221,7 +221,7 @@ public class QuizInfoController {
 
 	public QuizFullSummary getQuizSummary(int quiz_id) {
 		String order = ""
-				+ "SELECT quiz_name, quiz_description, category_name, user_login, quiz_score, quiz_difficulty, date_created, immediate_correction, quiz_likes, times_taken "
+				+ "SELECT quiz_name, quiz_description, category_name, user_login, quiz_score, quiz_difficulty, date_created, immediate_correction, quiz_likes, times_taken, time_limit "
 				+ "FROM Quizzes q " + "JOIN Users u ON u.user_id = q.author_id "
 				+ "JOIN Categories c ON c.category_id = q.category_id " + "WHERE quiz_id = " + quiz_id;
 		PreparedStatement stm = null;
@@ -236,12 +236,13 @@ public class QuizInfoController {
 				String quiz_category = res.getString("category_name");
 				String user_login = res.getString("user_login");
 				String quiz_difficulty = res.getString("quiz_difficulty");
+				int time_limit = res.getInt("time_limit");
 				Timestamp date_created = res.getTimestamp("date_created");
 				Boolean immediate_correction = res.getBoolean("immediate_correction");
 				int quiz_likes = res.getInt("quiz_likes");
 				int times_taken = res.getInt("times_taken");
 				summary = QuizInfoFactory.getFullSummary(quiz_name, times_taken, user_login, quiz_score, date_created, quiz_id,
-						quiz_category, quiz_description, quiz_likes, quiz_difficulty, immediate_correction);
+						quiz_category, quiz_description, quiz_likes, quiz_difficulty, immediate_correction, time_limit);
 			}
 			connection.close();
 		} catch (SQLException e) {
@@ -301,7 +302,6 @@ public class QuizInfoController {
 		ArrayList<ShortInfo> quizes = new ArrayList<>();
 		PreparedStatement stm = null;
 
-		System.out.println(query);
 		try {
 			stm = connection.prepareStatement(query);
 

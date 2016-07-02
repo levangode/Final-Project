@@ -10,6 +10,11 @@ function addAnswer() {
 	$('#' + fieldName).focus();
 	count += 1;
 }
+
+
+
+
+
 function addChoice() {
 	var fieldName = "choice" + count;
 	var answerName = "answer" + count;
