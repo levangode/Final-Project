@@ -73,8 +73,9 @@ public class DBQuestionResponse {
 
 	public void addQuestion(QuestionResponse question, int quiz_id) throws Exception {
 		String query = "insert into Questions_QuestionResponse(quiz_id, question_text, question_data, score, question_number) value ("
-				+ quiz_id + ", " + "'" + question.getQuestiontext() + "'" + ", " + "'"
-				+ question.getQuestiondescription() + "'" + ", " + question.getQuestionscore() + ", "
+				+ quiz_id + ", " + "'" + question.getQuestiontext() + "'" + ", "
+				+ "'" + question.getQuestiondescription() + "'" + ", "
+				+ question.getQuestionscore() + ", "
 				+ question.getQuestionnumber() + ");";
 
 		PreparedStatement stm;

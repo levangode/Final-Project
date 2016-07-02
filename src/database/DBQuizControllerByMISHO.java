@@ -304,9 +304,9 @@ public class DBQuizControllerByMISHO {
 			boolean immediate_correction = rs.getBoolean(11);
 			boolean random_questions = rs.getBoolean(12);
 
-			quiz = new Quiz(quiz_name, quiz_description, getAuthorStr(author_id), quiz_likes, date_created,
-					getQuizCategoryStr(category_id), quiz_difficulty, times_taken, questions, multiple_pages,
-					immediate_correction, random_questions);
+		//	quiz = new Quiz(quiz_name, quiz_description, getAuthorStr(author_id), quiz_likes, date_created,
+			//		getQuizCategoryStr(category_id), quiz_difficulty, times_taken, questions, multiple_pages,
+			//		immediate_correction, random_questions);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
