@@ -1,8 +1,10 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,12 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import DBQuizActivityContollers.DBQuizTake;
 import DBQuizControllers.DBQuizController;
 import DBQuizControllers.QuizInfoController;
 import answers.Answer;
 import backend.Quiz;
 import questions.MultipleChoiceQuestion;
 import questions.Question;
+import quizInfoes.UserActivity;
 
 /**
  * Servlet implementation class GradeQuiz
@@ -52,7 +56,10 @@ public class GradeQuiz extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		Timestamp endTime = new Timestamp(new Date().getTime());
 		HttpSession session = request.getSession();
+		Timestamp startTime = (Timestamp) session.getAttribute("Starttime");
+		String login = (String) session.getAttribute("user_name");
 		System.out.println("Gadavedi doGetshi!");
 		Quiz quiz = (Quiz) session.getAttribute("Quiz");
 		if (quiz == null) {
@@ -78,6 +85,14 @@ public class GradeQuiz extends HttpServlet {
 		DBQuizController contr = new DBQuizController();
 		contr.incrementTimesTaken(Integer.parseInt(request.getParameter("id")));
 		session.removeAttribute("Quiz");
+		session.removeAttribute("Starttime");
+		// UserActivity activity = new UserActivity(endTime, startTime, score,
+		// login);
+		DBQuizController db = new DBQuizController();
+		int id = db.getAuthorId(login);
+		DBQuizTake adb = new DBQuizTake();
+		adb.addActivity(id, Integer.parseInt(request.getParameter("id")),
+				(int) (endTime.getTime() - startTime.getTime()), score);
 		response.sendRedirect("MyGrade.jsp");
 		doGet(request, response);
 	}

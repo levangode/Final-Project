@@ -7,10 +7,10 @@ import javax.servlet.jsp.JspWriter;
 public class UserActivity implements DrawableInfo {
 	private Timestamp time_finished;
 	private Timestamp time_taken;
-	private int score;
+	private double score;
 	private String user;
 
-	public UserActivity(Timestamp time_finished, Timestamp time_taken, int score, String user) {
+	public UserActivity(Timestamp time_finished, Timestamp time_taken, double score, String user) {
 		this.setTime_finished(time_finished);
 		this.setTime_taken(time_taken);
 		this.setScore(score);
@@ -21,7 +21,7 @@ public class UserActivity implements DrawableInfo {
 	public void showOnCard(JspWriter out) {
 		try {
 			out.write("<p>Time finished: " + time_finished + "</p>");
-			out.write("<p>Score: "+score+"</p>");
+			out.write("<p>Score: " + score + "</p>");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -43,11 +43,11 @@ public class UserActivity implements DrawableInfo {
 		this.time_taken = time_taken;
 	}
 
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 

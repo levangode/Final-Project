@@ -1,3 +1,5 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.sql.Timestamp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="database.*"%>
@@ -10,10 +12,12 @@
 <html>
 
 <%
+	Timestamp startTime = new Timestamp(new Date().getTime());
 	DBQuizController cont = new DBQuizController();
 	int id = Integer.parseInt(request.getParameter("id"));
 	Quiz quiz = cont.getQuiz(id);
 	request.getSession().setAttribute("Quiz", quiz);
+	request.getSession().setAttribute("Starttime", startTime);
 %>
 
 <head>
@@ -40,8 +44,9 @@ body {
 				out.print(q.getQuestionHtml(i));
 			}
 		%>
-		<input type="hidden" name="id" value=<% out.write(request.getParameter("id")); %>>
-		<input type="submit" value="Submit">
+		<input type="hidden" name="id"
+			value=<%out.write(request.getParameter("id"));%>> <input
+			type="submit" value="Submit">
 	</form>
 </body>
 </html>

@@ -52,7 +52,7 @@ create table Quiz_taken(
 	time_finished timestamp,
 	time_taken int,
 	
-	score int not null,
+	score double not null,
 	
 	foreign key (user_id) references Users(user_id),
 	foreign key (quiz_id) references Quizzes(quiz_id)
