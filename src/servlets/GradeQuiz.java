@@ -61,7 +61,7 @@ public class GradeQuiz extends HttpServlet {
 		for (int i = 0; i < questions.size(); i++) {
 			Question q = questions.get(i);
 			double curScore = q.gradeAnswer(request, i);
-
+			System.out.println("gradedAnswers= " + curScore);
 			double questionScore = q.getQuestionscore();
 
 			maxScore += questionScore;

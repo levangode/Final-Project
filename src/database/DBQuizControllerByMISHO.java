@@ -219,7 +219,7 @@ public class DBQuizControllerByMISHO {
 		String question_text = question.getQuestiontext();
 		String question_type = question.getQuestiontype();
 		String question_description = question.getQuestiondescription();
-		int questions_time_limit = (int) question.getQuestiontimelimit();
+		//int questions_time_limit = (int) question.getQuestiontimelimit();
 
 		PreparedStatement stm;
 
@@ -230,7 +230,7 @@ public class DBQuizControllerByMISHO {
 			stm.setString(3, question_text);
 			stm.setInt(4, getQuestionTypeId(question_type));
 			stm.setString(5, question_description);
-			stm.setInt(6, questions_time_limit);
+			//stm.setInt(6, questions_time_limit);
 			System.out.println("Question statemnt:" + stm);
 			stm.executeUpdate();
 
