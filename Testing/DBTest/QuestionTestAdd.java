@@ -38,7 +38,6 @@ public class QuestionTestAdd {
 					"zzz waht is your name?",
 					QuestionTypes.QuestionResponse,
 					"zzz Best Question ever",
-					1, 
 					1,
 					answers,
 					5
@@ -65,7 +64,7 @@ public class QuestionTestAdd {
 		
 		System.out.println(answers.size());
 		
-		Question z = new MultipleChoiceQuestion("how much is 5 + 5?", QuestionTypes.MultipleChoiceMultipleAnswer, "", 1, 1, 5, 1, answers, 7);
+		Question z = new MultipleChoiceQuestion("how much is 5 + 5?", QuestionTypes.MultipleChoiceMultipleAnswer, "", 1, 5, 1, answers, 7);
 		
 		try {
 			z.addToDatabase(1);
