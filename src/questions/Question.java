@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import answers.Answer;
 
-
 public abstract class Question implements PrintableQuestion, DatabaseAddable, Comparable {
 
 	private String question_type;
@@ -14,18 +13,18 @@ public abstract class Question implements PrintableQuestion, DatabaseAddable, Co
 	private String question_text;
 	private int question_score;
 	private ArrayList<Answer> answers;
-	
+
 	private int question_number;
 
-	public Question(String question_text, String question_type, String question_description,
-			int question_score, ArrayList<Answer> answers, int question_number) {
+	public Question(String question_text, String question_type, String question_description, int question_score,
+			ArrayList<Answer> answers, int question_number) {
 		this.question_type = question_type;
 		this.question_text = question_text;
 		this.question_data = question_description;
 		this.question_score = question_score;
 		this.answers = answers;
 		this.question_number = question_number;
-		
+
 	}
 
 	public String toString() {
@@ -42,7 +41,7 @@ public abstract class Question implements PrintableQuestion, DatabaseAddable, Co
 		return question_type;
 	}
 
-	public double getQuestionscore() {
+	public int getQuestionscore() {
 		return question_score;
 	}
 
@@ -60,7 +59,6 @@ public abstract class Question implements PrintableQuestion, DatabaseAddable, Co
 		this.question_data = question_description;
 	}
 
-
 	public String getQuestiontext() {
 		return question_text;
 	}
@@ -76,21 +74,21 @@ public abstract class Question implements PrintableQuestion, DatabaseAddable, Co
 	public void setAnswers(ArrayList<Answer> answers) {
 		this.answers = answers;
 	}
-	
-	public int getQuestionnumber(){
+
+	public int getQuestionnumber() {
 		return question_number;
 	}
-	
+
 	@Override
 	public int compareTo(Object o) {
-		if (this.question_number < ((Question)o).getQuestionnumber() ){
+		if (this.question_number < ((Question) o).getQuestionnumber()) {
 			return -1;
 		}
-		
-		if (this.question_number > ((Question)o).getQuestionnumber() ){
+
+		if (this.question_number > ((Question) o).getQuestionnumber()) {
 			return 1;
 		}
-		
+
 		return 0;
 	}
 
