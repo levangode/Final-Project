@@ -36,7 +36,7 @@ public class QuestionResponse extends Question {
 			for (int i = 0; i < answers.size(); i++) {
 				Answer ans = answers.get(i);
 				if (ans.getAnswerText().equals(res)) {
-					return 1;
+					return getQuestionscore();
 				}
 			}
 		}
