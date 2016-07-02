@@ -21,6 +21,7 @@ create table Quizzes (
     author_id int not null,
     quiz_score int default 0,
     quiz_likes int default 0,
+    quiz_time_limit int default -1;
     date_created timestamp,
     quiz_difficulty varchar(50),
     times_taken int default 0,

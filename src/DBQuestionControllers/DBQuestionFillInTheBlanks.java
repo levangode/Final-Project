@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DBAnswerControllers.DBBlankAnswer;
-import DBAnswerControllers.DBMultipleChoiceAnswers;
 import answers.Answer;
 import database.DBconnector;
 import questions.FillTheBlankQuestion;
-import questions.Question;
-import questions.QuestionResponse;
 import questions.QuestionTypes;
 
 public class DBQuestionFillInTheBlanks {
@@ -31,7 +28,7 @@ public class DBQuestionFillInTheBlanks {
 	public List<FillTheBlankQuestion> retrieveQuestions(int quiz_id){
 		List<FillTheBlankQuestion> questions = new ArrayList<FillTheBlankQuestion>();
 		
-		String query = " select question_text, question_data, question_time_limit, score, question_id, question_number from Questions_FillInTheBlanks where quiz_id = "
+		String query = " select question_text, question_data, score, question_id, question_number from Questions_FillInTheBlanks where quiz_id = "
 				+ quiz_id
 				+ ";";
 		
@@ -47,13 +44,12 @@ public class DBQuestionFillInTheBlanks {
 				ArrayList<Answer> answers = getAnswers(rs.getInt(5));
 				
 				newQuestion = new FillTheBlankQuestion(
-								rs.getString(1), 
+								rs.getString("question_text"), 
 								QuestionTypes.QuestionResponse,
-								rs.getString(2),
-								rs.getInt(3),
-								rs.getInt(4),
+								rs.getString("question_data"),
+								rs.getInt("score"),
 								answers,
-								rs.getInt(6)
+								rs.getInt("question_number")
 							);
 				
 				questions.add(newQuestion);
@@ -85,7 +81,6 @@ public class DBQuestionFillInTheBlanks {
 				+ quiz_id + ", "
 				+ "'" + question.getQuestiontext() + "'" + ", "
 				+ "'" + question.getQuestiondescription() + "'" + ", "
-				+ question.getQuestiontimelimit() + ", "
 				+ question.getQuestionscore() + ", "
 				+ question.getQuestionnumber()
 				+ ");";

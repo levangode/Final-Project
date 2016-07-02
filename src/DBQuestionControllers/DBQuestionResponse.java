@@ -11,7 +11,6 @@ import java.util.List;
 import DBAnswerControllers.DBResponseAnswer;
 import answers.Answer;
 import database.DBconnector;
-import questions.Question;
 import questions.QuestionResponse;
 import questions.QuestionTypes;
 
@@ -30,7 +29,7 @@ public class DBQuestionResponse {
 	public List<QuestionResponse> retrieveQuestions(int quiz_id){
 		List<QuestionResponse> questions = new ArrayList<QuestionResponse>();
 		
-		String query = "select question_text, question_data, question_time_limit, score, question_id, question_number from Questions_QuestionResponse where quiz_id = "
+		String query = "select question_text, question_data, score, question_id, question_number from Questions_QuestionResponse where quiz_id = "
 				+ quiz_id
 				+ ";";
 		
@@ -45,16 +44,15 @@ public class DBQuestionResponse {
 			while(rs.next()){
 				QuestionResponse newQuestion;
 				
-				ArrayList<Answer> answers = getAnswers(rs.getInt(5));
+				ArrayList<Answer> answers = getAnswers(rs.getInt("question_id"));
 				
 				newQuestion = new QuestionResponse(
-								rs.getString(1), 
+								rs.getString("question_text"), 
 								QuestionTypes.QuestionResponse,
-								rs.getString(2),
-								rs.getInt(3),
-								rs.getInt(4),
+								rs.getString("question_data"),
+								rs.getInt("score"),
 								answers,
-								rs.getInt(6)
+								rs.getInt("question_number")
 							);
 				
 				questions.add(newQuestion);
@@ -82,16 +80,13 @@ public class DBQuestionResponse {
 	
 	public void addQuestion(QuestionResponse question, int quiz_id) throws Exception{
 		String query = 
-				"insert into Questions_QuestionResponse(quiz_id, question_text, question_data, question_time_limit, score, question_number) value ("
+				"insert into Questions_QuestionResponse(quiz_id, question_text, question_data, score, question_number) value ("
 				+ quiz_id + ", "
 				+ "'" + question.getQuestiontext() + "'" + ", "
 				+ "'" + question.getQuestiondescription() + "'" + ", "
-				+ question.getQuestiontimelimit() + ", "
 				+ question.getQuestionscore()+ ", "
 				+ question.getQuestionnumber()
 				+ ");";
-		
-//		System.out.println(query);
 		
 		PreparedStatement stm;
 		
@@ -99,11 +94,9 @@ public class DBQuestionResponse {
 			
 			stm = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 			
-//			System.out.println("11");
 			
 			stm.executeUpdate();
 			
-//			System.out.println("22");
 			
 			ResultSet rs = stm.getGeneratedKeys();
 			int question_id = -1;
@@ -112,7 +105,6 @@ public class DBQuestionResponse {
 			}
 			
 			for(Answer cur: question.getAnswers()){
-//				System.out.println("processing answer " + cur + " id = " + question_id);
 				cur.addToDatabase(question_id);
 			}
 			

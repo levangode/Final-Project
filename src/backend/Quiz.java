@@ -13,6 +13,7 @@ public class Quiz {
 	private String quiz_description;
 	private String quiz_author;
 	private int quiz_likes;
+	private int time_limit; //(minutes)
 	private Timestamp date_created_timestamp;
 	private String quiz_category;
 	private String quiz_difficulty;

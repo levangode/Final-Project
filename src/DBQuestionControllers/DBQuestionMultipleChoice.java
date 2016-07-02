@@ -9,14 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DBAnswerControllers.DBMultipleChoiceAnswers;
-import DBAnswerControllers.DBResponseAnswer;
 import answers.Answer;
 import database.DBconnector;
 import questions.MultipleChoiceQuestion;
-import questions.Question;
-import questions.QuestionResponse;
 import questions.QuestionTypes;
-import questions.QuestionWithMultipleAnswers;
 
 public class DBQuestionMultipleChoice {
 	
@@ -34,7 +30,7 @@ public class DBQuestionMultipleChoice {
 	public List<MultipleChoiceQuestion> retrieveQuestions(int quiz_id){
 		List<MultipleChoiceQuestion> questions = new ArrayList<MultipleChoiceQuestion>();
 		
-		String query = " select question_text, question_data, question_time_limit, score, num_answers_display, num_answers_correct, question_id, question_number from Questions_MultipleChoice where quiz_id = "
+		String query = " select question_text, question_data, score, num_answers_display, num_answers_correct, question_id, question_number from Questions_MultipleChoice where quiz_id = "
 				+ quiz_id
 				+ "; ";
 		
@@ -52,15 +48,14 @@ public class DBQuestionMultipleChoice {
 				ArrayList<Answer> answers = getAnswers(rs.getInt(7));
 				
 				newQuestion = new MultipleChoiceQuestion(
-								rs.getString(1),
+								rs.getString("question_text"),
 								QuestionTypes.MultipleChoiceMultipleAnswer,
-								rs.getString(2),
-								rs.getLong(3),
-								rs.getInt(4),
-								rs.getInt(5),
-								rs.getInt(6),
+								rs.getString("question_data"),
+								rs.getInt("score"),
+								rs.getInt("num_answers_display"),
+								rs.getInt("num_anwers_correct"),
 								answers,
-								rs.getInt(8)
+								rs.getInt("question_number")
 							);
 				
 				questions.add(newQuestion);
@@ -92,7 +87,6 @@ public class DBQuestionMultipleChoice {
 				+ quiz_id + ", "
 				+ "'" + question.getQuestiontext() + "'" + ", "
 				+ "'" + question.getQuestiondescription() + "'" + ", "
-				+ question.getQuestiontimelimit() + ", "
 				+ question.getQuestionscore() + ", "
 				+ question.getNumanswersdisplay() + ", "
 				+ question.getNumanswerscorrect() + ", "

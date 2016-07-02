@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DBAnswerControllers.DBMultipleAnswers;
-import DBAnswerControllers.DBMultipleChoiceAnswers;
 import answers.Answer;
 import database.DBconnector;
 import questions.QuestionTypes;
@@ -30,7 +29,7 @@ public class DBQuestionWithMultipleAnswers {
 	public List<QuestionWithMultipleAnswers> retrieveQuestions(int quiz_id){
 		List<QuestionWithMultipleAnswers> questions = new ArrayList<QuestionWithMultipleAnswers>();
 		
-		String query = "select question_text, question_data, question_time_limit, num_answers, score, answers_ordered, question_id, question_number from Questions_MultipleAnswers where quiz_id = "
+		String query = "select question_text, question_data, num_answers, score, answers_ordered, question_id, question_number from Questions_MultipleAnswers where quiz_id = "
 					+ quiz_id + " ;";
 		
 		PreparedStatement stm;
@@ -45,15 +44,14 @@ public class DBQuestionWithMultipleAnswers {
 				ArrayList<Answer> answers = getAnswers(rs.getInt(7));
 				
 				newQuestion = new QuestionWithMultipleAnswers(
-								rs.getString(1),
+								rs.getString("question_text"),
 								QuestionTypes.MultiAnswer,
-								rs.getString(2),
-								rs.getLong(3),
-								rs.getInt(4),
-								rs.getInt(5),// this is for numAnswers but it is not in constructor
-								rs.getBoolean(6),
+								rs.getString("question_data"),
+								rs.getInt("score"),
+								rs.getInt("num_answers"),
+								rs.getBoolean("answers_ordered"),
 								answers,
-								rs.getInt(8)
+								rs.getInt("question_number")
 							);
 				
 				questions.add(newQuestion);
@@ -85,7 +83,6 @@ public class DBQuestionWithMultipleAnswers {
 				+ quiz_id + ", "
 				+ "'" + question.getQuestiontext() + "'" + ", "
 				+ "'" + question.getQuestiondescription() + "'" + ", "
-				+ question.getQuestiontimelimit() + ", "
 				+ question.getQuestionscore() + ", "
 				+ question.getNumanswers() + ", "
 				+ question.getAnswersordered() + ", "
