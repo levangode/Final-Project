@@ -65,6 +65,8 @@ public class QuestionHTMLRetriever {
 		default:
 			break;
 		}
+		
+		System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n" + type + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 		return question;
 	}
 }

@@ -2,7 +2,7 @@ package DBTest;
 
 import org.junit.Test;
 
-import BDQuizActivityContollers.DBQuizTake;
+import DBQuizActivityContollers.DBQuizTake;
 
 public class takeQuizTest {
 	@Test
