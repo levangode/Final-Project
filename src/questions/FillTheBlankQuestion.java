@@ -17,9 +17,8 @@ import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 public class FillTheBlankQuestion extends Question {
 
 	public FillTheBlankQuestion(String question_text, String question_type, String question_description,
-			 int question_score, ArrayList<Answer> answers, int question_number) {
-		super(question_text, question_type, question_description, question_score, answers,
-				question_number);
+			int question_score, ArrayList<Answer> answers, int question_number) {
+		super(question_text, question_type, question_description, question_score, answers, question_number);
 	}
 
 	@Override
@@ -39,17 +38,22 @@ public class FillTheBlankQuestion extends Question {
 
 	@Override
 	public double gradeAnswer(HttpServletRequest request, int questionIndex) {
-		int counter = 0;
+		double counter = 0;
 		ArrayList<Answer> answers = getAnswers();
 		for (int i = 0; i < answers.size(); i++) {
 			String name = "q" + questionIndex + "-" + i;
 			if (request.getParameter(name) != null) {
 				String res = request.getParameter(name);
+				System.out.println("res: " + res);
+				System.out.println("answrs is: " + answers.get(i).getAnswerText());
 				if (res.equals(answers.get(i).getAnswerText()))
 					counter++;
 			}
 		}
-		return counter / answers.size() * getQuestionscore();
+		System.out.println("counter is: " + counter);
+		System.out.println("answer size is: " + answers.size());
+		System.out.println("questionsScore is: " + getQuestionscore());
+		return (counter /(double) answers.size()) * getQuestionscore();
 	}
 
 	public void addToDatabase(int quiz_id) throws Exception {

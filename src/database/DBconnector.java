@@ -13,7 +13,7 @@ public class DBconnector {
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}
-		
+		//
 		String server = INFO.MYSQL_DATABASE_SERVER;
 		String userName = INFO.MYSQL_USERNAME;
 		String password = INFO.MYSQL_PASSWORD;

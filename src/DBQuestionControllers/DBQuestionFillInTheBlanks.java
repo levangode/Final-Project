@@ -41,7 +41,7 @@ public class DBQuestionFillInTheBlanks {
 			while(rs.next()){
 				FillTheBlankQuestion newQuestion;
 				
-				ArrayList<Answer> answers = getAnswers(rs.getInt(5));
+				ArrayList<Answer> answers = getAnswers(rs.getInt(4));
 				
 				newQuestion = new FillTheBlankQuestion(
 								rs.getString("question_text"), 
