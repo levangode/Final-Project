@@ -34,11 +34,11 @@ public class QuestionTestGet {
 		
 	}
 	
-//	@Test
+	@Test
 	public void Test_MultipleChoice_Get(){
 		DBQuestionMultipleChoice z = new DBQuestionMultipleChoice();
 		
-		List<MultipleChoiceQuestion> questions = z.retrieveQuestions(27);
+		List<MultipleChoiceQuestion> questions = z.retrieveQuestions(9);
 		
 		System.out.println(questions.isEmpty());
 		
@@ -51,7 +51,7 @@ public class QuestionTestGet {
 		
 	}
 	
-	@Test
+//	@Test
 	public void Test_MultipleAnswers_Get(){
 		DBQuestionWithMultipleAnswers z = new DBQuestionWithMultipleAnswers();
 		

@@ -32,7 +32,7 @@ public class DBQuestionMultipleChoice {
 		
 		String query = " select question_text, question_data, score, num_answers_display, num_answers_correct, question_id, question_number from Questions_MultipleChoice where quiz_id = "
 				+ quiz_id
-				+ "; ";
+				+ ";";
 		
 		PreparedStatement stm;
 		
@@ -53,7 +53,7 @@ public class DBQuestionMultipleChoice {
 								rs.getString("question_data"),
 								rs.getInt("score"),
 								rs.getInt("num_answers_display"),
-								rs.getInt("num_anwers_correct"),
+								rs.getInt("num_answers_correct"),
 								answers,
 								rs.getInt("question_number")
 							);
