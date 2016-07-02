@@ -1,7 +1,4 @@
-create table QuestionTypes(
-	id int primary key auto_increment,
-    type_name varchar(100) not null
-);
+
 
 
 -- @@@ default question !!! not used in final version
