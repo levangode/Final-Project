@@ -41,7 +41,7 @@ public class DBQuestionWithMultipleAnswers {
 			while(rs.next()){
 				QuestionWithMultipleAnswers newQuestion;
 				
-				ArrayList<Answer> answers = getAnswers(rs.getInt(7));
+				ArrayList<Answer> answers = getAnswers(rs.getInt("question_id"));
 				
 				newQuestion = new QuestionWithMultipleAnswers(
 								rs.getString("question_text"),

@@ -55,12 +55,13 @@ public class QuestionTestGet {
 	public void Test_MultipleAnswers_Get(){
 		DBQuestionWithMultipleAnswers z = new DBQuestionWithMultipleAnswers();
 		
-		List<QuestionWithMultipleAnswers> questions = z.retrieveQuestions(27);
+		List<QuestionWithMultipleAnswers> questions = z.retrieveQuestions(8);
 		
 		System.out.println(questions.isEmpty());
 		
 		for(Question q: questions){
 			System.out.println(q);
+			
 			for(Answer a: q.getAnswers()){
 				System.out.println(a);
 			}

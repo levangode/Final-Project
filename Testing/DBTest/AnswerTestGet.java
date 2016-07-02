@@ -56,7 +56,7 @@ public class AnswerTestGet {
 	public void Test_MultipleAnswer_get(){
 		DBMultipleAnswers z = new DBMultipleAnswers();
 		
-		List<MultipleAnswer> answers = z.retrieveAnswers(5);
+		List<MultipleAnswer> answers = z.retrieveAnswers(2);
 		
 		System.out.println(answers.isEmpty());
 		for(Answer tmpAns: answers){
