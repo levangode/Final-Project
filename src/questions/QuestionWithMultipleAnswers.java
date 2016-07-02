@@ -3,10 +3,14 @@ package questions;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import DBQuestionControllers.DBQuestionMultipleChoice;
+import DBQuestionControllers.DBQuestionResponse;
 import DBQuestionControllers.DBQuestionWithMultipleAnswers;
 import answers.Answer;
 
+import answers.MultipleChoiceAnswer;
 
 import database.DBconnector;
 
@@ -15,9 +19,9 @@ public class QuestionWithMultipleAnswers extends Question {
 	private int numAnswers;
 
 	public QuestionWithMultipleAnswers(String question_text, String question_type, String question_description,
-			 int question_score, int numAnswers, boolean order, ArrayList<Answer> answers,
+			long question_time_limit, int question_score, int numAnswers, boolean order, ArrayList<Answer> answers,
 			int question_number) {
-		super(question_text, question_type, question_description,  question_score, answers,
+		super(question_text, question_type, question_description, question_time_limit, question_score, answers,
 				question_number);
 		this.order = order;
 		this.numAnswers = numAnswers;

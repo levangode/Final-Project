@@ -51,7 +51,8 @@ function addQuestion() {
 		$(
 				'<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus required></textarea>'
 						+ '<br><textarea name="description" style="display:none;" placeholder="Enter additional description" rows="3" cols="35"></textarea>'
-						+ '<br><input type="number" min="0" max="100" style="width:40px; display:none;" maxlength=3 name="score" value=0>Score'
+						+ '<br><input type="text" required style="width:35px; display:none;" maxlength=3 name="timeLimit">Time Limit(minutes)'
+						+ '<br><input type="text" style="width:35px; display:none;" maxlength=3 name="score" value=0>Score'
 						+ '<div id="answers"></div>'
 						+ '<button type="button" onclick="addAnswer()" style="display:none;">Create Answer</button><br> ')
 				.appendTo('#question').slideDown('slow');
@@ -60,7 +61,8 @@ function addQuestion() {
 		$(
 				'<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus required></textarea>'
 						+ '<br><textarea name="description" style="display:none;" placeholder="Enter additional description" rows="3" cols="35"></textarea>'
-						+ '<br><input type="number" min="0" max="100" style="width:40px; display:none;" maxlength=3 name="score" value=0>Score'
+						+ '<br><input type="text" required style="width:35px; display:none;" maxlength=3 name="timeLimit">Time Limit(minutes)'
+						+ '<br><input type="text" style="width:35px; display:none;" maxlength=3 name="score" value=0>Score'
 						+ '<div id="answers"></div>'
 						+ '<button type="button" onclick="addBlank()" style="display:none;">Blank</button><br> ')
 				.appendTo('#question').slideDown('slow');
@@ -69,9 +71,10 @@ function addQuestion() {
 		$(
 				'<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus required></textarea>'
 						+ '<br><textarea name="description" style="display:none;" placeholder="Enter additional description" rows="3" cols="35"></textarea>'
-						+ '<br><input type="number" min="0" max="100" style="width:40px; display:none;" maxlength=3 name="score" value=0>Score'
-						+ '<br><input type="number" min="0" max="100" name="questionsToShow" style="width:40px; display:none;" value=2> Number of Choices'
-						+ '<br><input type="number" min="0" max="100" name="correctNeeded" style="width:40px; display:none;" value=1> Correct Answers Required'
+						+ '<br><input type="text" required style="width:35px; display:none;" maxlength=3 name="timeLimit">Time Limit(minutes)'
+						+ '<br><input type="text" style="width:35px; display:none;" maxlength=3 name="score" value=0>Score'
+						+ '<br><input type="text" name="questionsToShow" style="width:35px; display:none;" value=2> Number of Choices'
+						+ '<br><input type="text" name="correctNeeded" style="width:35px; display:none;" value=1> Correct Answers Required'
 						+ '<br><div id="answers"></div>'
 						+ '<button type="button" onclick="addChoice()" style="display:none;">Add answer</button><br>')
 				.appendTo('#question').slideDown('slow');
@@ -80,9 +83,10 @@ function addQuestion() {
 		$(
 				'<br><textarea name="question" id="questionText" placeholder="Type your question here..." rows="3" cols="35" style="display:none;" autofocus required></textarea>'
 						+ '<br><textarea name="description" style="display:none;" placeholder="Enter additional description" rows="3" cols="35"></textarea>'
+						+ '<br><input type="text" required style="width:35px; display:none;" maxlength=3 name="timeLimit">Time Limit(minutes)'
 						+ '<br><select name="order"> <option value="Ordered">Ordered</option><option value="Unordered">Unordered</option></select>'
-						+ '<br><input type="number" min="0" max="15" required style="width:40px; display:none;" maxlength=3 name="numAnswers">Answers required'
-						+ '<br><input type="number" min="0" max="100" style="width:40px; display:none;" maxlength=3 name="score" value=0>Score'
+						+ '<br><input type="text" required style="width:35px; display:none;" maxlength=3 name="numAnswers">Answers required'
+						+ '<br><input type="text" style="width:35px; display:none;" maxlength=3 name="score" value=0>Score'
 						+ '<div id="answers"></div>'
 						+ '<button type="button" onclick="addAnswer()" style="display:none;">Create Answer</button><br> ')
 				.appendTo('#question').slideDown('slow');

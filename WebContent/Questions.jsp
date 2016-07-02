@@ -36,13 +36,6 @@ textarea {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="ScriptsForQuestionCreating.js" type="text/javascript"></script>
 <body>
-	<div id="main">
-	<jsp:include page="Header.jsp" />
-	<%
-		if (!(boolean) request.getSession().getAttribute("logged_in")) {
-			response.sendRedirect("NotLoggedIn.jsp");
-		}
-	%>
 	<form id="main" action="NextQuestion" method="post" onsubmit="">
 		<input type="hidden" name="questionNum"
 			value=<%out.write(request.getParameter("questionNum"));%>>
@@ -67,6 +60,5 @@ textarea {
 		<div id="question"></div>
 		<input type="submit" name="finalise" value="Finish Creating">
 	</form>
-	</div>
 </body>
 </html>

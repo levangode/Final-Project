@@ -3,6 +3,7 @@ package questions;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import DBQuestionControllers.DBQuestionResponse;
 import answers.Answer;
@@ -11,6 +12,7 @@ import database.DBconnector;
 public class QuestionResponse extends Question {
 
 	public QuestionResponse(String question_text, String question_type, String question_description,
+<<<<<<< HEAD
 
 			long question_time_limit, int question_score, ArrayList<Answer> answers, int question_number) {
 		super(question_text, question_type, question_description, question_time_limit, question_score, answers,
@@ -19,6 +21,11 @@ public class QuestionResponse extends Question {
 			 int question_score, ArrayList<Answer> answers, int question_number) {
 		super(question_text, question_type, question_description, question_score, answers, question_number);
 
+=======
+			long question_time_limit, int question_score, ArrayList<Answer> answers, int question_number) {
+		super(question_text, question_type, question_description, question_time_limit, question_score, answers,
+				question_number);
+>>>>>>> parent of 9517f87... Merge remote-tracking branch 'origin/master'
 	}
 
 	@Override

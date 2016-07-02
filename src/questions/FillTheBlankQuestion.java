@@ -1,20 +1,24 @@
 package questions;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.util.IntrospectionUtils;
 
 import DBQuestionControllers.DBQuestionFillInTheBlanks;
+import DBQuestionControllers.DBQuestionWithMultipleAnswers;
 
 import answers.Answer;
 import database.DBconnector;
+import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 
 public class FillTheBlankQuestion extends Question {
 
 	public FillTheBlankQuestion(String question_text, String question_type, String question_description,
-			 int question_score, ArrayList<Answer> answers, int question_number) {
-		super(question_text, question_type, question_description, question_score, answers,
+			long question_time_limit, int question_score, ArrayList<Answer> answers, int question_number) {
+		super(question_text, question_type, question_description, question_time_limit, question_score, answers,
 				question_number);
 	}
 

@@ -38,8 +38,6 @@ textarea {
 }
 </style>
 <body>
-	<div id="main">
-	<jsp:include page="Header.jsp" />
 	<%
 		if (!(boolean) request.getSession().getAttribute("logged_in")) {
 			response.sendRedirect("NotLoggedIn.jsp");
@@ -48,6 +46,7 @@ textarea {
 	<h1>Create Quiz</h1>
 	<h2>Choose Quiz category</h2>
 	<%
+
 		DBQuizController c = new DBQuizController();
 		ArrayList<String> categories = c.getQuizCategories();
 	%>
@@ -72,29 +71,15 @@ textarea {
 		<br />
 		<textarea name="quiz_description" rows="3" cols="45" maxlength="150"
 			placeholder="Enter quiz description here..." required></textarea>
-		<p>
-			<input name="Random Questions" type="checkbox">Random
-			Questions
-		</p>
-		<p>
-			<input name="Immediate Correction" type="checkbox">Immediate
-			Correction
-		</p>
+		<br /> <input name="Random Questions" type="checkbox">Random
+		Questions<br> <input name="Immediate Correction" type="checkbox">Immediate
+		Correction<br>
 		<h4>Show the quiz on:</h4>
-		<p>
-			<input type="radio" name="Show on" value="One Page" checked>One
-			Page
-		</p>
-		<p>
-			<input type="radio" name="Show on" value="Multiple Pages">Multiple
-			Pages
-		</p>
-		<p>
-			<input type="number" min="1" max="1000" name="time_limit" placeholder="NO" style="width:40px;"> Time Limit (minutes)
-		</p>
-		<input type="submit" value="Create" class="btn">
-
+		<input type="radio" name="Show on" value="One Page" checked>One
+		Page<br> <input type="radio" name="Show on"
+			value="Multiple Pages">Multiple Pages<br> <input
+			type="submit" value="Create" class="btn">
 	</form>
-	</div>
+
 </body>
 </html>
