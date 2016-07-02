@@ -183,7 +183,6 @@ public class DBQuizControllerByMISHO {
 		String command = "INSERT INTO Answers (answer_text,"
 				+ " answer_description , answer_correct,question_id) values(?,?,?,?)";
 
-
 	}
 
 	public void addAnswers(ArrayList<Answer> answers, int question_id) {
@@ -371,9 +370,11 @@ public class DBQuizControllerByMISHO {
 				String question_text = rs.getString(4);
 				int question_time_limit = rs.getInt(5);
 				ArrayList<Answer> answers = getAnswers(question_id);
-				/*Question newQuestion = new Question(question_text, getQuestionTypeStr(question_type),
-						question_description, question_time_limit, answers);
-				questions.add(newQuestion);*/
+				/*
+				 * Question newQuestion = new Question(question_text,
+				 * getQuestionTypeStr(question_type), question_description,
+				 * question_time_limit, answers); questions.add(newQuestion);
+				 */
 			}
 
 		} catch (SQLException e) {
@@ -396,8 +397,10 @@ public class DBQuizControllerByMISHO {
 				String answer_description = rs.getString(2);
 				boolean answer_correct = rs.getBoolean(3);
 
-				/*Answer newAnswer = new Answer(answer_text, answer_description, answer_correct);
-				answers.add(newAnswer);*/
+				/*
+				 * Answer newAnswer = new Answer(answer_text,
+				 * answer_description, answer_correct); answers.add(newAnswer);
+				 */
 			}
 
 		} catch (SQLException e) {
@@ -407,7 +410,5 @@ public class DBQuizControllerByMISHO {
 
 		return answers;
 	}
-
-	
 
 }
