@@ -5,18 +5,18 @@
 <head>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
 <link rel="stylesheet" type="text/css" href="Button.css">
-
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Quiz Score</title>
 </head>
 <body>
-
-	<%
-		double score = (double) request.getSession().getAttribute("userScore");
-		double maxScore = (double) request.getSession().getAttribute("maxScore");
-		out.print(score + "/" + maxScore);
-	%>
-
+	<div id="main" class="main">
+		<jsp:include page="Header.jsp"></jsp:include>
+		<%
+			double score = (double) request.getSession().getAttribute("userScore");
+			double maxScore = (double) request.getSession().getAttribute("maxScore");
+			out.print(score + "/" + maxScore);
+		%>
+	</div>
 
 </body>
 </html>

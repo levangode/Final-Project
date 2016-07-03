@@ -9,14 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Quiz Summary</title>
-<style>
-.column {
-	float: left;
-	font-family: sans-serif;
-	margin: 0px 15px;
-	overflow: hidden;
-}
-</style>
+<link rel="stylesheet" type="text/css" href="BasicStyles.css">
 </head>
 <body>
 	<div style="min-width: 1024px; position: relative;">
@@ -79,7 +72,7 @@
 				<h4>Statistics</h4>
 				<%
 					QuizInfoController stat = new QuizInfoController();
-					Statistics statist = stat.getStatistics();
+					Statistics statist = stat.getStatistics(quiz_id);
 					statist.showOnCard(out);
 				%>
 			</div>

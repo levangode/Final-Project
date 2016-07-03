@@ -21,14 +21,14 @@ public class QuizInfoFactory {
 				quiz_description, quiz_likes, quiz_difficulty, immediate_correction, time_limit);
 	}
 
-	public static UserActivity getUserActivity(Timestamp time_finished, Timestamp time_taken, int score, String user) {
+	public static UserActivity getUserActivity(Timestamp time_finished, int time_taken, double score, String user) {
 		return new UserActivity(time_finished, time_taken, score, user);
 	}
 
-	public static HighScore getHighScore(int score, String user) {
+	public static HighScore getHighScore(double score, String user) {
 		return new HighScore(score, user);
 	}
-	public static Statistics getStatistics(int count, int avgScore){
+	public static Statistics getStatistics(int count, double avgScore){
 		return new Statistics(count, avgScore);
 	}
 }

@@ -169,15 +169,15 @@ public class QuizInfoController {
 		ArrayList<UserActivity> act = new ArrayList<UserActivity>();
 		int user_id = getAuthorID(user_login);
 		String order = "Select time_finished, time_taken, score from Quiz_taken where user_id = " + user_id
-				+ " AND quiz_id = " + quiz_id;
+				+ " AND quiz_id = " + quiz_id + " order by time_finished DESC";
 		PreparedStatement stm = null;
 		try {
 			stm = connection.prepareStatement(order);
 			ResultSet res = stm.executeQuery();
 			while (res.next()) {
 				Timestamp time_finished = res.getTimestamp("time_finished");
-				Timestamp time_taken = res.getTimestamp("time_taken");
-				int score = res.getInt("score");
+				int time_taken = res.getInt("time_taken");
+				double score = res.getDouble("score");
 				act.add(QuizInfoFactory.getUserActivity(time_finished, time_taken, score, user_login));
 			}
 			connection.close();
@@ -199,14 +199,14 @@ public class QuizInfoController {
 				+ "JOIN Users u ON u.user_id = q.user_id "
 				+ "WHERE quiz_id = "+quiz_id+" "
 				+ timeLimit
-				+ "ORDER BY score "
+				+ "ORDER BY score DESC "
 				+ "LIMIT "+Constants.LIMIT_OF_SCORES;
 		PreparedStatement stm = null;
 		try {
 			stm = connection.prepareStatement(order);
 			ResultSet res = stm.executeQuery();
 			while (res.next()) {
-				int score = res.getInt("score");
+				double score = res.getDouble("score");
 				String user_login = res.getString("user_login");
 				act.add(QuizInfoFactory.getHighScore(score, user_login));
 			}
@@ -248,18 +248,18 @@ public class QuizInfoController {
 		}
 		return summary;
 	}
-	public Statistics getStatistics(){
+	public Statistics getStatistics(int quiz_id){
 		Statistics statist = null;
 		String order = ""
 				+ "SELECT COUNT( * ) AS count, AVG( score ) AS average "
-				+ "FROM Quiz_taken";
+				+ "FROM Quiz_taken where quiz_id = "+quiz_id;
 		ResultSet res=null;
 		try {
 			PreparedStatement stm = connection.prepareStatement(order);
 			res = stm.executeQuery();
 			while (res.next()) {
 				int count = res.getInt("count");
-				int avgScore = res.getInt("average");
+				double avgScore = res.getDouble("average");
 				statist=QuizInfoFactory.getStatistics(count, avgScore);
 			}
 			connection.close();

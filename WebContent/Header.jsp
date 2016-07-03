@@ -1,6 +1,6 @@
 <%@page import="DBQuizControllers.*"%>
 <div id="top" style="text-align: center; height: 154; min-width:1024;">
-	<div style="float: left; text-align: right; width: 200px; height: 154;">
+	<div style="float: left; text-align: right; width: 200px; height: 154px;">
 	</div>
 	<a href="HomePage.jsp"> <img src="Logo.png" width=600px;
 		height="154" alt="Welcome" id="homelogo" style="margin: auto;">

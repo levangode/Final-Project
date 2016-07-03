@@ -100,7 +100,7 @@ public class DBQuizController {
 		int id = -1;
 		String order = "insert into Quizzes(quiz_name, category_id, quiz_description, author_id,"
 				+ "quiz_likes, quiz_difficulty, times_taken, multiple_pages, immediate_correction,"
-				+ "random_questions, quiz_score) Values (?,?,?,?,?,?,?,?,?,?,?)";
+				+ "random_questions, quiz_score, time_limit) Values (?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement stm = null;
 		try {
@@ -117,6 +117,7 @@ public class DBQuizController {
 			stm.setBoolean(10, quiz.isRandomQuestions());
 			int max_score = getMaxScore(quiz);
 			stm.setInt(11, max_score);
+			stm.setInt(12, quiz.getTime_limit());
 			stm.executeUpdate();
 			ResultSet myRes = stm.getGeneratedKeys();
 			while (myRes.next()) {

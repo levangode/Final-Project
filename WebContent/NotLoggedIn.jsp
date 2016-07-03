@@ -8,6 +8,7 @@
 <title>Incorrect Information</title>
 </head>
 <body>
+	<div id="main" class="main">
 	<h3>You need to be logged in to view this page</h3>
 	<form action="Login" method="post">
 		User Name: <input type="text" name="user_login">
@@ -19,5 +20,6 @@
 		<a href = "Register.html">Create New Account</a>
 		
 	</form>
+	</div>
 </body>
 </html>

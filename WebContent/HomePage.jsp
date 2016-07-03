@@ -21,7 +21,7 @@
 </style>
 </head>
 <body>
-	<div style="min-width: 1024px; position: relative;">
+	<div id="main" class="main">
 		<!-- start top panel -->
 		<jsp:include page="Header.jsp" />
 		<div style="text-align: center; height: 50px;">

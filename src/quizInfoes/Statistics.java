@@ -6,8 +6,8 @@ import javax.servlet.jsp.JspWriter;
 
 public class Statistics implements DrawableInfo{
 	private int count;
-	private int avgScore;
-	public Statistics(int count, int avgScore){
+	private double avgScore;
+	public Statistics(int count, double avgScore){
 		this.count=count;
 		this.setAvgScore(avgScore);
 	}
@@ -23,10 +23,10 @@ public class Statistics implements DrawableInfo{
 		
 		
 	}
-	public int getAvgScore() {
+	public double getAvgScore() {
 		return avgScore;
 	}
-	public void setAvgScore(int avgScore) {
+	public void setAvgScore(double avgScore) {
 		this.avgScore = avgScore;
 	}
 	public int getCount() {

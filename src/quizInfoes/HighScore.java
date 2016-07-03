@@ -5,12 +5,12 @@ import java.io.IOException;
 import javax.servlet.jsp.JspWriter;
 
 public class HighScore implements DrawableInfo{
-	private int score;
+	private double score;
 	private String user;
 	
-	public HighScore(int score, String user){
-		this.setScore(score);
-		this.setUser(user);
+	public HighScore(double score, String user){
+		this.score=score;
+		this.user=user;
 	}
 	@Override
 	public void showOnCard(JspWriter out) {
@@ -20,10 +20,10 @@ public class HighScore implements DrawableInfo{
 			e.printStackTrace();
 		}
 	}
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
-	public void setScore(int score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 	public String getUser() {

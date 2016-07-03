@@ -48,6 +48,17 @@ public class NextQuestion extends HttpServlet {
 			throws ServletException, IOException {
 		int questionNum = Integer.parseInt(request.getParameter("questionNum"));
 		String question_type = request.getParameter("type");
+		if(question_type == null){
+			Quiz quiz = (Quiz)request.getSession().getAttribute("Quiz");
+			if(quiz == null){
+				System.out.println("Session Timed Out");
+				return;
+			}
+			DBQuizController ca = new DBQuizController();
+			ca.addQuiz(quiz);
+			response.sendRedirect("HomePage.jsp");
+			return;
+		}
 		QuestionHTMLRetriever qr=new QuestionHTMLRetriever();
 		AnswersHTMLRetriever ar=new AnswersHTMLRetriever();
 		Question question=qr.getQuestion(question_type, request);
@@ -63,7 +74,8 @@ public class NextQuestion extends HttpServlet {
 		}
 		Quiz current = (Quiz)request.getSession().getAttribute("Quiz");
 		if(current == null){
-			//TODO redirect session has timed out----try catchit jobs albat
+			System.out.println("Session Timed Out");
+			return;
 		}
 		current.addQuestion(question, questionNum);
 		System.out.println(current);

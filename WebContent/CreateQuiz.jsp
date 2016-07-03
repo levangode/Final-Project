@@ -14,21 +14,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Create Your Quiz</title>
 <link rel="stylesheet" type="text/css" href="Button.css">
+<link rel="stylesheet" type="text/css" href="BasicStyles.css">
 </head>
 <style>
-body {
-	background: #16A085;
-	background: -webkit-linear-gradient(to left, #16A085, #F4D03F);
-	background: linear-gradient(to left, #16A085, #F4D03F);
-	text-align: center;
-}
 
 h2 {
 	margin: 10px;
-}
-
-h4 {
-	margin: 0px;
 }
 
 input[type=checkbox] {
@@ -38,13 +29,16 @@ input[type=checkbox] {
 input[type=radio] {
 	margin: 10px;
 }
+input[type=number]{
+	margin: 10px;	
+}
 
 textarea {
 	resize: none;
 }
 </style>
 <body>
-	<div id="main">
+	<div id="main" class="main">
 		<jsp:include page="Header.jsp" />
 		<h1>Create Quiz</h1>
 		<h2>Choose Quiz category</h2>
