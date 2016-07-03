@@ -29,81 +29,79 @@
 <head>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <script type="text/javascript">
 	var numQuestion = -1;
 
 	var curQuestion = 1;
-	
-	function hideQuestions(){
+
+	function hideQuestions() {
 		var x;
-		for(x=2; x<=numQuestion; x++){
-			$("#div_question_"+x).hide();
+		for (x = 2; x <= numQuestion; x++) {
+			$("#div_question_" + x).hide();
 		}
 	}
-	
-	function setNumQuestions(num){
+
+	function setNumQuestions(num) {
 		numQuestion = num;
 		//alert("question number set to " + num);
 		hideQuestions();
 	}
 
-	function nextQuestion(){
+	function nextQuestion() {
 		//alert("display next question");
-		if(curQuestion == numQuestion){
+		if (curQuestion == numQuestion) {
 			alert("This is the last Question!");
-		}
-		else {
+		} else {
 			$("#" + "div_question_" + curQuestion).hide();
 			curQuestion++;
 			$("#" + "div_question_" + curQuestion).show();
 		}
 	}
 
-	function prevQuestion(){
+	function prevQuestion() {
 		//alert("display previous question");
-		
-		if(curQuestion == 1){
+
+		if (curQuestion == 1) {
 			alert("This is The firts Question!");
-		}
-		else {
+		} else {
 			$("#" + "div_question_" + curQuestion).hide();
 			curQuestion--;
 			$("#" + "div_question_" + curQuestion).show();
 		}
-		
+
 	}
 
-	function switchQuestion(id){
-		if(id == "but_next"){
+	function switchQuestion(id) {
+		if (id == "but_next") {
 			nextQuestion();
-		} 
-		else if (id == "but_prev"){
+		} else if (id == "but_prev") {
 			prevQuestion();
-		}
-		else {
+		} else {
 			alert("shit happens");
 		}
 	}
 
-	$(document).ready(function(){
-	    $(".next_prev_buttons").click(function(){
-	    	switchQuestion($(this).attr("id"));
-	    });
+	$(document).ready(function() {
+		$(".next_prev_buttons").click(function() {
+			switchQuestion($(this).attr("id"));
+		});
 	});
-
 </script>
 
+<script src="Timer.js" type="text/javascript"></script>
+<% out.write("<script>setTimeLimit("+quiz.getTime_limit()+");</script>");
+	System.out.println(quiz.getTime_limit());%>
 <style>
 body {
 	text-align: left
 }
 
-.next_prev_buttons{
-	float:right;
+.next_prev_buttons {
+	float: right;
 }
-
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>
@@ -113,32 +111,33 @@ body {
 </title>
 </head>
 <body>
-	<div id="main">
+	<div id="main" class="main">
 		<form action="GradeQuiz" method="post" id="quiz">
 			<%
 				ArrayList<Question> questions = quiz.getQuestions();
 				for (int i = 0; i < questions.size(); i++) {
 					Question q = questions.get(i);
-					out.print("<div id = 'div_question_" + (i+1) + "'>");
+					out.print("<div id = 'div_question_" + (i + 1) + "'>");
 					out.print((i + 1) + ")");
 					out.print(q.getQuestionHtml(i));
 					out.print("</div>");
 				}
-				
-				out.print("<script> setNumQuestions("+ questions.size() +"); </script>");
+
+				out.print("<script> setNumQuestions(" + questions.size() + "); </script>");
 			%>
 
-			
+
 
 			<div id="div_buttons">
-				<button type = "button" id="but_next" class = "next_prev_buttons">next</button>
-				<button type = "button" id="but_prev" class = "next_prev_buttons">previous</button>
+				<button type="button" id="but_next" class="next_prev_buttons">next</button>
+				<button type="button" id="but_prev" class="next_prev_buttons">previous</button>
 			</div>
 
 			<input type="hidden" name="id"
 				value=<%out.write(request.getParameter("id"));%>> <input
 				type="submit" value="Submit">
 		</form>
+		<div id="timer"></div>
 	</div>
 </body>
 </html>

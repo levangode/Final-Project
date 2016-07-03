@@ -10,6 +10,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Quiz Summary</title>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
+<style>
+p{
+	font-size:12px;
+}
+</style>
 </head>
 <body>
 	<div style="min-width: 1024px; position: relative;">

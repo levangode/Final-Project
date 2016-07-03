@@ -78,8 +78,12 @@ p {
 	font-size: 18;
 	margin: 0;
 }
+#card:hover{
+   background-color:#FF0000;
+}
 
 #card {
+	transition: background-color ease-in 0.5s;
 	background-color: #CBE32D;
 	border-radius: 25px;
 	border: 2px solid #000000;
@@ -87,4 +91,5 @@ p {
 	width: calc(100% - 4px);
 	height: 150px;
 	margin: 5px 3px;
+	hover:
 }

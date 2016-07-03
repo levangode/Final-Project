@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import javax.servlet.jsp.JspWriter;
 
+import DBQuizControllers.DBQuizController;
+
 public class QuizFullSummary extends QuizDetailedInfo implements DrawableInfo {
 	private String quiz_difficulty;
 	private Boolean immediate_correction;
@@ -34,7 +36,9 @@ public class QuizFullSummary extends QuizDetailedInfo implements DrawableInfo {
 			out.write("<p>Description: " + getQuiz_description() + "</p>");
 			out.write("<p>Quiz Category: " + getQuiz_category() + "</p>");
 			out.write("<p>");
-			out.write("	Author: <a href=\"UserPage.jsp?" + getQuiz_author() + "\">" + getQuiz_author() + "</a>");
+			DBQuizController c = new DBQuizController();
+			int author_id = c.getAuthorId(getQuiz_author());
+			out.write("	Author: <a href=\"UserPage.jsp?id=" + author_id + "\">" + getQuiz_author() + "</a>");
 			out.write("</p>");
 			out.write("<p>Quiz Difficulty: " + getQuiz_difficulty() + "</p>");
 			out.write("<p>Create Date: " + getQuiz_date() + "</p>");

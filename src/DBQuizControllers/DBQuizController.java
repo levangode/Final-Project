@@ -163,10 +163,9 @@ public class DBQuizController {
 
 			while (res.next()) {
 				ArrayList<Question> questions = getQuestions(res.getInt(12));
-
 				tmpQuiz = new Quiz(res.getString(1), res.getString(3), res.getString(4), res.getInt(5),
 						res.getTimestamp(6), res.getString(2), res.getString(7), res.getInt(8), questions,
-						res.getBoolean(9), res.getBoolean(10), res.getBoolean(11), res.getInt(12));
+						res.getBoolean(9), res.getBoolean(10), res.getBoolean(11), res.getInt(13));
 			}
 
 			connection.close();
