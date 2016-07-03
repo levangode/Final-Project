@@ -34,12 +34,45 @@
 <script type="text/javascript">
 	var numQuestion = -1;
 
+	var curQuestion = 1;
+	
+	function hideQuestions(){
+		var x;
+		for(x=2; x<=numQuestion; x++){
+			$("#div_question_"+x).hide();
+		}
+	}
+	
+	function setNumQuestions(num){
+		numQuestion = num;
+		//alert("question number set to " + num);
+		hideQuestions();
+	}
+
 	function nextQuestion(){
-		alert("display next question");
+		//alert("display next question");
+		if(curQuestion == numQuestion){
+			alert("This is the last Question!");
+		}
+		else {
+			$("#" + "div_question_" + curQuestion).hide();
+			curQuestion++;
+			$("#" + "div_question_" + curQuestion).show();
+		}
 	}
 
 	function prevQuestion(){
-		alert("display previous question")
+		//alert("display previous question");
+		
+		if(curQuestion == 1){
+			alert("This is The firts Question!");
+		}
+		else {
+			$("#" + "div_question_" + curQuestion).hide();
+			curQuestion--;
+			$("#" + "div_question_" + curQuestion).show();
+		}
+		
 	}
 
 	function switchQuestion(id){
@@ -56,7 +89,7 @@
 
 	$(document).ready(function(){
 	    $(".next_prev_buttons").click(function(){
-	    	switchQuestion($(this).attr(id));
+	    	switchQuestion($(this).attr("id"));
 	    });
 	});
 
@@ -86,16 +119,20 @@ body {
 				ArrayList<Question> questions = quiz.getQuestions();
 				for (int i = 0; i < questions.size(); i++) {
 					Question q = questions.get(i);
+					out.print("<div id = 'div_question_" + (i+1) + "'>");
 					out.print((i + 1) + ")");
-					out.print("<div id = 'div_question_" + i + "'>");
 					out.print(q.getQuestionHtml(i));
 					out.print("</div>");
 				}
+				
+				out.print("<script> setNumQuestions("+ questions.size() +"); </script>");
 			%>
 
+			
+
 			<div id="div_buttons">
-				<button id="but_next" class = "next_prev_buttons">next</button>
-				<button id="but_prev" class = "next_prev_buttons">previous</button>
+				<button type = "button" id="but_next" class = "next_prev_buttons">next</button>
+				<button type = "button" id="but_prev" class = "next_prev_buttons">previous</button>
 			</div>
 
 			<input type="hidden" name="id"
