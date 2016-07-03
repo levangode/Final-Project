@@ -81,7 +81,11 @@ public class MultipleChoiceQuestion extends Question {
 			MultipleChoiceAnswer ans = (MultipleChoiceAnswer) answers.get(i);
 			html += ans.getHtml(id, i);
 		}
-		html += "</ul></div>";
+		html += "</ul>";
+		if (getQuestiondescription() != null) {
+			html += "<br><img src='" + getQuestiondescription() + "' alt='Question Image' height='100' width='100'>";
+		}
+		html += "</div>";
 		return html;
 	}
 
