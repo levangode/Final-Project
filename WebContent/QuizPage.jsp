@@ -28,10 +28,49 @@
 
 <head>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<script type="text/javascript">
+	var numQuestion = -1;
+
+	function nextQuestion(){
+		alert("display next question");
+	}
+
+	function prevQuestion(){
+		alert("display previous question")
+	}
+
+	function switchQuestion(id){
+		if(id == "but_next"){
+			nextQuestion();
+		} 
+		else if (id == "but_prev"){
+			prevQuestion();
+		}
+		else {
+			alert("shit happens");
+		}
+	}
+
+	$(document).ready(function(){
+	    $(".next_prev_buttons").click(function(){
+	    	switchQuestion($(this).attr(id));
+	    });
+	});
+
+</script>
+
 <style>
 body {
 	text-align: left
 }
+
+.next_prev_buttons{
+	float:right;
+}
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>
@@ -48,9 +87,17 @@ body {
 				for (int i = 0; i < questions.size(); i++) {
 					Question q = questions.get(i);
 					out.print((i + 1) + ")");
+					out.print("<div id = 'div_question_" + i + "'>");
 					out.print(q.getQuestionHtml(i));
+					out.print("</div>");
 				}
 			%>
+
+			<div id="div_buttons">
+				<button id="but_next" class = "next_prev_buttons">next</button>
+				<button id="but_prev" class = "next_prev_buttons">previous</button>
+			</div>
+
 			<input type="hidden" name="id"
 				value=<%out.write(request.getParameter("id"));%>> <input
 				type="submit" value="Submit">
