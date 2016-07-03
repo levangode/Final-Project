@@ -169,7 +169,7 @@ public class QuizInfoController {
 		ArrayList<UserActivity> act = new ArrayList<UserActivity>();
 		int user_id = getAuthorID(user_login);
 		String order = "Select time_finished, time_taken, score from Quiz_taken where user_id = " + user_id
-				+ " AND quiz_id = " + quiz_id + " order by time_finished DESC";
+				+ " AND quiz_id = " + quiz_id + " order by time_finished DESC limit "+Constants.LIMIT_OF_SCORES;
 		PreparedStatement stm = null;
 		try {
 			stm = connection.prepareStatement(order);

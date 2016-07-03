@@ -20,8 +20,7 @@ public class UserActivity implements DrawableInfo {
 	@Override
 	public void showOnCard(JspWriter out) {
 		try {
-			out.write("<p>Time finished: " + time_finished + "</p>");
-			out.write("<p>Score: " + score + "</p>");
+			out.write("<p>Time finished: " + time_finished + "<br>Score: " + score+"</p>");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

@@ -12,7 +12,11 @@
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
 <style>
 p{
-	font-size:12px;
+	font-size:14px;
+	line-height:1.5;
+	border-style:solid;
+	border-width:1px;
+	border-color:#005A31;
 }
 </style>
 </head>
@@ -39,7 +43,7 @@ p{
 						String user_login = (String) request.getSession().getAttribute("user_name");
 						ArrayList<UserActivity> act = activity.getUserActivity(user_login, quiz_id);
 						if (act.isEmpty()) {
-							out.print("You Have Never Taken This Quiz Before");
+							out.print("<p>You Have Never Taken This Quiz Before</p>");
 						}
 						for (UserActivity next : act) {
 							next.showOnCard(out);
@@ -52,7 +56,7 @@ p{
 						QuizInfoController scores = new QuizInfoController();
 						ArrayList<HighScore> scor = scores.getHighScores(quiz_id, Constants.NO_HOURS_LIMIT);
 						if (scor.isEmpty()) {
-							out.print("Quiz hasn't been taken yet, be the first!");
+							out.print("<p>Quiz hasn't been taken yet, be the first!</p>");
 						}
 						for (HighScore next : scor) {
 							next.showOnCard(out);
@@ -65,7 +69,7 @@ p{
 						QuizInfoController todayScores = new QuizInfoController();
 						ArrayList<HighScore> todayScor = todayScores.getHighScores(quiz_id, Constants.PAST_HOURS);
 						if (todayScor.isEmpty()) {
-							out.print("Quiz hasn't been taken yet, be the first!");
+							out.print("<p>Quiz hasn't been taken yet, be the first!</p>");
 						}
 						for (HighScore next : todayScor) {
 							next.showOnCard(out);
@@ -84,16 +88,16 @@ p{
 			<div id="bottom" style="overflow: hidden; margin: 20px;">
 				<form action="QuizPage.jsp">
 					<input type="hidden" name="id"
-						value=<%out.print(request.getParameter("id"));%>> <input
+						value=<%out.print(request.getParameter("id"));%>> <input class="btn"
 						type="submit" value="Take Quiz">
 				</form>
 				<%
 					DBQuizController another = new DBQuizController();
 					String button = "";
 					if (another.canLike(user_login, quiz_id)) {
-						button = "<input type=\"submit\" value=\"Like Quiz\">";
+						button = "<input class=\"btn\" type=\"submit\" value=\"Like Quiz\">";
 					} else {
-						button = "<input type=\"submit\" value=\"Liked\" disabled>";
+						button = "<input class=\"btn\" type=\"submit\" value=\"Liked\" disabled>";
 					}
 					out.write("<form action=\"SubmitLike\" method=\"post\">");
 					out.write("<input type=\"hidden\" name=\"like_id\" value=" + request.getParameter("id") + ">");

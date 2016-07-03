@@ -15,7 +15,7 @@ public class HighScore implements DrawableInfo{
 	@Override
 	public void showOnCard(JspWriter out) {
 		try {
-			out.print("<p>User: "+user+" - Score: "+score);
+			out.print("<p>User: "+user+" - Score: "+score+"</p>");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

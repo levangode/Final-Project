@@ -307,4 +307,21 @@ public class DBQuizController {
 			return false;
 		} return true;
 	}
+	
+	public ArrayList<String> getQuizDifficulties(){
+		ArrayList<String> result = new ArrayList<String>();
+		String order = "Select quiz_difficulty from Quiz_Difficulties";
+		PreparedStatement stm = null;
+		ResultSet myResultSet = null;
+		try {
+			stm = connection.prepareStatement(order);
+			myResultSet = stm.executeQuery();
+			while(myResultSet.next()){
+				result.add(myResultSet.getString("quiz_difficulty"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

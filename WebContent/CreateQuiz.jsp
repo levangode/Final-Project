@@ -17,7 +17,6 @@
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
 </head>
 <style>
-
 h2 {
 	margin: 10px;
 }
@@ -29,8 +28,9 @@ input[type=checkbox] {
 input[type=radio] {
 	margin: 10px;
 }
-input[type=number]{
-	margin: 10px;	
+
+input[type=number] {
+	margin: 10px;
 }
 
 textarea {
@@ -44,6 +44,7 @@ textarea {
 		<h2>Choose Quiz category</h2>
 		<%
 			DBQuizController c = new DBQuizController();
+			ArrayList<String> difficulties = c.getQuizDifficulties();
 			ArrayList<String> categories = c.getQuizCategories();
 		%>
 
@@ -55,9 +56,11 @@ textarea {
 					}
 				%>
 			</select> <select name="difficulty">
-				<option value="Easy">Easy</option>
-				<option value="Medium">Medium</option>
-				<option value="Hard">Hard</option>
+				<%
+					for (String a : difficulties) {
+						out.write("<option value=\"" + a + "\">" + a + "</option>");
+					}
+				%>
 			</select>
 			<h2>Enter quiz name</h2>
 			<br /> <input type="text" name="quiz_name" maxlength="25"

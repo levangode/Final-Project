@@ -8,6 +8,16 @@ create table Users (
     user_profile_image varchar(1000)
 );
 
+create table Quiz_Difficulties (
+	quiz_difficulty varchar(50) primary key
+);
+
+insert into Quiz_Difficulties(quiz_difficulty) Values
+	('Easy'),
+	('Medium'),
+	('Hard'),
+	('Unfair')
+
 create table Categories(
 	category_id int auto_increment primary key,
     category_name varchar(50) not null
@@ -22,13 +32,14 @@ create table Quizzes (
     quiz_score int default 0,
     quiz_likes int default 0,
     quiz_time_limit int default -1;
-    date_created timestamp,
+    date_created timestamp not null,
     quiz_difficulty varchar(50),
     times_taken int default 0,
     multiple_pages boolean default false,
     immediate_correction boolean default 0,
     random_questions boolean default 0,
     
+    foreign key (quiz_difficulty) references Quiz_Difficulties(quiz_difficulty),
     foreign key (author_id) references Users(user_id),
     foreign key (category_id) references Categories(category_id)
     
