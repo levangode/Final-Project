@@ -12,6 +12,7 @@ function startTimer(duration, display) {
 		if (--timer < 0) {
 			document.getElementById("quiz").submit();
 		}
+		//Thanks to StackOverflow for this function;
 	}, 1000);
 }
 var timeLimit = 0;
