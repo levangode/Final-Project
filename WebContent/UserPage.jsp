@@ -7,12 +7,12 @@
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE>
 <html>
-	<%
-		if (!(boolean) request.getSession().getAttribute("logged_in")) {
-			response.sendRedirect("NotLoggedIn.jsp");
-			return;
-		}
-	%>
+<%
+	if (!(boolean) request.getSession().getAttribute("logged_in")) {
+		response.sendRedirect("NotLoggedIn.jsp");
+		return;
+	}
+%>
 <head>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
 <link rel="stylesheet" type="text/css" href="Button.css">
@@ -76,6 +76,10 @@ div.right {
 					request.getSession().setAttribute("friendId", id);
 					out.print("<form action='SendFriendshipRequest' method='post'>"
 							+ "<input type='submit' value='Send Friend Request' class='btn'></form>");
+				} else if (dbf.isFriend(myId, id)) {
+					request.getSession().setAttribute("friendId", id);
+					out.print("<form action='RemoveFriend' method='post'>"
+							+ "<input type='submit' value='Remove Friend' class='btn'></form>");
 				}
 			%>
 			<p>

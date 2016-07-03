@@ -11,16 +11,16 @@ import DBQuizControllers.DBQuizController;
 import database.DBFriendController;
 
 /**
- * Servlet implementation class SendFriendShiprequest
+ * Servlet implementation class RemoveFriend
  */
-@WebServlet("/SendFriendshipRequest")
-public class SendFriendshipRequest extends HttpServlet {
+@WebServlet("/RemoveFriend")
+public class RemoveFriend extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SendFriendshipRequest() {
+	public RemoveFriend() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -41,14 +41,11 @@ public class SendFriendshipRequest extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("Shemovedi aq");
-		int friendId = (int) request.getSession().getAttribute("friendId");
-		DBQuizController db = new DBQuizController();
-		int yourId = db.getAuthorId((String) request.getSession().getAttribute("user_name"));
-		DBFriendController fdb = new DBFriendController();
-		fdb.addFriendshpRequestByUserID(yourId, friendId);
+		int fid = (int) request.getSession().getAttribute("friendId");
+		int myId = new DBQuizController().getAuthorId((String) request.getSession().getAttribute("user_name"));
+		new DBFriendController().cancelFriendshipByID(myId, fid);
 		request.getSession().removeAttribute("friendId");
-		response.sendRedirect("UserPage.jsp?id=" + friendId);
+		response.sendRedirect("UserPage.jsp?id=" + fid);
 		doGet(request, response);
 	}
 
