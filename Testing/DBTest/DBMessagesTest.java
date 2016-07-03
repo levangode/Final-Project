@@ -5,13 +5,14 @@ import java.util.List;
 import org.junit.Test;
 
 import DBMessageControllers.DBMessage;
+import DBMessageControllers.MessageRecievedInfo;
 import backend.Message;
 import backend.User;
 
 public class DBMessagesTest {
 
 	
-	@Test
+//	@Test
 	public void DBMessageAddTest(){
 		
 		DBMessage dbm = new DBMessage();
@@ -28,7 +29,7 @@ public class DBMessagesTest {
 		
 	}
 	
-	@Test
+//	@Test
 	public void DBMessageGetTest1(){
 		
 		System.out.println("Test1");
@@ -61,5 +62,22 @@ public class DBMessagesTest {
 		System.out.println("\n\n\n");
 	}
 	
+	@Test
+	public void DMMessageInfoTest1(){
+		System.out.println("TestINFO2");
+		
+		DBMessage dbm = new DBMessage();
+		
+		
+		
+		List<MessageRecievedInfo> res = dbm.getRecievedMessagesInfo(1);
+		
+		System.out.println(res.size());
+		
+		
+		for(MessageRecievedInfo z: res){
+			System.out.println(z);
+		}
+	}
 	
 }

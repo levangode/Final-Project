@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -259,5 +260,89 @@ public class DBMessage {
 		}
 		
 		return message;
+	}
+	
+	public MessageInfo getRecievedMessageInfoByID(int recipient_id){
+		
+		MessageInfo message = null;
+		
+		String query = "select sender_id, recipient_id, message_text, message_subject, message_id from Messages where "
+				+ "recipient_id = " + recipient_id
+				+ ";";
+		
+		connection = new DBconnector().getConnection();
+		
+		PreparedStatement stm;
+		
+		System.out.println(query);
+		
+		try {
+			stm = connection.prepareStatement(query);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while (rs.next()){
+				int sender_id = rs.getInt(1);
+				//int recipient_id1 = rs.getInt(2);
+				
+				String message_text = rs.getString(3);
+				String message_subject = rs.getString(4);
+				
+				int tmp_message_id = rs.getInt(5);
+				
+				MessageInfo m = new MessageInfo(sender_id, recipient_id, message_text, message_subject, tmp_message_id);
+				
+				message = m;
+			}
+			
+			connection.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+	
+	public List<MessageRecievedInfo> getRecievedMessagesInfo(int recipient_id){
+		connection = new DBconnector().getConnection();
+		
+		List<MessageRecievedInfo> messageInfo = new ArrayList<MessageRecievedInfo>();
+		
+		String query = "select m.message_id, m.`message_text`, m.message_subject, m.message_seen, m.date_sent, send.user_login, send.user_name "
+				+ "from messages m, users send "
+				+ "where m.recipient_id = " + recipient_id
+				+ " and m.sender_id = send.user_id";
+		
+		PreparedStatement stm;
+		
+		System.out.println(query);
+		
+		try {
+			stm = connection.prepareStatement(query);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while (rs.next()){
+				int messageID = rs.getInt("message_id");
+				String messageText = rs.getString("message_text");
+				String messageSubject = rs.getString("message_subject");
+				boolean messageSeen = rs.getBoolean("message_seen");
+				Timestamp dateSent = rs.getTimestamp("date_sent");
+				String senderName = rs.getString("user_name");
+				String senderLogin = rs.getString("user_login");
+				
+				messageInfo.add(new MessageRecievedInfo(senderLogin, senderName, messageText, messageSubject, messageID, messageSeen, dateSent));
+				
+			}
+			
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return messageInfo;
 	}
 }

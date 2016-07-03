@@ -1,3 +1,9 @@
+<%@page import="DBMessageControllers.MessageRecievedInfo"%>
+<%@page import="DBMessageControllers.DBMessage"%>
+<%@page import="DBMessageControllers.MessageInfo"%>
+<%@page import="backend.Message"%>
+<%@page import="java.util.List"%>
+<%@page import="database.UserController"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -44,6 +50,7 @@
 
 		margin-left: 15px;
 		padding: 5px;
+		padding-right: 15px;
 		
 		background: pink;
     	border-style: dotted;
@@ -85,10 +92,29 @@
 	</div>
 
 	<div id="message_list_frame">
-		Messages List
+		Messages
 
+		<%
+			String userName = (String)session.getAttribute("user_name");
+			
+			out.print("<h1>" + "Traki " + userName + "</h1>");
+			
+			UserController dbu = new UserController();
+			
+			int userID = dbu.getUserIDByLogin(userName);
+			
+			DBMessage dbm = new DBMessage();
+			
+			List<MessageRecievedInfo> recievedMessages = dbm.getRecievedMessagesInfo(userID);
+			
+			for(int i=0; i<recievedMessages.size(); i++){
+				out.print(recievedMessages.get(i).getPreviewHTML(i+1));
+			}
+		%>
+	
 		<div>
 			<p>MessageOne</p>
+			
 		</div>
 
 		<div>
