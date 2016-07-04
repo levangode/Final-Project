@@ -72,8 +72,8 @@ public class MessageRecievedInfo {
 		return getSenderLogin() + getMessageText() + messageID + dateSent; 
 	}
 	
-	private final int PREVIEw_CHAR_LIMIT_TEXT = 100;
-	private final int PREVIEw_CHAR_LIMIT_SUBJECT = 50;
+	private final int PREVIEW_CHAR_LIMIT_TEXT = 100;
+	private final int PREVIEW_CHAR_LIMIT_SUBJECT = 50;
 	
 	public String getPreviewHTML(int id){
 		StringBuilder scr = new StringBuilder("");
@@ -82,9 +82,9 @@ public class MessageRecievedInfo {
 			scr.append("<p>");
 				scr.append("" + this.getSenderLogin());
 				scr.append("</br>");
-				scr.append("" + this.getMessageSubject(PREVIEw_CHAR_LIMIT_SUBJECT));
+				scr.append("" + this.getMessageSubject(PREVIEW_CHAR_LIMIT_SUBJECT));
 				scr.append("</br>");
-				scr.append("" + this.getMessageText(PREVIEw_CHAR_LIMIT_TEXT));
+				scr.append("" + this.getMessageText(PREVIEW_CHAR_LIMIT_TEXT));
 			scr.append("</p>");
 		scr.append("</div>");
 		
