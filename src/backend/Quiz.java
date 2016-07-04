@@ -75,12 +75,11 @@ public class Quiz {
 	}
 
 	public void addQuestion(Question question, int questionNum) {
-		if (questionNum >= questions.size()) {
+		if (questionNum > questions.size()) {
 			questions.add(question);
 		} else {
 			questions.set(questionNum - 1, question);
 		}
-		System.out.println(questions.size());
 	}
 
 	public void addQuestionWithoutNum(Question question) {
@@ -206,6 +205,9 @@ public class Quiz {
 
 	public void setTime_limit(int time_limit) {
 		this.time_limit = time_limit;
+	}
+	public int getQuestions_num(){
+		return this.questions.size();
 	}
 
 }
