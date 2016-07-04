@@ -16,7 +16,7 @@ insert into Quiz_Difficulties(quiz_difficulty) Values
 	('Easy'),
 	('Medium'),
 	('Hard'),
-	('Unfair')
+	('Unfair');
 
 create table Categories(
 	category_id int auto_increment primary key,
@@ -31,7 +31,7 @@ create table Quizzes (
     author_id int not null,
     quiz_score int default 0,
     quiz_likes int default 0,
-    quiz_time_limit int default -1;
+    quiz_time_limit int default -1,
     date_created timestamp not null,
     quiz_difficulty varchar(50),
     times_taken int default 0,
@@ -96,17 +96,7 @@ insert into Categories(category_name) values
     ('Biology'),
     ('Math');
 
-create table Questions(
-	question_id int auto_increment primary key,
-    quiz_id int not null,
-    question_text varchar(500),
-    question_type int not null,
-    question_description varchar(500),
-    question_time_limit int default -1,
-	
- 
-	foreign key (quiz_id) references Quizzes(quiz_id)
-);
+
 
 create table Likes(
 	user_id int not null,
@@ -116,17 +106,6 @@ create table Likes(
 	foreign key (quiz_id) references Quizzes(quiz_id)
 );
 
-create table Answers(
-	answer_id int auto_increment primary key,
-	answer_text varchar(500),
-    answer_description varchar(500),
-    answer_correct bool not null,
--- 	answer_type varchar(100) not null,
-
-	question_id int not null,
-    
-	foreign key (question_id) references Questions(question_id)
-);
 
 -- Friend system
 

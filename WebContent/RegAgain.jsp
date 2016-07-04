@@ -9,6 +9,8 @@
 <link rel="stylesheet" type="text/css" href="Buttons.css">
 </head>
 <body>
+	<div id="main" class="main">
+	<jsp:include page="Header.jsp"></jsp:include>
 	<h1>
 		The Name <%=request.getAttribute("user_login")%> is Already In Use
 	</h1>
@@ -20,5 +22,6 @@
 		Password: <input type="text" name="user_password"> <input
 			type="submit" value="Sign up">
 	</form>
+	</div>
 </body>
 </html>

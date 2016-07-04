@@ -8,6 +8,8 @@
 <title>Incorrect Information</title>
 </head>
 <body>
+	<div id="main" class="main">
+	<jsp:include page="Header.jsp"></jsp:include>
 	<h1>Please Try Again</h1>
 	<p>Either your user name or password is incorrect. 
 	Please try again.</p>
@@ -21,5 +23,6 @@
 		<a href = "Register.html">Create New Account</a>
 		
 	</form>
+	</div>
 </body>
 </html>

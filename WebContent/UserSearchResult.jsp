@@ -24,7 +24,8 @@
 <title>Search Results for</title>
 </head>
 <body>
-	<div id="main">
+	<div id="main" class="main">
+	<jsp:include page="Header.jsp"></jsp:include>
 		<%
 			List<User> users = new UserController().getUserList(user_name);
 			out.print("<div class='left'><ul> ");

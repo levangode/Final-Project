@@ -9,6 +9,7 @@
 </head>
 <body>
 	<div id="main" class="main">
+	<jsp:include page="Header.jsp"></jsp:include>
 	<h3>You need to be logged in to view this page</h3>
 	<form action="Login" method="post">
 		User Name: <input type="text" name="user_login">

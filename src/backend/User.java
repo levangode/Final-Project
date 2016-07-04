@@ -23,9 +23,10 @@ public class User {
 		return name;
 	}
 
-	public int getCreatedQuizCount() {
-		int counter = 0;
-
+	public int getCreatedQuizCount(int user_id) {
+		int counter=0;
+		UserController uc = new UserController();
+		counter=uc.getUserQuizCount(user_id);
 		return counter;
 	}
 

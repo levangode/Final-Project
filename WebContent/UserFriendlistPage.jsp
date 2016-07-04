@@ -44,7 +44,8 @@ div.left {
 <title>Your Friends</title>
 </head>
 <body>
-	<div id="main">
+	<div id="main" class="main">
+	<jsp:include page="Header.jsp"></jsp:include>
 	<ul>
 		<%
 			for (int i = 0; i < friendIds.size(); i++) {

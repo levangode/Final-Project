@@ -9,12 +9,12 @@
 <%@page import="database.*"%>
 <%@page import="java.util.ArrayList"%>
 <html>
-	<%
-		if (!(boolean) request.getSession().getAttribute("logged_in")) {
-			response.sendRedirect("NotLoggedIn.jsp");
-			return;
-		}
-	%>
+<%
+	if (!(boolean) request.getSession().getAttribute("logged_in")) {
+		response.sendRedirect("NotLoggedIn.jsp");
+		return;
+	}
+%>
 <head>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
 <link rel="stylesheet" type="text/css" href="StyleForUserQuizes.css">
@@ -45,13 +45,14 @@ div.left {
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="main">
+	<div id="main" class="main">
+		<jsp:include page="Header.jsp"></jsp:include>
 		<div class="center">
-			You have Created:
+			Created:
 			<%
-			out.print(user.getCreatedQuizCount());
-		%>
-			Quizes
+			out.print(user.getCreatedQuizCount(id));
+			%>
+			Quizzes
 		</div>
 
 		<div class="center">

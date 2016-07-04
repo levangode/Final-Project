@@ -46,8 +46,8 @@ div.right {
 </title>
 </head>
 <body>
-	<div style="min-width: 1024px; position: relative;">
-		<jsp:include page="Header.jsp" />
+	<div id="main" class="main">
+		<jsp:include page="Header.jsp"></jsp:include>
 		<div class='left'>
 			<h1>
 				<%

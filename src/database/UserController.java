@@ -14,12 +14,10 @@ public class UserController {
 	private DBconnector db;
 
 	public UserController() {
-
+		connection = new DBconnector().getConnection();
 	}
 
 	public User getUserByID(int ID) {
-		db = new DBconnector();
-		connection = db.getConnection();
 		String order = "select user_name, user_id, user_login, user_profile_image from Users " + "where user_id = " + ID
 				+ ";";
 		PreparedStatement stm = null;
@@ -41,18 +39,15 @@ public class UserController {
 
 				thisUser = new User(user_name, user_login, user_profile_image);
 			}
-
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		db.closeConnection();
 
 		return thisUser;
 	}
 
 	public User getUserByLogin(String login) {
-		db = new DBconnector();
-		connection = db.getConnection();
 		String order = "select user_name, user_id, user_login, user_profile_image from Users " + "where user_login = '"
 				+ login + "';";
 		PreparedStatement stm = null;
@@ -65,7 +60,7 @@ public class UserController {
 
 			if (myRes.next()) {
 				String user_name = myRes.getString(1);
-				//int user_id = myRes.getInt(2);
+				// int user_id = myRes.getInt(2);
 				String user_login = myRes.getString(3);
 				String user_profile_image = myRes.getString(4);
 				if (user_profile_image == null) {
@@ -75,66 +70,58 @@ public class UserController {
 				thisUser = new User(user_name, user_login, user_profile_image);
 			}
 
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		db.closeConnection();
 
 		return thisUser;
 	}
-	
-	public List<User> getUserList(String fragment){
-		
+
+	public List<User> getUserList(String fragment) {
+
 		List<User> users = new ArrayList<User>();
-		
-		connection = new DBconnector().getConnection();
-		
-		String query = "select user_name, user_id, user_login, user_profile_image from Users " + 
-				"where user_login like '%" + fragment + "%' or user_name like '%" + fragment + "%';";
-		
+
+		String query = "select user_name, user_id, user_login, user_profile_image from Users "
+				+ "where user_login like '%" + fragment + "%' or user_name like '%" + fragment + "%';";
+
 		PreparedStatement stm;
-		
+
 		System.out.println(query);
-		
+
 		try {
 			stm = connection.prepareStatement(query);
-			
+
 			ResultSet rs = stm.executeQuery();
-			
-			while(rs.next()){
+
+			while (rs.next()) {
 				User tmp = new User(rs.getString(1), rs.getString(3), rs.getString(4));
 				users.add(tmp);
 			}
-			
+			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return users;
 	}
 
 	public void editImgUrl(String login, String newUrl) {
-		db = new DBconnector();
-		connection = db.getConnection();
 		String order = "Update Users Set user_profile_image = '" + newUrl + "' where user_login ='" + login + "'";
 		PreparedStatement stm = null;
 
 		try {
 			stm = connection.prepareStatement(order);
-			System.out.println(stm);
 			stm.executeUpdate();
-
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		db.closeConnection();
 
 	}
 
 	public void editUserName(String login, String newUserName) {
-		db = new DBconnector();
-		connection = db.getConnection();
 		String order = "Update Users Set user_name = '" + newUserName + "' where user_login ='" + login + "'";
 		PreparedStatement stm = null;
 
@@ -142,16 +129,13 @@ public class UserController {
 			stm = connection.prepareStatement(order);
 			System.out.println(stm);
 			stm.executeUpdate();
-
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		db.closeConnection();
 	}
 
 	public boolean containsUser(String user_login) {
-		db = new DBconnector();
-		connection = db.getConnection();
 		String order = "select count(*) from Users " + "where user_login = " + "'" + user_login + "'";
 		PreparedStatement stm = null;
 		try {
@@ -165,18 +149,18 @@ public class UserController {
 			myRes = stm.executeQuery();
 			myRes.next();
 			count = myRes.getInt(1);
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			
 		}
-		db.closeConnection();
 		if (count == 0)
 			return false;
 		return true;
 	}
 
 	public void addNewUser(String user_login, String user_password, String user_name) {
-		db = new DBconnector();
-		connection = db.getConnection();
 		String order = "" + "insert into Users(user_login, user_password, user_name) values " + "	('" + user_login
 				+ "', '" + user_password + "', '" + user_name + "');";
 		PreparedStatement stm = null;
@@ -187,16 +171,14 @@ public class UserController {
 		}
 		try {
 			stm.executeUpdate();
+			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		db.closeConnection();
 	}
 
 	public boolean passwordMatch(String user_login, String user_password) {
 		boolean result = false;
-		db = new DBconnector();
-		connection = db.getConnection();
 		String order = "" + "select user_password from Users where user_login = '" + user_login + "'";
 		PreparedStatement stm = null;
 		try {
@@ -210,41 +192,59 @@ public class UserController {
 			myRes.next();
 			if (user_password.equals(myRes.getString(1)))
 				result = true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		db.closeConnection();
-		return result;
-	}
-	
-	public int getUserIDByLogin(String login){
-		
-		int user_id = -1;
-		
-		connection = new DBconnector().getConnection();
-		
-		String query = "select user_id from Users where user_login = "
-				+ "'" + login + "'"
-				+";";
-		
-		PreparedStatement stm = null;
-		
-//		System.out.println(query);
-		
-		try {
-			stm = connection.prepareStatement(query);
-			ResultSet rs = stm.executeQuery(query);
-			
-			while(rs.next()){
-				user_id = rs.getInt(1);
-			}
-			
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		return result;
+	}
+
+	public int getUserIDByLogin(String login) {
+
+		int user_id = -1;
+
+
+		String query = "select user_id from Users where user_login = " + "'" + login + "'" + ";";
+
+		PreparedStatement stm = null;
+
+		// System.out.println(query);
+
+		try {
+			stm = connection.prepareStatement(query);
+			ResultSet rs = stm.executeQuery(query);
+
+			while (rs.next()) {
+				user_id = rs.getInt(1);
+			}
+
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return user_id;
+	}
+
+	public int getUserQuizCount(int user_id) {
+		int result = 0;
+
+		String order = "select count(*) from Quizzes where author_id = "+user_id;
+		PreparedStatement stm = null;
+
+		try {
+			stm = connection.prepareStatement(order);
+			ResultSet rs = stm.executeQuery(order);
+
+			while (rs.next()) {
+				result = rs.getInt(1);
+			}
+
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }
