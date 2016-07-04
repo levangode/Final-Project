@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBQuizControllers.DBQuizController;
 import questions.Question;
 
 public class Quiz {
@@ -208,6 +209,11 @@ public class Quiz {
 	}
 	public int getQuestions_num(){
 		return this.questions.size();
+	}
+	
+	public void addToDatabase(){
+		DBQuizController ca = new DBQuizController();
+		ca.addQuiz(this);
 	}
 
 }

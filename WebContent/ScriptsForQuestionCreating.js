@@ -3,7 +3,7 @@ function addAnswer() {
 	var fieldName = "answer" + count;
 	var answerName = "answer" + count;
 	$(
-			'<textarea class="inputs" name="' + answerName + '" id="' + fieldName
+			'<textarea class="inputs" required name="' + answerName + '" id="' + fieldName
 					+ '" rows="3" cols="30" placeholder="' + fieldName
 					+ '" style="display:none;"></textarea><br />').appendTo(
 			'#answers').slideDown('fast');
@@ -16,7 +16,7 @@ function addChoice() {
 	var answerName = "answer" + count;
 	var tickName = "tick" + count;
 	$(
-			'<textarea class="inputs" name="' + answerName + '" id="' + fieldName
+			'<textarea class="inputs" required name="' + answerName + '" id="' + fieldName
 					+ '" rows="3" cols="30" placeholder="' + fieldName
 					+ '" style="display:none;"></textarea><br />').appendTo(
 			'#answers').slideDown('fast');
@@ -37,7 +37,7 @@ function addBlank() {
 	var answerName = "answer" + count;
 	$('#questionText').val($('#questionText').val() + ' ' + count + '. ____ ');
 	$(
-			'<input type="text" class="inputs" name="' + answerName + '" id="' + fieldName
+			'<input type="text" required class="inputs" name="' + answerName + '" id="' + fieldName
 					+ '" placeholder="' + fieldName
 					+ '" style="display:none;"><br />').appendTo('#answers')
 			.slideDown('fast');

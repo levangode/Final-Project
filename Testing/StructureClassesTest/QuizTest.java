@@ -81,7 +81,7 @@ public class QuizTest {
 		int time_limit = 1;
 		Quiz a = QuizFactory.getQuiz(quiz_name, quiz_description, quiz_author, quiz_likes, quiz_category,
 				quiz_difficulty, times_taken, displayMultiplePages, immediateCorrection, randomQuestions, time_limit);
-		Question b=QuestionFactory.getBlankQuestion("", "", "", 0, 0);
+		Question b = QuestionFactory.getBlankQuestion("", "", "", 0, 0);
 		assertEquals(0, a.getQuestions_num());
 		a.addQuestionWithoutNum(b);
 		assertEquals(1, a.getQuestions_num());
@@ -91,6 +91,6 @@ public class QuizTest {
 		assertEquals(2, a.getQuestions_num());
 		a.addQuestion(b, 2);
 		assertEquals(2, a.getQuestions_num());
-		
+
 	}
 }

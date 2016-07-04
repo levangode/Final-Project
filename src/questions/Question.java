@@ -78,6 +78,11 @@ public abstract class Question implements PrintableQuestion, DatabaseAddable, Co
 	public int getQuestionnumber() {
 		return question_number;
 	}
+	
+	
+	public int getAnswerNum(){
+		return answers.size();
+	}
 
 	@Override
 	public int compareTo(Object o) {

@@ -19,6 +19,10 @@ public class BlankAnswer extends Answer {
 	public int getBlankpos() {
 		return blank_position;
 	}
+	
+	public void setBlankpos(int pos){
+		blank_position=pos;
+	}
 
 	@Override
 	public String getAnswerText() {
