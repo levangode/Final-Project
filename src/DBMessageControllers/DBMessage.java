@@ -24,6 +24,36 @@ public class DBMessage {
 		
 	}
 	
+	public boolean sendMessage(SendMessageInfo mes){
+		connection = new DBconnector().getConnection();
+				
+		int sender_id = getSenderID(mes.getSnederLogin());
+		int recipient_id = getRecipientID(mes.getRecipientLogin());
+		
+		String query = "insert into Messages(sender_id, recipient_id, message_text, message_subject) value("
+				+ sender_id + ", "
+				+ recipient_id + ", "
+				+ "'" + mes.getText() + "', "
+				+ "'" + mes.getSubject() + "' "
+				+");";
+		
+		PreparedStatement stm;
+		
+		try {
+			stm = connection.prepareStatement(query);
+			
+			stm.executeUpdate();
+			
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public void sendMessage(Message m){
 		
 		connection = new DBconnector().getConnection();
@@ -65,10 +95,26 @@ public class DBMessage {
 		
 		return recipient_id;
 	}
+	
+	private int getRecipientID(String recipient_login) {
+		UserController u = new UserController();
+		
+		int recipient_id = u.getUserIDByLogin(recipient_login);
+		
+		return recipient_id;
+	}
 
 	private int getSenderID(Message m) {
 		String sender_login = m.getSender().getLogin();
 		
+		UserController u = new UserController();
+		
+		int senderID = u.getUserIDByLogin(sender_login);
+		
+		return senderID;
+	}
+	
+	private int getSenderID(String sender_login) {
 		UserController u = new UserController();
 		
 		int senderID = u.getUserIDByLogin(sender_login);
