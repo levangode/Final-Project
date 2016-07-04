@@ -32,7 +32,7 @@ create table Quizzes (
     quiz_score int default 0,
     quiz_likes int default 0,
     quiz_time_limit int default -1,
-    date_created timestamp not null,
+    date_created timestamp default current_timestamp default current_timestamp default current_timestamp,
     quiz_difficulty varchar(50),
     times_taken int default 0,
     multiple_pages boolean default false,
@@ -50,7 +50,7 @@ create table Quiz_edit(
 	user_id int not null,
 	quiz_id int not null,
 	quiz_edited tinyint(1) default null,
-	quiz_edit_date timestamp,
+	quiz_edit_date timestamp default current_timestamp ,
 	
 	foreign key (user_id) references Users(user_id),
 	foreign key (quiz_id) references Quizzes(quiz_id)	
@@ -60,7 +60,7 @@ create table Quiz_taken(
 	user_id int not null,
 	quiz_id int not null,
 	
-	time_finished timestamp,
+	time_finished timestamp default current_timestamp ,
 	time_taken int,
 	
 	score double not null,
@@ -134,7 +134,7 @@ create table Messages(
 	recipient_id int not null,
 	message_text varchar(1000),
 	message_subject varchar(500),
-	date_sent timestamp,
+	date_sent timestamp default current_timestamp ,
  	message_seen tinyint(1) default 0, 
 	
 	foreign key (sender_id) references Users(user_id),
