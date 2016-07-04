@@ -77,7 +77,7 @@ public class MultipleChoiceQuestion extends Question {
 		html += "<div id='question-" + id + "'>" + "<p>" + getQuestiontext() + "</p> ";
 		ArrayList<Answer> answers = getAnswers();
 		html += "<ul>";
-		for (int i = 0; i < answers.size(); i++) {
+		for (int i = 0; i < answers_to_show; i++) {
 			MultipleChoiceAnswer ans = (MultipleChoiceAnswer) answers.get(i);
 			html += ans.getHtml(id, i);
 		}
