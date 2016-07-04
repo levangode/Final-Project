@@ -79,7 +79,7 @@
 	    $("#button_seen").click(function(){
 	    	//var param = $(this).attr("id");
 	    	//alert(param);
-	        messageSeen(1);
+	        messageSeen(9);
 	        //sendMessage();
 	    });
 	});
@@ -96,6 +96,10 @@
 </script>
 
 <style type="text/css">
+	body{
+		background-color: #94be9c;
+	}
+
 	div.messageDisplay{
 	    
 	}
@@ -138,12 +142,20 @@
     animation-duration: 0.4s
 }
 
+/* rounded corners*/
+.rounded-bottom{
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
 /* Modal Content */
 .modal-content {
     /*position: fixed;*/
     bottom: 0;
     background-color: #fefefe;
     width: 70%;
+    max-width: 700px;
+    min-width: 420px;
     margin-left: auto;
     margin-right: auto;
     -webkit-animation-name: fadeIn;
@@ -181,17 +193,6 @@
     color: white;
 }
 
-/* Add Animation */
-/*@-webkit-keyframes slideIn {
-    from {bottom: -300px; opacity: 0}
-    to {bottom: 0; opacity: 1}
-}
-
-@keyframes slideIn {
-    from {bottom: -300px; opacity: 0}
-    to {bottom: 0; opacity: 1}
-}*/
-
 @-webkit-keyframes fadeIn {
     from {opacity: 0}
     to {opacity: 1}
@@ -209,19 +210,17 @@
 </head>
 <body>
 
-	<h2>Bottom Modal</h2>
-
 	<!-- Trigger/Open The Modal -->
-	<button id="myBtn">Open Modal</button>
+	<button id="myBtn">Compose Message</button>
 	
 	<!-- The Modal -->
 	<div id="myModal" class="modal">
 	
 	  <!-- Modal content -->
-	  <div class="modal-content">
+	  <div class="modal-content rounded-bottom">
 	    <div class="modal-header">
 	      <span class="close">&times</span>
-	      <h2>Modal Header</h2>
+	      <h2>Compose Message</h2>
 	    </div>
 	    <div class="modal-body">
 	      <p>Some text in the Modal Body</p>
@@ -233,7 +232,7 @@
 	      <p>Some text in the Modal Body</p>
 	      <p>Some other text...</p>
 	    </div>
-	    <div class="modal-footer">
+	    <div class="modal-footer rounded-bottom">
 	      <h3>Modal Footer</h3>
 	    </div>
 	  </div>
