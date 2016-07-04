@@ -11,7 +11,6 @@ import backend.User;
 
 public class UserController {
 	private Connection connection;
-	private DBconnector db;
 
 	public UserController() {
 		connection = new DBconnector().getConnection();
@@ -149,7 +148,6 @@ public class UserController {
 			myRes = stm.executeQuery();
 			myRes.next();
 			count = myRes.getInt(1);
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -186,6 +184,7 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println("ait");
 		ResultSet myRes = null;
 		try {
 			myRes = stm.executeQuery();
@@ -208,10 +207,10 @@ public class UserController {
 
 		PreparedStatement stm = null;
 
-		// System.out.println(query);
 
 		try {
 			stm = connection.prepareStatement(query);
+			System.out.println("ait");
 			ResultSet rs = stm.executeQuery(query);
 
 			while (rs.next()) {

@@ -63,11 +63,11 @@ textarea {
 				%>
 			</select>
 			<h2>Enter quiz name</h2>
-			<br /> <input type="text" name="quiz_name" maxlength="25"
+			<br /> <input type="text" class="inputs" name="quiz_name" maxlength="25"
 				placeholder="Enter quiz name here..." required> <br />
 			<h2>Enter quiz description</h2>
 			<br />
-			<textarea name="quiz_description" rows="3" cols="45" maxlength="150"
+			<textarea name="quiz_description" class="inputs" rows="3" cols="45" maxlength="150"
 				placeholder="Enter quiz description here..." required></textarea>
 			<p>
 				<input name="Random Questions" type="checkbox">Random

@@ -46,8 +46,8 @@ div.notif {
 				out.write("<a href='UserPage.jsp?id=" + yourID + "' >Your Page</a>");
 				out.write("<br><a  href=\"Logout.jsp\">Logout</a>");
 			} else {
-				out.write("User Name <input type=\"text\" name=\"user_login\">");
-				out.write("Password <input type=\"password\" name=\"user_password\">");
+				out.write("<input placeholder=\"Username\" class=\"inputs\" type=\"text\" name=\"user_login\"><br><br>");
+				out.write("<input placeholder=\"Password\" class=\"inputs\" type=\"password\" name=\"user_password\"><br><br>");
 				out.write("<input type=\"submit\" value=\"Login\">");
 				out.write("<button type=\"button\" onclick=\"location.href = 'Register.html'\">Register</button>");
 			}

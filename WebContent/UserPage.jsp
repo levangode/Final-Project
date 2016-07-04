@@ -67,10 +67,10 @@ div.right {
 				int myId = new DBQuizController().getAuthorId(login);
 				if (myId == id) {
 					out.print(
-							"<form action='ChangeImgUrl' method='post'>Chane Your Image: <input type='text' name='imgUrl'>"
+							"<form action='ChangeImgUrl' method='post'>Chane Your Image: <input type='text' class='inputs' name='imgUrl'>"
 									+ "<input type='submit' value='Submit'></form>");
 					out.print(
-							"<form action='ChangeUserName' method='post'>Chane Your Name: <input type='text' name='userName'>"
+							"<form action='ChangeUserName' method='post'>Chane Your Name: <input class='inputs' type='text' name='userName'>"
 									+ "<input type='submit' value='Submit'></form>");
 				} else if (!dbf.isFriend(myId, id) && !dbf.isRequestSent(myId, id)) {
 					request.getSession().setAttribute("friendId", id);
@@ -82,9 +82,6 @@ div.right {
 							+ "<input type='submit' value='Remove Friend' class='btn'></form>");
 				}
 			%>
-			<p>
-				<a class="btn" href="HomePage.jsp"> Return To Homepage </a>
-			</p>
 		</div>
 
 		<%
@@ -118,7 +115,7 @@ div.right {
 		%>
 		<div class='right'>
 			<form action='SearchUser' method='post'>
-				Search User<input type='text' name='user_name'> <input
+				Search User<input type='text' class='searchInput' name='user_name'> <input
 					type='submit' value='Search'>
 			</form>
 		</div>

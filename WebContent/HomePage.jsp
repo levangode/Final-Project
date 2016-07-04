@@ -76,7 +76,7 @@
 			<div class="box" style="float: right">
 				<div class="box bloki" style="text-align: center;">
 					<form action='SearchQuiz' method='post'>
-						Search Quiz<input type='text' name='quiz_name'> <input
+						Search Quiz<input type="text" maxlength=20 class="searchInput" name='quiz_name'> <input
 							type='submit' value='Search'>
 					</form>
 				</div>

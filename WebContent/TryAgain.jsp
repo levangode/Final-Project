@@ -14,9 +14,9 @@
 	<p>Either your user name or password is incorrect. 
 	Please try again.</p>
 	<form action="Login" method="post">
-		User Name: <input type="text" name="user_login">
+		User Name: <input type="text" class="inputs" name="user_login">
 		<br />
-		Password: <input type="text" name="user_password">
+		Password: <input type="password" class="inputs" name="user_password">
 		<br />
 		<input type = "submit" value="Login">
 		<br />

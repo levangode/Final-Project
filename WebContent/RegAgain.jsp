@@ -18,8 +18,8 @@
 	<br />
 	<br />
 	<form action="Registration" method="post">
-		User Name: <input type="text" name="user_login"> <br />
-		Password: <input type="text" name="user_password"> <input
+		User Name: <input type="text" class="inputs" name="user_login"> <br />
+		Password: <input type="password" class="inputs" name="user_password"> <input
 			type="submit" value="Sign up">
 	</form>
 	</div>
