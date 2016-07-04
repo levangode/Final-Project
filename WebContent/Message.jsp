@@ -16,7 +16,12 @@
 <script type="text/javascript">
 	///modal box test
 	
+	var userName = "";
 	
+	function setUserName(name){
+		userName = name;
+		//alert("user name set to " + name);
+	}
 	
 	///modal box test
 	
@@ -46,11 +51,18 @@
 		);
 	}
 	
+	function clearFields(){
+		$('#input_message_to').val("");
+		$('#input_message_subject').val("");
+		$('#input_message_text').val("");
+	}
+	
 	function sendMessage(){
-		var senderLogin = "z";
-		var recipientLogin = "mike";
-		var messageText = "ra xdeba shechema";
-		var messageSubject = "trakoo!";
+		var senderLogin = userName;
+		var recipientLogin = $('#input_message_to').val();
+		var messageText = $('#input_message_subject').val();
+		var messageSubject = $('#input_message_text').val();
+		
 		
 		$.get(
 		    "MessageSend",
@@ -86,16 +98,72 @@
 	
 	$(document).ready(function(){
 	    $("#button_send").click(function(){
-	    	//var param = $(this).attr("id");
-	    	//alert(param);
-	        //messageSeen(1);
-	        sendMessage();
+	    	sendMessage();
+	    	$('#myModal').hide();
+	    	clearFields();
+	    });
+	});
+
+	$(document).ready(function(){
+	    $("#button_reset").click(function(){
+	    	clearFields();
+	    });
+	});
+	
+	function showUserNotFound(){
+		$("#span_not_found").show();
+		$("#span_found").hide();
+	}
+
+	function showUserFound(){
+		$("#span_not_found").hide();
+		$("#span_found").show();
+	}
+	
+	function displayUserFound(){
+		var user = $("#input_message_to").val();
+		
+		$.get(
+			"UserValid",
+			{
+		    	user_login: user
+		    },
+		    function(data) {
+		    	if(data=="OK"){
+		    		showUserFound();
+		    	} else {
+		    		showUserNotFound();
+		    	} 	
+			}		
+		);
+		
+		//alert("asdasda");
+		
+	}
+	
+	$(document).ready(function(){
+	    $("#input_message_to").change(function(){
+	    	displayUserFound();
 	    });
 	});
 
 </script>
 
 <style type="text/css">
+	.message_display{
+		border: groove;
+		padding: 5px;
+	}
+
+	.user_input_check{
+		display: none;
+	}
+
+	#input_message_text{
+		height: 100px;
+		width: 400px;
+	}
+
 	body{
 		background-color: #94be9c;
 	}
@@ -144,8 +212,8 @@
 
 /* rounded corners*/
 .rounded-bottom{
-	border-bottom-right-radius: 10px;
-	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 7px;
+	border-bottom-left-radius: 7px;
 }
 
 /* Modal Content */
@@ -188,7 +256,7 @@
 .modal-body {padding: 2px 16px;}
 
 .modal-footer {
-    padding: 2px 16px;
+    padding: 10px 26px;
     background-color: #5cb85c;
     color: white;
 }
@@ -223,17 +291,25 @@
 	      <h2>Compose Message</h2>
 	    </div>
 	    <div class="modal-body">
-	      <p>Some text in the Modal Body</p>
-	      <p>Some other text...</p>
-	      <p>Some text in the Modal Body</p>
-	      <p>Some other text...</p>
-	      <p>Some text in the Modal Body</p>
-	      <p>Some other text...</p>
-	      <p>Some text in the Modal Body</p>
-	      <p>Some other text...</p>
+	    	To:
+	    	</br>
+	      	<input id = "input_message_to" type = "text">
+	      	<span id = "span_not_found" class = "user_input_check">User with such login not found</span>
+	      	<span id = "span_found" class = "user_input_check">User name is Valid</span>
+	      	</br>
+	      	Subject:
+	      	</br>
+	      	<input id = "input_message_subject" type = "text">
+	      	</br>
+	      	Text:
+	      	</br>
+	      	<textarea id = "input_message_text">
+	      		
+	      	</textarea> 
 	    </div>
 	    <div class="modal-footer rounded-bottom">
-	      <h3>Modal Footer</h3>
+	      <button id = "button_send"> Send </button>
+	      <button id = "button_reset"> Reset </button>
 	    </div>
 	  </div>
 	
@@ -269,15 +345,7 @@
 
 	<p>Trawi is real!</p>
 
-	<button id="button_change" type="button">Click tom do things!!</button>
-
 	<p>z</p>
-
-	<form action="MessageTest" method="get">
-		<input type="submit" value = "TestMessage">
-			 
-		
-	</form>
 
 	</br>
 
@@ -292,7 +360,7 @@
 		<%
 			String userName = (String)session.getAttribute("user_name");
 			
-			out.print("<h1>" + "Traki " + userName + "</h1>");
+			out.print("<script>" + "setUserName('" + userName + "');"+ "</script>");
 			
 			UserController dbu = new UserController();
 			
@@ -307,13 +375,13 @@
 			}
 		%>
 		
-		<button id = "button_seen" type = "button" >
+		<!-- <button id = "button_seen" type = "button" >
 			Test Seen Servlet
 		</button>
 
-		<button id = "button_send" type = "button" >
+		<button id = "button_send1" type = "button" >
 			Test Send Message Servlet
-		</button>
+		</button> -->
 		
 		<div>
 			<p>MessageOne</p>

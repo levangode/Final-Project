@@ -78,14 +78,21 @@ public class MessageRecievedInfo {
 	public String getPreviewHTML(int id){
 		StringBuilder scr = new StringBuilder("");
 		
-		scr.append("<div>");
-			scr.append("<p>");
-				scr.append("" + this.getSenderLogin());
+		String elemID = "div_message_display_" + id;
+		String elemClasses = "message_display";
+		
+		if(getMessageseen()){
+			elemClasses += " message_display_seen";
+		}
+		
+		scr.append("<div id = " + elemID +" class = " + elemClasses + ">");
+			scr.append("<a>");
+				scr.append("from: " + this.getSenderLogin());
 				scr.append("</br>");
-				scr.append("" + this.getMessageSubject(PREVIEW_CHAR_LIMIT_SUBJECT));
+				scr.append("subject: " + this.getMessageSubject(PREVIEW_CHAR_LIMIT_SUBJECT));
 				scr.append("</br>");
 				scr.append("" + this.getMessageText(PREVIEW_CHAR_LIMIT_TEXT));
-			scr.append("</p>");
+			scr.append("</a>");
 		scr.append("</div>");
 		
 		return scr.toString();
