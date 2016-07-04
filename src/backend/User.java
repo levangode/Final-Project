@@ -1,6 +1,9 @@
 package backend;
 
+import DBQuizControllers.QuizInfoController;
 import database.UserController;
+import quizInfoes.QuizInfo;
+import quizInfoes.UserActivity;
 
 public class User {
 	private String name;
@@ -45,6 +48,11 @@ public class User {
 
 	public String getImageURL() {
 		return profile_image_url;
+	}
+	
+	public UserActivity getHighestUserScore(int quiz_id){
+		QuizInfoController c = new QuizInfoController();
+		return c.getUserHighest(login, quiz_id, 1).get(0);
 	}
 	
 	

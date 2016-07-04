@@ -11,12 +11,12 @@
 <title>Quiz Summary</title>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
 <style>
-p{
-	font-size:14px;
-	line-height:1.5;
-	border-style:solid;
-	border-width:1px;
-	border-color:#005A31;
+p {
+	font-size: 14px;
+	line-height: 1.5;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #005A31;
 }
 </style>
 </head>
@@ -88,8 +88,8 @@ p{
 			<div id="bottom" style="overflow: hidden; margin: 20px;">
 				<form action="QuizPage.jsp">
 					<input type="hidden" name="id"
-						value=<%out.print(request.getParameter("id"));%>> <input class="btn"
-						type="submit" value="Take Quiz">
+						value=<%out.print(request.getParameter("id"));%>> <input
+						class="btn" type="submit" value="Take Quiz">
 				</form>
 				<%
 					DBQuizController another = new DBQuizController();
@@ -104,6 +104,15 @@ p{
 					out.write(button);
 					out.write("</form>");
 				%>
+				<%
+					DBQuizController g = new DBQuizController();
+					int user_id = g.getAuthorId(user_login);
+				%>
+				<form action="UserFriendlistPage.jsp">
+					<input type="hidden" name="id" value=<% out.print(user_id); %>>
+					<input type="hidden" name="challenge" value='<% out.print(quiz_id); %>'>
+					<input type="submit" class='btn' value="Challenge Friend">
+				</form>
 			</div>
 		</div>
 	</div>

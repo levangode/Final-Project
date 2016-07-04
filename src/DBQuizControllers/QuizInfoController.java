@@ -166,10 +166,14 @@ public class QuizInfoController {
 
 
 	public ArrayList<UserActivity> getUserActivity(String user_login, int quiz_id) {
+		return getUserHighest(user_login, quiz_id, Constants.LIMIT_OF_SCORES);
+	}
+	
+	public ArrayList<UserActivity> getUserHighest(String user_login, int quiz_id, int limit){
 		ArrayList<UserActivity> act = new ArrayList<UserActivity>();
 		int user_id = getAuthorID(user_login);
 		String order = "Select time_finished, time_taken, score from Quiz_taken where user_id = " + user_id
-				+ " AND quiz_id = " + quiz_id + " order by time_finished DESC limit "+Constants.LIMIT_OF_SCORES;
+				+ " AND quiz_id = " + quiz_id + " order by time_finished DESC limit "+limit;
 		PreparedStatement stm = null;
 		try {
 			stm = connection.prepareStatement(order);

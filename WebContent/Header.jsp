@@ -2,20 +2,7 @@
 <%@page import="database.*"%>
 <%@page import="backend.User"%>
 
-<style>
-div.notif {
-	width: 18px;
-	height: 18px;
-	font-size: 15px;
-	text-align: center;
-	font-color: red;
-	position: absolute; 
-	top: 8 px; 
-	left: 10 px;
-	right:70px;
-	border: 1px solid;
-}
-</style>
+
 
 <div id="top" style="text-align: center; height: 154; min-width: 1024;">
 	<div

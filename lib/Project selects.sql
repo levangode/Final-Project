@@ -141,6 +141,17 @@ create table Messages(
 	foreign key (recipient_id) references Users(user_id)
 
 )
+
+create table Challenges (
+	from_user int not null,
+        to_user int not null,
+        quiz_id int not null,
+        seen boolean default false,
+        
+        foreign key(quiz_id) references Quizzes(quiz_id),
+  	foreign key(to_user) references Users(user_id),
+        foreign key(from_user) references Users(user_id)
+);
 -- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 -- xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
