@@ -345,4 +345,28 @@ public class DBMessage {
 		
 		return messageInfo;
 	}
+	
+	public boolean setMessageSeen(int message_id){
+		connection = new DBconnector().getConnection();
+		
+		String query = "update messages set message_seen = 1 where message_id = "
+				+ message_id
+				+ ";";
+		
+		PreparedStatement stm;
+		
+		try {
+			stm = connection.prepareStatement(query);
+			
+			stm.executeUpdate();
+			
+			connection.close();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
 }

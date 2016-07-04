@@ -29,12 +29,31 @@
 	    	}
 		);
 	}
+	
+	function messageSeen(id){
+		//alert("in function sendReq " + param);
+		$.get(
+		    "MessageSeen",
+		    {message_id : id, paramOne : 1, paramX : 'abc'},
+		    function(data) {
+		       alert('page content: ' + data);
+	    	}
+		);
+	}
 
 	$(document).ready(function(){
 	    $("#button_change").click(function(){
 	    	var param = $(this).attr("id");
 	    	//alert(param);
 	        sendRequest(param);
+	    });
+	});
+	
+	$(document).ready(function(){
+	    $("#button_seen").click(function(){
+	    	//var param = $(this).attr("id");
+	    	//alert(param);
+	        messageSeen(1);
 	    });
 	});
 
@@ -111,7 +130,11 @@
 				out.print(recievedMessages.get(i).getPreviewHTML(i+1));
 			}
 		%>
-	
+		
+		<button id = "button_seen" type = "button" >
+			Test Seen Servlet
+		</button>
+		
 		<div>
 			<p>MessageOne</p>
 			

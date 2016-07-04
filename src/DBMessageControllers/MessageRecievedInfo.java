@@ -73,7 +73,7 @@ public class MessageRecievedInfo {
 	}
 	
 	private final int PREVIEW_CHAR_LIMIT_TEXT = 100;
-	private final int PREVIEW_CHAR_LIMIT_SUBJECT = 50;
+	private final int PREVIEW_CHAR_LIMIT_SUBJECT = 30;
 	
 	public String getPreviewHTML(int id){
 		StringBuilder scr = new StringBuilder("");
