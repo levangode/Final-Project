@@ -305,7 +305,7 @@
 	      	</br>
 	      	<textarea id = "input_message_text">
 	      		
-	      	</textarea> 
+	      	</textarea>
 	    </div>
 	    <div class="modal-footer rounded-bottom">
 	      <button id = "button_send"> Send </button>
