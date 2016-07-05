@@ -1,3 +1,4 @@
+<%@page import="DBMessageControllers.MessageSentInfo"%>
 <%@page import="DBMessageControllers.MessageRecievedInfo"%>
 <%@page import="DBMessageControllers.DBMessage"%>
 <%@page import="DBMessageControllers.MessageInfo"%>
@@ -97,6 +98,30 @@
 	});
 	
 	$(document).ready(function(){
+	    $(".message_display").click(function(){
+	    	//var param = $(this).attr("id");
+	    	//alert(param);
+	//        alert($(this).data('value'));
+	        $(this).addClass('message_display_seen');
+	        
+	    	messageSeen($(this).data('value'));
+	        //sendMessage();
+	    });
+	});
+
+	$(document).ready(function(){
+	    $(".views").click(function(){
+	    	//var param = $(this).attr("id");
+	    	//alert(param);
+	        alert($(this).attr('id'));
+	        //$(this).addClass('message_display_seen');
+	        
+	    	//messageSeen($(this).data('value'));
+	        //sendMessage();
+	    });
+	});
+	
+	$(document).ready(function(){
 	    $("#button_send").click(function(){
 	    	sendMessage();
 	    	$('#myModal').hide();
@@ -150,9 +175,29 @@
 </script>
 
 <style type="text/css">
+	p.views{
+		background-color: red;
+		cursor: pointer;
+		
+		margin-left: 5px;
+		margin-right: 5px;
+	}
+	
+	#messages_sent{
+		display: none;
+	}
+	
+	#messages_recieved{
+	}
+
+	.message_display_seen{
+		background: cyan;
+	}
+
 	.message_display{
 		border: groove;
 		padding: 5px;
+		cursor: pointer;
 	}
 
 	.user_input_check{
@@ -187,7 +232,7 @@
 	
 	#views_list_frame{
 		float: left;
-		width: 80px;
+		width: 100px;
 		
 		background: silver;
 	}
@@ -351,51 +396,71 @@
 
 	<div id="views_list_frame">
 		Views
+		<p id = "view_inbox" class = "views">
+			Inbox
+		</p>
+		
+		<p id = "view_sent" class = "views">
+			Sent
+		</p>
 		
 	</div>
 
 	<div id="message_list_frame">
-		Messages
+		<div id="messages_recieved">
+			Messages Received
+	
+			<%
+				String userName = (String)session.getAttribute("user_name");
+				
+				out.print("<script>" + "setUserName('" + userName + "');"+ "</script>");
+				
+				UserController dbu = new UserController();
+				
+				int userID = dbu.getUserIDByLogin(userName);
+				
+				DBMessage dbm = new DBMessage();
+				
+				List<MessageRecievedInfo> recievedMessages = dbm.getRecievedMessagesInfo(userID);
+				
+				for(int i=0; i<recievedMessages.size(); i++){
+					out.print(recievedMessages.get(i).getPreviewHTML(i+1));
+				}
+			%>
+			
+			<!-- <button id = "button_seen" type = "button" >
+				Test Seen Servlet
+			</button>
+	
+			<button id = "button_send1" type = "button" >
+				Test Send Message Servlet
+			</button> -->
 
-		<%
-			String userName = (String)session.getAttribute("user_name");
-			
-			out.print("<script>" + "setUserName('" + userName + "');"+ "</script>");
-			
-			UserController dbu = new UserController();
-			
-			int userID = dbu.getUserIDByLogin(userName);
-			
-			DBMessage dbm = new DBMessage();
-			
-			List<MessageRecievedInfo> recievedMessages = dbm.getRecievedMessagesInfo(userID);
-			
-			for(int i=0; i<recievedMessages.size(); i++){
-				out.print(recievedMessages.get(i).getPreviewHTML(i+1));
-			}
-		%>
+		</div>
 		
-		<!-- <button id = "button_seen" type = "button" >
-			Test Seen Servlet
-		</button>
-
-		<button id = "button_send1" type = "button" >
-			Test Send Message Servlet
-		</button> -->
-		
-		<div>
-			<p>MessageOne</p>
+		<div id = "messages_sent">
+			Messages Sent
+			
+			<%
+				//String userName = (String)session.getAttribute("user_name");
+				
+				//out.print("<script>" + "setUserName('" + userName + "');"+ "</script>");
+				
+				UserController dbu1 = new UserController();
+				
+				int userID1 = dbu1.getUserIDByLogin(userName);
+				
+				DBMessage dbm1 = new DBMessage();
+				
+				List<MessageSentInfo> sentMessages = dbm1.getSentMessagesInfo(userID);
+				
+				for(int i=0; i<sentMessages.size(); i++){
+					out.print(sentMessages.get(i).getPreviewHTML(i+1));
+				}
+			%>
 			
 		</div>
-
-		<div>
-			<p>MessageTwo</p>
-		</div>
-
-		<div>
-			<p>MessageThree</p>
-		</div>
-
+		
 	</div>
 
 

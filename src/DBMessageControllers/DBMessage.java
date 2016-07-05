@@ -391,6 +391,49 @@ public class DBMessage {
 		
 		return messageInfo;
 	}
+
+	
+	public List<MessageSentInfo> getSentMessagesInfo(int recipient_id){
+		connection = new DBconnector().getConnection();
+		
+		List<MessageSentInfo> messageInfo = new ArrayList<MessageSentInfo>();
+		
+		String query = "select m.message_id, m.`message_text`, m.message_subject, m.message_seen, m.date_sent, send.user_login, send.user_name "
+					+ " from messages m, users send where "
+					+ " m.sender_id = " + 1
+					+ " and m.recipient_id = send.user_id; ";
+		
+		PreparedStatement stm;
+		
+		System.out.println(query);
+		
+		try {
+			stm = connection.prepareStatement(query);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while (rs.next()){
+				int messageID = rs.getInt("message_id");
+				String messageText = rs.getString("message_text");
+				String messageSubject = rs.getString("message_subject");
+				boolean messageSeen = rs.getBoolean("message_seen");
+				Timestamp dateSent = rs.getTimestamp("date_sent");
+				String senderName = rs.getString("user_name");
+				String senderLogin = rs.getString("user_login");
+				
+				messageInfo.add(new MessageSentInfo(senderLogin, senderName, messageText, messageSubject, messageID, messageSeen, dateSent));
+				
+			}
+			
+			connection.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return messageInfo;
+	}
 	
 	public boolean setMessageSeen(int message_id){
 		connection = new DBconnector().getConnection();

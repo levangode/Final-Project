@@ -2,7 +2,7 @@ package DBMessageControllers;
 
 import java.sql.Timestamp;
 
-public class MessageRecievedInfo {
+public class MessageSentInfo {
 	String userLogin;
 	String userName;
 	
@@ -14,7 +14,7 @@ public class MessageRecievedInfo {
 	
 	Timestamp dateSent;
 	
-	public MessageRecievedInfo(String userLogin, String userName, String messageText, String messageSubject, int messageID, boolean messageSeen, Timestamp dateSent){
+	public MessageSentInfo(String userLogin, String userName, String messageText, String messageSubject, int messageID, boolean messageSeen, Timestamp dateSent){
 		this.userLogin = userLogin;
 		this.userName = userName;
 		this.messageText = messageText;
@@ -78,14 +78,14 @@ public class MessageRecievedInfo {
 	public String getPreviewHTML(int id){
 		StringBuilder scr = new StringBuilder("");
 		
-		String elemID = "div_message_recieved_display_" + id;
+		String elemID = "div_message_sent_display_" + id;
 		String elemClasses = "message_display";
 		
 		if(getMessageseen()){
 			elemClasses += " message_display_seen";
 		}
 		
-		scr.append("<div id = '" + elemID +"' class = '" + elemClasses + "' data-value = " + messageID + ">");
+		scr.append("<div id = '" + elemID +"' class = '" + elemClasses + "'>");
 			scr.append("<a>");
 				scr.append("from: " + this.getSenderLogin());
 				scr.append("</br>");
