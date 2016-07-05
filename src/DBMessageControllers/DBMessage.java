@@ -8,6 +8,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.Query;
+
 import answers.Answer;
 import backend.Message;
 import backend.User;
@@ -22,6 +24,24 @@ public class DBMessage {
 	
 	public DBMessage(){
 		
+	}
+	
+	public int getNumUnread(String login){
+		
+		connection = new DBconnector().getConnection();
+		
+		UserController dbu = new UserController();
+		
+		int user_id = dbu.getUserIDByLogin(login);
+		
+		String query = "select count(*) from messages where sender_id = "
+				+ user_id
+				+ "and" 
+				+ "seen = 0";
+
+		System.out.println(query);
+		
+		return 7;
 	}
 	
 	public boolean sendMessage(SendMessageInfo mes){
