@@ -45,6 +45,9 @@ public class MultipleChoiceQuestion extends Question {
 //		correct = 2;
 //		rest = 3;
 		
+		System.out.println(correct);
+		System.out.println(rest);
+		
 
 		//System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + total);
 		
@@ -57,11 +60,13 @@ public class MultipleChoiceQuestion extends Question {
 				if (correct > 0) {
 					correct--;
 					res.add(ans);
+					System.out.println("cor");
 				}
 			} else {
 				if (rest > 0) {
 					rest--;
 					res.add(ans);
+					System.out.println("wrong");
 				}
 			}
 		}
