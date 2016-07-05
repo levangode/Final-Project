@@ -116,6 +116,7 @@ public class MultipleChoiceQuestion extends Question {
 				return 0;
 			}
 		}
+		if(getNumanswerscorrect()==0)return 0;
 		return (counter / (double) getNumanswerscorrect()) * getQuestionscore();
 	}
 

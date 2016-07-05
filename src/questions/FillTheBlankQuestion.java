@@ -49,7 +49,8 @@ public class FillTheBlankQuestion extends Question {
 					counter++;
 			}
 		}
-
+		if (answers.size() == 0)
+			return 0;
 		return (counter / (double) answers.size()) * getQuestionscore();
 	}
 

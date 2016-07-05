@@ -74,6 +74,7 @@ public class QuestionWithMultipleAnswers extends Question {
 				}
 			}
 		}
+		if(getNumanswers()==0)return 0;
 		return (counter / (double) getNumanswers()) * getQuestionscore();
 	}
 
