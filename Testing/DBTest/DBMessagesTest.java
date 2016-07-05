@@ -63,7 +63,7 @@ public class DBMessagesTest {
 	}
 	
 //	@Test
-	public void DMMessageInfoTest1(){
+	public void DBMessageInfoTest1(){
 		System.out.println("TestINFO2");
 		
 		DBMessage dbm = new DBMessage();
