@@ -46,7 +46,7 @@ public class QuizDetailedInfo extends QuizInfo implements DrawableInfo {
 			out.write("Times Taken: " + getTimes_taken() + "<br>");
 			out.write("<p class=\"para\" style=\"left:0; bottom:0;\">Likes: " + getQuiz_likes() + "</p>");
 			out.write(
-					"<a class=\"btn\" style=\"position: absolute; right:0; bottom:0; padding:5px;\" href=\"QuizSummaryPage.jsp?id="
+					"<a class=\"btn\" style=\"position: absolute; right:7; bottom:7; padding:5px; color:white;\" href=\"QuizSummaryPage.jsp?id="
 							+ getQuiz_id() + "\">Check It Out</a>");
 			out.write("</div>");
 		} catch (Exception e) {
