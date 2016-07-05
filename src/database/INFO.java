@@ -8,9 +8,9 @@ public class INFO {
 //	public static final String MYSQL_DATABASE_NAME = "sql8123237";
 
 	public static final String MYSQL_USERNAME = "root";
-	public static final String MYSQL_PASSWORD = "12123321";
-	public static final String MYSQL_DATABASE_SERVER = "jdbc:mysql://localhost:3306";
-	public static final String MYSQL_DATABASE_NAME = "homework";
+	public static final String MYSQL_PASSWORD = "2256";
+	public static final String MYSQL_DATABASE_SERVER = "jdbc:mysql://109.172.145.203:3306";
+	public static final String MYSQL_DATABASE_NAME = "oop";
 
 	/*
 	 * public static final String MYSQL_USERNAME = "root"; public static final
