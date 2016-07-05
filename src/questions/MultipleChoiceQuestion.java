@@ -41,21 +41,20 @@ public class MultipleChoiceQuestion extends Question {
 
 		int correct = answers_to_be_correct;
 		int rest = answers_to_show - correct;
-				
-//		correct = 2;
-//		rest = 3;
-		
+
+		// correct = 2;
+		// rest = 3;
+
 		System.out.println(correct);
 		System.out.println(rest);
-		
 
-		//System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + total);
-		
+		// System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + total);
+
 		for (Answer ans : tmp) {
 			if (correct == 0 && rest == 0) {
 				break;
 			}
-			
+
 			if (((MultipleChoiceAnswer) ans).isCorrect()) {
 				if (correct > 0) {
 					correct--;
@@ -86,7 +85,7 @@ public class MultipleChoiceQuestion extends Question {
 	public String getQuestionHtml(int id) {
 		String html = "";
 		html += "<div id='question-" + id + "'>" + "<p>" + getQuestiontext() + "</p> ";
-//		ArrayList<Answer> answers = getAnswers();
+		// ArrayList<Answer> answers = getAnswers();
 		ArrayList<Answer> answers = getFormattedAnswers();
 		html += "<ul>";
 		for (int i = 0; i < answers.size(); i++) {
@@ -94,7 +93,7 @@ public class MultipleChoiceQuestion extends Question {
 			html += ans.getHtml(id, i);
 		}
 		html += "</ul>";
-		if (getQuestiondescription() != null) {
+		if (!getQuestiondescription().equals("")) {
 			html += "<br><img src='" + getQuestiondescription() + "' alt='Question Image' height='100' width='100'>";
 		}
 		html += "</div>";
@@ -116,7 +115,8 @@ public class MultipleChoiceQuestion extends Question {
 				return 0;
 			}
 		}
-		if(getNumanswerscorrect()==0)return 0;
+		if (getNumanswerscorrect() == 0)
+			return 0;
 		return (counter / (double) getNumanswerscorrect()) * getQuestionscore();
 	}
 

@@ -30,7 +30,7 @@ public class FillTheBlankQuestion extends Question {
 			questionTxt = questionTxt.replaceFirst("____", inputStr);
 		}
 		html = questionTxt;
-		if (getQuestiondescription() != null) {
+		if (!getQuestiondescription().equals("")){
 			html += "<br><img src='" + getQuestiondescription() + "' alt='Question Image' height='100' width='100'>";
 		}
 		System.out.println("Generated HTML: " + html);

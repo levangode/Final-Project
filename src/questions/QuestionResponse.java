@@ -23,7 +23,7 @@ public class QuestionResponse extends Question {
 		html += "<div id='question-" + id + "'>" + "<p>" + getQuestiontext() + "</p> ";
 		html += "<input type='text' name='q" + id + "' id='q" + id + "'><br/>";
 
-		if (getQuestiondescription() != null) {
+		if (!getQuestiondescription().equals("")) {
 			html += "<br><img src='" + getQuestiondescription() + "' alt='Question Image' height='200' width='200'>";
 		}
 		html += "</div>";

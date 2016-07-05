@@ -45,7 +45,7 @@ public class QuestionWithMultipleAnswers extends Question {
 		for (int i = 0; i < getNumanswers(); i++) {
 			html += "<input type='text' name='q" + id + "-" + i + "' id='q" + id + "-" + i + "'><br/>";
 		}
-		if (getQuestiondescription() != null) {
+		if (!getQuestiondescription().equals("")) {
 			html += "<br><img src='" + getQuestiondescription() + "' alt='Question Image' height='100' width='100'>";
 		}
 		html += "</div>";
@@ -74,7 +74,8 @@ public class QuestionWithMultipleAnswers extends Question {
 				}
 			}
 		}
-		if(getNumanswers()==0)return 0;
+		if (getNumanswers() == 0)
+			return 0;
 		return (counter / (double) getNumanswers()) * getQuestionscore();
 	}
 
