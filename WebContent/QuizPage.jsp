@@ -54,7 +54,15 @@
 	
 	function setNumQuestions(num) {
 		numQuestion = num;
-		//alert("question number set to " + num);
+		
+	}
+	
+	function hideSwitchButtons(){
+		$('#div_buttons').hide();
+	}
+
+	function showSwitchButtons(){
+		$('#div_buttons').show();
 	}
 	
 	const DISPLAY_MODE_SINGLE_PAGE = 1;
@@ -64,9 +72,13 @@
 		switch (display_mode){
 		case DISPLAY_MODE_SINGLE_PAGE:
 			showQuestions();
+			alert("single 1");
+			hideSwitchButtons();
 			break;
 		case DISPLAY_MODE_MULTIPLE_PAGE:
 			hideQuestions();
+			alert("mult 1");
+			showSwitchButtons();
 			break;
 		}
 	}
@@ -159,6 +171,14 @@ body {
 				<button type="button" id="but_next" class="next_prev_buttons">next</button>
 				<button type="button" id="but_prev" class="next_prev_buttons">previous</button>
 			</div>
+			
+			<%
+				if (quiz.isDisplayMultiplePages()){
+					out.print("<script> setDisplayMode(DISPLAY_MODE_MULTIPLE_PAGE); </script>");
+				} else {
+					out.print("<script> setDisplayMode(DISPLAY_MODE_SINGLE_PAGE); </script>");
+				}
+			%>
 
 			<input type="hidden" name="id"
 				value=<%out.write(request.getParameter("id"));%>> <input
