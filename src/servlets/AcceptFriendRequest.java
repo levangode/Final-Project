@@ -43,6 +43,8 @@ public class AcceptFriendRequest extends HttpServlet {
 			throws ServletException, IOException {
 
 		int friendId = Integer.parseInt(request.getParameter("fid"));
+		
+		
 		DBFriendController dbf = new DBFriendController();
 		DBFriendController dbf2 = new DBFriendController();
 		String login = (String) request.getSession().getAttribute("user_name");
