@@ -109,9 +109,10 @@ p {
 					int user_id = g.getAuthorId(user_login);
 				%>
 				<form action="UserFriendlistPage.jsp">
-					<input type="hidden" name="id" value=<% out.print(user_id); %>>
-					<input type="hidden" name="challenge" value='<% out.print(quiz_id); %>'>
-					<input type="submit" class='btn' value="Challenge Friend">
+					<input type="hidden" name="id" value=<%out.print(user_id);%>>
+					<input type="hidden" name="challenge"
+						value='<%out.print(quiz_id);%>'> <input type="submit"
+						class='btn' value="Challenge Friend">
 				</form>
 			</div>
 		</div>

@@ -88,7 +88,6 @@ public class DBQuizController {
 		}
 		return result;
 	}
-	
 
 	public int getAuthorId(String author) {
 		int result = 0;
@@ -161,8 +160,8 @@ public class DBQuizController {
 
 	private int getMaxScore(Quiz quiz) {
 		int counter = 0;
-		for(Question q: quiz.getQuestions()){
-			counter+=q.getQuestionscore();
+		for (Question q : quiz.getQuestions()) {
+			counter += q.getQuestionscore();
 		}
 		return counter;
 	}
@@ -263,10 +262,11 @@ public class DBQuizController {
 		questions.addAll(multipleAnswersQuestions);
 
 		Collections.sort(questions);
-		
+
 		return questions;
 	}
-	public void incrementTimesTaken(int quiz_id){
+
+	public void incrementTimesTaken(int quiz_id) {
 		String order1 = "select times_taken from Quizzes where quiz_id = " + quiz_id + " FOR UPDATE;";
 		String order2 = "update Quizzes set times_taken = times_taken + 1 where quiz_id = " + quiz_id + ";";
 		String order3 = "commit;";
@@ -290,6 +290,7 @@ public class DBQuizController {
 			}
 		}
 	}
+
 	private void incrementLikes(int quiz_id) {
 		String order1 = "select quiz_likes from Quizzes where quiz_id = " + quiz_id + " FOR UPDATE;";
 		String order2 = "update Quizzes set quiz_likes = quiz_likes + 1 where quiz_id = " + quiz_id + ";";
@@ -308,9 +309,10 @@ public class DBQuizController {
 			e.printStackTrace();
 		}
 	}
-	public void addLike(String user_login, int quiz_id){
+
+	public void addLike(String user_login, int quiz_id) {
 		int user_id = getAuthorId(user_login);
-		String order = "INSERT INTO `Likes`(`user_id`, `quiz_id`) VALUES ("+user_id+","+quiz_id+")";
+		String order = "INSERT INTO `Likes`(`user_id`, `quiz_id`) VALUES (" + user_id + "," + quiz_id + ")";
 		PreparedStatement stm = null;
 		try {
 			stm = connection.prepareStatement(order);
@@ -327,20 +329,21 @@ public class DBQuizController {
 			}
 		}
 	}
-	public boolean canLike(String user_login, int quiz_id){
+
+	public boolean canLike(String user_login, int quiz_id) {
 		int user_id = getAuthorId(user_login);
-		String order = "select count(*) as count from Likes where quiz_id = "+quiz_id+" AND user_id = "+user_id;
+		this.connection=new DBconnector().getConnection();
+		String order = "select count(*) as count from Likes where quiz_id = " + quiz_id + " AND user_id = " + user_id;
 		int count = 0;
 		PreparedStatement stm = null;
 		ResultSet myResultSet = null;
 		try {
 			stm = connection.prepareStatement(order);
 			myResultSet = stm.executeQuery();
-			while(myResultSet.next()){
-				count=myResultSet.getInt("count");
+			while (myResultSet.next()) {
+				count = myResultSet.getInt("count");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
@@ -349,12 +352,13 @@ public class DBQuizController {
 				e.printStackTrace();
 			}
 		}
-		if(count > 0){
+		if (count > 0) {
 			return false;
-		} return true;
+		}
+		return true;
 	}
-	
-	public ArrayList<String> getQuizDifficulties(){
+
+	public ArrayList<String> getQuizDifficulties() {
 		ArrayList<String> result = new ArrayList<String>();
 		String order = "Select quiz_difficulty from Quiz_Difficulties";
 		PreparedStatement stm = null;
@@ -362,12 +366,12 @@ public class DBQuizController {
 		try {
 			stm = connection.prepareStatement(order);
 			myResultSet = stm.executeQuery();
-			while(myResultSet.next()){
+			while (myResultSet.next()) {
 				result.add(myResultSet.getString("quiz_difficulty"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		return result;
 	}
 }

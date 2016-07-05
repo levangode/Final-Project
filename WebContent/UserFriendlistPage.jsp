@@ -63,26 +63,27 @@ div.left {
 					String name = friend.getName();
 					String link = "<h3><a href='UserPage.jsp?id=" + friendsId + "'>" + login + "</a></h3>";
 					if (request.getParameter("challenge") != null) {
-						link = "<form id='myform' action='SendChallenge' method='post'>"
+						link = "<form id='myform"+i+"' action='SendChallenge' method='post'>"
 								+ "<input type='hidden' name='sender' value='" + id + "'>"
 								+ "<input type='hidden' name='receiver' value='" + friendsId + "'>"
 								+ "<input type='hidden' name='quiz' value='" + request.getParameter("challenge") + "'>"
-								+ "<h3><a href=\"#\" onclick=\"document.getElementById('myform').submit()\">"
+								+ "<h3><a href=\"#\" onclick=\"document.getElementById('myform"+i+"').submit()\">"
 								+ login + "</a><h3>";
-					}
-					out.print("<li> <img border='0' alt='FriendImage' src='" + url + "' width='100' height='100'>" + link);
+					} 
+					out.print("<li> <img border='0' alt='FriendImage' src='" + url + "' width='100' height='100'>" + link );
+					
 					if (name != null) {
 						out.print("<p>" + name + "</p>");
 					}
-					out.print("</li>");
+					out.print("</form></li>");
 				}
 			%>
-
-			<div class="center">
+			
+		</ul>
+		<div class="center">
 				<a class="btn" href="UserPage.jsp?id=<%out.print(id);%>"> Return
 					To User Page </a>
 			</div>
-		</ul>
 	</div>
 </body>
 </html>
