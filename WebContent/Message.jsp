@@ -1,7 +1,4 @@
-<%@page import="DBMessageControllers.MessageSentInfo"%>
-<%@page import="DBMessageControllers.MessageRecievedInfo"%>
-<%@page import="DBMessageControllers.DBMessage"%>
-<%@page import="DBMessageControllers.MessageInfo"%>
+<%@page import="DBMessageControllers.*"%>
 <%@page import="backend.Message"%>
 <%@page import="java.util.List"%>
 <%@page import="database.UserController"%>
