@@ -66,7 +66,7 @@ public class QuestionHTMLRetriever {
 		int question_number=0;
 		try {
 			question_score = Integer.parseInt(request.getParameter("score"));
-			answers_to_show = Integer.parseInt(request.getParameter("questionsToShow"));
+			answers_to_show = Integer.parseInt(request.getParameter("answersToShow"));
 			answers_to_be_correct = Integer.parseInt(request.getParameter("correctNeeded"));
 			question_number = Integer.parseInt(request.getParameter("questionNum"));
 		} catch (Exception e) {
