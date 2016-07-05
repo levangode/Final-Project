@@ -1,5 +1,7 @@
 package database;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.List;
 
 public class DBFriendController {
 
-	private java.sql.Connection con;
+	private Connection con;
 
 	public DBFriendController() {
 		con = new DBconnector().getConnection();
@@ -18,7 +20,7 @@ public class DBFriendController {
 
 		String query = "select `to` from Friends where `from` = " + ID + ";";
 
-		java.sql.PreparedStatement stm;
+		PreparedStatement stm;
 
 		try {
 			stm = con.prepareStatement(query);
@@ -28,14 +30,16 @@ public class DBFriendController {
 				Integer friendID = rs.getInt(1);
 				friends.add(friendID);
 			}
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-
 		return friends;
 	}
 
@@ -44,7 +48,7 @@ public class DBFriendController {
 
 		String query = "select user_login from Users, Friends where `from` = " + ID + " and `from` = user_id";
 
-		java.sql.PreparedStatement stm;
+		PreparedStatement stm;
 
 		try {
 			stm = con.prepareStatement(query);
@@ -59,7 +63,11 @@ public class DBFriendController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return friends;
@@ -73,7 +81,7 @@ public class DBFriendController {
 		String query1 = "insert into Friends(`from`, `to`) values (" + user1ID + ", " + user2ID + " );";
 		String query2 = "insert into Friends(`from`, `to`) values (" + user2ID + ", " + user1ID + " );";
 
-		java.sql.PreparedStatement stm;
+		PreparedStatement stm;
 
 		try {
 			stm = con.prepareStatement(query1);
@@ -87,7 +95,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return true;
@@ -99,7 +111,7 @@ public class DBFriendController {
 		}
 
 		String query = "insert into FriendshipRequests(`from`, `to`) values (?,?);";
-		java.sql.PreparedStatement stm;
+		PreparedStatement stm;
 
 		try {
 			stm = con.prepareStatement(query);
@@ -111,7 +123,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return true;
 	}
@@ -119,8 +135,7 @@ public class DBFriendController {
 	public ArrayList<Integer> getFriendRequests(int id) {
 		ArrayList<Integer> list = new ArrayList<>();
 		String query = "Select `from` from FriendshipRequests where `to` =" + id;
-		java.sql.PreparedStatement stm;
-		System.out.println("database friendRequests");
+		PreparedStatement stm;
 		try {
 			stm = con.prepareStatement(query);
 			ResultSet res = stm.executeQuery();
@@ -133,6 +148,12 @@ public class DBFriendController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
+		} finally {
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}

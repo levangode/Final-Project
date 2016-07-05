@@ -59,9 +59,14 @@ public class QuizInfoController {
 				result.add(QuizInfoFactory.getDetailedInfo(quiz_name, times_taken, quiz_author, quiz_date, quiz_id,
 						quiz_category, quiz_description, quiz_likes));
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -82,9 +87,14 @@ public class QuizInfoController {
 				int times_taken = res.getInt("times_taken");
 				result.add(QuizInfoFactory.getQuizInfo(quiz_name, times_taken, quiz_author, quiz_date, quiz_id));
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -106,9 +116,14 @@ public class QuizInfoController {
 				int times_taken = res.getInt("times_taken");
 				result.add(QuizInfoFactory.getQuizInfo(quiz_name, times_taken, quiz_author, quiz_date, quiz_id));
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -125,7 +140,7 @@ public class QuizInfoController {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		} 
 		return id;
 	}
 	
@@ -156,10 +171,15 @@ public class QuizInfoController {
 						quiz_category, quiz_description, quiz_likes));
 			}
 			
-			connection.close();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -184,9 +204,14 @@ public class QuizInfoController {
 				double score = res.getDouble("score");
 				act.add(QuizInfoFactory.getUserActivity(time_finished, time_taken, score, user_login));
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return act;
 	}
@@ -214,9 +239,14 @@ public class QuizInfoController {
 				String user_login = res.getString("user_login");
 				act.add(QuizInfoFactory.getHighScore(score, user_login));
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return act;
 	}
@@ -246,9 +276,14 @@ public class QuizInfoController {
 				summary = QuizInfoFactory.getFullSummary(quiz_name, times_taken, user_login, quiz_score, date_created, quiz_id,
 						quiz_category, quiz_description, quiz_likes, quiz_difficulty, immediate_correction, time_limit);
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return summary;
 	}
@@ -266,9 +301,14 @@ public class QuizInfoController {
 				double avgScore = res.getDouble("average");
 				statist=QuizInfoFactory.getStatistics(count, avgScore);
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return statist;
 		
@@ -290,9 +330,14 @@ public class QuizInfoController {
 				int times_taken = res.getInt("times_taken");
 				result.add(QuizInfoFactory.getQuizInfo(quiz_name, times_taken, quiz_author, quiz_date, quiz_id));
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -317,11 +362,16 @@ public class QuizInfoController {
 				quizes.add(tmpQuiz);
 			}
 
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-
+ 
 		return quizes;
 	}
 

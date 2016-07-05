@@ -38,9 +38,14 @@ public class UserController {
 
 				thisUser = new User(user_name, user_login, user_profile_image);
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return thisUser;
@@ -69,9 +74,14 @@ public class UserController {
 				thisUser = new User(user_name, user_login, user_profile_image);
 			}
 
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return thisUser;
@@ -97,10 +107,15 @@ public class UserController {
 				User tmp = new User(rs.getString(1), rs.getString(3), rs.getString(4));
 				users.add(tmp);
 			}
-			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return users;
@@ -113,9 +128,14 @@ public class UserController {
 		try {
 			stm = connection.prepareStatement(order);
 			stm.executeUpdate();
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -128,9 +148,14 @@ public class UserController {
 			stm = connection.prepareStatement(order);
 			System.out.println(stm);
 			stm.executeUpdate();
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -150,9 +175,7 @@ public class UserController {
 			count = myRes.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			
-		}
+		} 
 		if (count == 0)
 			return false;
 		return true;
@@ -169,9 +192,14 @@ public class UserController {
 		}
 		try {
 			stm.executeUpdate();
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -184,16 +212,20 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("ait");
 		ResultSet myRes = null;
 		try {
 			myRes = stm.executeQuery();
 			myRes.next();
 			if (user_password.equals(myRes.getString(1)))
 				result = true;
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -202,24 +234,26 @@ public class UserController {
 
 		int user_id = -1;
 
-
 		String query = "select user_id from Users where user_login = " + "'" + login + "'" + ";";
 
 		PreparedStatement stm = null;
 
-
 		try {
 			stm = connection.prepareStatement(query);
-			System.out.println("ait");
 			ResultSet rs = stm.executeQuery(query);
 
 			while (rs.next()) {
 				user_id = rs.getInt(1);
 			}
 
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return user_id;
@@ -228,7 +262,7 @@ public class UserController {
 	public int getUserQuizCount(int user_id) {
 		int result = 0;
 
-		String order = "select count(*) from Quizzes where author_id = "+user_id;
+		String order = "select count(*) from Quizzes where author_id = " + user_id;
 		PreparedStatement stm = null;
 
 		try {
@@ -239,9 +273,14 @@ public class UserController {
 				result = rs.getInt(1);
 			}
 
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}

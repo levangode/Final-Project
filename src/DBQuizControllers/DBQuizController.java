@@ -39,9 +39,14 @@ public class DBQuizController {
 			while (res.next()) {
 				result.add(res.getString(1));
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -56,9 +61,14 @@ public class DBQuizController {
 			while (res.next()) {
 				result.add(res.getString(1));
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -92,6 +102,12 @@ public class DBQuizController {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -128,12 +144,17 @@ public class DBQuizController {
 				cur.addToDatabase(id);
 			}
 
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("Error Adding Questions");
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return id;
 	}
@@ -168,9 +189,14 @@ public class DBQuizController {
 						res.getBoolean(9), res.getBoolean(10), res.getBoolean(11), res.getInt(13));
 			}
 
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return tmpQuiz;
@@ -200,9 +226,14 @@ public class DBQuizController {
 				quizes.add(tmpQuiz);
 			}
 
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return quizes;
@@ -249,9 +280,14 @@ public class DBQuizController {
 			stm1.executeQuery();
 			stm2.executeUpdate();
 			stm3.executeQuery();
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	private void incrementLikes(int quiz_id) {
@@ -280,10 +316,15 @@ public class DBQuizController {
 			stm = connection.prepareStatement(order);
 			stm.executeUpdate();
 			incrementLikes(quiz_id);
-			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	public boolean canLike(String user_login, int quiz_id){
@@ -298,10 +339,15 @@ public class DBQuizController {
 			while(myResultSet.next()){
 				count=myResultSet.getInt("count");
 			}
-			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		if(count > 0){
 			return false;
@@ -321,7 +367,7 @@ public class DBQuizController {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		} 
 		return result;
 	}
 }

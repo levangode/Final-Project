@@ -44,11 +44,16 @@ public class DBMessage {
 			
 			stm.executeUpdate();
 			
-			connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return true;
@@ -76,11 +81,16 @@ public class DBMessage {
 			stm = connection.prepareStatement(query);
 			stm.executeUpdate();
 						
-			connection.close();
 			
 		} catch (SQLException e) {
 			System.out.println("Error occured durin database connection!");
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
@@ -154,10 +164,15 @@ public class DBMessage {
 				messages.add(m);
 			}
 			
-			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return messages;
@@ -205,10 +220,15 @@ public class DBMessage {
 				messages.add(m);
 			}
 			
-			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return messages;
@@ -257,10 +277,15 @@ public class DBMessage {
 				message = m;
 			}
 			
-			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return message;
@@ -299,10 +324,15 @@ public class DBMessage {
 				message = m;
 			}
 			
-			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return message;
@@ -341,12 +371,17 @@ public class DBMessage {
 				message = m;
 			}
 			
-			connection.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-		
+		 
 		return message;
 	}
 	
@@ -382,11 +417,16 @@ public class DBMessage {
 				
 			}
 			
-			connection.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return messageInfo;
@@ -449,11 +489,16 @@ public class DBMessage {
 			
 			stm.executeUpdate();
 			
-			connection.close();
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 			return false;
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return true;

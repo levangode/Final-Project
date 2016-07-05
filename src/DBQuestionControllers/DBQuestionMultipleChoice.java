@@ -61,11 +61,16 @@ public class DBQuestionMultipleChoice {
 				questions.add(newQuestion);
 			}
 			
-			connection.close();
 			
 		} catch (SQLException e) {
 			System.out.println("Error occured durin database connection!");
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return questions;
@@ -111,13 +116,18 @@ public class DBQuestionMultipleChoice {
 				cur.addToDatabase(question_id);
 			}
 			
-			connection.close();
 			
 		} catch (SQLException e) {
 			System.out.println("Error occured durin database connection!");
 			
 			throw new Exception("Error durin insertion in DB");
 			//e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

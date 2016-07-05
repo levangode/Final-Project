@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,22 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ChallengeControllers.ChallengeController;
-import backend.Challenge;
-import backend.ChallengeFactory;
-import backend.User;
-import database.UserController;
 
 /**
- * Servlet implementation class SendChallenge
+ * Servlet implementation class AcceptChallenge
  */
-@WebServlet("/SendChallenge")
-public class SendChallenge extends HttpServlet {
+@WebServlet("/AcceptChallenge")
+public class AcceptChallenge extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SendChallenge() {
+    public AcceptChallenge() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,14 +38,9 @@ public class SendChallenge extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int sender = Integer.parseInt(request.getParameter("sender"));
 		int receiver = Integer.parseInt(request.getParameter("receiver"));
-		UserController first = new UserController();
-		User from_user = first.getUserByID(sender);
-		UserController second = new UserController();
-		User to_user = second.getUserByID(receiver);
-		
 		int quiz_id = Integer.parseInt(request.getParameter("quiz"));
-		Challenge newOne = ChallengeFactory.getChallenge(from_user, to_user, quiz_id);
-		newOne.addToDatabase();
+		ChallengeController ch = new ChallengeController();
+		ch.cancelChallenge(sender, receiver, quiz_id);
 		response.sendRedirect("QuizSummaryPage.jsp?id="+quiz_id);
 		doGet(request, response);
 	}

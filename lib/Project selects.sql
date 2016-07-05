@@ -31,7 +31,7 @@ create table Quizzes (
     author_id int not null,
     quiz_score int default 0,
     quiz_likes int default 0,
-    quiz_time_limit int default -1,
+    time_limit int default -1,
     date_created timestamp default current_timestamp default current_timestamp default current_timestamp,
     quiz_difficulty varchar(50),
     times_taken int default 0,
@@ -140,13 +140,12 @@ create table Messages(
 	foreign key (sender_id) references Users(user_id),
 	foreign key (recipient_id) references Users(user_id)
 
-)
+);
 
 create table Challenges (
 	from_user int not null,
         to_user int not null,
         quiz_id int not null,
-        seen boolean default false,
         
         foreign key(quiz_id) references Quizzes(quiz_id),
   	foreign key(to_user) references Users(user_id),
