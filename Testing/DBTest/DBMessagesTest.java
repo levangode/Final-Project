@@ -46,7 +46,7 @@ public class DBMessagesTest {
 		System.out.println("\n\n\n");
 	}
 	
-	@Test
+//	@Test
 	public void DBMessageGetTest2(){
 		
 		System.out.println("Test2");
@@ -62,7 +62,7 @@ public class DBMessagesTest {
 		System.out.println("\n\n\n");
 	}
 	
-	@Test
+//	@Test
 	public void DMMessageInfoTest1(){
 		System.out.println("TestINFO2");
 		
@@ -78,6 +78,15 @@ public class DBMessagesTest {
 		for(MessageRecievedInfo z: res){
 			System.out.println(z);
 		}
+	}
+	
+	@Test
+	public void testNumUnread(){
+		
+		DBMessage dbm = new DBMessage();
+		
+		System.out.println( "unread is " + dbm.getNumUnread("mike") );
+		
 	}
 	
 }

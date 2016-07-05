@@ -28,6 +28,8 @@ public class DBMessage {
 	
 	public int getNumUnread(String login){
 		
+		int numUnread = 0;
+		
 		connection = new DBconnector().getConnection();
 		
 		UserController dbu = new UserController();
@@ -36,12 +38,28 @@ public class DBMessage {
 		
 		String query = "select count(*) from messages where sender_id = "
 				+ user_id
-				+ "and" 
-				+ "seen = 0";
+				+ " and " 
+				+ " message_seen = 0;";
+		
+		PreparedStatement stm;
+		
+		try {
+			stm = connection.prepareStatement(query);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()){
+				numUnread = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		System.out.println(query);
 		
-		return 7;
+		return numUnread;
 	}
 	
 	public boolean sendMessage(SendMessageInfo mes){
