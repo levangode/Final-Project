@@ -41,13 +41,17 @@ public class DBQuizTake {
 			stm = connection.prepareStatement(query);
 			stm.executeUpdate();
 
-			connection.close();
 
 		} catch (SQLException e) {
 			System.out.println("Error occured durin database connection!");
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
-		disconnect();
 	}
 }

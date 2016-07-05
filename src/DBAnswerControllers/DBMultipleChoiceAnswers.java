@@ -45,11 +45,16 @@ public class DBMultipleChoiceAnswers {
 				answers.add(newAnswer);
 			}
 			
-			connection.close();
 			
 		} catch (SQLException e) {
 			System.out.println("Error occured durin database connection!");
 			e.printStackTrace();
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return answers;

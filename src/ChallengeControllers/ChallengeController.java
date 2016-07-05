@@ -3,6 +3,7 @@ package ChallengeControllers;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.jsp.tagext.TryCatchFinally;
@@ -44,9 +45,14 @@ public class ChallengeController {
 		try {
 			stm = connection.prepareStatement(order);
 			stm.executeUpdate();
-			connection.close();
 		} catch (Exception e) {
 			// TODO: handle exception
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -70,6 +76,12 @@ public class ChallengeController {
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -84,6 +96,12 @@ public class ChallengeController {
 			stm.executeUpdate();
 		} catch (Exception e) {
 			// TODO: handle exception
+		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 }
