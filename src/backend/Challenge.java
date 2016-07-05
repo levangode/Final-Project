@@ -72,19 +72,31 @@ public class Challenge implements DrawableInfo{
 		ch.addChallenge(from, to, quiz_id);
 	}
 
-	@Override
+	
 	public void showOnCard(JspWriter out) {
+		DBQuizController first = new DBQuizController();
+		DBQuizController second = new DBQuizController();
+		int from = first.getAuthorId(from_user.getLogin());
+		int to = second.getAuthorId(to_user.getLogin());
+		String additionalParameters = ""
+				+ "<input type='hidden' name='sender' value='"+from+"'>"
+				+ "<input type='hidden' name='receiver' value='"+to+"'>"
+				+ "<input type='hidden' name='quiz' value='"+this.quiz_id+"'>";
 		try {
 			out.print("<li> <img border='0' alt='FriendImage' src='" + from_user.getImageURL() + "' width='100' height='100'>"
-					+ "<h3><a href='UserPage.jsp?id=" + 9 + "'>" + from_user.getLogin() + "</a> challenged you to take quiz!</h3>"
-					+ "<div><form action='AcceptChallenge' method='post'>"
-					+ "<input type='submit' value='Accept' class='button tick'><input type='hidden' name='fid' value='"
-					+ 9 + "'></form> ");
+					+ "<h3><a href='UserPage.jsp?id=" + from + "'>" + from_user.getLogin() + "</a> challenged you to take quiz!</h3>"
+					+ "<div style='height:50px;'><form action='AcceptChallenge' method='post'>"
+					+additionalParameters
+					+ "<input type='submit' value='Accept' class='button tick'></form> ");
 			out.print("<form action='RejectChallenge' method='post'>"
-					+ "<input type='submit' value='Reject' class='button tick' style='float:right' ><input type='hidden' name='fid' value='"
-					+ 9 + "'></form></div>"
-							+ "<div><h3><a href='"+getLink()+"'>Link</a></h3></div>"
-							+ "</li>");
+					+additionalParameters
+					+ "<input type='submit' value='Reject' class='button tick' style='float:right' ></form></div>"
+					+ "<div style='text-align:center;'><h4><br>"
+			+from_user.getLogin()+"'s max score for the <a href='"+getLink()+"'>Quiz: </a>");
+			for(int i=0; i<sendersHighest.size(); i++){
+				out.print(sendersHighest.get(i).getScore());
+			}
+			out.print("</h4></div></li>");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

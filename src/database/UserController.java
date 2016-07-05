@@ -38,7 +38,6 @@ public class UserController {
 
 				thisUser = new User(user_name, user_login, user_profile_image);
 			}
-			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -184,7 +183,6 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("ait");
 		ResultSet myRes = null;
 		try {
 			myRes = stm.executeQuery();

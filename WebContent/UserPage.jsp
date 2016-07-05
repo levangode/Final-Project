@@ -90,6 +90,9 @@ div.right {
 				ArrayList<Integer> requests = dbf.getFriendRequests(myId);
 				out.print("<div class='left'><h3>Friend Requests</h3><ul> ");
 				UserController userController = new UserController();
+				if(requests.size() == 0){
+					out.print("<p>No New Requests</p>");
+				}
 				for (int i = 0; i < requests.size(); i++) {
 					int friendsId = requests.get(i);
 					User friend = userController.getUserByID(friendsId);
@@ -113,18 +116,21 @@ div.right {
 
 			}
 		%>
-		<div class='left'>
-			<h3>Challenges</h3>
-			<ul>
+		
 				<%
+				if(myId == id){
+					out.print("<div class='left'><h3>Challenges</h3><ul>");
 					ChallengeController chc = new ChallengeController();
 					ArrayList<Challenge> challenges = chc.getChallenges(id);
 					for (Challenge a : challenges) {
 						a.showOnCard(out);
 					}
+					if(challenges.size() == 0){
+						out.print("<p>No New Challenges</p>");
+					}
+					out.print("</ul></div>");
+				}
 				%>
-			</ul>
-		</div>
 		<div class='right'>
 			<form action='SearchUser' method='post'>
 				Search User<input type='text' class='searchInput' name='user_name'>
@@ -140,7 +146,7 @@ div.right {
 		</div>
 		<div class='right'>
 			<a class="btn" href="UserQuizes.jsp?id=<%out.print(id);%>">
-				Quizes </a>
+				Quizzes </a>
 		</div>
 
 	</div>

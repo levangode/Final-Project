@@ -37,6 +37,7 @@ div.left {
 	DBFriendController friendDB = new DBFriendController();
 	DBQuizController quizDB = new DBQuizController();
 	int id = quizDB.getAuthorId(user.getLogin());
+	System.out.println(user.getLogin());
 	UserController userController = new UserController();
 	List<Integer> friendIds = friendDB.getFriendsIDList(id);
 %>
@@ -54,7 +55,8 @@ div.left {
 		<ul>
 			<%
 				for (int i = 0; i < friendIds.size(); i++) {
-					User friend = userController.getUserByID(friendIds.get(i));
+					UserController a = new UserController();
+					User friend = a.getUserByID(friendIds.get(i));
 					int friendsId = friendIds.get(i);
 					String url = friend.getImageURL();
 					String login = friend.getLogin();

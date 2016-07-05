@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ChallengeControllers.ChallengeController;
+
 /**
  * Servlet implementation class AcceptChallenge
  */
@@ -34,7 +36,12 @@ public class AcceptChallenge extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		int sender = Integer.parseInt(request.getParameter("sender"));
+		int receiver = Integer.parseInt(request.getParameter("receiver"));
+		int quiz_id = Integer.parseInt(request.getParameter("quiz"));
+		ChallengeController ch = new ChallengeController();
+		ch.cancelChallenge(sender, receiver, quiz_id);
+		response.sendRedirect("QuizSummaryPage.jsp?id="+quiz_id);
 		doGet(request, response);
 	}
 

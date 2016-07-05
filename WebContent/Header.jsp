@@ -15,15 +15,16 @@
 		style="float: right; text-align: right; width: 200px; height: 154px; margin: 0px;">
 		<%
 			if ((boolean) request.getSession().getAttribute("logged_in")) {
-				User curUser = new UserController()
-						.getUserByLogin((String) request.getSession().getAttribute("user_name"));
+				UserController n = new UserController();
+				User curUser = n.getUserByLogin((String) request.getSession().getAttribute("user_name"));
 				out.write("<span style='text-align:center; font-size:30px'><img src='" + curUser.getImageURL()
 						+ "' alt='User Image' style='width:40px;height:40px; border: 2px ; border-radius: 10px'>");
 				out.write((String) request.getSession().getAttribute("user_name") + "   </span>");
 				String login = (String) request.getSession().getAttribute("user_name");
 				DBQuizController quizCont = new DBQuizController();
 				int yourID = quizCont.getAuthorId(login);
-				int requestNum = new DBFriendController().getFriendRequests(yourID).size();
+				DBFriendController z = new DBFriendController();
+				int requestNum = z.getFriendRequests(yourID).size();
 				if (requestNum > 0) {
 					out.write("<br><div class='notif'><strong style='color:red;font-weight:bold'>" + requestNum
 							+ "</strong></div>");

@@ -51,7 +51,7 @@ public class SendChallenge extends HttpServlet {
 		int quiz_id = Integer.parseInt(request.getParameter("quiz"));
 		Challenge newOne = ChallengeFactory.getChallenge(from_user, to_user, quiz_id);
 		newOne.addToDatabase();
-		response.sendRedirect("QuizSummaryPage.jps?id="+quiz_id);
+		response.sendRedirect("QuizSummaryPage.jsp?id="+quiz_id);
 		doGet(request, response);
 	}
 
