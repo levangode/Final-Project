@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.plaf.synth.SynthSplitPaneUI;
 
 import DBQuestionControllers.DBQuestionMultipleChoice;
 import DBQuestionControllers.DBQuestionWithMultipleAnswers;
@@ -38,25 +39,30 @@ public class MultipleChoiceQuestion extends Question {
 		List<Answer> tmp = this.getAnswers();
 		Collections.shuffle(tmp);
 
-		int total = answers_to_show;
 		int correct = answers_to_be_correct;
+		int rest = answers_to_show - correct;
+				
+//		correct = 2;
+//		rest = 3;
+		
 
+		//System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<" + total);
+		
 		for (Answer ans : tmp) {
+			if (correct == 0 && rest == 0) {
+				break;
+			}
+			
 			if (((MultipleChoiceAnswer) ans).isCorrect()) {
 				if (correct > 0) {
 					correct--;
-					total--;
 					res.add(ans);
 				}
-			} else if (!((MultipleChoiceAnswer) ans).isCorrect()) {
-				if (total > 0) {
-					total--;
-					res.add(ans);
-				}
-			} else if (correct == 0 && total == 0) {
-				break;
 			} else {
-				System.out.println("something went wrong int getFormattedAnswers Methd!!!!!!!!!!!!!!");
+				if (rest > 0) {
+					rest--;
+					res.add(ans);
+				}
 			}
 		}
 
@@ -75,7 +81,8 @@ public class MultipleChoiceQuestion extends Question {
 	public String getQuestionHtml(int id) {
 		String html = "";
 		html += "<div id='question-" + id + "'>" + "<p>" + getQuestiontext() + "</p> ";
-		ArrayList<Answer> answers = getAnswers();
+//		ArrayList<Answer> answers = getAnswers();
+		ArrayList<Answer> answers = getFormattedAnswers();
 		html += "<ul>";
 		for (int i = 0; i < answers.size(); i++) {
 			MultipleChoiceAnswer ans = (MultipleChoiceAnswer) answers.get(i);
