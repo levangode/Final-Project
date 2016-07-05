@@ -101,13 +101,7 @@ public class DBQuizController {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
+		} 
 		return result;
 	}
 
@@ -123,7 +117,8 @@ public class DBQuizController {
 			stm.setString(1, quiz.getQuiz_name());
 			stm.setInt(2, getQuizCategory(quiz.getQuiz_category()));
 			stm.setString(3, quiz.getQuiz_description());
-			stm.setInt(4, getAuthorId(quiz.getQuiz_author()));
+			int authid = getAuthorId(quiz.getQuiz_author());
+			stm.setInt(4, authid);
 			stm.setInt(5, quiz.getQuiz_likes());
 			stm.setString(6, quiz.getQuiz_difficulty());
 			stm.setInt(7, quiz.getTimes_taken());
