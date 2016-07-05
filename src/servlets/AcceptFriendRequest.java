@@ -44,11 +44,12 @@ public class AcceptFriendRequest extends HttpServlet {
 
 		int friendId = Integer.parseInt(request.getParameter("fid"));
 		DBFriendController dbf = new DBFriendController();
+		DBFriendController dbf2 = new DBFriendController();
 		String login = (String) request.getSession().getAttribute("user_name");
 		DBQuizController db = new DBQuizController();
 		int id = db.getAuthorId(login);
 		dbf.addFriendshpByUserID(id, friendId);
-		dbf.cancelFriendshipRequestByID(id, friendId);
+		dbf2.cancelFriendshipRequestByID(id, friendId);
 		response.sendRedirect("UserPage.jsp?id=" + id);
 		doGet(request, response);
 	}

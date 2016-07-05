@@ -269,7 +269,6 @@ to {
 
 
 			<%
-				DBFriendController dbf = new DBFriendController();
 				String url = user.getImageURL();
 				if (url == null) {
 					url = "defaultPicture.png";
@@ -284,11 +283,11 @@ to {
 					out.print(
 							"<form action='ChangeUserName' method='post'>Chane Your Name: <input class='inputs' type='text' name='userName'>"
 									+ "<input type='submit' value='Submit'></form>");
-				} else if (!dbf.isFriend(myId, id) && !dbf.isRequestSent(myId, id)) {
+				} else if (!(new DBFriendController().isFriend(myId, id)) && !(new DBFriendController().isRequestSent(myId, id))) {
 					request.getSession().setAttribute("friendId", id);
 					out.print("<form action='SendFriendshipRequest' method='post'>"
 							+ "<input type='submit' value='Send Friend Request' class='btn'></form>");
-				} else if (dbf.isFriend(myId, id)) {
+				} else if ((new DBFriendController().isFriend(myId, id))) {
 					request.getSession().setAttribute("friendId", id);
 					out.print("<form action='RemoveFriend' method='post'>"
 							+ "<input type='submit' value='Remove Friend' class='btn'></form>");
@@ -297,8 +296,9 @@ to {
 		</div>
 
 		<%
+		DBFriendController dbf3 = new DBFriendController();
 			if (myId == id) {
-				ArrayList<Integer> requests = dbf.getFriendRequests(myId);
+				ArrayList<Integer> requests = dbf3.getFriendRequests(myId);
 				out.print("<div class='left'><h3>Friend Requests</h3><ul> ");
 				UserController userController = new UserController();
 				if (requests.size() == 0) {

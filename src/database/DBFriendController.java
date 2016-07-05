@@ -186,7 +186,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return addFriendshpByUserID(user1ID, user2ID);
@@ -222,7 +226,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return addFriendshpByUserID(user1ID, user2ID);
@@ -253,7 +261,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return true;
@@ -267,7 +279,6 @@ public class DBFriendController {
 		String query1 = "SELECT * FROM FriendshipRequests WHERE `from` =" + user1 + " and " + "`to` = " + user2 + ";";
 
 		java.sql.PreparedStatement stm;
-		System.out.println("isFriendsdadas?");
 		try {
 			stm = con.prepareStatement(query1);
 			ResultSet res1 = stm.executeQuery();
@@ -283,7 +294,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return false;
@@ -318,7 +333,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return false;
@@ -350,7 +369,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return true;
