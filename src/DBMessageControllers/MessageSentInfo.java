@@ -87,7 +87,7 @@ public class MessageSentInfo {
 		
 		scr.append("<div id = '" + elemID +"' class = '" + elemClasses + "'>");
 			scr.append("<a>");
-				scr.append("from: " + this.getSenderLogin());
+				scr.append("to: " + this.getSenderLogin());
 				scr.append("</br>");
 				scr.append("subject: " + this.getMessageSubject(PREVIEW_CHAR_LIMIT_SUBJECT));
 				scr.append("</br>");

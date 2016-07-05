@@ -79,7 +79,7 @@ public class MessageRecievedInfo {
 		StringBuilder scr = new StringBuilder("");
 		
 		String elemID = "div_message_recieved_display_" + id;
-		String elemClasses = "message_display";
+		String elemClasses = "message_display message_recieved";
 		
 		if(getMessageseen()){
 			elemClasses += " message_display_seen";

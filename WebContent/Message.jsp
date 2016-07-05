@@ -30,17 +30,6 @@
 		$("p").html("" + id);
 	}
 	
-	function sendRequest(param){
-		//alert("in function sendReq " + param);
-		$.get(
-		    "MessageTest",
-		    {paramOne : 1, paramX : 'abc'},
-		    function(data) {
-		       alert('page content: ' + data);
-	    	}
-		);
-	}
-	
 	function messageSeen(id){
 		//alert("in function sendReq " + param);
 		$.get(
@@ -98,7 +87,7 @@
 	});
 	
 	$(document).ready(function(){
-	    $(".message_display").click(function(){
+	    $(".message_recieved").click(function(){
 	    	//var param = $(this).attr("id");
 	    	//alert(param);
 	//        alert($(this).data('value'));
@@ -108,12 +97,41 @@
 	        //sendMessage();
 	    });
 	});
-
+	
+	function clearAllViews(){
+		$("#messages_recieved").hide();
+		$("#messages_sent").hide();
+	}
+	
+	function switchView(view){
+		clearAllViews();
+		switch(view){
+		case "inbox":
+			$("#messages_recieved").show();
+			break;
+		case "sent":
+			$("#messages_sent").show();
+		}
+	}
+	
+	function updateView(view_id){
+		
+		if(view_id == "view_inbox"){
+			switchView("inbox");
+		}
+		if(view_id == "view_sent"){
+			switchView("sent");
+		}
+	}
+	
 	$(document).ready(function(){
 	    $(".views").click(function(){
 	    	//var param = $(this).attr("id");
 	    	//alert(param);
-	        alert($(this).attr('id'));
+	        //alert($(this).attr('id'));
+	        
+	        updateView($(this).attr('id'));
+	        
 	        //$(this).addClass('message_display_seen');
 	        
 	    	//messageSeen($(this).data('value'));
