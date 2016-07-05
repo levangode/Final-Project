@@ -39,15 +39,36 @@
 
 	function hideQuestions() {
 		var x;
-		for (x = 2; x <= numQuestion; x++) {
+		for (x = 1; x <= numQuestion; x++) {
 			$("#div_question_" + x).hide();
 		}
+		$("#div_question_" + curQuestion).show();
 	}
-
+	
+	function showQuestions(){
+		var x;
+		for (x = 1; x <= numQuestion; x++) {
+			$("#div_question_" + x).show();
+		}
+	}
+	
 	function setNumQuestions(num) {
 		numQuestion = num;
 		//alert("question number set to " + num);
-		hideQuestions();
+	}
+	
+	const DISPLAY_MODE_SINGLE_PAGE = 1;
+	const DISPLAY_MODE_MULTIPLE_PAGE = 2;
+	
+	function setDisplayMode(display_mode){
+		switch (display_mode){
+		case DISPLAY_MODE_SINGLE_PAGE:
+			showQuestions();
+			break;
+		case DISPLAY_MODE_MULTIPLE_PAGE:
+			hideQuestions();
+			break;
+		}
 	}
 
 	function nextQuestion() {
@@ -124,6 +145,12 @@ body {
 				}
 
 				out.print("<script> setNumQuestions(" + questions.size() + "); </script>");
+				
+				if (quiz.isDisplayMultiplePages()){
+					out.print("<script> setDisplayMode(DISPLAY_MODE_MULTIPLE_PAGE); </script>");
+				} else {
+					out.print("<script> setDisplayMode(DISPLAY_MODE_SINGLE_PAGE); </script>");
+				}
 			%>
 
 
