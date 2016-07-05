@@ -1,3 +1,4 @@
+<%@page import="ChallengeControllers.ChallengeController"%>
 <%@page import="database.UserController"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -87,7 +88,7 @@ div.right {
 		<%
 			if (myId == id) {
 				ArrayList<Integer> requests = dbf.getFriendRequests(myId);
-				out.print("<div class='left'><ul> ");
+				out.print("<div class='left'><h3>Friend Requests</h3><ul> ");
 				UserController userController = new UserController();
 				for (int i = 0; i < requests.size(); i++) {
 					int friendsId = requests.get(i);
@@ -108,15 +109,26 @@ div.right {
 					}
 					out.print("</li>");
 				}
-
 				out.print("</ul> </div>");
 
 			}
 		%>
+		<div class='left'>
+			<h3>Challenges</h3>
+			<ul>
+				<%
+					ChallengeController chc = new ChallengeController();
+					ArrayList<Challenge> challenges = chc.getChallenges(id);
+					for (Challenge a : challenges) {
+						a.showOnCard(out);
+					}
+				%>
+			</ul>
+		</div>
 		<div class='right'>
 			<form action='SearchUser' method='post'>
-				Search User<input type='text' class='searchInput' name='user_name'> <input
-					type='submit' value='Search'>
+				Search User<input type='text' class='searchInput' name='user_name'>
+				<input type='submit' value='Search'>
 			</form>
 		</div>
 
