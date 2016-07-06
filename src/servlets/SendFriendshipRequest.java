@@ -1,16 +1,12 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DBConnector.Connector;
 import DBQuizControllers.DBQuizController;
 import database.DBFriendController;
 
@@ -45,27 +41,14 @@ public class SendFriendshipRequest extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		Connection con = null;
-		
-		try {
-			con = Connector.getConnection();
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		System.out.println("Shemovedi aq");
 		int friendId = (int) request.getSession().getAttribute("friendId");
 		DBQuizController db = new DBQuizController();
 		int yourId = db.getAuthorId((String) request.getSession().getAttribute("user_name"));
-		DBFriendController fdb = new DBFriendController(con);
+		DBFriendController fdb = new DBFriendController();
 		fdb.addFriendshpRequestByUserID(yourId, friendId);
 		request.getSession().removeAttribute("friendId");
 		response.sendRedirect("UserPage.jsp?id=" + friendId);
-		
-		Connector.returnConnection(con);
-		
 		doGet(request, response);
 	}
 

@@ -11,10 +11,8 @@ public class DBFriendController {
 
 	private Connection con;
 
-	public DBFriendController(Connection con) {
-		// TODO doing now;
-		this.con = con;
-		//con = new DBconnector().getConnection();
+	public DBFriendController() {
+		con = new DBconnector().getConnection();
 	}
 
 	public List<Integer> getFriendsIDList(int ID) {
