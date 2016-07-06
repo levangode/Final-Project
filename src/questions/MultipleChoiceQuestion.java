@@ -96,9 +96,7 @@ public class MultipleChoiceQuestion extends Question {
 
 	@Override
 	public ArrayList<Answer> getAnswers() {
-		if (answersFormatted){
-			return getFormattedAnswers();
-		}
+		
 		return this.getAnswers();
 	}
 	
