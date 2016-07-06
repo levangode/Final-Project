@@ -1,12 +1,16 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBConnector.Connector;
 import DBQuizControllers.DBQuizController;
 import database.DBFriendController;
 
@@ -44,15 +48,31 @@ public class AcceptFriendRequest extends HttpServlet {
 
 		int friendId = Integer.parseInt(request.getParameter("fid"));
 		
+		Connection con1 = null, con2 = null;
 		
-		DBFriendController dbf = new DBFriendController();
-		DBFriendController dbf2 = new DBFriendController();
+		// TODO add real connections;
+		
+		try {
+			con1 = Connector.getConnection();
+			con2 = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		DBFriendController dbf = new DBFriendController(con1);
+		DBFriendController dbf2 = new DBFriendController(con2);
 		String login = (String) request.getSession().getAttribute("user_name");
 		DBQuizController db = new DBQuizController();
 		int id = db.getAuthorId(login);
 		dbf.addFriendshpByUserID(id, friendId);
 		dbf2.cancelFriendshipRequestByID(id, friendId);
 		response.sendRedirect("UserPage.jsp?id=" + id);
+		
+		Connector.returnConnection(con1);
+		Connector.returnConnection(con2);
+		
+		
 		doGet(request, response);
 	}
 

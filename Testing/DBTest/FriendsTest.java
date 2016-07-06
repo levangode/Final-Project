@@ -11,11 +11,7 @@ import database.DBFriendController;
 import database.UserController;
 
 public class FriendsTest {
-	private void addFakeUsers(){
-		UserController DBU = new UserController();
-		DBU.addNewUser("gocha", "123", "gocha");
-	}
-	
+
 	
 	private void getFriendsList(String userLogin){
 
@@ -34,12 +30,11 @@ public class FriendsTest {
 		Connector.returnConnection(con);
 		
 		List<String> z = dbf.getFriendsUserNamesList(1);
-		System.out.println(z.get(0));
+		System.out.println(z);
 	}
 	
 	@Test
 	public void testFriends(){
-		addFakeUsers();
 		getFriendsList("gocha");
 	}
 	
