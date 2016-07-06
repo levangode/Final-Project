@@ -18,6 +18,10 @@ public class MultipleChoiceQuestion extends Question {
 	private int answers_to_show;
 	private int answers_to_be_correct;
 
+
+	ArrayList<Answer> formAnswers;
+	boolean answersFormatted = false;
+	
 	public MultipleChoiceQuestion(String question_text, String question_type, String question_description,
 			int question_score, int answers_to_show, int answers_to_be_correct, ArrayList<Answer> answers,
 			int question_number) {
@@ -34,6 +38,12 @@ public class MultipleChoiceQuestion extends Question {
 	}
 
 	public ArrayList<Answer> getFormattedAnswers() {
+		
+		if(answersFormatted){
+			return formAnswers;
+		} 
+		
+		
 		ArrayList<Answer> res = new ArrayList<Answer>();
 
 		List<Answer> tmp = this.getAnswers();
@@ -69,6 +79,8 @@ public class MultipleChoiceQuestion extends Question {
 				}
 			}
 		}
+		
+		formAnswers = res;
 
 		return res;
 	}

@@ -23,7 +23,8 @@ public class Quiz {
 	private boolean displayMultiplePages;
 	private boolean immediateCorrection;
 	private boolean randomQuestions;
-
+	
+	
 	public Quiz(String quiz_name, String quiz_description, String quiz_author, int quiz_likes,
 			Timestamp date_created_timestamp, String quiz_category, String quiz_difficulty, int times_taken,
 			ArrayList<Question> questions, boolean displayMultiplePages, boolean immediateCorrection,
