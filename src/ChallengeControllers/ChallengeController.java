@@ -89,8 +89,11 @@ public class ChallengeController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
-			Connector.returnConnection(con1);
-			Connector.returnConnection(con2);
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
