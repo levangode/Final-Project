@@ -13,7 +13,7 @@
 <html>
 <%
 	if (!(boolean) request.getSession().getAttribute("logged_in")) {
-		response.sendRedirect("NotLoggedIn.jsp");
+		response.sendRedirect("NotLoggedIn.jsp"); 
 		return;
 	}
 %>
