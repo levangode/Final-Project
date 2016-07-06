@@ -99,7 +99,7 @@
 	function nextQuestion() {
 		//alert("display next question");
 		
-		gradeQuestion();
+		//gradeQuestion();
 		
 		if (curQuestion == numQuestion) {
 			alert("This is the last Question!");
