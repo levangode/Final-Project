@@ -91,7 +91,7 @@ public class MultipleChoiceQuestion extends Question {
 		}
 		
 		formAnswers = res;
-
+		answersFormatted = true;
 		return res;
 	}
 
