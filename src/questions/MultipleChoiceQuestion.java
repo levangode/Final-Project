@@ -95,6 +95,14 @@ public class MultipleChoiceQuestion extends Question {
 	}
 
 	@Override
+	public ArrayList<Answer> getAnswers() {
+		if (answersFormatted){
+			return getFormattedAnswers();
+		}
+		return this.getAnswers();
+	}
+	
+	@Override
 	public String getQuestionHtml(int id) {
 		String html = "";
 		html += "<div id='question-" + id + "'>" + "<p>" + getQuestiontext() + "</p> ";

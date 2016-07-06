@@ -72,12 +72,12 @@
 		switch (display_mode){
 		case DISPLAY_MODE_SINGLE_PAGE:
 			showQuestions();
-			alert("single 1");
+		//	alert("single 1");
 			hideSwitchButtons();
 			break;
 		case DISPLAY_MODE_MULTIPLE_PAGE:
 			hideQuestions();
-			alert("mult 1");
+		//	alert("mult 1");
 			showSwitchButtons();
 			break;
 		}
@@ -86,7 +86,7 @@
 	function gradeQuestion(){
 		var question_id = curQuestion;
 		
-		alert("" + question_id);
+		//alert("" + question_id);
 		
 		$.get("ImmedateCorrect", {
 			question_num : question_id

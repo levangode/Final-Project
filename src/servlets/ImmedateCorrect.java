@@ -39,8 +39,9 @@ public class ImmedateCorrect extends HttpServlet {
 		System.out.println(question_num);
 		
 		Quiz a = (Quiz)request.getSession().getAttribute("Quiz");
-		if(a==null)System.out.println("bliad");
-		Question curQuestion = ((Quiz)request.getSession().getAttribute("Quiz")).getQuestions().get(question_num-1);
+		//if(a==null)System.out.println("bliad");
+		Question curQuestion = a.getQuestions().get(question_num-1);
+		
 		
 		
 		System.out.println(curQuestion);
