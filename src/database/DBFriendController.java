@@ -36,7 +36,11 @@ public class DBFriendController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return friends;
 	}
@@ -61,7 +65,11 @@ public class DBFriendController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return friends;
@@ -89,7 +97,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return true;
@@ -113,7 +125,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return true;
 	}
@@ -135,7 +151,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return null;
 		} finally {
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}
@@ -168,7 +188,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return addFriendshpByUserID(user1ID, user2ID);
@@ -204,7 +228,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return addFriendshpByUserID(user1ID, user2ID);
@@ -235,7 +263,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return true;
@@ -264,7 +296,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return false;
@@ -299,7 +335,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return false;
@@ -331,7 +371,11 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			
+			try {
+				con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return true;

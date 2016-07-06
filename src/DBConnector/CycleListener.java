@@ -23,7 +23,13 @@ public class CycleListener implements ServletContextListener {
 	/**
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
-    public void contextDestroyed(ServletContextEvent arg0)  {
+    public void contextDestroyed(ServletContextEvent arg0)  { 
+         try {
+			Connector.terminateAllConnections();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 	/**

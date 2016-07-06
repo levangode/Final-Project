@@ -52,7 +52,7 @@ public class DBMessage {
 				+ " message_seen = 0;";
 		
 		PreparedStatement stm;
-		// z
+		
 		try {
 			stm = connection.prepareStatement(query);
 			

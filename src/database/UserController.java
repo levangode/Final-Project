@@ -41,7 +41,11 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return thisUser;
@@ -73,7 +77,11 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return thisUser;
@@ -103,7 +111,11 @@ public class UserController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return users;
@@ -119,7 +131,11 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -135,7 +151,11 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -175,7 +195,11 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -197,7 +221,11 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
@@ -221,12 +249,17 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 
 		return user_id;
 	}
 
-	public int getUserQuizCount(int user_id){
+	public int getUserQuizCount(int user_id) {
 		int result = 0;
 
 		String order = "select count(*) from Quizzes where author_id = " + user_id;
@@ -243,6 +276,11 @@ public class UserController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return result;
 	}
