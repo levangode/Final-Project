@@ -119,7 +119,7 @@ public class DBFriendController {
 	}
 
 	public ArrayList<Integer> getFriendRequests(int id) {
-		ArrayList<Integer> list = new ArrayList<>();
+		ArrayList<Integer> list = new ArrayList<Integer>();
 		String query = "Select `from` from FriendshipRequests where `to` =" + id;
 		PreparedStatement stm;
 		try {
@@ -127,14 +127,13 @@ public class DBFriendController {
 			ResultSet res = stm.executeQuery();
 			while (res.next()) {
 				int requestId = res.getInt(1);
-				System.out.println("integer: " + requestId);
 				list.add(requestId);
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
-		} finally {
+		} finally{
 			Connector.returnConnection(con);
 		}
 		return list;
@@ -279,7 +278,7 @@ public class DBFriendController {
 		String query2 = "SELECT * FROM Friends WHERE `from` =" + user2ID + " and " + "`to` = " + user1ID + ";";
 
 		java.sql.PreparedStatement stm;
-		System.out.println("isFriendsdadas?");
+
 		try {
 			stm = con.prepareStatement(query1);
 			ResultSet res1 = stm.executeQuery();

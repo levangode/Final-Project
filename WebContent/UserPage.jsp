@@ -296,15 +296,17 @@ to {
 		</div>
 
 		<%
-		DBFriendController dbf3 = new DBFriendController();
+		
 			if (myId == id) {
-				ArrayList<Integer> requests = dbf3.getFriendRequests(myId);
+				DBFriendController dbf4 = new DBFriendController();
+				ArrayList<Integer> requests = dbf4.getFriendRequests(myId);
 				out.print("<div class='left'><h3>Friend Requests</h3><ul> ");
 				
-				if (requests.size() == 0) {
-					out.print("<p>No New Requests</p>");
+				if (requests.size() == 0 && requests != null) {
+					out.println("<p>No New Requests</p>");
 				}
 				for (int i = 0; i < requests.size(); i++) {
+					System.out.println("gijia"+i);
 					UserController userController = new UserController();
 					int friendsId = requests.get(i);
 					User friend = userController.getUserByID(friendsId);
