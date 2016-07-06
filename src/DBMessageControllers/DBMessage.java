@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.management.Query;
 
+import DBConnector.Connector;
 import answers.Answer;
 import backend.Message;
 import backend.User;
@@ -32,7 +33,16 @@ public class DBMessage {
 		
 		connection = new DBconnector().getConnection();
 		
-		UserController dbu = new UserController();
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		UserController dbu = new UserController(con);
 		
 		int user_id = dbu.getUserIDByLogin(login);
 		
@@ -58,6 +68,8 @@ public class DBMessage {
 		}
 
 		System.out.println(query);
+		
+		Connector.returnConnection(con);
 		
 		return numUnread;
 	}
@@ -137,17 +149,40 @@ public class DBMessage {
 	private int getRecipientID(Message m) {
 		String recipient_login = m.getRecipient().getLogin();
 		
-		UserController u = new UserController();
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		UserController u = new UserController(con);
 		
 		int recipient_id = u.getUserIDByLogin(recipient_login);
+		
+		Connector.returnConnection(con);
 		
 		return recipient_id;
 	}
 	
 	private int getRecipientID(String recipient_login) {
-		UserController u = new UserController();
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		UserController u = new UserController(con);
 		
 		int recipient_id = u.getUserIDByLogin(recipient_login);
+		
+		Connector.returnConnection(con);
 		
 		return recipient_id;
 	}
@@ -155,17 +190,42 @@ public class DBMessage {
 	private int getSenderID(Message m) {
 		String sender_login = m.getSender().getLogin();
 		
-		UserController u = new UserController();
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		UserController u = new UserController(con);
 		
 		int senderID = u.getUserIDByLogin(sender_login);
 		
+		Connector.returnConnection(con);
+				
 		return senderID;
 	}
 	
 	private int getSenderID(String sender_login) {
-		UserController u = new UserController();
+		
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		UserController u = new UserController(con);
 		
 		int senderID = u.getUserIDByLogin(sender_login);
+		
+		Connector.returnConnection(con);
 		
 		return senderID;
 	}
@@ -183,6 +243,16 @@ public class DBMessage {
 		
 		System.out.println(query);
 		
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		try {
 			stm = connection.prepareStatement(query);
 			
@@ -194,8 +264,8 @@ public class DBMessage {
 				String message_text = rs.getString(3);
 				String message_subject = rs.getString(4);
 				
-				User sender = new UserController().getUserByID(sender_id1);
-				User recipient = new UserController().getUserByID(recipient_id);
+				User sender = new UserController(con).getUserByID(sender_id1);
+				User recipient = new UserController(con).getUserByID(recipient_id);
 				
 				Message m = new Message(message_text, message_subject, sender, recipient);
 				
@@ -213,15 +283,30 @@ public class DBMessage {
 			}
 		}
 		
+		Connector.returnConnection(con);
+		
 		return messages;
 	}
 	
 	public List<Message> getMessagesSent(User sender){
-		UserController usr = new UserController(); 
+		
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		UserController usr = new UserController(con); 
 		
 		int sender_id = -1;
 		
 		sender_id = usr.getUserIDByLogin(sender.getLogin());
+		
+		Connector.returnConnection(con);
 		
 		return getMessagesSent(sender_id);
 	}
@@ -239,6 +324,16 @@ public class DBMessage {
 		
 		System.out.println(query);
 		
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		try {
 			stm = connection.prepareStatement(query);
 			
@@ -250,8 +345,8 @@ public class DBMessage {
 				String message_text = rs.getString(3);
 				String message_subject = rs.getString(4);
 				
-				User sender = new UserController().getUserByID(sender_id1);
-				User recipient = new UserController().getUserByID(recipient_id1);
+				User sender = new UserController(con).getUserByID(sender_id1);
+				User recipient = new UserController(con).getUserByID(recipient_id1);
 				
 				Message m = new Message(message_text, message_subject, sender, recipient);
 				
@@ -269,15 +364,29 @@ public class DBMessage {
 			}
 		}
 		
+		Connector.returnConnection(con);
+		
 		return messages;
 	}
 	
 	public List<Message> getMessagesRecieved(User recipient){
-		UserController usr = new UserController(); 
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		UserController usr = new UserController(con); 
 		
 		int recipient_id = -1;
 		
 		recipient_id = usr.getUserIDByLogin(recipient.getLogin());
+		
+		Connector.returnConnection(con);
 		
 		return getMessagesSent(recipient_id);
 	}
@@ -296,6 +405,16 @@ public class DBMessage {
 		
 		System.out.println(query);
 		
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		try {
 			stm = connection.prepareStatement(query);
 			
@@ -307,8 +426,8 @@ public class DBMessage {
 				String message_text = rs.getString(3);
 				String message_subject = rs.getString(4);
 				
-				User sender = new UserController().getUserByID(sender_id1);
-				User recipient = new UserController().getUserByID(recipient_id1);
+				User sender = new UserController(con).getUserByID(sender_id1);
+				User recipient = new UserController(con).getUserByID(recipient_id1);
 				
 				Message m = new Message(message_text, message_subject, sender, recipient);
 				
@@ -325,6 +444,8 @@ public class DBMessage {
 				e.printStackTrace();
 			}
 		}
+		
+		Connector.returnConnection(con);
 		
 		return message;
 	}

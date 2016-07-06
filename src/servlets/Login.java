@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBConnector.Connector;
 import backend.User;
 import database.UserController;
 import helpers.Hasher;
@@ -45,7 +48,18 @@ public class Login extends HttpServlet {
 			throws ServletException, IOException {
 		String user_login = request.getParameter("user_login");
 		String user_password = request.getParameter("user_password");
-		UserController db = new UserController();
+		
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		UserController db = new UserController(con);
 		Hasher h = new Hasher();
 		if (db.containsUser(user_login)) {
 			if (db.passwordMatch(user_login, h.generateHash(user_password))) {
@@ -58,6 +72,9 @@ public class Login extends HttpServlet {
 		} else {
 			request.getRequestDispatcher("TryAgain.jsp").forward(request, response);
 		}
+		
+		Connector.returnConnection(con);
+		
 		doGet(request, response);
 	}
 

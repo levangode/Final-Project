@@ -1,12 +1,16 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBConnector.Connector;
 import database.UserController;
 
 /**
@@ -30,7 +34,17 @@ public class UserValid extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String resp = "OK";
 		
-		UserController usr = new UserController();
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		UserController usr = new UserController(con);
 		
 		String user_login = request.getParameter("user_login");
 		
@@ -43,6 +57,8 @@ public class UserValid extends HttpServlet {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(resp);
+		
+		Connector.returnConnection(con);
 		
 	}
 

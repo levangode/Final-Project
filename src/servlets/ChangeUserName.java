@@ -1,12 +1,16 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBConnector.Connector;
 import DBQuizControllers.DBQuizController;
 import database.UserController;
 
@@ -39,11 +43,25 @@ public class ChangeUserName extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String newName = (String) request.getParameter("userName");
 		String login = (String) request.getSession().getAttribute("user_name");
-		UserController contr = new UserController();
+		
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		UserController contr = new UserController(con);
+		
 		DBQuizController db = new DBQuizController();
 		int id = db.getAuthorId(login);
 		contr.editUserName(login, newName);
 		response.sendRedirect("UserPage.jsp?id=" + id);
+		
+		Connector.returnConnection(con);
+		
 		doGet(request, response);
 	}
 

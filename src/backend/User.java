@@ -1,5 +1,9 @@
 package backend;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import DBConnector.Connector;
 import DBQuizControllers.QuizInfoController;
 import database.UserController;
 import quizInfoes.QuizInfo;
@@ -27,15 +31,40 @@ public class User {
 	}
 
 	public int getCreatedQuizCount(int user_id) {
+		
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		int counter=0;
-		UserController uc = new UserController();
+		UserController uc = new UserController(con);
 		counter=uc.getUserQuizCount(user_id);
+		
+		Connector.returnConnection(con);
+		
 		return counter;
 	}
 
 	public void editImageUrl(String url) {
-		UserController cont = new UserController();
+		
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		UserController cont = new UserController(con);
 		cont.editImgUrl(this.login, url);
+		
+		Connector.returnConnection(con);
 	}
 
 	public String getLogin() {

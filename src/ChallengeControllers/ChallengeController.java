@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
+import DBConnector.Connector;
 import DBQuizControllers.QuizInfoController;
 import backend.Challenge;
 import backend.ChallengeFactory;
@@ -61,12 +62,23 @@ public class ChallengeController {
 		String order = "select from_user, to_user, quiz_id from Challenges where to_user = " + user_id;
 		PreparedStatement stm = null;
 		ResultSet res = null;
+		
+		Connection con1 = null, con2 = null;
+		
+		try {
+			con1 = Connector.getConnection();
+			con2 = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		try {
 			stm = connection.prepareStatement(order);
 			res = stm.executeQuery();
 			while (res.next()) {
-				UserController c = new UserController();
-				UserController d = new UserController();
+				UserController c = new UserController(con1);
+				UserController d = new UserController(con2);
 				User sender = c.getUserByID(res.getInt("from_user"));
 				User receiver = d.getUserByID(res.getInt("to_user"));
 				int quiz_id = res.getInt("quiz_id");
