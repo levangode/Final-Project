@@ -1,4 +1,8 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="DBConnector.Connector"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="DBMessageControllers.*"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="backend.Message"%>
 <%@page import="java.util.List"%>
 <%@page import="database.UserController"%>
@@ -415,7 +419,16 @@ to {
 
 					out.print("<script>" + "setUserName('" + userName + "');" + "</script>");
 
-					UserController dbu = new UserController();
+					Connection con = null;
+					
+					try {
+						con = Connector.getConnection();
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					UserController dbu = new UserController(con);
 
 					int userID = dbu.getUserIDByLogin(userName);
 
@@ -426,6 +439,9 @@ to {
 					for (int i = 0; i < recievedMessages.size(); i++) {
 						out.print(recievedMessages.get(i).getPreviewHTML(i + 1));
 					}
+					
+					Connector.returnConnection(con);
+					
 				%>
 
 					<!-- <button id = "button_seen" type = "button" >
@@ -447,7 +463,16 @@ to {
 
 				//out.print("<script>" + "setUserName('" + userName + "');"+ "</script>");
 
-				UserController dbu1 = new UserController();
+				Connection con1 = null;
+		
+				try {
+					con = Connector.getConnection();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				UserController dbu1 = new UserController(con1);
 
 				int userID1 = dbu1.getUserIDByLogin(userName);
 
@@ -458,6 +483,8 @@ to {
 				for (int i = 0; i < sentMessages.size(); i++) {
 					out.print(sentMessages.get(i).getPreviewHTML(i + 1));
 				}
+				
+				Connector.returnConnection(con1);
 			%>
 
 			</div>

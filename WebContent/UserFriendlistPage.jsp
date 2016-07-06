@@ -1,3 +1,6 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="DBConnector.Connector"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -31,13 +34,25 @@ div.left {
 
 <%
 	int mid = Integer.parseInt(request.getParameter("id"));
-	UserController db = new UserController();
+	
+	Connection con = null;
+	
+	try {
+		con = Connector.getConnection();
+	} catch (ClassNotFoundException | SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+
+	UserController db = new UserController(con);
 	User user = db.getUserByID(mid);
-	DBFriendController friendDB = new DBFriendController();
+	DBFriendController friendDB = new DBFriendController(con);
 	DBQuizController quizDB = new DBQuizController();
 	int id = quizDB.getAuthorId(user.getLogin());
-	UserController userController = new UserController();
+	UserController userController = new UserController(con);
 	List<Integer> friendIds = friendDB.getFriendsIDList(id);
+	
+	Connector.returnConnection(con);
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Your Friends</title>
@@ -47,8 +62,16 @@ div.left {
 		<jsp:include page="Header.jsp"></jsp:include>
 		<ul>
 			<%
+				Connection con1 = null;
+				
+				try {
+					con1 = Connector.getConnection();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				for (int i = 0; i < friendIds.size(); i++) {
-					UserController a = new UserController();
+					UserController a = new UserController(con1);
 					User friend = a.getUserByID(friendIds.get(i));
 					int friendsId = friendIds.get(i);
 					String url = friend.getImageURL();
@@ -70,6 +93,8 @@ div.left {
 					}
 					out.print("</form></li>");
 				}
+				
+				Connector.returnConnection(con1);
 			%>
 			
 		</ul>

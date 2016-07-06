@@ -1,3 +1,6 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="DBConnector.Connector"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Timestamp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -32,9 +35,20 @@ div.left {
 }
 </style>
 <%
+	Connection con = null;
+	
+	try {
+		con = Connector.getConnection();
+	} catch (ClassNotFoundException | SQLException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+
 	int id = Integer.parseInt(request.getParameter("id"));
-	UserController udb = new UserController();
+	UserController udb = new UserController(con);
 	User user = udb.getUserByID(id);
+	
+	Connector.returnConnection(con);
 %>
 
 

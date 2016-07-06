@@ -1,3 +1,6 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="DBConnector.Connector"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="backend.*"%>
 <%@page import="database.*"%>
 <%@page import="DBQuizControllers.*"%>
@@ -27,9 +30,18 @@
 	<div id="main" class="main">
 	<jsp:include page="Header.jsp"></jsp:include>
 		<%
-			List<User> users = new UserController().getUserList(user_name);
+			Connection con = null;
+			
+			try {
+				con = Connector.getConnection();
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		
+			List<User> users = new UserController(con).getUserList(user_name);
 			out.print("<div class='left'><ul> ");
-			UserController userController = new UserController();
+			UserController userController = new UserController(con);
 			for (int i = 0; i < users.size(); i++) {
 				User res = users.get(i);
 				int userid = new DBQuizController().getAuthorId(res.getLogin());
@@ -46,6 +58,8 @@
 			}
 
 			out.print("</ul> </div>");
+			
+			Connector.returnConnection(con);
 		%>
 	</div>
 </body>

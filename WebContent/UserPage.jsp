@@ -1,3 +1,6 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="DBConnector.Connector"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="ChallengeControllers.ChallengeController"%>
 <%@page import="database.UserController"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -174,10 +177,21 @@ to {
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>
 	<%
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}	
+	
 		int id = Integer.parseInt(request.getParameter("id"));
-		UserController db = new UserController();
+		UserController db = new UserController(con);
 		User user = db.getUserByID(id);
 		out.print(user.getName());
+		
+		Connector.returnConnection(con);
 	%>
 </title>
 </head>
@@ -269,6 +283,15 @@ to {
 
 
 			<%
+				Connection con1 = null;
+				
+				try {
+					con1 = Connector.getConnection();
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
 				String url = user.getImageURL();
 				if (url == null) {
 					url = "defaultPicture.png";
@@ -283,24 +306,38 @@ to {
 					out.print(
 							"<form action='ChangeUserName' method='post'>Chane Your Name: <input class='inputs' type='text' name='userName'>"
 									+ "<input type='submit' value='Submit'></form>");
-				} else if (!(new DBFriendController().isFriend(myId, id)) && !(new DBFriendController().isRequestSent(myId, id))) {
+				} else if (!(new DBFriendController(con1).isFriend(myId, id)) && !(new DBFriendController(con1).isRequestSent(myId, id))) {
 					request.getSession().setAttribute("friendId", id);
 					out.print("<form action='SendFriendshipRequest' method='post'>"
 							+ "<input type='submit' value='Send Friend Request' class='btn'></form>");
-				} else if ((new DBFriendController().isFriend(myId, id))) {
+				} else if ((new DBFriendController(con1).isFriend(myId, id))) {
 					request.getSession().setAttribute("friendId", id);
 					out.print("<form action='RemoveFriend' method='post'>"
 							+ "<input type='submit' value='Remove Friend' class='btn'></form>");
 				}
+				
+				Connector.returnConnection(con1);
 			%>
 		</div>
 
 		<%
-		DBFriendController dbf3 = new DBFriendController();
+		
+		Connection con2 = null;
+		Connection con3 = null;
+		
+		try {
+			con2 = Connector.getConnection();
+			con3 = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		DBFriendController dbf3 = new DBFriendController(con2);
 			if (myId == id) {
 				ArrayList<Integer> requests = dbf3.getFriendRequests(myId);
 				out.print("<div class='left'><h3>Friend Requests</h3><ul> ");
-				UserController userController = new UserController();
+				UserController userController = new UserController(con3);
 				if (requests.size() == 0) {
 					out.print("<p>No New Requests</p>");
 				}
@@ -326,6 +363,11 @@ to {
 				out.print("</ul> </div>");
 
 			}
+			
+			Connector.returnConnection(con2);
+			Connector.returnConnection(con3
+					);
+			
 		%>
 
 		<%
