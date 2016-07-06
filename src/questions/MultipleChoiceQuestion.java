@@ -36,6 +36,16 @@ public class MultipleChoiceQuestion extends Question {
 		return result;
 
 	}
+	
+	@Override
+	public ArrayList<Answer> getAnswers() {
+		if (answersFormatted){
+			return formAnswers;
+		}
+		
+		return getFormattedAnswers();
+		
+	}
 
 	public ArrayList<Answer> getFormattedAnswers() {
 		
