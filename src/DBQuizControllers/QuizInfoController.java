@@ -137,7 +137,6 @@ public class QuizInfoController {
 		
 		List<QuizDetailedInfo> result = new ArrayList<QuizDetailedInfo>();
 		
-		connection = new DBconnector().getConnection();
 		
 		String query = "select quiz_id, quiz_name, quiz_description, category_name, user_login, date_created, times_taken, quiz_likes from Quizzes, Users, Categories "
 				+ "where quiz_name like '%" + nameFragment + "%' and Quizzes.category_id = Categories.category_id and author_id = user_id;";

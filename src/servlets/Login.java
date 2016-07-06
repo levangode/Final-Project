@@ -46,9 +46,10 @@ public class Login extends HttpServlet {
 		String user_login = request.getParameter("user_login");
 		String user_password = request.getParameter("user_password");
 		UserController db = new UserController();
+		UserController db2 = new UserController();
 		Hasher h = new Hasher();
 		if (db.containsUser(user_login)) {
-			if (db.passwordMatch(user_login, h.generateHash(user_password))) {
+			if (db2.passwordMatch(user_login, h.generateHash(user_password))) {
 				request.getSession().setAttribute("user_name", user_login);
 				request.getSession().setAttribute("logged_in", true);
 				response.sendRedirect("HomePage.jsp");

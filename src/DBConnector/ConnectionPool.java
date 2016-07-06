@@ -76,6 +76,7 @@ public class ConnectionPool {
 		 
 	public synchronized void returnConnectionToPool(Connection connection){
 		availableConnections.add(connection);
+		System.out.println("darcha amdeni "+availableConnections.size());
 	}
 	
 }

@@ -300,11 +300,12 @@ to {
 			if (myId == id) {
 				ArrayList<Integer> requests = dbf3.getFriendRequests(myId);
 				out.print("<div class='left'><h3>Friend Requests</h3><ul> ");
-				UserController userController = new UserController();
+				
 				if (requests.size() == 0) {
 					out.print("<p>No New Requests</p>");
 				}
 				for (int i = 0; i < requests.size(); i++) {
+					UserController userController = new UserController();
 					int friendsId = requests.get(i);
 					User friend = userController.getUserByID(friendsId);
 					String furl = friend.getImageURL();

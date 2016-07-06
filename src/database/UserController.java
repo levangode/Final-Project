@@ -156,7 +156,9 @@ public class UserController {
 			count = myRes.getInt(1);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		} finally {
+			Connector.returnConnection(connection);
+		}
 		if (count == 0)
 			return false;
 		return true;

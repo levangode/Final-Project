@@ -56,6 +56,8 @@ public class DBMessage {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			Connector.returnConnection(connection);
 		}
 
 		System.out.println(query);

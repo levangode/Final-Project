@@ -36,7 +36,6 @@ div.left {
 	DBFriendController friendDB = new DBFriendController();
 	DBQuizController quizDB = new DBQuizController();
 	int id = quizDB.getAuthorId(user.getLogin());
-	UserController userController = new UserController();
 	List<Integer> friendIds = friendDB.getFriendsIDList(id);
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
