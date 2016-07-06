@@ -71,10 +71,13 @@ public class ConnectionPool {
 			connection = (Connection) availableConnections.get(0);
 			availableConnections.remove(0);
 		}
+		System.out.println("\n\nConnections in pool: " + availableConnections.size() + "\n\n");
 		return connection;
 	}
 		 
 	public synchronized void returnConnectionToPool(Connection connection){
+		System.out.println("\n\nConnections in pool: " + availableConnections.size() + "\n\n");
+		
 		availableConnections.add(connection);
 	}
 	

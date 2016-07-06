@@ -43,7 +43,9 @@ public class User {
 		
 		int counter=0;
 		UserController uc = new UserController(con);
-		counter=uc.getUserQuizCount(user_id);
+		
+		counter = uc.getUserQuizCount(user_id);
+		
 		
 		Connector.returnConnection(con);
 		
