@@ -12,8 +12,8 @@ import backend.User;
 public class UserController {
 	private Connection connection;
 
-	public UserController(Connection con) {
-		connection = con;
+	public UserController() {
+		connection = new DBconnector().getConnection();
 	}
 
 	public User getUserByID(int ID) {
