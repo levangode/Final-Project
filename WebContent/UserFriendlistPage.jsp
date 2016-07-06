@@ -15,7 +15,6 @@
 %>
 <head>
 <link rel="stylesheet" type="text/css" href="BasicStyles.css">
-<link rel="stylesheet" type="text/css" href="Button.css">
 <link rel="stylesheet" type="text/css" href="StyleForUserQuizes.css">
 <style>
 div.center {
@@ -37,15 +36,9 @@ div.left {
 	DBFriendController friendDB = new DBFriendController();
 	DBQuizController quizDB = new DBQuizController();
 	int id = quizDB.getAuthorId(user.getLogin());
-	System.out.println(user.getLogin());
 	UserController userController = new UserController();
 	List<Integer> friendIds = friendDB.getFriendsIDList(id);
 %>
-<script type="text/javascript">
-	document.getElementById("myform").onclick = function() {
-		document.getElementById("myform").submit();
-	}
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Your Friends</title>
 </head>

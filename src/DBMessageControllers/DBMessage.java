@@ -36,7 +36,7 @@ public class DBMessage {
 		
 		int user_id = dbu.getUserIDByLogin(login);
 		
-		String query = "select count(*) from messages where sender_id = "
+		String query = "select count(*) from messages where recipient_id = "
 				+ user_id
 				+ " and " 
 				+ " message_seen = 0;";
@@ -478,7 +478,7 @@ public class DBMessage {
 		
 		String query = "select m.message_id, m.`message_text`, m.message_subject, m.message_seen, m.date_sent, send.user_login, send.user_name "
 					+ " from messages m, users send where "
-					+ " m.sender_id = " + 1
+					+ " m.sender_id = " + recipient_id
 					+ " and m.recipient_id = send.user_id; ";
 		
 		PreparedStatement stm;

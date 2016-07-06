@@ -1,10 +1,12 @@
+<%@page import="DBMessageControllers.DBMessage"%>
+<%@page import="ChallengeControllers.ChallengeController"%>
 <%@page import="DBQuizControllers.*"%>
 <%@page import="database.*"%>
 <%@page import="backend.User"%>
 
 
 
-<div id="top" style="text-align: center; height: 154; min-width: 1024;">
+<div id="top" style="text-align: center; height: 154; min-width: 1024; position:relative;">
 	<div
 		style="float: left; text-align: right; width: 200px; height: 154px;">
 	</div>
@@ -25,13 +27,20 @@
 				int yourID = quizCont.getAuthorId(login);
 				DBFriendController z = new DBFriendController();
 				int requestNum = z.getFriendRequests(yourID).size();
-				if (requestNum > 0) {
-					out.write("<br><div class='notif'><strong style='color:red;font-weight:bold'>" + requestNum
+				ChallengeController ch = new ChallengeController();
+				int challengeNum = ch.getChallenges(yourID).size();
+				DBMessage m = new DBMessage();
+				int unseenMessage = m.getNumUnread(login);
+				int sum = requestNum+challengeNum+unseenMessage;
+				System.out.println(unseenMessage);
+				if (sum > 0) {
+					out.write("<br><div class='notif'><strong style='color:red;font-weight:bold'>" + sum
 							+ "</strong></div>");
 				}else{
 					out.write("<br>");
 				}
 				out.write("<a href='UserPage.jsp?id=" + yourID + "' >Your Page</a>");
+				out.write("<br><a href='Message.jsp'>Messages</a>");
 				out.write("<br><a  href=\"Logout.jsp\">Logout</a>");
 			} else {
 				out.write("<input placeholder=\"Username\" class=\"inputs\" type=\"text\" name=\"user_login\"><br><br>");

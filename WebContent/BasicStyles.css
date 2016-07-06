@@ -94,6 +94,11 @@ p {
 	margin: 5px 3px;
 	hover:
 }
+.btn:disabled{
+	background: white;
+	-webkit-box-shadow:inset 0px 40px 0px -24px white;
+	color: black;
+}
 
 .btn {
 	-moz-box-shadow:inset 0px 40px 0px -24px #276873;
