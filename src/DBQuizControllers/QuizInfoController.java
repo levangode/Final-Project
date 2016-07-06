@@ -129,7 +129,9 @@ public class QuizInfoController {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		} finally {
+			Connector.returnConnection(connection);
+		}
 		return id;
 	}
 	
@@ -171,6 +173,7 @@ public class QuizInfoController {
 
 	public ArrayList<UserActivity> getUserActivity(String user_login, int quiz_id) {
 		return getUserHighest(user_login, quiz_id, Constants.LIMIT_OF_SCORES);
+		
 	}
 	
 	public ArrayList<UserActivity> getUserHighest(String user_login, int quiz_id, int limit){
