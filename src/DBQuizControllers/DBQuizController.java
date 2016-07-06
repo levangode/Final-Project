@@ -316,6 +316,7 @@ public class DBQuizController {
 		int user_id = getAuthorId(user_login);
 		String order = "INSERT INTO `Likes`(`user_id`, `quiz_id`) VALUES (" + user_id + "," + quiz_id + ")";
 		PreparedStatement stm = null;
+		this.connection = new DBconnector().getConnection();
 		try {
 			stm = connection.prepareStatement(order);
 			stm.executeUpdate();
