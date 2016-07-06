@@ -78,7 +78,7 @@ public class DBQuizController {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}  
 		return result;
 	}
 
@@ -162,7 +162,6 @@ public class DBQuizController {
 
 		PreparedStatement stm = null;
 
-		System.out.println(query);
 		try {
 			stm = connection.prepareStatement(query);
 

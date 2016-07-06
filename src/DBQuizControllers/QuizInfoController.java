@@ -129,8 +129,6 @@ public class QuizInfoController {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			Connector.returnConnection(connection);
 		}
 		return id;
 	}
@@ -178,7 +176,7 @@ public class QuizInfoController {
 	
 	public ArrayList<UserActivity> getUserHighest(String user_login, int quiz_id, int limit){
 		ArrayList<UserActivity> act = new ArrayList<UserActivity>();
-		int user_id = new QuizInfoController().getAuthorID(user_login);
+		int user_id = new DBQuizController().getAuthorId(user_login);
 		String order = "Select time_finished, time_taken, score from Quiz_taken where user_id = " + user_id
 				+ " AND quiz_id = " + quiz_id + " order by time_finished DESC limit "+limit;
 		PreparedStatement stm = null;
