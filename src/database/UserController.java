@@ -89,7 +89,6 @@ public class UserController {
 
 		PreparedStatement stm;
 
-		System.out.println(query);
 
 		try {
 			stm = connection.prepareStatement(query);
@@ -131,7 +130,6 @@ public class UserController {
 
 		try {
 			stm = connection.prepareStatement(order);
-			System.out.println(stm);
 			stm.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

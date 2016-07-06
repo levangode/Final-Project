@@ -33,7 +33,6 @@ public class DBBlankAnswer {
 		
 		PreparedStatement stm;
 		
-		System.out.println(query);
 		
 		try{
 			stm = connection.prepareStatement(query);
@@ -66,7 +65,6 @@ public class DBBlankAnswer {
 				+ ");";
 		PreparedStatement stm;
 		
-		System.out.println(query);
 		
 		try{
 			stm = connection.prepareStatement(query);

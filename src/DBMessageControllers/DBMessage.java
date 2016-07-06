@@ -60,7 +60,6 @@ public class DBMessage {
 			Connector.returnConnection(connection);
 		}
 
-		System.out.println(query);
 		
 		return numUnread;
 	}
@@ -112,7 +111,6 @@ public class DBMessage {
 		
 		PreparedStatement stm;
 		
-		System.out.println(query);
 		
 		try{
 			stm = connection.prepareStatement(query);
@@ -176,7 +174,6 @@ public class DBMessage {
 		
 		PreparedStatement stm;
 		
-		System.out.println(query);
 		
 		try {
 			stm = connection.prepareStatement(query);
@@ -228,7 +225,6 @@ public class DBMessage {
 		
 		PreparedStatement stm;
 		
-		System.out.println(query);
 		
 		try {
 			stm = connection.prepareStatement(query);
@@ -281,7 +277,6 @@ public class DBMessage {
 		
 		PreparedStatement stm;
 		
-		System.out.println(query);
 		
 		try {
 			stm = connection.prepareStatement(query);
@@ -324,7 +319,6 @@ public class DBMessage {
 		
 		PreparedStatement stm;
 		
-		System.out.println(query);
 		
 		try {
 			stm = connection.prepareStatement(query);
@@ -367,7 +361,6 @@ public class DBMessage {
 		
 		PreparedStatement stm;
 		
-		System.out.println(query);
 		
 		try {
 			stm = connection.prepareStatement(query);
@@ -410,7 +403,6 @@ public class DBMessage {
 		
 		PreparedStatement stm;
 		
-		System.out.println(query);
 		
 		try {
 			stm = connection.prepareStatement(query);
@@ -454,7 +446,6 @@ public class DBMessage {
 		
 		PreparedStatement stm;
 		
-		System.out.println(query);
 		
 		try {
 			stm = connection.prepareStatement(query);

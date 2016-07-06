@@ -34,7 +34,6 @@ public class DBMultipleChoiceAnswers {
 		
 		PreparedStatement stm;
 		
-		System.out.println(query);
 		
 		try{
 			stm = connection.prepareStatement(query);
@@ -68,7 +67,6 @@ public class DBMultipleChoiceAnswers {
 		PreparedStatement stm;
 		
 		try{
-			System.out.println(query);
 			stm = connection.prepareStatement(query);
 			stm.executeUpdate();
 					

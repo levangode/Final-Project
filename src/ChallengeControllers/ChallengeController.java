@@ -27,7 +27,6 @@ public class ChallengeController {
 	public void addChallenge(int from_user, int to_user, int quiz_id) {
 		String check = "select * from Challenges where from_user = " + from_user + " AND to_user = " + to_user
 				+ " AND quiz_id = " + quiz_id;
-		System.out.println(check);
 		PreparedStatement checkStm = null;
 		ResultSet res = null;
 		try {
@@ -83,7 +82,6 @@ public class ChallengeController {
 		String order = "delete from Challenges where from_user = " + from_user + " AND to_user = " + to_user
 				+ " AND quiz_id = " + quiz_id;
 		PreparedStatement stm = null;
-		System.out.println(order);
 		try {
 			stm = connection.prepareStatement(order);
 			stm.executeUpdate();

@@ -32,7 +32,6 @@ public class MultipleChoiceAnswer extends Answer {
 		String value = "value='" + getAnswerText() + "' ";
 		String id = "id='q" + questionNum + answerNum + "' ";
 		html += "<input " + type + name + value + id + "><label for=" + id + ">" + getAnswerText() + "</label><br/>";
-		System.out.println("Generated HTML:" + html);
 		return html;
 	}
 

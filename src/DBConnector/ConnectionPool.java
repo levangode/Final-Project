@@ -31,9 +31,7 @@ public class ConnectionPool {
 	 
 	 
 	private void initializeConnectionPool(){
-		int counter = 0;
 		while(!checkIfConnectionPoolIsFull()){
-			System.out.println(counter++);
 			availableConnections.add(createNewConnectionForPool());
 		}
 	}
@@ -76,7 +74,6 @@ public class ConnectionPool {
 		 
 	public synchronized void returnConnectionToPool(Connection connection){
 		availableConnections.add(connection);
-		System.out.println("darcha amdeni "+availableConnections.size());
 	}
 	
 }
