@@ -1,12 +1,16 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBConnector.Connector;
 import DBQuizControllers.DBQuizController;
 import database.DBFriendController;
 
@@ -41,11 +45,24 @@ public class RemoveFriend extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		Connection con = null;
+		
+		try {
+			con = Connector.getConnection();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		int fid = (int) request.getSession().getAttribute("friendId");
 		int myId = new DBQuizController().getAuthorId((String) request.getSession().getAttribute("user_name"));
-		new DBFriendController().cancelFriendshipByID(myId, fid);
+		new DBFriendController(con).cancelFriendshipByID(myId, fid);
 		request.getSession().removeAttribute("friendId");
 		response.sendRedirect("UserPage.jsp?id=" + fid);
+		
+		Connector.returnConnection(con);
+		
 		doGet(request, response);
 	}
 

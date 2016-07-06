@@ -72,12 +72,10 @@
 		switch (display_mode){
 		case DISPLAY_MODE_SINGLE_PAGE:
 			showQuestions();
-			alert("single 1");
 			hideSwitchButtons();
 			break;
 		case DISPLAY_MODE_MULTIPLE_PAGE:
 			hideQuestions();
-			alert("mult 1");
 			showSwitchButtons();
 			break;
 		}
