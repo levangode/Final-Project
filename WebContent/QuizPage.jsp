@@ -82,9 +82,23 @@
 			break;
 		}
 	}
+	
+	function gradeQuestion(){
+		var question_id = curQuestion;
+		
+		$.get("ImmedateCorrect", {
+			question_num : question_id
+		}, function(data) {
+			alert('' + data);
+		});
+		
+	}
 
 	function nextQuestion() {
 		//alert("display next question");
+		
+		gradeQuestion();
+		
 		if (curQuestion == numQuestion) {
 			alert("This is the last Question!");
 		} else {
