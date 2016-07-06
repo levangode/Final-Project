@@ -116,7 +116,6 @@
 							for (QuizInfo a : mine) {
 								out.print("<li><a href=\"QuizSummaryPage.jsp?id=" + a.getQuiz_id() + "\">" + a.getQuiz_name()
 										+ "</a></li>");
-								//TODO shignidan ro dabechdos tavisi tavi
 							}
 						%>
 					</ul>

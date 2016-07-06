@@ -33,6 +33,7 @@
 				UserController n = new UserController(con1);
 				
 				User curUser = n.getUserByLogin((String) request.getSession().getAttribute("user_name"));
+				Connector.returnConnection(con1);
 				out.write("<span style='text-align:center; font-size:30px'><img src='" + curUser.getImageURL()
 						+ "' alt='User Image' style='width:40px;height:40px; border: 2px ; border-radius: 10px'>");
 				out.write((String) request.getSession().getAttribute("user_name") + "   </span>");
@@ -58,7 +59,6 @@
 				int sum = requestNum+challengeNum+unseenMessage;
 				System.out.println(unseenMessage);
 				
-				Connector.returnConnection(con1);
 				Connector.returnConnection(con2);
 				
 				if (sum > 0) {

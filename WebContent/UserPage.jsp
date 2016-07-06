@@ -336,6 +336,7 @@ to {
 		DBFriendController dbf3 = new DBFriendController(con2);
 			if (myId == id) {
 				ArrayList<Integer> requests = dbf3.getFriendRequests(myId);
+			Connector.returnConnection(con2);
 				out.print("<div class='left'><h3>Friend Requests</h3><ul> ");
 				UserController userController = new UserController(con3);
 				if (requests.size() == 0) {
@@ -347,6 +348,8 @@ to {
 					String furl = friend.getImageURL();
 					String flogin = friend.getLogin();
 					String fname = friend.getName();
+			Connector.returnConnection(con3
+					);
 					out.print("<li> <img border='0' alt='FriendImage' src='" + furl + "' width='100' height='100'>"
 							+ "<h3><a href='UserPage.jsp?id=" + friendsId + "'>" + flogin + "</a></h3>"
 							+ "<form action='AcceptFriendRequest' method='post'>"
@@ -364,9 +367,6 @@ to {
 
 			}
 			
-			Connector.returnConnection(con2);
-			Connector.returnConnection(con3
-					);
 			
 		%>
 

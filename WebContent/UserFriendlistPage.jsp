@@ -73,6 +73,7 @@ div.left {
 				for (int i = 0; i < friendIds.size(); i++) {
 					UserController a = new UserController(con1);
 					User friend = a.getUserByID(friendIds.get(i));
+					Connector.returnConnection(con1);
 					int friendsId = friendIds.get(i);
 					String url = friend.getImageURL();
 					String login = friend.getLogin();
@@ -94,7 +95,6 @@ div.left {
 					out.print("</form></li>");
 				}
 				
-				Connector.returnConnection(con1);
 			%>
 			
 		</ul>
