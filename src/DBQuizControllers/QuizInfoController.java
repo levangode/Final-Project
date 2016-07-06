@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import DBConnector.Connector;
 import database.DBconnector;
 
 
@@ -62,11 +63,7 @@ public class QuizInfoController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		return result;
 	}
@@ -90,11 +87,7 @@ public class QuizInfoController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		return result;
 	}
@@ -119,11 +112,7 @@ public class QuizInfoController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		return result;
 	}
@@ -175,11 +164,7 @@ public class QuizInfoController {
 			
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		return result;
 	}
@@ -207,11 +192,7 @@ public class QuizInfoController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		return act;
 	}
@@ -242,11 +223,7 @@ public class QuizInfoController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		return act;
 	}
@@ -279,11 +256,7 @@ public class QuizInfoController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		return summary;
 	}
@@ -304,11 +277,7 @@ public class QuizInfoController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		return statist;
 		
@@ -333,11 +302,7 @@ public class QuizInfoController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		return result;
 	}
@@ -365,11 +330,7 @@ public class QuizInfoController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
  
 		return quizes;

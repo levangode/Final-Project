@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.management.Query;
 
+import DBConnector.Connector;
 import answers.Answer;
 import backend.Message;
 import backend.User;
@@ -87,11 +88,7 @@ public class DBMessage {
 			e.printStackTrace();
 			return false;
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		
 		return true;
@@ -124,11 +121,7 @@ public class DBMessage {
 			System.out.println("Error occured durin database connection!");
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		
 		
@@ -206,11 +199,7 @@ public class DBMessage {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		
 		return messages;
@@ -262,11 +251,7 @@ public class DBMessage {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		
 		return messages;
@@ -319,11 +304,7 @@ public class DBMessage {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		
 		return message;
@@ -366,11 +347,7 @@ public class DBMessage {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		
 		return message;
@@ -413,11 +390,7 @@ public class DBMessage {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		 
 		return message;
@@ -460,11 +433,7 @@ public class DBMessage {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		
 		return messageInfo;
@@ -503,11 +472,12 @@ public class DBMessage {
 				
 			}
 			
-			connection.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			Connector.returnConnection(connection);
 		}
 		
 		return messageInfo;
@@ -532,11 +502,7 @@ public class DBMessage {
 			e.printStackTrace();
 			return false;
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		
 		return true;

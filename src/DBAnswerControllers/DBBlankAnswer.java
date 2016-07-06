@@ -9,6 +9,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import DBConnector.Connector;
 import answers.BlankAnswer;
 import database.DBconnector;
 
@@ -49,11 +50,7 @@ public class DBBlankAnswer {
 			System.out.println("Error occured durin database connection!");
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		
 		return answers;
@@ -80,11 +77,7 @@ public class DBBlankAnswer {
 			System.out.println("Error occured durin database connection!");
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 	
 	}

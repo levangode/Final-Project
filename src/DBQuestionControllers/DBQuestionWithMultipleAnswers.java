@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DBAnswerControllers.DBMultipleAnswers;
+import DBConnector.Connector;
 import answers.Answer;
 import database.DBconnector;
 import questions.QuestionTypes;
@@ -62,11 +63,7 @@ public class DBQuestionWithMultipleAnswers {
 			System.out.println("Error occured durin database connection!");
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		
 		return questions;
@@ -121,11 +118,7 @@ public class DBQuestionWithMultipleAnswers {
 			throw new Exception("Error durin insertion in DB");
 			//e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 	}
 }

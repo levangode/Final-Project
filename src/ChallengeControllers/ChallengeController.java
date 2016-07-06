@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.servlet.jsp.tagext.TryCatchFinally;
 
+import DBConnector.Connector;
 import DBQuizControllers.QuizInfoController;
 import backend.Challenge;
 import backend.ChallengeFactory;
@@ -48,11 +49,7 @@ public class ChallengeController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 	}
 
@@ -77,11 +74,7 @@ public class ChallengeController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		return result;
 	}
@@ -97,11 +90,7 @@ public class ChallengeController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 	}
 }

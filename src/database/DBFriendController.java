@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import DBConnector.Connector;
+
 public class DBFriendController {
 
 	private Connection con;
@@ -34,11 +36,7 @@ public class DBFriendController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(con);
 		}
 		return friends;
 	}
@@ -63,11 +61,7 @@ public class DBFriendController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(con);
 		}
 
 		return friends;
@@ -95,11 +89,7 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(con);
 		}
 
 		return true;
@@ -123,11 +113,7 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(con);
 		}
 		return true;
 	}
@@ -149,11 +135,7 @@ public class DBFriendController {
 			e.printStackTrace();
 			return null;
 		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(con);
 		}
 		return list;
 	}
@@ -186,11 +168,7 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(con);
 		}
 
 		return addFriendshpByUserID(user1ID, user2ID);
@@ -226,11 +204,7 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(con);
 		}
 
 		return addFriendshpByUserID(user1ID, user2ID);
@@ -261,11 +235,7 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(con);
 		}
 
 		return true;
@@ -294,11 +264,7 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(con);
 		}
 
 		return false;
@@ -333,11 +299,7 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(con);
 		}
 
 		return false;
@@ -369,11 +331,7 @@ public class DBFriendController {
 			e.printStackTrace();
 			return false;
 		} finally {
-			try {
-				con.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(con);
 		}
 
 		return true;

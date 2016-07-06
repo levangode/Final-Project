@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import DBConnector.Connector;
 import database.DBconnector;
 
 public class DBQuizTake {
@@ -19,12 +20,7 @@ public class DBQuizTake {
 	}
 
 	private void disconnect() {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Connector.returnConnection(connection);
 	}
 
 	public void addActivity(int user_id, int quiz_id, int time_taken, double score) {
@@ -46,11 +42,7 @@ public class DBQuizTake {
 			System.out.println("Error occured durin database connection!");
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 
 	}

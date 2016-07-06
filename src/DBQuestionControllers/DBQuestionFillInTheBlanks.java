@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DBAnswerControllers.DBBlankAnswer;
+import DBConnector.Connector;
 import answers.Answer;
 import database.DBconnector;
 import questions.FillTheBlankQuestion;
@@ -60,11 +61,7 @@ public class DBQuestionFillInTheBlanks {
 			System.out.println("Error occured durin database connection!");
 			e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 		 
 		return questions;
@@ -119,11 +116,7 @@ public class DBQuestionFillInTheBlanks {
 			throw new Exception("Error durin insertion in DB");
 			//e.printStackTrace();
 		} finally {
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			Connector.returnConnection(connection);
 		}
 	}
 }

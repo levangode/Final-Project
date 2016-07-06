@@ -4,10 +4,19 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import DBConnector.Connector;
+
 public class DBconnector {
 	private Connection connection;
 
 	public DBconnector() {
+		try {
+			this.connection = Connector.getConnection();
+			return;
+		} catch (ClassNotFoundException | SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e1) {
@@ -31,11 +40,7 @@ public class DBconnector {
 	}
 
 	public void closeConnection() {
-		try {
-			connection.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Connector.returnConnection(connection);
 	}
 
 }
