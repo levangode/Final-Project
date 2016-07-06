@@ -36,16 +36,7 @@ public class MultipleChoiceQuestion extends Question {
 		return result;
 
 	}
-	
-	@Override
-	public ArrayList<Answer> getAnswers() {
-		if (answersFormatted){
-			return formAnswers;
-		}
-		
-		return getFormattedAnswers();
-		
-	}
+
 
 	public ArrayList<Answer> getFormattedAnswers() {
 		
@@ -125,7 +116,7 @@ public class MultipleChoiceQuestion extends Question {
 	@Override
 	public double gradeAnswer(HttpServletRequest request, int questionIndex) {
 		double counter = 0;
-		ArrayList<Answer> answers = getAnswers();
+		ArrayList<Answer> answers = getFormattedAnswers();
 		for (int i = 0; i < answers.size(); i++) {
 			MultipleChoiceAnswer ans = (MultipleChoiceAnswer) answers.get(i);
 			String name = "q" + questionIndex + "-" + i;
