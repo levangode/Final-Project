@@ -86,6 +86,8 @@
 	function gradeQuestion(){
 		var question_id = curQuestion;
 		
+		alert("" + question_id);
+		
 		$.get("ImmedateCorrect", {
 			question_num : question_id
 		}, function(data) {

@@ -30,11 +30,20 @@ public class ImmedateCorrect extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int question_num = (Integer.parseInt((String)request.getAttribute("question_num")));
+		//System.out.println(5646545);
+		
+		//System.out.println(request.getAttribute("question_num"));
+		
+		int question_num = (Integer.parseInt((String)(request.getParameter("question_num"))));
 		
 		System.out.println(question_num);
 		
-		Question curQuestion = ((Quiz)request.getSession().getAttribute("Quiz")).getQuestions().get(question_num);
+		Quiz a = (Quiz)request.getSession().getAttribute("Quiz");
+		if(a==null)System.out.println("bliad");
+		Question curQuestion = ((Quiz)request.getSession().getAttribute("Quiz")).getQuestions().get(question_num-1);
+		
+		
+		System.out.println(curQuestion);
 		
 		Double score_got = curQuestion.gradeAnswer(request, question_num);
 		
